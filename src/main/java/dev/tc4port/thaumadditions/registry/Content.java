@@ -247,6 +247,9 @@ public final class Content {
     /** The blue wolf; its class is shared, so this one registers through {@link #init}. */
     public static Supplier<net.minecraft.world.entity.EntityType<dev.tc4port.thaumadditions.entity.BlueWolf>> BLUE_WOLF;
 
+    /** The essentia pistol's one loading slot. */
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.PistolMenu>> PISTOL_MENU;
+
     /** The crystal bag's nine virtual slots. */
     public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.CrystalBagMenu>> CRYSTAL_BAG_MENU;
 
@@ -350,6 +353,8 @@ public final class Content {
                 () -> platform.menuType(dev.tc4port.thaumadditions.gui.ChesterMenu::new));
         CRYSTAL_BAG_MENU = menus.register("crystal_bag",
                 () -> platform.menuType(dev.tc4port.thaumadditions.gui.CrystalBagMenu::new));
+        PISTOL_MENU = menus.register("essentia_pistol",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.PistolMenu::new));
     }
 
     // ------------------------------------------------------------------ items

@@ -62,6 +62,8 @@ public final class ThaumAddsForgeClient {
                     dev.tc4port.thaumadditions.client.gui.ChesterScreen::new);
             net.minecraft.client.gui.screens.MenuScreens.register(Content.CRYSTAL_BAG_MENU.get(),
                     dev.tc4port.thaumadditions.client.gui.CrystalBagScreen::new);
+            net.minecraft.client.gui.screens.MenuScreens.register(Content.PISTOL_MENU.get(),
+                    dev.tc4port.thaumadditions.client.gui.PistolScreen::new);
         });
     }
 }

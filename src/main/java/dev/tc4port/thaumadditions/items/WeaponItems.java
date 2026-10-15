@@ -219,6 +219,13 @@ public final class WeaponItems {
             @Override
             public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
                 ItemStack stack = player.getItemInHand(hand);
+                if (player.isShiftKeyDown()) {
+                    // Sneak-use loads it; nothing could load it before, so it fired once and stopped.
+                    if (!level.isClientSide && player instanceof net.minecraft.server.level.ServerPlayer server) {
+                        dev.tc4port.thaumadditions.gui.PistolMenu.open(server, hand);
+                    }
+                    return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+                }
                 if (!level.isClientSide) {
                     CompoundTag tag = HCLitePlatform.Holder.get().itemTag(stack);
                     AspectId aspect = TaAspect.readAspect(tag, "Aspect");
