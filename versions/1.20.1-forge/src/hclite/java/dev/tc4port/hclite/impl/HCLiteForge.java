@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import dev.tc4port.hclite.HCLite;
 import dev.tc4port.hclite.net.HCLiteNet;
+import dev.tc4port.hclite.net.HCLitePackets;
 import dev.tc4port.hclite.net.HCPacket;
 import dev.tc4port.hclite.net.PacketChannel;
 import dev.tc4port.hclite.platform.HCLitePlatform;
@@ -94,5 +95,9 @@ public final class HCLiteForge {
                         .with(() -> be.getLevel().getChunkAt(be.getBlockPos())), packet);
             }
         });
+
+        // The channel only knows the packets registered here; SyncedBlockEntity.sync() throws
+        // "Invalid message" without this.
+        HCLitePackets.registerAll();
     }
 }
