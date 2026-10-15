@@ -442,7 +442,8 @@ public class TileFluxConcentrator extends TileEssentia implements AspectContaine
         }
         cooldown = CONVERSION_COOLDOWN;
         for (BlockPos covered : fluxed) {
-            BlockState replacement = replacementFor(level.getBlockState(covered));
+            BlockState replacement = dev.tc4port.thaumadditions.recipes.FluxRecipes
+                    .outputFor(level.getBlockState(covered));
             if (replacement == null) {
                 continue;
             }
@@ -454,35 +455,10 @@ public class TileFluxConcentrator extends TileEssentia implements AspectContaine
         }
     }
 
-    // ------------------------------------------------------------------ the table
-
-    /**
-     * 1.12's recipe table, minus the log rule. TC4R has a vishroom to turn mushrooms into, and the
-     * mod has its own taintkin for the pumpkins, but TC4R has no taint log for the third rule.
-     */
-    private static BlockState replacementFor(BlockState state) {
-        if (state.is(Blocks.BROWN_MUSHROOM) || state.is(Blocks.RED_MUSHROOM)) {
-            return blockState("thaumcraft:vishroom");
-        }
-        if (state.is(Blocks.PUMPKIN)) {
-            return blockState("thaumadds:taintkin");
-        }
-        if (state.is(Blocks.JACK_O_LANTERN)) {
-            return blockState("thaumadds:taintkin_lit");
-        }
-        return null;
-    }
-
-    private static BlockState blockState(String id) {
-        ResourceLocation key = ResourceLocation.tryParse(id);
-        var block = key == null ? null : BuiltInRegistries.BLOCK.get(key);
-        return block == null || block == Blocks.AIR ? null : block.defaultBlockState();
-    }
-
     /** Whether the field may pass this position in the given direction. */
     private static boolean isPassable(Level level, BlockPos pos, Direction face) {
         BlockState state = level.getBlockState(pos);
-        if (replacementFor(state) != null) {
+        if (dev.tc4port.thaumadditions.recipes.FluxRecipes.isInput(state)) {
             // Recipe inputs are what the field is made of; it flows through them.
             return true;
         }

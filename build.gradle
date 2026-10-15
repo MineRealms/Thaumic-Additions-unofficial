@@ -58,6 +58,12 @@ repositories {
         url = 'https://api.modrinth.com/maven'
         content { includeGroup 'maven.modrinth' }
     }
+    // JEI; the two nodes take it from the same place under different coordinates.
+    maven {
+        name = 'ModMaven'
+        url = 'https://modmaven.dev/'
+        content { includeGroup 'mezz.jei' }
+    }
     mavenCentral()
 }
 
@@ -129,6 +135,11 @@ if (isForge) {
 
         // KubeJS replaces the 1.12 CraftTweaker integration (optional at runtime; the plugin
         // class is discovered via kubejs.plugins.txt only when KubeJS is installed).
+        // JEI is compile-only: the plugin is written against its API but the mod runs without it.
+        compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}") { transitive = false }
+        compileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}") { transitive = false }
+        // Only the dev client loads JEI, so the plugin can be exercised without shipping the dep.
+        runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") { transitive = false }
         compileOnly("dev.latvian.mods:kubejs-forge:${kubejs_forge_version}") { transitive = false }
         compileOnly("dev.latvian.mods:rhino-forge:${rhino_forge_version}") { transitive = false }
 
@@ -211,6 +222,10 @@ if (isForge) {
         runtimeOnly("maven.modrinth:terrablender:${terrablender_file}") { transitive = false }
 
         // KubeJS replaces the 1.12 CraftTweaker integration (optional at runtime).
+        compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}") { transitive = false }
+        compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}") { transitive = false }
+        // Only the dev client loads JEI, so the plugin can be exercised without shipping the dep.
+        runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}") { transitive = false }
         compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_neoforge_version}") { transitive = false }
         compileOnly("dev.latvian.mods:rhino:${rhino_neoforge_version}") { transitive = false }
         runtimeOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_neoforge_version}") {

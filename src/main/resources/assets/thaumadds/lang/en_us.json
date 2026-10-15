@@ -361,5 +361,7 @@
   "tooltip.thaumadds:cb_sort_rule.3": "Sort by quantity (Ascending)",
   "tooltip.thaumadds:essentia_pistol.shoot": "Shot Volume: %,d Vis",
   "tooltip.thaumadds:phantom": "Phantom",
-  "tooltip.thaumadds:vis": "Vis: %,d / %,d"
+  "tooltip.thaumadds:vis": "Vis: %,d / %,d",
+  "jei.thaumadds.flux_concentrator": "Flux Concentrator",
+  "jei.thaumadds.aspect_items": "These items carry an aspect; each aspect is a separate entry."
 }
