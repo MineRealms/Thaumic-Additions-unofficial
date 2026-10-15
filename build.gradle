@@ -23,14 +23,14 @@ def tc4Repository = file(providers.gradleProperty('tc4Repository')
 // Values expanded into the loader metadata of either node.
 def metadata = [minecraft_version_range: minecraft_version_range, loader_version_range: loader_version_range,
         mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-        mod_authors: mod_authors, mod_description: mod_description,
+        mod_authors: mod_authors, mod_description: mod_description, pack_format: pack_format,
         thaumcraft_version_range: thaumcraft_version_range]
 
 // HCLite metadata: the jar-in-jar companion mod (HammerCore essentials, reimplemented).
 def hcliteMeta = [mod_id: 'hclite', mod_name: 'HCLite (HammerCore essentials)',
               mod_license: mod_license, mod_version: hclite_version,
               mod_authors: mod_authors,
-              loader_version_range: loader_version_range, minecraft_version_range: minecraft_version_range,
+              loader_version_range: loader_version_range, minecraft_version_range: minecraft_version_range, pack_format: pack_format,
               mod_description: 'Reimplementation of the HammerCore essentials used by Thaumic Additions.']
 def hcliteJarName = "hclite-${minecraft_version}-${mod_loader}-${hclite_version}.jar"
 
@@ -131,11 +131,11 @@ if (isForge) {
 
     tasks.named('processResources', ProcessResources).configure {
         inputs.properties metadata
-        filesMatching(['META-INF/mods.toml']) { expand metadata }
+        filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand metadata }
     }
     tasks.named('processHcliteResources', ProcessResources).configure {
         inputs.properties hcliteMeta
-        filesMatching(['META-INF/mods.toml']) { expand hcliteMeta }
+        filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand hcliteMeta }
     }
 } else {
     // ---------------------------------------------------------------- 1.21.1 / NeoForge
@@ -209,11 +209,11 @@ if (isForge) {
 
     tasks.named('processResources', ProcessResources).configure {
         inputs.properties metadata
-        filesMatching(['META-INF/neoforge.mods.toml']) { expand metadata }
+        filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) { expand metadata }
     }
     tasks.named('processHcliteResources', ProcessResources).configure {
         inputs.properties hcliteMeta
-        filesMatching(['META-INF/neoforge.mods.toml']) { expand hcliteMeta }
+        filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) { expand hcliteMeta }
     }
 }
 
