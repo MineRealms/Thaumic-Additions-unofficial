@@ -18,6 +18,7 @@ import dev.tc4port.thaumadditions.platform.TaArmorSound;
 import dev.tc4port.thaumadditions.platform.TaArmorTick;
 import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.ToolKind;
+import dev.tc4port.thaumadditions.tiles.TileAspectCombiner;
 import dev.tc4port.thaumadditions.tiles.TileCrystal;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
@@ -213,7 +214,7 @@ public final class Content {
     public static Supplier<BlockEntityType<TaTiles.Summoner>> SUMMONER_BE;
     public static Supplier<BlockEntityType<TaTiles.Enchanter>> ENCHANTER_BE;
     public static Supplier<BlockEntityType<TileGrowthChamber>> GROWTH_BE;
-    public static Supplier<BlockEntityType<TaTiles.Combiner>> COMBINER_BE;
+    public static Supplier<BlockEntityType<TileAspectCombiner>> COMBINER_BE;
     public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
     public static Supplier<BlockEntityType<TaTiles.Disperser>> DISPERSER_BE;
     public static Supplier<BlockEntityType<TaTiles.Bore>> BORE_BE;
@@ -457,8 +458,8 @@ public final class Content {
                 (pos, state) -> new TaTiles.Enchanter(ENCHANTER_BE.get(), pos, state), SHADOW_ENCHANTER.get()).build(null));
         GROWTH_BE = registrar.register("growth_chamber", () -> BlockEntityType.Builder.<TileGrowthChamber>of(
                 (pos, state) -> new TileGrowthChamber(GROWTH_BE.get(), pos, state), GROWTH_CHAMBER.get()).build(null));
-        COMBINER_BE = registrar.register("aspect_combiner", () -> BlockEntityType.Builder.<TaTiles.Combiner>of(
-                (pos, state) -> new TaTiles.Combiner(COMBINER_BE.get(), pos, state), ASPECT_COMBINER.get()).build(null));
+        COMBINER_BE = registrar.register("aspect_combiner", () -> BlockEntityType.Builder.<TileAspectCombiner>of(
+                (pos, state) -> new TileAspectCombiner(COMBINER_BE.get(), pos, state), ASPECT_COMBINER.get()).build(null));
         CHARGER_BE = registrar.register("aura_charger", () -> BlockEntityType.Builder.<TaTiles.Charger>of(
                 (pos, state) -> new TaTiles.Charger(CHARGER_BE.get(), pos, state), AURA_CHARGER.get()).build(null));
         DISPERSER_BE = registrar.register("aura_disperser", () -> BlockEntityType.Builder.<TaTiles.Disperser>of(

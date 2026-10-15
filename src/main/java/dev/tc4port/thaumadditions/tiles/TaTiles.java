@@ -16,23 +16,6 @@ public final class TaTiles {
     private TaTiles() {
     }
 
-    /** 1.12 {@code TileAspectCombiner}: two side inputs, one upward output, 100t per craft. */
-    public static class Combiner extends TileEssentia {
-        public Combiner(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, 128, 128);
-        }
-
-        @Override
-        protected boolean accepts(Direction face) {
-            return face == Direction.WEST || face == Direction.EAST;
-        }
-
-        @Override
-        protected boolean emits(Direction face) {
-            return face == Direction.UP;
-        }
-    }
-
     /** 1.12 {@code TileAuraCharger}: pulls AURA from below, injects vis into the chunk. */
     public static class Charger extends TileEssentia {
         public Charger(BlockEntityType<?> type, BlockPos pos, BlockState state) {

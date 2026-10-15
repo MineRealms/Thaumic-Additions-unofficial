@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 
 import dev.tc4port.thaumadditions.client.model.MachineModels;
 import dev.tc4port.thaumadditions.tiles.TaTiles;
+import dev.tc4port.thaumadditions.tiles.TileAspectCombiner;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import net.minecraft.client.model.geom.ModelPart;
@@ -98,11 +99,11 @@ public final class MachineRenderers {
     }
 
     /** 1.12 {@code TESRAspectCombiner}. */
-    public static final class AspectCombiner implements BlockEntityRenderer<TaTiles.Combiner> {
+    public static final class AspectCombiner implements BlockEntityRenderer<TileAspectCombiner> {
         private static final ModelPart ROOT = MachineModels.AspectCombiner.layer().bakeRoot();
 
         @Override
-        public void render(TaTiles.Combiner be, float partialTick, PoseStack pose, MultiBufferSource buffers,
+        public void render(TileAspectCombiner be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
             draw(pose, buffers, MachineModels.AspectCombiner.TEXTURE, be.getBlockState(), light, overlay,
                     ROOT, 0.0F);
