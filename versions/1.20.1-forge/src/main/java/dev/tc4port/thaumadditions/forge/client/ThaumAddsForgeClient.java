@@ -60,6 +60,8 @@ public final class ThaumAddsForgeClient {
                     dev.tc4port.thaumadditions.client.gui.MachineScreens.ShadowEnchanter::new);
             net.minecraft.client.gui.screens.MenuScreens.register(Content.CHESTER_MENU.get(),
                     dev.tc4port.thaumadditions.client.gui.ChesterScreen::new);
+            net.minecraft.client.gui.screens.MenuScreens.register(Content.CRYSTAL_BAG_MENU.get(),
+                    dev.tc4port.thaumadditions.client.gui.CrystalBagScreen::new);
         });
     }
 }

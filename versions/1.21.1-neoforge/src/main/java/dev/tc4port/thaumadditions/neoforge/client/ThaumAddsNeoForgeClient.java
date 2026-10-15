@@ -75,5 +75,7 @@ public final class ThaumAddsNeoForgeClient {
                 dev.tc4port.thaumadditions.client.gui.MachineScreens.ShadowEnchanter::new);
         event.register(Content.CHESTER_MENU.get(),
                 dev.tc4port.thaumadditions.client.gui.ChesterScreen::new);
+        event.register(Content.CRYSTAL_BAG_MENU.get(),
+                dev.tc4port.thaumadditions.client.gui.CrystalBagScreen::new);
     }
 }

@@ -247,6 +247,9 @@ public final class Content {
     /** The blue wolf; its class is shared, so this one registers through {@link #init}. */
     public static Supplier<net.minecraft.world.entity.EntityType<dev.tc4port.thaumadditions.entity.BlueWolf>> BLUE_WOLF;
 
+    /** The crystal bag's nine virtual slots. */
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.CrystalBagMenu>> CRYSTAL_BAG_MENU;
+
     /** Chester, the walking chest, and the menu that shows its thirty-six slots. */
     public static Supplier<net.minecraft.world.entity.EntityType<dev.tc4port.thaumadditions.entity.Chester>> CHESTER_ENTITY;
     public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.ChesterMenu>> CHESTER_MENU;
@@ -345,6 +348,8 @@ public final class Content {
                 () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.ShadowEnchanter::new));
         CHESTER_MENU = menus.register("chester",
                 () -> platform.menuType(dev.tc4port.thaumadditions.gui.ChesterMenu::new));
+        CRYSTAL_BAG_MENU = menus.register("crystal_bag",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.CrystalBagMenu::new));
     }
 
     // ------------------------------------------------------------------ items

@@ -251,6 +251,16 @@ public final class ToolItems {
     public static Item crystalBag(TaPlatform platform) {
         return platform.behaviorItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE), new ItemBehavior() {
             @Override
+            public net.minecraft.world.InteractionResultHolder<ItemStack> use(Level level, Player player,
+                                                                             InteractionHand hand) {
+                ItemStack stack = player.getItemInHand(hand);
+                if (!level.isClientSide && player instanceof net.minecraft.server.level.ServerPlayer server) {
+                    dev.tc4port.thaumadditions.gui.CrystalBagMenu.open(server, hand);
+                }
+                return net.minecraft.world.InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+            }
+
+            @Override
             public void inventoryTick(ItemStack stack, Level level, Entity holder, int slot, boolean selected) {
                 if (level.isClientSide || !(holder instanceof Player player) || level.getGameTime() % 10 != 0) {
                     return;
@@ -272,21 +282,7 @@ public final class ToolItems {
             }
 
             private void add(ItemStack stack, AspectId aspect, int amount) {
-                HCLitePlatform.Holder.get().updateItemTag(stack, tag -> {
-                    ListTag list = tag.getList("Essentia", Tag.TAG_COMPOUND);
-                    for (int i = 0; i < list.size(); i++) {
-                        CompoundTag entry = list.getCompound(i);
-                        if (entry.getString("k").equals(aspect.value().toString())) {
-                            entry.putInt("v", Math.min(32768, entry.getInt("v") + amount));
-                            return;
-                        }
-                    }
-                    CompoundTag entry = new CompoundTag();
-                    entry.putString("k", aspect.value().toString());
-                    entry.putInt("v", Math.min(32768, amount));
-                    list.add(entry);
-                    tag.put("Essentia", list);
-                });
+                dev.tc4port.thaumadditions.items.CrystalBagStore.add(stack, aspect, amount);
             }
 
             @Override
