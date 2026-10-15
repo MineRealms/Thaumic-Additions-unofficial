@@ -206,6 +206,15 @@ public final class TaMachineBlocks {
 
     /** 1.12 {@code BlockSeal}: 6-way facing, entity-block animated, no item. */
     public static class SealBlock extends TaBlocks.OrientableBlock implements BeBlock {
+        /** 1.12's {@code Block#onEntityCollision}; the portal seal teleports on it. */
+        @Override
+        public void entityInside(BlockState state, net.minecraft.world.level.Level level, BlockPos pos,
+                                 net.minecraft.world.entity.Entity entity) {
+            if (level.getBlockEntity(pos) instanceof dev.tc4port.thaumadditions.tiles.TileSeal seal) {
+                seal.onEntityInside(level, entity);
+            }
+        }
+
         private final java.util.function.Supplier<? extends BlockEntityType<?>> type;
 
         public SealBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type) {

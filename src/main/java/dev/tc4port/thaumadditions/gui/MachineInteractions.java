@@ -40,6 +40,13 @@ public final class MachineInteractions {
             return false;
         }
         BlockState state = level.getBlockState(pos);
+        // A seal binds on right-click — the portal walks its network — and its globe is the
+        // client's half of the same click.
+        if (state.getBlock() instanceof TaMachineBlocks.SealBlock
+                && level.getBlockEntity(pos) instanceof dev.tc4port.thaumadditions.tiles.TileSeal seal) {
+            var behaviour = seal.instance();
+            return behaviour != null && behaviour.onSealActivated(level, pos, player);
+        }
         if (!(state.getBlock() instanceof TaMachineBlocks.BeBlock machine)) {
             return false;
         }

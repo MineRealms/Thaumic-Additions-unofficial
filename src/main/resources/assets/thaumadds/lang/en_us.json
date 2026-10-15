@@ -370,7 +370,7 @@
   "seal.thaumadds.harvestcrops1": "Seal of the Harvested Crops: reaps what is in front of it.",
   "seal.thaumadds.harvestcrops2": "Seal of the Replanted Crops: reaps and sows again.",
   "seal.thaumadds.pickupitems": "Seal of the Picked Up Items: gathers loose items.",
-  "seal.thaumadds.portal": "Seal of the Portal: passes items to its partner.",
+  "seal.thaumadds.portal": "Seal of the Portal: right-click to walk it through its network.",
   "entity.thaumadds.essentia_shot": "Essentia Shot",
   "entity.thaumadds.mithminite_scythe": "Mithminite Scythe",
   "gui.thaumadds.crystal_bag.empty": "Empty: walk over crystallised essence to fill it",
@@ -379,5 +379,6 @@
   "gui.thaumadds.seal_globe.unknown": "These symbols do not make a seal.",
   "gui.thaumadds.pistol.load": "Feed it a crystallised essence",
   "tooltip.thaumadds.chester": "Place him down and he carries thirty-six slots for you.",
-  "tooltip.thaumadds.seal_globe": "Right-click a seal to read what its symbols mean."
+  "tooltip.thaumadds.seal_globe": "Right-click a seal to read what its symbols mean.",
+  "seal.thaumadds.portalb": "Seal of the Portal, on the %s network."
 }

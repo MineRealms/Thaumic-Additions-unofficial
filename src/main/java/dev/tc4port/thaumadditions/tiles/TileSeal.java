@@ -48,6 +48,31 @@ public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
         return BlockPos.of(packed);
     }
 
+    /** The resolved behaviour, or {@code null} while the symbols mean nothing. */
+    public dev.tc4port.thaumadditions.seals.SealInstance instance() {
+        if (instance == null) {
+            instance = dev.tc4port.thaumadditions.seals.SealManager.makeInstance(this);
+        }
+        return instance;
+    }
+
+    /** 1.12's {@code Block#onEntityCollision}; the portal seal teleports on it. */
+    public void onEntityInside(net.minecraft.world.level.Level level,
+                               net.minecraft.world.entity.Entity entity) {
+        var behaviour = instance();
+        if (behaviour != null) {
+            behaviour.onEntityCollisionWithSeal(level, getBlockPos(), entity);
+        }
+    }
+
+    @Override
+    public void setRemoved() {
+        if (instance != null) {
+            instance.onSealBreak();
+        }
+        super.setRemoved();
+    }
+
     @Override
     public void tick(net.minecraft.world.level.Level level, BlockPos pos, BlockState state) {
         // The symbols can change under the machine, so the behaviour is re-resolved whenever they do.

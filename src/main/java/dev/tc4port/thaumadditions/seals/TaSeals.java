@@ -50,7 +50,9 @@ public final class TaSeals {
                 "seal.thaumadds.harvestcrops2"), ReplantCrops::new);
         SealManager.register(new SealCombination(aspect("vacuos"), aspect("vacuos"), aspect("vacuos"),
                 "seal.thaumadds.pickupitems"), PickupItems::new);
-        SealManager.register(new SealCombination(aspect("praecantatio"), aspect("iter"), aspect("alienis"),
+        // 1.12's portal overrode the match rule rather than naming three symbols: magic, then air,
+        // then anything — and the anything is the network key that decides who pairs with whom.
+        SealManager.register(new SealCombination(aspect("praecantatio"), aspect("aer"), null,
                 "seal.thaumadds.portal"), Portal::new);
     }
 
@@ -289,13 +291,37 @@ public final class TaSeals {
     }
 
     /**
-     * 1.12 {@code SealPortal}: pairs with another portal seal and moves items between them.
+     * 1.12 {@code SealPortal}: a hole in the world that anything walking into comes out of the far
+     * side of, at another portal seal.
      *
-     * <p>Upstream kept the pairing in the seal's own saved data. The port does too, but moves only
-     * items — the chunk-loading half of the original is a separate seal and is not ported, because
-     * 1.20.1's forced chunks are a server setting rather than a block's business.</p>
+     * <p>The pairing is upstream's: two portal seals belong to the same network when they share
+     * their third symbol and their owner, and right-clicking one walks it through the members of
+     * that network, so a player builds a pair by clicking each until they point at each other.
+     * Nothing binds by item — the third symbol is the network key.</p>
+     *
+     * <p>The seal also holds its own chunk loaded while it is bound, which is what lets a portal
+     * work over a distance longer than the view. 1.12 wrote its own chunk loader for that; the port
+     * asks the server directly, which is the one place it uses a loader facility where upstream
+     * built one.</p>
      */
     public static final class Portal extends SealInstance {
+        /** Every portal seal whose chunk is loaded, so a pair can find each other. */
+        private static final java.util.Map<net.minecraft.resources.ResourceKey<Level>,
+                java.util.List<Portal>> ACTIVE = new java.util.HashMap<>();
+
+        /** 1.12 teleported anything whose box met the seal's, grown by this. */
+        private static final double CONTACT = 0.4D;
+        /** 1.12 waited five ticks after a binding before it would carry anything. */
+        private static final int BIND_COOLDOWN = 5;
+        /** How far below the target's floor a traveller arrives, before the air check lifts them. */
+        private static final double ARRIVAL_DROP = 1.0D;
+
+        /** Where this portal leads, or {@code null} while it has not been paired. */
+        private net.minecraft.core.BlockPos bound;
+        private int cooldown;
+        /** Whether this seal has forced its own chunk, so it only ever relaxes what it forced. */
+        private boolean holding;
+
         public Portal(TileSeal seal) {
             super(seal);
         }
@@ -308,19 +334,161 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide || !atTickRate(level, 20) || powered(level)) {
+            if (level == null || level.isClientSide) {
                 return;
             }
-            BlockPos target = seal.portalTarget();
-            if (target == null || target.equals(seal.getBlockPos())) {
+            join(level);
+            if (cooldown > 0) {
+                --cooldown;
+            }
+            if (bound != null && !holding && level instanceof ServerLevel server) {
+                hold(server, seal.getBlockPos(), true);
+            }
+        }
+
+        /**
+         * Registers this seal so its partner can find it. Called every tick, so it checks first:
+         * without the check the list would grow by one entry per tick per portal.
+         */
+        private void join(Level level) {
+            List<Portal> peers = ACTIVE.computeIfAbsent(level.dimension(),
+                    key -> new java.util.ArrayList<>());
+            if (!peers.contains(this)) {
+                peers.add(this);
+            }
+        }
+
+        /** Forces or relaxes this seal's chunk, remembering that it did. */
+        private void hold(ServerLevel server, net.minecraft.core.BlockPos pos, boolean force) {
+            net.minecraft.world.level.ChunkPos chunk = new net.minecraft.world.level.ChunkPos(pos);
+            server.setChunkForced(chunk.x, chunk.z, force);
+            holding = force;
+        }
+
+        /** The other portal seals this one may lead to: same network, same owner, not itself. */
+        private List<Portal> network() {
+            Level level = seal.getLevel();
+            List<Portal> peers = level == null ? null : ACTIVE.get(level.dimension());
+            if (peers == null) {
+                return List.of();
+            }
+            List<Portal> out = new java.util.ArrayList<>();
+            for (Portal other : new java.util.ArrayList<>(peers)) {
+                if (other == this || other.seal.isRemoved() || other.seal.getLevel() == null) {
+                    continue;
+                }
+                if (!java.util.Objects.equals(other.seal.getOwner(), seal.getOwner())) {
+                    continue;
+                }
+                if (!java.util.Objects.equals(other.seal.symbol(2), seal.symbol(2))) {
+                    continue;
+                }
+                out.add(other);
+            }
+            return out;
+        }
+
+        /** 1.12's {@code onSealActivated}: step the binding to the next member of the network. */
+        @Override
+        public boolean onSealActivated(Level level, net.minecraft.core.BlockPos pos,
+                                       net.minecraft.world.entity.player.Player player) {
+            List<Portal> peers = network();
+            if (peers.isEmpty()) {
+                return false;
+            }
+            int current = -1;
+            for (int index = 0; index < peers.size(); index++) {
+                net.minecraft.core.BlockPos theirBound = peers.get(index).bound;
+                if (theirBound != null && theirBound.equals(seal.getBlockPos())) {
+                    current = index;
+                    break;
+                }
+            }
+            Portal next = peers.get((current + 1) % peers.size());
+            this.bound = next.seal.getBlockPos();
+            next.bound = seal.getBlockPos();
+            this.cooldown += BIND_COOLDOWN;
+            next.cooldown += BIND_COOLDOWN;
+            seal.sync();
+            next.seal.sync();
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT,
+                    net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+            return true;
+        }
+
+        /** 1.12's {@code onEntityCollisionWithSeal}: carry whatever steps into the hole. */
+        @Override
+        public void onEntityCollisionWithSeal(Level level, net.minecraft.core.BlockPos pos,
+                                              net.minecraft.world.entity.Entity entity) {
+            if (level.isClientSide || bound == null || cooldown > 0) {
                 return;
             }
-            List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class,
-                    new net.minecraft.world.phys.AABB(seal.getBlockPos()).inflate(1.5D));
-            for (ItemEntity item : items) {
-                item.teleportTo(target.getX() + 0.5D, target.getY() + 1.0D, target.getZ() + 0.5D);
+            var shape = seal.getBlockState().getShape(level, pos).bounds().move(pos).inflate(CONTACT);
+            if (!entity.getBoundingBox().intersects(shape)) {
                 return;
             }
+            if (!(level.getBlockEntity(bound) instanceof TileSeal target)
+                    || !(target.instance() instanceof Portal portal)) {
+                // The far end has gone; forget it rather than pointing at nothing.
+                this.bound = null;
+                return;
+            }
+            net.minecraft.core.Direction out = target.orientation();
+            net.minecraft.core.BlockPos landing = bound.relative(out);
+            double x = landing.getX() + 0.5D;
+            double y = landing.getY() - ARRIVAL_DROP;
+            double z = landing.getZ() + 0.5D;
+            if (!level.getBlockState(net.minecraft.core.BlockPos.containing(x, y, z)).isAir()) {
+                y += 1.0D;
+            }
+            entity.teleportTo(x, y, z);
+            // The traveller comes out facing away from the far portal, as upstream had them.
+            entity.setYRot(switch (out) {
+                case NORTH -> 180.0F;
+                case SOUTH -> 0.0F;
+                case WEST -> 90.0F;
+                case EAST -> 270.0F;
+                default -> entity.getYRot();
+            });
+            this.cooldown += BIND_COOLDOWN;
+            portal.cooldown += BIND_COOLDOWN;
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT,
+                    net.minecraft.sounds.SoundSource.BLOCKS, 0.6F, 1.4F);
+        }
+
+        @Override
+        public void onSealBreak() {
+            Level level = seal.getLevel();
+            if (bound != null && level instanceof ServerLevel server) {
+                hold(server, seal.getBlockPos(), false);
+            }
+            List<Portal> peers = level == null ? null : ACTIVE.get(level.dimension());
+            if (peers == null) {
+                return;
+            }
+            peers.remove(this);
+            for (Portal other : peers) {
+                if (seal.getBlockPos().equals(other.bound)) {
+                    other.bound = null;
+                    if (other.seal.getLevel() instanceof ServerLevel otherServer) {
+                        other.hold(otherServer, other.seal.getBlockPos(), false);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void readFromNbt(net.minecraft.nbt.CompoundTag tag) {
+            this.bound = tag.contains("Bound")
+                    ? net.minecraft.core.BlockPos.of(tag.getLong("Bound")) : null;
+        }
+
+        @Override
+        public net.minecraft.nbt.CompoundTag writeToNbt(net.minecraft.nbt.CompoundTag tag) {
+            if (bound != null) {
+                tag.putLong("Bound", bound.asLong());
+            }
+            return tag;
         }
     }
 

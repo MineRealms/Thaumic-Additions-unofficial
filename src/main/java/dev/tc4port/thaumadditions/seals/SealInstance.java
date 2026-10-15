@@ -35,8 +35,14 @@ public abstract class SealInstance {
     public void tick() {
     }
 
-    /** 1.12 {@code onEntityCollisionWithSeal}; only the pickup seal used it. */
+    /** 1.12 {@code onEntityCollisionWithSeal}; only the portal seal used it. */
     public void onEntityCollisionWithSeal(Level level, BlockPos pos, Entity entity) {
+    }
+
+    /** 1.12's {@code onSealActivated}: right-clicking the seal. Only the portal binds on it. */
+    public boolean onSealActivated(Level level, BlockPos pos,
+                                   net.minecraft.world.entity.player.Player player) {
+        return false;
     }
 
     /** 1.12 {@code onSealBreak}, for a seal that had to clean up after itself. */
