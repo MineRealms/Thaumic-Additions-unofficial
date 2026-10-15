@@ -52,11 +52,23 @@ public class TileEssentiaSink extends SyncedBlockEntity
         HCLitePlatform.Holder.get().loadItemStacks(this, getPersistentData(), KEY_ITEMS, inventory);
     }
 
-    /** 1.12 {@code WorldUtil.getFacing(state).rotateYCCW()}: the face the sink listens on. */
+    /**
+     * 1.12 {@code WorldUtil.getFacing(state).rotateYCCW()}: the face the sink listens on.
+     *
+     * <p>The sink's block is a horizontal-only one, so the facing property it carries is
+     * {@code HORIZONTAL_FACING}; the vertical fallback is here so that a six-way variant would not
+     * quietly turn the machine around.</p>
+     */
     public Direction essentiaFace() {
         BlockState state = getBlockState();
-        Direction facing = state.hasProperty(BlockStateProperties.FACING)
-                ? state.getValue(BlockStateProperties.FACING) : Direction.NORTH;
+        Direction facing;
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        } else if (state.hasProperty(BlockStateProperties.FACING)) {
+            facing = state.getValue(BlockStateProperties.FACING);
+        } else {
+            facing = Direction.NORTH;
+        }
         return facing.getCounterClockWise();
     }
 

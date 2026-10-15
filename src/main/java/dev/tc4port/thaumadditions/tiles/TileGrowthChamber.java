@@ -191,10 +191,15 @@ public class TileGrowthChamber extends TileEssentia implements Container {
         return true;
     }
 
-    /** The crystal block item's own aspect tag, or a random one when it has none. */
+    /**
+     * The aspect the crystal block item carries, or a random one when it carries none.
+     *
+     * <p>The aspect has to be read the way the item stores it — see
+     * {@link ThaumcraftItems#aspectOfCrystalEssence} — or every crystal looks aspect-less and the
+     * chamber grows a random one instead of the crystal's own.</p>
+     */
     private static AspectId aspectOfCrystal(ItemStack crystal) {
-        AspectId tagged = TaAspect.readAspect(
-                HCLitePlatform.Holder.get().itemTag(crystal), "Aspect");
+        AspectId tagged = ThaumcraftItems.aspectOfCrystalEssence(crystal);
         return tagged != null ? tagged : TaAspect.random(new java.util.Random());
     }
 

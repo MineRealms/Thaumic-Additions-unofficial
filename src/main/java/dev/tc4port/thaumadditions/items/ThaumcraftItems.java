@@ -39,4 +39,26 @@ public final class ThaumcraftItems {
         stack.setCount(count);
         return stack;
     }
+
+    /**
+     * The aspect a crystallised essence was filled with.
+     *
+     * <p>TC4R keeps the aspect in its own item state rather than in a plain NBT tag, so it has to be
+     * read through {@link dev.tc4port.thaumcraft.api.aspect.AspectItemView}. Reading the stack's
+     * {@code "Aspect"} tag — the shape the port's own items use — finds nothing on one of these and
+     * silently returns {@code null}, which is how a machine ends up inventing a random aspect.</p>
+     */
+    public static AspectId aspectOfCrystalEssence(ItemStack stack) {
+        if (stack == null || stack.isEmpty()
+                || !(stack.getItem() instanceof dev.tc4port.thaumcraft.api.aspect.AspectItemView view)) {
+            return null;
+        }
+        dev.tc4port.thaumcraft.api.aspect.AspectAmounts stored = view.storedAspectData(stack);
+        for (java.util.Map.Entry<AspectId, Integer> entry : stored.amounts().entrySet()) {
+            if (entry.getValue() != null && entry.getValue() > 0) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
 }

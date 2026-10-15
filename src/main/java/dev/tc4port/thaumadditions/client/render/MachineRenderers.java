@@ -9,6 +9,7 @@ import dev.tc4port.thaumadditions.tiles.TileAspectCombiner;
 import dev.tc4port.thaumadditions.tiles.TileCrystalBore;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
+import dev.tc4port.thaumadditions.tiles.TileFluxConcentrator;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -136,12 +137,12 @@ public final class MachineRenderers {
     }
 
     /** 1.12 {@code TESRFluxConcentrator}. */
-    public static final class FluxConcentrator implements BlockEntityRenderer<TaTiles.Concentrator> {
+    public static final class FluxConcentrator implements BlockEntityRenderer<TileFluxConcentrator> {
         private static final MachineModels.FluxConcentrator MODEL =
                 new MachineModels.FluxConcentrator(MachineModels.FluxConcentrator.layer().bakeRoot());
 
         @Override
-        public void render(TaTiles.Concentrator be, float partialTick, PoseStack pose, MultiBufferSource buffers,
+        public void render(TileFluxConcentrator be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
             draw(pose, buffers, MachineModels.FluxConcentrator.TEXTURE, be.getBlockState(), light, overlay,
                     MODEL.root(), 0.0F);

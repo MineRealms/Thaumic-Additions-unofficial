@@ -176,16 +176,7 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
         if (in.isEmpty() || !in.is(dev.tc4port.thaumadditions.items.ThaumcraftItems.crystalEssence())) {
             return null;
         }
-        if (!(in.getItem() instanceof AspectItemView view)) {
-            return null;
-        }
-        AspectAmounts stored = view.storedAspectData(in);
-        for (java.util.Map.Entry<AspectId, Integer> entry : stored.amounts().entrySet()) {
-            if (entry.getValue() != null && entry.getValue() > 0) {
-                return entry.getKey();
-            }
-        }
-        return null;
+        return dev.tc4port.thaumadditions.items.ThaumcraftItems.aspectOfCrystalEssence(in);
     }
 
     private static AspectId machinaAspect() {
