@@ -26,6 +26,7 @@ public final class ThaumAdditionsForge {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ThaumAdditions.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ThaumAdditions.MOD_ID);
     public static final DeferredRegister<net.minecraft.world.inventory.MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, ThaumAdditions.MOD_ID);
+    public static final DeferredRegister<net.minecraft.world.entity.EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ThaumAdditions.MOD_ID);
 
     public ThaumAdditionsForge(FMLJavaModLoadingContext context) {
         IEventBus modBus = context.getModEventBus();
@@ -58,9 +59,27 @@ public final class ThaumAdditionsForge {
                 return (Supplier<T>) (Supplier) MENUS.register(name, (Supplier) factory);
             }
         };
+        Registrar entityTypes = new Registrar() {
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            @Override
+            public <T> Supplier<T> register(String name, Supplier<T> factory) {
+                return (Supplier<T>) (Supplier) ENTITY_TYPES.register(name, (Supplier) factory);
+            }
+        };
         TaPlatformForge platform = new TaPlatformForge();
         TaPlatform.Active.set(platform);
-        Content.init(items, blocks, blockEntities, menus, platform);
+        Content.init(items, blocks, blockEntities, menus, entityTypes, platform);
+        Content.setEssentiaShot(entityTypes.register("essentia_shot",
+                () -> net.minecraft.world.entity.EntityType.Builder
+                        .<dev.tc4port.thaumadditions.forge.entity.EssentiaShot>of(
+                                dev.tc4port.thaumadditions.forge.entity.EssentiaShot::new,
+                                net.minecraft.world.entity.MobCategory.MISC)
+                        .sized(0.4F, 0.4F)
+                        .clientTrackingRange(4)
+                        .updateInterval(4)
+                        .build("thaumadds:essentia_shot")),
+                (level, thrower, payload) -> new dev.tc4port.thaumadditions.forge.entity.EssentiaShot(
+                        Content.ESSENTIA_SHOT.get(), level, thrower, payload));
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))
@@ -72,6 +91,7 @@ public final class ThaumAdditionsForge {
         BLOCKS.register(modBus);
         BLOCK_ENTITIES.register(modBus);
         MENUS.register(modBus);
+        ENTITY_TYPES.register(modBus);
         TABS.register(modBus);
 
         modBus.addListener(this::commonSetup);

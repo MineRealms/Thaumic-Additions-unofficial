@@ -231,6 +231,26 @@ public final class Content {
     public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.GrowthChamber>> GROWTH_MENU;
     public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.AuraDisperser>> DISPERSER_MENU;
     public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.ShadowEnchanter>> ENCHANTER_MENU;
+
+    /**
+     * The essentia pistol's shot; the other entities are not ported yet.
+     *
+     * <p>Filled by the node rather than by {@link #init}, because the entity's concrete class has to
+     * be per node: {@code defineSynchedData} takes a builder on one version and nothing on the
+     * other.</p>
+     */
+    public static Supplier<net.minecraft.world.entity.EntityType<? extends dev.tc4port.thaumadditions.entity.EssentiaShotBase>> ESSENTIA_SHOT;
+
+    /** How shared code builds one; the node fills this alongside the type. */
+    public static dev.tc4port.thaumadditions.entity.EssentiaShotFactory ESSENTIA_SHOT_FACTORY;
+
+    /** Called by the node once it has registered the entity type. */
+    public static void setEssentiaShot(
+            Supplier<net.minecraft.world.entity.EntityType<? extends dev.tc4port.thaumadditions.entity.EssentiaShotBase>> type,
+            dev.tc4port.thaumadditions.entity.EssentiaShotFactory factory) {
+        ESSENTIA_SHOT = type;
+        ESSENTIA_SHOT_FACTORY = factory;
+    }
     public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
     public static Supplier<BlockEntityType<TileAuraDisperser>> DISPERSER_BE;
     public static Supplier<BlockEntityType<TileCrystalBore>> BORE_BE;
@@ -241,7 +261,7 @@ public final class Content {
     }
 
     public static void init(Registrar items, Registrar blocks, Registrar blockEntities, Registrar menus,
-                            TaPlatform platform) {
+                            Registrar entityTypes, TaPlatform platform) {
         materials(items);
         essentiaMaterials(items, platform);
         plainItems(items, platform);

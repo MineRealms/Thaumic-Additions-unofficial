@@ -24,6 +24,7 @@ public final class ThaumAdditionsNeoForge {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ThaumAdditions.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ThaumAdditions.MOD_ID);
     public static final DeferredRegister<net.minecraft.world.inventory.MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, ThaumAdditions.MOD_ID);
+    public static final DeferredRegister<net.minecraft.world.entity.EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, ThaumAdditions.MOD_ID);
 
     public ThaumAdditionsNeoForge(IEventBus modBus) {
         Registrar items = new Registrar() {
@@ -56,7 +57,25 @@ public final class ThaumAdditionsNeoForge {
                 return (Supplier<T>) (Supplier) MENUS.register(name, (Supplier) factory);
             }
         };
-        Content.init(items, blocks, blockEntities, menus, platform);
+        Registrar entityTypes = new Registrar() {
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            @Override
+            public <T> Supplier<T> register(String name, Supplier<T> factory) {
+                return (Supplier<T>) (Supplier) ENTITY_TYPES.register(name, (Supplier) factory);
+            }
+        };
+        Content.init(items, blocks, blockEntities, menus, entityTypes, platform);
+        Content.setEssentiaShot(entityTypes.register("essentia_shot",
+                () -> net.minecraft.world.entity.EntityType.Builder
+                        .<dev.tc4port.thaumadditions.neoforge.entity.EssentiaShot>of(
+                                dev.tc4port.thaumadditions.neoforge.entity.EssentiaShot::new,
+                                net.minecraft.world.entity.MobCategory.MISC)
+                        .sized(0.4F, 0.4F)
+                        .clientTrackingRange(4)
+                        .updateInterval(4)
+                        .build("thaumadds:essentia_shot")),
+                (level, thrower, payload) -> new dev.tc4port.thaumadditions.neoforge.entity.EssentiaShot(
+                        Content.ESSENTIA_SHOT.get(), level, thrower, payload));
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))
@@ -68,6 +87,7 @@ public final class ThaumAdditionsNeoForge {
         BLOCKS.register(modBus);
         BLOCK_ENTITIES.register(modBus);
         MENUS.register(modBus);
+        ENTITY_TYPES.register(modBus);
         TABS.register(modBus);
         // The right-click hook lives on the game bus, which the mod bus does not carry.
         net.neoforged.neoforge.common.NeoForge.EVENT_BUS.register(ThaumAdditionsNeoForge.class);

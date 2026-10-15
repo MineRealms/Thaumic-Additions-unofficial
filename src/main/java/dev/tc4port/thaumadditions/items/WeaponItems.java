@@ -197,18 +197,13 @@ public final class WeaponItems {
                     AspectId aspect = TaAspect.readAspect(tag, "Aspect");
                     int amount = tag == null ? 0 : tag.getInt("Essentia");
                     if (aspect != null && amount > 0) {
-                        Vec3 start = player.getEyePosition(1.0F);
-                        Vec3 end = start.add(player.getViewVector(1.0F).scale(32.0D));
-                        EntityHitResult hit = ProjectileUtil.getEntityHitResult(level, player, start, end,
-                                new AABB(start, end).inflate(1.0D),
-                                entity -> entity instanceof LivingEntity && entity != player);
-                        if (hit != null && hit.getEntity() instanceof LivingEntity victim) {
-                            victim.hurt(level.damageSources().playerAttack(player), 6.0F);
-                            applyAspectEffect(victim, aspect);
-                            victim.push(player.getViewVector(1.0F).x * 0.6D, 0.25D,
-                                    player.getViewVector(1.0F).z * 0.6D);
-                        }
-                        HCLitePlatform.Holder.get().updateItemTag(stack, nbt -> nbt.putInt("Essentia", amount - 1));
+                        var payload = new dev.tc4port.thaumcraft.api.aspect.AspectList();
+                        payload.add(aspect, amount);
+                        var shot = dev.tc4port.thaumadditions.registry.Content.ESSENTIA_SHOT_FACTORY
+                                .create(level, player, payload);
+                        shot.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+                        level.addFreshEntity(shot);
+                        HCLitePlatform.Holder.get().updateItemTag(stack, nbt -> nbt.putInt("Essentia", 0));
                         player.getCooldowns().addCooldown(stack.getItem(), 10);
                         level.playSound(null, player.blockPosition(), SoundEvents.FIREWORK_ROCKET_BLAST,
                                 SoundSource.PLAYERS, 1.0F, 1.6F);
@@ -217,24 +212,6 @@ public final class WeaponItems {
                 return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
             }
 
-            private void applyAspectEffect(LivingEntity victim, AspectId aspect) {
-                switch (aspect.value().getPath()) {
-                    case "ignis", "infernum" -> platform.ignite(victim, 5.0F);
-                    case "aqua", "gelum", "aer", "victus" ->
-                            victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
-                    case "terra", "ordo" -> victim.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));
-                    case "perditio", "exitium" -> victim.hurt(victim.damageSources().magic(), 2.0F);
-                    default -> {
-                    }
-                }
-            }
-
-            @Override
-            public List<Component> tooltipLines(ItemStack stack) {
-                AspectId aspect = TaAspect.readAspect(HCLitePlatform.Holder.get().itemTag(stack), "Aspect");
-                return List.of(Component.translatable("tooltip.thaumadds.essentia_pistol.aspect",
-                        aspect == null ? "-" : TaAspect.displayName(aspect)).withStyle(ChatFormatting.GRAY));
-            }
         });
     }
 }
