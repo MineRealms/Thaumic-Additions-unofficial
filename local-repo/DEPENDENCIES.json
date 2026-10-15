@@ -1,11 +1,17 @@
 {
-  "comment": "TC4R 0.1.0-20740 seeded from the user-provided 20740 dev kit zips. SHA-1 per artifact; verify before build.",
+  "comment": "TC4R 0.1.0-20740 (20740 dev kit zips, api+sources seeded for forge and neoforge) + Rosetta remote-debug bridge (dev-only, built from RainJava-work/RosettaRemoteDebugBridge: forge master 1.0.0 / neoforge-1.21.1-port 1.0.1). SHA-1 per artifact.",
   "artifacts": {
     "dev/tc4port/thaumcraft-forge/0.1.0-20740/thaumcraft-forge-0.1.0-20740.jar": "1b75bb8eca2b8b00a2abb3080c3c6aefee4f36d6",
+    "dev/tc4port/thaumcraft-forge/0.1.0-20740/thaumcraft-forge-0.1.0-20740-api.jar": "ac80fe755f7cdee112af081af653359146f86ee5",
+    "dev/tc4port/thaumcraft-forge/0.1.0-20740/thaumcraft-forge-0.1.0-20740-sources.jar": "a524485ef4308eadd3684d1a305dea3ebbfd893e",
     "dev/tc4port/thaumcraft-forge/0.1.0-20740/thaumcraft-forge-0.1.0-20740.pom": "c6f1f2850a36e4a8daf9b7ebe074681a103cde25",
     "dev/tc4port/thaumcraft-neoforge/0.1.0-20740/thaumcraft-neoforge-0.1.0-20740.jar": "ca4ffd80c9705e5e56ee64cc4c6475584374fa48",
     "dev/tc4port/thaumcraft-neoforge/0.1.0-20740/thaumcraft-neoforge-0.1.0-20740-api.jar": "67d0a2a502b1ff9f8ea6c548a36714080c001c92",
     "dev/tc4port/thaumcraft-neoforge/0.1.0-20740/thaumcraft-neoforge-0.1.0-20740-sources.jar": "ed7ae8fab33bf8fc081cedcf6a10c6bc75b00efe",
-    "dev/tc4port/thaumcraft-neoforge/0.1.0-20740/thaumcraft-neoforge-0.1.0-20740.pom": "c67464a6d094ac20a8ddf5d57db0a84641d9816c"
+    "dev/tc4port/thaumcraft-neoforge/0.1.0-20740/thaumcraft-neoforge-0.1.0-20740.pom": "c67464a6d094ac20a8ddf5d57db0a84641d9816c",
+    "dev/rosetta/rosetta-remote-debug-bridge-forge/1.0.0/rosetta-remote-debug-bridge-forge-1.0.0.jar": "94b2bc4beaf4402bcfc326bade739af010a097a9",
+    "dev/rosetta/rosetta-remote-debug-bridge-forge/1.0.0/rosetta-remote-debug-bridge-forge-1.0.0.pom": "7f358b4a10efeadd7c52e0264dc2661b227d08d6",
+    "dev/rosetta/rosetta-remote-debug-bridge-neoforge/1.0.1/rosetta-remote-debug-bridge-neoforge-1.0.1.jar": "be6029a5d1991a6e56fbf8e6f1ae16ae51874b8a",
+    "dev/rosetta/rosetta-remote-debug-bridge-neoforge/1.0.1/rosetta-remote-debug-bridge-neoforge-1.0.1.pom": "7e99a69fc54e27195e5ce3b62a1036f34d7ed5c6"
   }
 }
