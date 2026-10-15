@@ -103,21 +103,4 @@ public final class TaTiles {
         }
     }
 
-    /** 1.12 {@code TileShadowEnchanter}: spends essentia to write one whitelisted enchantment. */
-    public static class Enchanter extends TileEssentia {
-        public Enchanter(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, 32, 12);
-        }
-
-        @Override
-        protected boolean accepts(Direction face) {
-            return true;
-        }
-
-        @Override
-        protected boolean emits(Direction face) {
-            return false;
-        }
-    }
-
 }

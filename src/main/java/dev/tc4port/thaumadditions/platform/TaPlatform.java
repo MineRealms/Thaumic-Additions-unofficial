@@ -165,4 +165,28 @@ public interface TaPlatform {
 
     /** Removes every harmful effect, the mithminite full-set cleanse. */
     void clearHarmfulEffects(LivingEntity target);
+
+    // ------------------------------------------------------------------ enchantments
+
+    /**
+     * Resolves an enchantment by registry id, or {@code null} when nothing holds that id. The
+     * level is needed because 1.21 enchantments live in a data-driven registry.
+     */
+    TaEnchantment enchantment(net.minecraft.world.level.Level level, ResourceLocation id);
+
+    /** The id an enchantment was registered under. */
+    ResourceLocation enchantmentId(TaEnchantment enchantment);
+
+    /** Whether two enchantments may sit on the same item. */
+    boolean enchantmentsCompatible(TaEnchantment first, TaEnchantment second);
+
+    /** Whether this enchantment can be written onto this stack. */
+    boolean enchantmentAppliesTo(TaEnchantment enchantment, ItemStack stack);
+
+    int enchantmentMinLevel(TaEnchantment enchantment);
+
+    int enchantmentMaxLevel(TaEnchantment enchantment);
+
+    /** Writes the enchantment onto the stack, replacing any existing level of it. */
+    void enchantItem(ItemStack stack, TaEnchantment enchantment, int level);
 }

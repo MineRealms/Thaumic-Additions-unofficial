@@ -24,6 +24,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionResult;
@@ -221,6 +222,11 @@ public final class TaPlatformForge implements TaPlatform {
                           dev.tc4port.thaumadditions.platform.TaSound sound, float volume, float pitch) {
         net.minecraft.sounds.SoundEvent event = switch (sound) {
             case EXPLODE -> net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE;
+            case CRAFT_FAIL -> dev.tc4port.thaumcraft.registry.TCSounds.CRAFT_FAIL.get();
+            case CRAFT_START -> dev.tc4port.thaumcraft.registry.TCSounds.CRAFT_START.get();
+            case BRAIN -> dev.tc4port.thaumcraft.registry.TCSounds.BRAIN.get();
+            // 1.12's SoundsTC.poof has no TC4R entry; UPGRADE is TC4R's "something finished" cue.
+            case CRAFT_DONE -> dev.tc4port.thaumcraft.registry.TCSounds.UPGRADE.get();
         };
         level.playSound(null, pos, event, net.minecraft.sounds.SoundSource.BLOCKS, volume, pitch);
     }
@@ -373,6 +379,57 @@ public final class TaPlatformForge implements TaPlatform {
         for (MobEffectInstance active : new ArrayList<>(target.getActiveEffects()))
             if (!active.getEffect().isBeneficial())
                 target.removeEffect(active.getEffect());
+    }
+
+    // ------------------------------------------------------------------ enchantments
+
+    /** 1.20.1 enchantments are a static registry; the handle is a holder onto an entry. */
+    @Override
+    public dev.tc4port.thaumadditions.platform.TaEnchantment enchantment(
+            net.minecraft.world.level.Level level, ResourceLocation id) {
+        Enchantment value = net.minecraft.core.registries.BuiltInRegistries.ENCHANTMENT.get(id);
+        return value == null ? null
+                : new EnchantmentHandle(net.minecraft.core.registries.BuiltInRegistries.ENCHANTMENT
+                        .wrapAsHolder(value));
+    }
+
+    @Override
+    public ResourceLocation enchantmentId(dev.tc4port.thaumadditions.platform.TaEnchantment enchantment) {
+        return net.minecraft.core.registries.BuiltInRegistries.ENCHANTMENT
+                .getKey(((EnchantmentHandle) enchantment).value.value());
+    }
+
+    @Override
+    public boolean enchantmentsCompatible(dev.tc4port.thaumadditions.platform.TaEnchantment first,
+                                          dev.tc4port.thaumadditions.platform.TaEnchantment second) {
+        return ((EnchantmentHandle) first).value.value()
+                .isCompatibleWith(((EnchantmentHandle) second).value.value());
+    }
+
+    @Override
+    public boolean enchantmentAppliesTo(dev.tc4port.thaumadditions.platform.TaEnchantment enchantment,
+                                        ItemStack stack) {
+        return ((EnchantmentHandle) enchantment).value.value().canEnchant(stack);
+    }
+
+    @Override
+    public int enchantmentMinLevel(dev.tc4port.thaumadditions.platform.TaEnchantment enchantment) {
+        return ((EnchantmentHandle) enchantment).value.value().getMinLevel();
+    }
+
+    @Override
+    public int enchantmentMaxLevel(dev.tc4port.thaumadditions.platform.TaEnchantment enchantment) {
+        return ((EnchantmentHandle) enchantment).value.value().getMaxLevel();
+    }
+
+    @Override
+    public void enchantItem(ItemStack stack, dev.tc4port.thaumadditions.platform.TaEnchantment enchantment,
+                            int level) {
+        stack.enchant(((EnchantmentHandle) enchantment).value.value(), level);
+    }
+
+    private record EnchantmentHandle(net.minecraft.core.Holder<Enchantment> value)
+            implements dev.tc4port.thaumadditions.platform.TaEnchantment {
     }
 
     private static MobEffect nativeEffect(TaEffect effect) {

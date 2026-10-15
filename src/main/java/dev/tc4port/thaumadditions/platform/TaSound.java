@@ -9,5 +9,14 @@ package dev.tc4port.thaumadditions.platform;
  */
 public enum TaSound {
     /** 1.12 {@code TileAdaminiteJar}: {@code SoundEvents.ENTITY_GENERIC_EXPLODE}. */
-    EXPLODE
+    EXPLODE,
+
+    /** 1.12 {@code SoundsTC.craftfail}, played when the shadow enchanter loses its recipe. */
+    CRAFT_FAIL,
+    /** 1.12 {@code SoundsTC.craftstart}, played when the shadow enchanter starts infusing. */
+    CRAFT_START,
+    /** 1.12 {@code SoundsTC.brain}, the enchanter's idle tick every few seconds. */
+    BRAIN,
+    /** 1.12 {@code SoundsTC.poof}, played when the shadow enchanter finishes an item. */
+    CRAFT_DONE
 }

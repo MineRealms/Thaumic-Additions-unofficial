@@ -21,10 +21,12 @@ import dev.tc4port.thaumadditions.platform.ToolKind;
 import dev.tc4port.thaumadditions.tiles.TileAspectCombiner;
 import dev.tc4port.thaumadditions.tiles.TileAuraDisperser;
 import dev.tc4port.thaumadditions.tiles.TileCrystal;
+import dev.tc4port.thaumadditions.tiles.TileCrystalLamp;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
 import dev.tc4port.thaumadditions.tiles.TileJar;
 import dev.tc4port.thaumadditions.tiles.TileSeal;
+import dev.tc4port.thaumadditions.tiles.TileShadowEnchanter;
 import dev.tc4port.thaumadditions.tiles.TileSmelter;
 import dev.tc4port.thaumadditions.tiles.TaTiles;
 import dev.tc4port.thaumcraft.api.ThaumcraftTags;
@@ -208,12 +210,12 @@ public final class Content {
     public static Supplier<BlockEntityType<TileJar>> JAR_BE;
     public static Supplier<BlockEntityType<TileSmelter>> SMELTER_BE;
     public static Supplier<BlockEntityType<TileCrystal>> CRYSTAL_BE;
-    public static Supplier<BlockEntityType<TileCrystal>> CRYSTAL_LAMP_BE;
+    public static Supplier<BlockEntityType<TileCrystalLamp>> CRYSTAL_LAMP_BE;
     public static Supplier<BlockEntityType<TileCrystal.Cake>> CAKE_BE;
     public static Supplier<BlockEntityType<TileSeal>> SEAL_BE;
     public static Supplier<BlockEntityType<TaTiles.Sink>> SINK_BE;
     public static Supplier<BlockEntityType<TaTiles.Summoner>> SUMMONER_BE;
-    public static Supplier<BlockEntityType<TaTiles.Enchanter>> ENCHANTER_BE;
+    public static Supplier<BlockEntityType<TileShadowEnchanter>> ENCHANTER_BE;
     public static Supplier<BlockEntityType<TileGrowthChamber>> GROWTH_BE;
     public static Supplier<BlockEntityType<TileAspectCombiner>> COMBINER_BE;
     public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
@@ -445,8 +447,8 @@ public final class Content {
                 MITHMINITE_SMELTER.get()).build(null));
         CRYSTAL_BE = registrar.register("crystal_block", () -> BlockEntityType.Builder.<TileCrystal>of(
                 (pos, state) -> new TileCrystal(CRYSTAL_BE.get(), pos, state), CRYSTAL_BLOCK.get()).build(null));
-        CRYSTAL_LAMP_BE = registrar.register("crystal_lamp", () -> BlockEntityType.Builder.<TileCrystal>of(
-                (pos, state) -> new TileCrystal(CRYSTAL_LAMP_BE.get(), pos, state), CRYSTAL_LAMP.get()).build(null));
+        CRYSTAL_LAMP_BE = registrar.register("crystal_lamp", () -> BlockEntityType.Builder.<TileCrystalLamp>of(
+                (pos, state) -> new TileCrystalLamp(CRYSTAL_LAMP_BE.get(), pos, state), CRYSTAL_LAMP.get()).build(null));
         CAKE_BE = registrar.register("cake", () -> BlockEntityType.Builder.<TileCrystal.Cake>of(
                 (pos, state) -> new TileCrystal.Cake(CAKE_BE.get(), pos, state), CAKE.get()).build(null));
         SEAL_BE = registrar.register("seal", () -> BlockEntityType.Builder.<TileSeal>of(
@@ -455,8 +457,8 @@ public final class Content {
                 (pos, state) -> new TaTiles.Sink(SINK_BE.get(), pos, state), ESSENTIA_SINK.get()).build(null));
         SUMMONER_BE = registrar.register("entity_summoner", () -> BlockEntityType.Builder.<TaTiles.Summoner>of(
                 (pos, state) -> new TaTiles.Summoner(SUMMONER_BE.get(), pos, state), ENTITY_SUMMONER.get()).build(null));
-        ENCHANTER_BE = registrar.register("shadow_enchanter", () -> BlockEntityType.Builder.<TaTiles.Enchanter>of(
-                (pos, state) -> new TaTiles.Enchanter(ENCHANTER_BE.get(), pos, state), SHADOW_ENCHANTER.get()).build(null));
+        ENCHANTER_BE = registrar.register("shadow_enchanter", () -> BlockEntityType.Builder.<TileShadowEnchanter>of(
+                (pos, state) -> new TileShadowEnchanter(ENCHANTER_BE.get(), pos, state), SHADOW_ENCHANTER.get()).build(null));
         GROWTH_BE = registrar.register("growth_chamber", () -> BlockEntityType.Builder.<TileGrowthChamber>of(
                 (pos, state) -> new TileGrowthChamber(GROWTH_BE.get(), pos, state), GROWTH_CHAMBER.get()).build(null));
         COMBINER_BE = registrar.register("aspect_combiner", () -> BlockEntityType.Builder.<TileAspectCombiner>of(
