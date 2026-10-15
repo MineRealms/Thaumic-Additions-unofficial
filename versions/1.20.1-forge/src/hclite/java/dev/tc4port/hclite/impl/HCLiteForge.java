@@ -54,6 +54,22 @@ public final class HCLiteForge {
                                       java.util.function.Consumer<CompoundTag> mutator) {
                 mutator.accept(stack.getOrCreateTag());
             }
+
+            @Override
+            public void saveItemStacks(BlockEntity be, CompoundTag tag, String key,
+                                       net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> slots) {
+                CompoundTag holder = new CompoundTag();
+                net.minecraft.world.ContainerHelper.saveAllItems(holder, slots);
+                tag.put(key, holder);
+            }
+
+            @Override
+            public void loadItemStacks(BlockEntity be, CompoundTag tag, String key,
+                                       net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> slots) {
+                slots.clear();
+                if (tag.contains(key, net.minecraft.nbt.Tag.TAG_COMPOUND))
+                    net.minecraft.world.ContainerHelper.loadAllItems(tag.getCompound(key), slots);
+            }
         });
 
         HCLiteNet.bootstrap(new PacketChannel() {

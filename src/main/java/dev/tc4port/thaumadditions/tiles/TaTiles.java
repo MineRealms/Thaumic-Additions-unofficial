@@ -188,47 +188,4 @@ public final class TaTiles {
         }
     }
 
-    /** 1.12 {@code TileAbstractSmelter}: aspect fuel in, distilled essentia out to alembics. */
-    public static class Smelter extends TileEssentia {
-        private final float efficiency;
-        private final int speed;
-        private final int capacity;
-
-        public Smelter(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, capacityOf(state), 1);
-            dev.tc4port.thaumadditions.blocks.TaMachineBlocks.SmelterBlock block =
-                    (dev.tc4port.thaumadditions.blocks.TaMachineBlocks.SmelterBlock) state.getBlock();
-            this.efficiency = block.efficiency();
-            this.speed = block.speed();
-            this.capacity = block.capacity();
-        }
-
-        private static int capacityOf(BlockState state) {
-            return state.getBlock() instanceof dev.tc4port.thaumadditions.blocks.TaMachineBlocks.SmelterBlock block
-                    ? block.capacity() : 1000;
-        }
-
-        public float efficiency() {
-            return efficiency;
-        }
-
-        public int speed() {
-            return speed;
-        }
-
-        @Override
-        public int getCapacity() {
-            return capacity;
-        }
-
-        @Override
-        protected boolean accepts(Direction face) {
-            return face != Direction.DOWN;
-        }
-
-        @Override
-        protected boolean emits(Direction face) {
-            return face == Direction.UP;
-        }
-    }
 }

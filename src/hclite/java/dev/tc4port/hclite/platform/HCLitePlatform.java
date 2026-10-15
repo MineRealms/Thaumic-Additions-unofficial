@@ -33,6 +33,19 @@ public interface HCLitePlatform {
     /** Mutates the item's custom NBT, creating and attaching it when absent. */
     void updateItemTag(ItemStack stack, Consumer<CompoundTag> mutator);
 
+    /**
+     * Writes a block entity's item slots into {@code tag} under {@code key}.
+     *
+     * <p>Item stack serialisation is the other mapping-drift point: 1.20.1 saves a stack straight
+     * into a tag, while 1.21 needs a registry lookup provider, which the node takes from the block
+     * entity's level. Machines with an inventory go through here so the shared tile code never
+     * names either shape.</p>
+     */
+    void saveItemStacks(BlockEntity be, CompoundTag tag, String key, net.minecraft.core.NonNullList<ItemStack> slots);
+
+    /** Reads back what {@link #saveItemStacks} wrote, leaving the slots empty when absent. */
+    void loadItemStacks(BlockEntity be, CompoundTag tag, String key, net.minecraft.core.NonNullList<ItemStack> slots);
+
     final class Holder {
         private static volatile HCLitePlatform platform;
 

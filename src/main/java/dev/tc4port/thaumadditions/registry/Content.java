@@ -21,6 +21,7 @@ import dev.tc4port.thaumadditions.platform.ToolKind;
 import dev.tc4port.thaumadditions.tiles.TileCrystal;
 import dev.tc4port.thaumadditions.tiles.TileJar;
 import dev.tc4port.thaumadditions.tiles.TileSeal;
+import dev.tc4port.thaumadditions.tiles.TileSmelter;
 import dev.tc4port.thaumadditions.tiles.TaTiles;
 import dev.tc4port.thaumcraft.api.ThaumcraftTags;
 import dev.tc4port.thaumcraft.api.item.ArmorTextureApi;
@@ -201,7 +202,7 @@ public final class Content {
 
     /** The sixteen block entity types. */
     public static Supplier<BlockEntityType<TileJar>> JAR_BE;
-    public static Supplier<BlockEntityType<TaTiles.Smelter>> SMELTER_BE;
+    public static Supplier<BlockEntityType<TileSmelter>> SMELTER_BE;
     public static Supplier<BlockEntityType<TileCrystal>> CRYSTAL_BE;
     public static Supplier<BlockEntityType<TileCrystal>> CRYSTAL_LAMP_BE;
     public static Supplier<BlockEntityType<TileCrystal.Cake>> CAKE_BE;
@@ -435,8 +436,8 @@ public final class Content {
         JAR_BE = registrar.register("jar", () -> BlockEntityType.Builder.<TileJar>of(
                 (pos, state) -> new TileJar(JAR_BE.get(), pos, state), JAR_BRASS.get(), JAR_THAUMIUM.get(), JAR_ELDRITCH.get(),
                 JAR_MITHRILLIUM.get(), JAR_ADAMINITE.get(), JAR_MITHMINITE.get()).build(null));
-        SMELTER_BE = registrar.register("smelter", () -> BlockEntityType.Builder.<TaTiles.Smelter>of(
-                (pos, state) -> new TaTiles.Smelter(SMELTER_BE.get(), pos, state), MITHRILLIUM_SMELTER.get(), ADAMINITE_SMELTER.get(),
+        SMELTER_BE = registrar.register("smelter", () -> BlockEntityType.Builder.<TileSmelter>of(
+                (pos, state) -> new TileSmelter(SMELTER_BE.get(), pos, state), MITHRILLIUM_SMELTER.get(), ADAMINITE_SMELTER.get(),
                 MITHMINITE_SMELTER.get()).build(null));
         CRYSTAL_BE = registrar.register("crystal_block", () -> BlockEntityType.Builder.<TileCrystal>of(
                 (pos, state) -> new TileCrystal(CRYSTAL_BE.get(), pos, state), CRYSTAL_BLOCK.get()).build(null));

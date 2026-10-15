@@ -86,6 +86,22 @@ public final class HCLiteNeoForge {
                 net.minecraft.world.item.component.CustomData.update(
                         net.minecraft.core.component.DataComponents.CUSTOM_DATA, stack, mutator);
             }
+
+            @Override
+            public void saveItemStacks(BlockEntity be, CompoundTag tag, String key,
+                                       net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> slots) {
+                CompoundTag holder = new CompoundTag();
+                net.minecraft.world.ContainerHelper.saveAllItems(holder, slots, provider(be));
+                tag.put(key, holder);
+            }
+
+            @Override
+            public void loadItemStacks(BlockEntity be, CompoundTag tag, String key,
+                                       net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> slots) {
+                slots.clear();
+                if (tag.contains(key, net.minecraft.nbt.Tag.TAG_COMPOUND))
+                    net.minecraft.world.ContainerHelper.loadAllItems(tag.getCompound(key), slots, provider(be));
+            }
         });
 
         HCLiteNet.bootstrap(new PacketChannel() {
@@ -118,6 +134,11 @@ public final class HCLiteNeoForge {
         HCLitePackets.registerAll();
 
         modBus.addListener(HCLiteNeoForge::registerPayloads);
+    }
+
+    /** 1.21 item serialisation resolves registry ids through a lookup provider. */
+    private static net.minecraft.core.HolderLookup.Provider provider(BlockEntity be) {
+        return be.getLevel() == null ? net.minecraft.core.RegistryAccess.EMPTY : be.getLevel().registryAccess();
     }
 
     private static Envelope envelope(HCPacket packet) {
