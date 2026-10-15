@@ -243,6 +243,11 @@ public class TileEssentiaSink extends SyncedBlockEntity
         setChanged();
     }
 
+    @Override
+    protected void afterReload() {
+        HCLitePlatform.Holder.get().loadItemStacks(this, getPersistentData(), KEY_ITEMS, inventory);
+    }
+
     private void saveInventory() {
         HCLitePlatform.Holder.get().saveItemStacks(this, getPersistentData(), KEY_ITEMS, inventory);
         // The slot change is only visible to the other side once the block entity is pushed;

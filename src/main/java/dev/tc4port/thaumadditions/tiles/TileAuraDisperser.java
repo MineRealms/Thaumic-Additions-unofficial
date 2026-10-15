@@ -73,6 +73,11 @@ public class TileAuraDisperser extends SyncedBlockEntity
 
     public TileAuraDisperser(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        readState();
+    }
+
+    /** Re-reads the fields this machine caches; see the crusher's twin for why. */
+    private void readState() {
         this.timer = getPersistentData().getInt("Timer");
         this.tickTimer = getPersistentData().getInt("TickTimer");
         this.auraApplied = getPersistentData().getBoolean("AuraApplied");
@@ -212,6 +217,11 @@ public class TileAuraDisperser extends SyncedBlockEntity
         AspectList list = new AspectList();
         list.add(id, 1);
         return list;
+    }
+
+    @Override
+    protected void afterReload() {
+        readState();
     }
 
     private void saveInventory() {

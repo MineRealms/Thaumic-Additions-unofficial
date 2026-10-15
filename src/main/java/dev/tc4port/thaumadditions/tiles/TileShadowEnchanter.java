@@ -80,11 +80,17 @@ public class TileShadowEnchanter extends SyncedBlockEntity
 
     public TileShadowEnchanter(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        readState();
+    }
+
+    /** Re-reads the fields this machine caches; see the crusher's twin for why. */
+    private void readState() {
         CompoundTag tag = getPersistentData();
         this.infusing = tag.getBoolean(KEY_INFUSING);
         this.craftTimer = tag.getInt(KEY_TIMER);
         this.pending = readAspects(tag);
         HCLitePlatform.Holder.get().loadItemStacks(this, tag, KEY_ITEMS, inventory);
+        enchants.clear();
         readEnchants(tag);
     }
 
@@ -326,6 +332,11 @@ public class TileShadowEnchanter extends SyncedBlockEntity
         writeEnchants(tag);
         setChanged();
         sync();
+    }
+
+    @Override
+    protected void afterReload() {
+        readState();
     }
 
     private void saveInventory() {

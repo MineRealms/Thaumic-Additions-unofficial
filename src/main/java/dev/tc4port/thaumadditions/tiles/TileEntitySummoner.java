@@ -80,6 +80,11 @@ public class TileEntitySummoner extends SyncedBlockEntity
 
     public TileEntitySummoner(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        readState();
+    }
+
+    /** Re-reads the fields this machine caches; see the crusher's twin for why. */
+    private void readState() {
         CompoundTag tag = getPersistentData();
         this.requirements = readAspects(tag, KEY_REQUIREMENTS);
         this.accumulated = readAspects(tag, KEY_ACCUMULATED);
@@ -357,6 +362,11 @@ public class TileEntitySummoner extends SyncedBlockEntity
         tag.putInt(KEY_COOLDOWN, cooldown);
         setChanged();
         sync();
+    }
+
+    @Override
+    protected void afterReload() {
+        readState();
     }
 
     private void saveInventory() {

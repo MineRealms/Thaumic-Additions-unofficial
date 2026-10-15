@@ -34,5 +34,16 @@ public abstract class SyncedBlockEntity extends BlockEntity {
     public final void reloadFromNbt(CompoundTag tag) {
         HCLitePlatform.Holder.get().loadBlockEntityNbt(this, tag);
         setChanged();
+        afterReload();
+    }
+
+    /**
+     * Called on the client once a snapshot has been applied.
+     *
+     * <p>Loading the tag is not enough for a machine that keeps its slots in a field: the field was
+     * filled when the block entity was constructed and the loader only writes the tag, so a synced
+     * machine would report empty slots forever. Machines with an inventory read it back here.</p>
+     */
+    protected void afterReload() {
     }
 }

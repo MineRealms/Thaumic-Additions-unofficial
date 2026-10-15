@@ -52,6 +52,15 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
 
     public TileCrystalCrusher(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state, 64, 1);
+        readState();
+    }
+
+    /**
+     * Re-reads every field the machine keeps a copy of. The loader only writes the block entity's
+     * tag, so anything cached in a field has to be pulled back out of it after a reload — which is
+     * what the constructor and {@link #afterReload()} both do.
+     */
+    private void readState() {
         this.crushes = getPersistentData().getInt("Fuel");
         this.craftTime = getPersistentData().getInt("CraftTime");
         HCLitePlatform.Holder.get().loadItemStacks(this, getPersistentData(), KEY_ITEMS, inventory);
@@ -188,6 +197,11 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
         } catch (RuntimeException unknown) {
             return null;
         }
+    }
+
+    @Override
+    protected void afterReload() {
+        readState();
     }
 
     private void saveInventory() {
