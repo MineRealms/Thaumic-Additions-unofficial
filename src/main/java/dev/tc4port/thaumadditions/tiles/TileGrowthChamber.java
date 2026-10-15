@@ -212,6 +212,10 @@ public class TileGrowthChamber extends TileEssentia implements Container {
 
     private void saveInventory() {
         HCLitePlatform.Holder.get().saveItemStacks(this, getPersistentData(), KEY_ITEMS, inventory);
+        // The slot change is only visible to the other side once the block entity is pushed;
+        // setChanged on its own just marks it for saving.
+        setChanged();
+        sync();
     }
 
     // ------------------------------------------------------------------ Container

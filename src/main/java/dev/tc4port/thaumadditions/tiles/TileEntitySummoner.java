@@ -246,6 +246,9 @@ public class TileEntitySummoner extends SyncedBlockEntity
                 continue;
             }
             entity.load(data);
+            // 1.12 gave every spawn a fresh identity before placing it. Without this the whole
+            // batch would share the cell's UUID and only the first would survive.
+            entity.setUUID(java.util.UUID.randomUUID());
             double x = pos.getX() + (level.getRandom().nextDouble() - level.getRandom().nextDouble())
                     * SPAWN_SPREAD + 0.5D;
             double y = pos.getY() + level.getRandom().nextInt(3);
@@ -358,6 +361,10 @@ public class TileEntitySummoner extends SyncedBlockEntity
 
     private void saveInventory() {
         HCLitePlatform.Holder.get().saveItemStacks(this, getPersistentData(), KEY_ITEMS, inventory);
+        // The slot change is only visible to the other side once the block entity is pushed;
+        // setChanged on its own just marks it for saving.
+        setChanged();
+        sync();
     }
 
     private static void writeAspects(CompoundTag tag, String key, AspectList list) {
