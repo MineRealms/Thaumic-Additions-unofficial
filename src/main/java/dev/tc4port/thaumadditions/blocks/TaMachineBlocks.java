@@ -192,12 +192,39 @@ public final class TaMachineBlocks {
 
     /** 1.12 {@code BlockCrystalBlock}: 6-way facing, one stored aspect, no item form. */
     public static class CrystalBlock extends TaBlocks.OrientableBlock implements BeBlock {
+        /** 1.12 {@code TileCrystalBlock.createDrop}: nine crystallised essence of the stored aspect. */
+        public static final int ESSENCE_DROP = 9;
+
         private final java.util.function.Supplier<? extends BlockEntityType<?>> type;
 
         public CrystalBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type) {
             super(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
                     .mapColor(MapColor.QUARTZ).strength(1.0F).sound(SoundType.GLASS).noOcclusion());
             this.type = type;
+        }
+
+        /**
+         * 1.12 dropped the stored essence instead of the block, through HammerCore's
+         * {@code ITileDroppable}. Not calling super is the point: this replaces the loot, it does not
+         * add to it.
+         */
+        @Override
+        public void playerDestroy(net.minecraft.world.level.Level level,
+                                  net.minecraft.world.entity.player.Player player,
+                                  BlockPos pos, BlockState state,
+                                  @org.jetbrains.annotations.Nullable BlockEntity blockEntity,
+                                  net.minecraft.world.item.ItemStack tool) {
+            if (level.isClientSide || player.isCreative()) {
+                return;
+            }
+            dev.tc4port.thaumcraft.api.aspect.AspectId aspect =
+                    blockEntity instanceof dev.tc4port.thaumadditions.tiles.TileCrystal crystal
+                            ? crystal.getAspect() : null;
+            net.minecraft.world.item.ItemStack drop =
+                    dev.tc4port.thaumadditions.items.ThaumcraftItems.crystalEssence(aspect, ESSENCE_DROP);
+            if (!drop.isEmpty()) {
+                net.minecraft.world.level.block.Block.popResource(level, pos, drop);
+            }
         }
 
         @Override

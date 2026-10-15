@@ -21,8 +21,20 @@ public class TileCrystal extends SyncedBlockEntity {
         super(type, pos, state);
     }
 
+    /**
+     * 1.12 {@code TileCrystalBlock.getAspect}: a crystal block that had never been given an aspect
+     * picked a random one the first time anything asked, and kept it from then on.
+     */
     public AspectId getAspect() {
-        return TaAspect.readAspect(getPersistentData(), "Aspect");
+        AspectId stored = TaAspect.readAspect(getPersistentData(), "Aspect");
+        if (stored != null) {
+            return stored;
+        }
+        AspectId picked = TaAspect.random(new java.util.Random());
+        if (picked != null) {
+            setAspect(picked);
+        }
+        return picked;
     }
 
     public void setAspect(AspectId id) {

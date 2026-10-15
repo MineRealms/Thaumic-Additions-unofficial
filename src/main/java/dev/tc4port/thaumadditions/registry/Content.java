@@ -19,6 +19,7 @@ import dev.tc4port.thaumadditions.platform.TaArmorTick;
 import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.ToolKind;
 import dev.tc4port.thaumadditions.tiles.TileCrystal;
+import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import dev.tc4port.thaumadditions.tiles.TileJar;
 import dev.tc4port.thaumadditions.tiles.TileSeal;
 import dev.tc4port.thaumadditions.tiles.TileSmelter;
@@ -215,7 +216,7 @@ public final class Content {
     public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
     public static Supplier<BlockEntityType<TaTiles.Disperser>> DISPERSER_BE;
     public static Supplier<BlockEntityType<TaTiles.Bore>> BORE_BE;
-    public static Supplier<BlockEntityType<TaTiles.Crusher>> CRUSHER_BE;
+    public static Supplier<BlockEntityType<TileCrystalCrusher>> CRUSHER_BE;
     public static Supplier<BlockEntityType<TaTiles.Concentrator>> CONCENTRATOR_BE;
 
     private Content() {
@@ -463,8 +464,8 @@ public final class Content {
                 (pos, state) -> new TaTiles.Disperser(DISPERSER_BE.get(), pos, state), AURA_DISPERSER.get()).build(null));
         BORE_BE = registrar.register("crystal_bore", () -> BlockEntityType.Builder.<TaTiles.Bore>of(
                 (pos, state) -> new TaTiles.Bore(BORE_BE.get(), pos, state), CRYSTAL_BORE.get()).build(null));
-        CRUSHER_BE = registrar.register("crystal_crusher", () -> BlockEntityType.Builder.<TaTiles.Crusher>of(
-                (pos, state) -> new TaTiles.Crusher(CRUSHER_BE.get(), pos, state), CRYSTAL_CRUSHER.get()).build(null));
+        CRUSHER_BE = registrar.register("crystal_crusher", () -> BlockEntityType.Builder.<TileCrystalCrusher>of(
+                (pos, state) -> new TileCrystalCrusher(CRUSHER_BE.get(), pos, state), CRYSTAL_CRUSHER.get()).build(null));
         CONCENTRATOR_BE = registrar.register("flux_concentrator", () -> BlockEntityType.Builder.<TaTiles.Concentrator>of(
                 (pos, state) -> new TaTiles.Concentrator(CONCENTRATOR_BE.get(), pos, state), FLUX_CONCENTRATOR.get()).build(null));
     }

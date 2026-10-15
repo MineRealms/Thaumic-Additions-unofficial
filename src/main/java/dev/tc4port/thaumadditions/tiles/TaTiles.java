@@ -84,23 +84,6 @@ public final class TaTiles {
         }
     }
 
-    /** 1.12 {@code TileCrystalCrusher}: spends essentia for three crushes, 100t per crystal. */
-    public static class Crusher extends TileEssentia {
-        public Crusher(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, 64, 1);
-        }
-
-        @Override
-        protected boolean accepts(Direction face) {
-            return false;
-        }
-
-        @Override
-        protected boolean emits(Direction face) {
-            return false;
-        }
-    }
-
     /** 1.12 {@code TileFluxConcentrator}: pulls FLUX from behind, converts blocks in a flood fill. */
     public static class Concentrator extends TileEssentia {
         public Concentrator(BlockEntityType<?> type, BlockPos pos, BlockState state) {

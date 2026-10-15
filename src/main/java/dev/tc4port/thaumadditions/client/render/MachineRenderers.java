@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 
 import dev.tc4port.thaumadditions.client.model.MachineModels;
 import dev.tc4port.thaumadditions.tiles.TaTiles;
+import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -120,11 +121,11 @@ public final class MachineRenderers {
     }
 
     /** 1.12 {@code TESRCrystalCrusher}. */
-    public static final class CrystalCrusher implements BlockEntityRenderer<TaTiles.Crusher> {
+    public static final class CrystalCrusher implements BlockEntityRenderer<TileCrystalCrusher> {
         private static final ModelPart ROOT = MachineModels.CrystalCrusher.layer().bakeRoot();
 
         @Override
-        public void render(TaTiles.Crusher be, float partialTick, PoseStack pose, MultiBufferSource buffers,
+        public void render(TileCrystalCrusher be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
             draw(pose, buffers, MachineModels.CrystalCrusher.TEXTURE, be.getBlockState(), light, overlay,
                     ROOT, 0.0F);
