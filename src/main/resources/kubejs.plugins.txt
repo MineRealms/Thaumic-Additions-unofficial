@@ -1,0 +1,3 @@
+# KubeJS plugin discovery (replaces the 1.12 CraftTweaker integration; same FQCN on both
+# nodes, each node ships its own class — K6 class vs K7 interface).
+dev.tc4port.thaumadditions.kubejs.ThaumAddsKubeJSPlugin

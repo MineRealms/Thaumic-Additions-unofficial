@@ -1,0 +1,294 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'dev.kikugie.stonecutter'
+    // Both loader plugin families come from ModDevGradle. They are declared here (apply false)
+    // so that the per-node branch below can apply exactly one of them.
+    id 'net.neoforged.moddev.legacyforge' version '2.0.148' apply false
+    id 'net.neoforged.moddev' version '2.0.148' apply false
+}
+
+// This file is Stonecutter's shared build script: it runs once per node.
+def isForge = mod_loader == 'forge'
+def node = sc.current.project
+
+version = mod_version
+group = mod_group_id
+base { archivesName = "${mod_id}-${minecraft_version}-${mod_loader}" }
+java.toolchain.languageVersion = JavaLanguageVersion.of(java_version.toInteger())
+
+def tc4Repository = file(providers.gradleProperty('tc4Repository')
+        .getOrElse(rootProject.file('local-repo').absolutePath))
+
+// Values expanded into the loader metadata of either node.
+def metadata = [minecraft_version_range: minecraft_version_range, loader_version_range: loader_version_range,
+        mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+        mod_authors: mod_authors, mod_description: mod_description,
+        thaumcraft_version_range: thaumcraft_version_range]
+
+// HCLite metadata: the jar-in-jar companion mod (HammerCore essentials, reimplemented).
+def hcliteMeta = [mod_id: 'hclite', mod_name: 'HCLite (HammerCore essentials)',
+              mod_license: mod_license, mod_version: hclite_version,
+              mod_authors: mod_authors,
+              loader_version_range: loader_version_range, minecraft_version_range: minecraft_version_range,
+              mod_description: 'Reimplementation of the HammerCore essentials used by Thaumic Additions.']
+def hcliteJarName = "hclite-${minecraft_version}-${mod_loader}-${hclite_version}.jar"
+
+// ------------------------------------------------------------------ source sets
+// `hclite` is a separate mod embedded into the release jar via jar-in-jar. Its shared core
+// lives in src/hclite (chiseled per node), its loader entry classes live in the node's own
+// versions/<node>/src/hclite/java.
+sourceSets {
+    hclite
+}
+
+repositories {
+    maven {
+        name = 'LocalTC4R'
+        url = uri(tc4Repository)
+        content { includeGroup 'dev.tc4port' }
+    }
+    // GeckoLib is published on its own Cloudsmith repository.
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content { includeGroup 'software.bernie.geckolib' }
+    }
+    maven {
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+    mavenCentral()
+}
+
+if (isForge) {
+    // ---------------------------------------------------------------- 1.20.1 / Forge (LegacyForge)
+    apply plugin: 'net.neoforged.moddev.legacyforge'
+
+    legacyForge {
+        version = "${minecraft_version}-${forge_version}"
+
+        runs {
+            configureEach {
+                systemProperty 'forge.logging.console.level', 'info'
+            }
+            client {
+                client()
+                gameDirectory = rootProject.file('run-client')
+                if (project.hasProperty('quickPlay')) {
+                    programArgument '--quickPlaySingleplayer'
+                    programArgument project.property('quickPlay').toString()
+                }
+            }
+        }
+
+        mods {
+            thaumadds {
+                sourceSet sourceSets.main
+            }
+            hclite {
+                sourceSet sourceSets.hclite
+            }
+        }
+
+        // The hclite source set is a separate mod: give it the same modding classpath as main.
+        addModdingDependenciesTo sourceSets.hclite
+    }
+
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.theillusivec4.top' }
+        maven {
+            url = 'https://maven.latvian.dev/releases'
+            // KubeJS's transitives include non-latvian groups (com.github.rtyley etc.),
+            // so no group filter here.
+        }
+    }
+
+    dependencies {
+        // TC4R release jar is SRG-mapped: ModDevGradle's mod* configurations remap it to
+        // official names for both compile and runtime. The full jar IS the compile classpath
+        // because the port reaches into TC4R internals (jars, smelters, essentia transport).
+        modImplementation("dev.tc4port:thaumcraft-forge:${tc4r_version}") { transitive = false }
+
+        // GeckoLib for entity animations (replaces 1.12 HammerAnimations). Never bundled.
+        modCompileOnly("software.bernie.geckolib:geckolib-forge-1.20.1:${geckolib_version}") { transitive = false }
+        modRuntimeOnly("software.bernie.geckolib:geckolib-forge-1.20.1:${geckolib_version}") { transitive = false }
+
+        // TC4R declares both mandatory.
+        modRuntimeOnly("top.theillusivec4.curios:curios-forge:${curios_version}") { transitive = false }
+        modRuntimeOnly("com.github.glitchfiend:TerraBlender-forge:${terrablender_version}") { transitive = false }
+
+        // KubeJS replaces the 1.12 CraftTweaker integration (optional at runtime; the plugin
+        // class is discovered via kubejs.plugins.txt only when KubeJS is installed).
+        compileOnly("dev.latvian.mods:kubejs-forge:${kubejs_forge_version}") { transitive = false }
+        compileOnly("dev.latvian.mods:rhino-forge:${rhino_forge_version}") { transitive = false }
+
+        testImplementation(platform("org.junit:junit-bom:${junit_version}"))
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    tasks.named('processResources', ProcessResources).configure {
+        inputs.properties metadata
+        filesMatching(['META-INF/mods.toml']) { expand metadata }
+    }
+    tasks.named('processHcliteResources', ProcessResources).configure {
+        inputs.properties hcliteMeta
+        filesMatching(['META-INF/mods.toml']) { expand hcliteMeta }
+    }
+} else {
+    // ---------------------------------------------------------------- 1.21.1 / NeoForge
+    apply plugin: 'net.neoforged.moddev'
+
+    neoForge {
+        version = neo_version
+
+        runs {
+            configureEach {
+                systemProperty 'forge.logging.console.level', 'info'
+            }
+            client {
+                client()
+                gameDirectory = rootProject.file('run-client-1.21.1')
+                if (project.hasProperty('quickPlay')) {
+                    programArgument '--quickPlaySingleplayer'
+                    programArgument project.property('quickPlay').toString()
+                }
+            }
+        }
+
+        mods {
+            thaumadds {
+                sourceSet sourceSets.main
+            }
+            hclite {
+                sourceSet sourceSets.hclite
+            }
+        }
+
+        // The hclite source set is a separate mod: give it the same modding classpath as main.
+        addModdingDependenciesTo sourceSets.hclite
+    }
+
+    repositories {
+        maven { url = 'https://maven.neoforged.net/releases' }
+        maven { url = 'https://maven.theillusivec4.top' }
+        maven {
+            url = 'https://maven.latvian.dev/releases'
+            // KubeJS's transitives include non-latvian groups (com.github.rtyley etc.),
+            // so no group filter here.
+        }
+    }
+
+    dependencies {
+        // NeoForge runs in official mappings, so no remapping is needed anywhere. The release
+        // jar doubles as the compile classpath; local-repo also carries -api/-sources for IDEs.
+        implementation("dev.tc4port:thaumcraft-neoforge:${tc4r_version}") { transitive = false }
+        runtimeOnly("dev.tc4port:thaumcraft-neoforge:${tc4r_version}") { transitive = false }
+
+        // GeckoLib for entity animations (replaces 1.12 HammerAnimations). Never bundled.
+        compileOnly("software.bernie.geckolib:geckolib-neoforge-1.21.1:${geckolib_version}") { transitive = false }
+        runtimeOnly("software.bernie.geckolib:geckolib-neoforge-1.21.1:${geckolib_version}") { transitive = false }
+
+        // TC4R declares both mandatory.
+        runtimeOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}") { transitive = false }
+        runtimeOnly("maven.modrinth:terrablender:${terrablender_file}") { transitive = false }
+
+        // KubeJS replaces the 1.12 CraftTweaker integration (optional at runtime).
+        compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_neoforge_version}") { transitive = false }
+        compileOnly("dev.latvian.mods:rhino:${rhino_neoforge_version}") { transitive = false }
+        runtimeOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_neoforge_version}") {
+            exclude group: 'com.github.rtyley', module: 'animated-gif-lib-for-java'
+        }
+
+        testImplementation(platform("org.junit:junit-bom:${junit_version}"))
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    tasks.named('processResources', ProcessResources).configure {
+        inputs.properties metadata
+        filesMatching(['META-INF/neoforge.mods.toml']) { expand metadata }
+    }
+    tasks.named('processHcliteResources', ProcessResources).configure {
+        inputs.properties hcliteMeta
+        filesMatching(['META-INF/neoforge.mods.toml']) { expand hcliteMeta }
+    }
+}
+
+stonecutter.tasks.configureSource(sourceSets.hclite)
+stonecutter.tasks.configureSource(sourceSets.test)
+
+// ---------------------------------------------------------------- shared by both nodes
+
+// Builds the HCLite companion mod jar (its own metadata, own @Mod entry).
+def hcliteJar = tasks.register('hcliteJar', Jar) {
+    group = 'build'
+    description = 'Builds the HCLite companion mod jar.'
+    archiveBaseName = 'hclite'
+    archiveClassifier = minecraft_version + '-' + mod_loader
+    archiveVersion = hclite_version
+    from sourceSets.hclite.output
+}
+
+// Embeds HCLite into the release jar via the Forge/NeoForge jar-in-jar format. MDG's jarJar
+// plumbing expects maven-published companions; a manual embed keeps the companion in-repo.
+def jarJarDir = layout.buildDirectory.dir('jarjar')
+def jarJarMeta = tasks.register('hcliteJarJarMetadata') {
+    group = 'build'
+    def outFile = jarJarDir.map { it.file('metadata.json') }
+    inputs.property('hcliteVersion', hclite_version)
+    inputs.property('groupId', mod_group_id)
+    inputs.property('jarName', hcliteJarName)
+    outputs.file(outFile)
+    doLast {
+        def f = outFile.get().asFile
+        f.parentFile.mkdirs()
+        f.text = """
+{
+  "jars": [
+    {
+      "identifier": { "group": "${mod_group_id}", "artifact": "hclite" },
+      "version": { "range": "[${hclite_version},${(hclite_version as String).tokenize('.')[0].toInteger() + 1}.0)", "artifactVersion": "${hclite_version}" },
+      "path": "META-INF/jarjar/jars/${hcliteJarName}",
+      "isObfuscated": false
+    }
+  ]
+}
+"""
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes('Specification-Title': mod_name, 'Specification-Vendor': mod_authors,
+                'Specification-Version': '1',
+                'Implementation-Title': "${rootProject.name}-${minecraft_version}-${mod_loader}",
+                'Implementation-Version': project.version, 'Implementation-Vendor': mod_authors,
+                // ModDevGradle does not scan resources for mixin configs; without this the
+                // mixins silently never apply on Forge.
+                'MixinConfigs': 'thaumadds.mixins.json')
+    }
+    dependsOn hcliteJar, jarJarMeta
+    from(hcliteJar.map { it.outputs.files }) {
+        into 'META-INF/jarjar/jars'
+        rename { hcliteJarName }
+    }
+    from(jarJarDir) {
+        into 'META-INF/jarjar'
+    }
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
+    testLogging { events 'failed'; exceptionFormat 'full' }
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

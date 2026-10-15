@@ -1,0 +1,27 @@
+plugins {
+    id 'dev.kikugie.stonecutter'
+}
+
+stonecutter.active('1.20.1-forge')
+
+// Builds both targets and collects the two release jars into one directory.
+tasks.register('buildAndCollect', Sync) {
+    group = 'build'
+    description = 'Builds both targets, then collects the two release jars.'
+    dependsOn ':1.20.1-forge:build', ':1.21.1-neoforge:build'
+    from(layout.projectDirectory.dir('versions/1.20.1-forge/build/libs')) { include '*-forge-*.jar' }
+    from(layout.projectDirectory.dir('versions/1.21.1-neoforge/build/libs')) { include '*-neoforge-*.jar' }
+    into layout.buildDirectory.dir('distributions')
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+}
+
+// `parameters {}` is replayed once per node with that node as the delegate, so `current` here is
+// the node being configured (computing it at the top level would pin it to the active node).
+stonecutter.parameters {
+    def neo = current.project.endsWith('-neoforge')
+    constants {
+        put('forge', !neo)
+        put('neoforge', neo)
+    }
+    // No replacement table: loader drift lives in versions/<node>/src adapters.
+}

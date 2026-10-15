@@ -1,0 +1,63 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+// The canonical data files are written in the 1.20.1 format. This turns them into the 1.21.1
+// format while packaging the NeoForge node, so the two nodes never carry diverging copies.
+// Stonecutter replacements only rewrite file contents, never paths, hence a ProcessResources step.
+
+// Rewrites complete recipe JSON objects; never arbitrary occurrences of "item".
+class NeoForgeRecipeReader extends FilterReader {
+    private final StringReader converted
+
+    NeoForgeRecipeReader(Reader input) {
+        super(input)
+        def data = convert(new JsonSlurper().parse(input))
+        // Forge reads top-level "conditions"; NeoForge 1.21.1 only reads "neoforge:conditions".
+        if (data.containsKey('conditions')) data['neoforge:conditions'] = data.remove('conditions')
+        if (data.result instanceof Map && data.result.containsKey('item')) {
+            data.result.id = data.result.remove('item')
+        }
+        converted = new StringReader(JsonOutput.prettyPrint(JsonOutput.toJson(data)) + '\n')
+    }
+
+    static Object convert(Object value) {
+        if (value instanceof List) return value.collect { convert(it) }
+        if (!(value instanceof Map)) return value
+        def result = value.collectEntries { key, child -> [(key): convert(child)] }
+        // 1.21.1 publishes the common ingredient tags in the `c` namespace.
+        // A water bottle: Forge's partial NBT ingredient becomes a NeoForge component ingredient.
+        if (result.type == 'forge:partial_nbt' && result.nbt instanceof Map && result.nbt.Potion != null) {
+            return [type: 'neoforge:components', items: result.item, strict: false,
+                    components: ['minecraft:potion_contents': [potion: result.nbt.Potion]]]
+        }
+        if (result.tag instanceof String && result.tag.startsWith('forge:')) {
+            result.tag = 'c:' + result.tag.substring('forge:'.length())
+        }
+        return result
+    }
+
+    @Override int read() { converted.read() }
+    @Override int read(char[] buffer, int offset, int length) { converted.read(buffer, offset, length) }
+    @Override void close() { converted.close(); super.close() }
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    inputs.file(rootProject.file('gradle/neoforge-resources.gradle'))
+    filesMatching('data/*/recipes/**/*.json') { filter(NeoForgeRecipeReader) }
+    eachFile { details ->
+        def parts = details.relativePath.segments.toList()
+        if (parts.size() >= 3 && parts[0] == 'data') {
+            // 1.21 singularised the registry directories.
+            def directories = [recipes: 'recipe', loot_tables: 'loot_table', structures: 'structure',
+                               advancements: 'advancement', functions: 'function']
+            if (directories.containsKey(parts[2])) parts[2] = directories[parts[2]]
+            if (parts[2] == 'tags' && parts.size() >= 4) {
+                def tags = [items: 'item', blocks: 'block', fluids: 'fluid']
+                if (tags.containsKey(parts[3])) parts[3] = tags[parts[3]]
+            }
+            details.relativePath = new RelativePath(true, parts as String[])
+        }
+    }
+    includeEmptyDirs = false
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+}
