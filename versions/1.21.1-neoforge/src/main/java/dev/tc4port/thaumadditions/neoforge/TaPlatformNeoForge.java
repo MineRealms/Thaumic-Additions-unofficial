@@ -244,6 +244,16 @@ public final class TaPlatformNeoForge implements TaPlatform {
         return new net.minecraft.world.item.BlockItem(block, new net.minecraft.world.item.Item.Properties());
     }
 
+    /** 1.21.1 spells these cues as {@code Holder<SoundEvent>}. */
+    @Override
+    public void playSound(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos,
+                          dev.tc4port.thaumadditions.platform.TaSound sound, float volume, float pitch) {
+        net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent> event = switch (sound) {
+            case EXPLODE -> net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE;
+        };
+        level.playSound(null, pos, event.value(), net.minecraft.sounds.SoundSource.BLOCKS, volume, pitch);
+    }
+
     /** Concrete 1.21 shape: the shared base is abstract because {@code BushBlock.codec()} is. */
     private static final class NeoPuriflower extends dev.tc4port.thaumadditions.blocks.TaBlocks.PuriflowerBlock {
         private NeoPuriflower(BlockBehaviour.Properties properties) {

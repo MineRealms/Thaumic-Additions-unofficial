@@ -24,6 +24,18 @@ public final class TaMachineBlocks {
     /** A block that creates a block entity from a registered type. */
     public interface BeBlock extends EntityBlock {
         java.util.function.Supplier<? extends BlockEntityType<?>> type();
+
+        /**
+         * 1.20.1 asks the block which ticker its block entity uses. 1.21 moved that onto
+         * {@code BlockEntityType.Builder#build}, which {@code TaPlatform.blockEntityType} supplies,
+         * so this override may simply go unused there.
+         */
+        @Override
+        default <T extends net.minecraft.world.level.block.entity.BlockEntity>
+        net.minecraft.world.level.block.entity.BlockEntityTicker<T> getTicker(
+                net.minecraft.world.level.Level level, BlockState state, BlockEntityType<T> type) {
+            return dev.tc4port.thaumadditions.tiles.TaTickables.ticker();
+        }
     }
 
     /** Shared plumbing so each machine block only names its type. */
@@ -47,19 +59,57 @@ public final class TaMachineBlocks {
         }
     }
 
-    /** 1.12 {@code BlockAbstractEssentiaJar}: glass jar, 3..13/16 box, capacity per variant. */
-    public static class JarBlock extends AbstractBeBlock {
-        private static final VoxelShape SHAPE = box(3, 0, 3, 13, 14, 13);
+    /**
+     * The six 1.12 jars. They were six {@code TileAbstractJarFillable} subclasses that differed only
+     * in capacity, plus two rules: the mithminite jar spills anything past its cap into the aura,
+     * and a nearly full adaminite jar of flux detonates.
+     */
+    public enum JarKind {
+        BRASS(275),
+        THAUMIUM(350),
+        ELDRITCH(500),
+        MITHRILLIUM(1000),
+        ADAMINITE(2000),
+        MITHMINITE(4000);
+
         private final int capacity;
 
-        public JarBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type, int capacity) {
-            super(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.NONE).strength(0.3F).sound(SoundType.GLASS).noOcclusion(), type);
+        JarKind(int capacity) {
             this.capacity = capacity;
         }
 
         public int capacity() {
             return capacity;
+        }
+
+        /** 1.12 {@code TileMithminiteJar.addToContainer}. */
+        public boolean spillsIntoAura() {
+            return this == MITHMINITE;
+        }
+
+        /** 1.12 {@code TileAdaminiteJar.update}. */
+        public boolean detonatesOnFlux() {
+            return this == ADAMINITE;
+        }
+    }
+
+    /** 1.12 {@code BlockAbstractEssentiaJar}: glass jar, 3..13/16 box, capacity per variant. */
+    public static class JarBlock extends AbstractBeBlock {
+        private static final VoxelShape SHAPE = box(3, 0, 3, 13, 14, 13);
+        private final JarKind kind;
+
+        public JarBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type, JarKind kind) {
+            super(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.NONE).strength(0.3F).sound(SoundType.GLASS).noOcclusion(), type);
+            this.kind = kind;
+        }
+
+        public JarKind kind() {
+            return kind;
+        }
+
+        public int capacity() {
+            return kind.capacity();
         }
 
         @Override

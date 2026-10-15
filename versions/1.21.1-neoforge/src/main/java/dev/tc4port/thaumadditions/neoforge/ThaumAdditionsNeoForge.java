@@ -46,7 +46,9 @@ public final class ThaumAdditionsNeoForge {
                 return (Supplier<T>) (Supplier) BLOCK_ENTITIES.register(name, (Supplier) factory);
             }
         };
-        Content.init(items, blocks, blockEntities, new TaPlatformNeoForge());
+        TaPlatformNeoForge platform = new TaPlatformNeoForge();
+        dev.tc4port.thaumadditions.platform.TaPlatform.Active.set(platform);
+        Content.init(items, blocks, blockEntities, platform);
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))

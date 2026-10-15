@@ -367,12 +367,12 @@ public final class Content {
 
     /** Every block that carries a block entity, wired to its type supplier. */
     private static void machines(Registrar items, Registrar blocks, TaPlatform platform) {
-        JAR_BRASS = jar(blocks, "jar_brass", 275);
-        JAR_THAUMIUM = jar(blocks, "jar_thaumium", 350);
-        JAR_ELDRITCH = jar(blocks, "jar_eldritch", 500);
-        JAR_MITHRILLIUM = jar(blocks, "jar_mithrillium", 1000);
-        JAR_ADAMINITE = jar(blocks, "jar_adaminite", 2000);
-        JAR_MITHMINITE = jar(blocks, "jar_mithminite", 4000);
+        JAR_BRASS = jar(blocks, "jar_brass", TaMachineBlocks.JarKind.BRASS);
+        JAR_THAUMIUM = jar(blocks, "jar_thaumium", TaMachineBlocks.JarKind.THAUMIUM);
+        JAR_ELDRITCH = jar(blocks, "jar_eldritch", TaMachineBlocks.JarKind.ELDRITCH);
+        JAR_MITHRILLIUM = jar(blocks, "jar_mithrillium", TaMachineBlocks.JarKind.MITHRILLIUM);
+        JAR_ADAMINITE = jar(blocks, "jar_adaminite", TaMachineBlocks.JarKind.ADAMINITE);
+        JAR_MITHMINITE = jar(blocks, "jar_mithminite", TaMachineBlocks.JarKind.MITHMINITE);
 
         // 1.12 BlockAbstractSmelter(efficiency, speed, capacity) per variant.
         MITHRILLIUM_SMELTER = smelter(blocks, "mithrillium_smelter", 1.0F, 20, 1000);
@@ -503,8 +503,8 @@ public final class Content {
         VOID_SEED = track(items.register("void_seed", () -> ToolItems.voidSeed(VOID_CROP)));
     }
 
-    private static Supplier<Block> jar(Registrar blocks, String name, int capacity) {
-        return blocks.<Block>register(name, () -> new TaMachineBlocks.JarBlock(JAR_BE, capacity));
+    private static Supplier<Block> jar(Registrar blocks, String name, TaMachineBlocks.JarKind kind) {
+        return blocks.<Block>register(name, () -> new TaMachineBlocks.JarBlock(JAR_BE, kind));
     }
 
     private static Supplier<Block> smelter(Registrar blocks, String name, float efficiency, int speed,

@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -21,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
  * exposes, so every machine only has to decide which faces are open and how much
  * suction it advertises.</p>
  */
-public abstract class TileEssentia extends SyncedBlockEntity implements EssentiaTransport {
+public abstract class TileEssentia extends SyncedBlockEntity implements EssentiaTransport, TaTickables.Ticking {
     private final int capacity;
     private final int suction;
 
@@ -30,6 +31,19 @@ public abstract class TileEssentia extends SyncedBlockEntity implements Essentia
         super(type, pos, state);
         this.capacity = capacity;
         this.suction = suction;
+    }
+
+    /**
+     * 1.12 drove every machine from {@code TileEntity.update()}; 1.20.1 only ticks a type that was
+     * registered with a ticker (see {@link TaTickables}). Machines override {@link #machineTick}.
+     */
+    @Override
+    public final void tick(Level level, BlockPos pos, BlockState state) {
+        machineTick(level, pos, state);
+    }
+
+    /** Per-tick work. Runs on both sides unless the override says otherwise. */
+    protected void machineTick(Level level, BlockPos pos, BlockState state) {
     }
 
     /**

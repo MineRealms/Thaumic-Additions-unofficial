@@ -3,6 +3,7 @@ package dev.tc4port.thaumadditions.forge;
 import java.util.function.Supplier;
 
 import dev.tc4port.thaumadditions.ThaumAdditions;
+import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.registry.Content;
 import dev.tc4port.thaumadditions.registry.Registrar;
 import net.minecraft.core.registries.Registries;
@@ -49,7 +50,9 @@ public final class ThaumAdditionsForge {
                 return (Supplier<T>) (Supplier) BLOCK_ENTITIES.register(name, (Supplier) factory);
             }
         };
-        Content.init(items, blocks, blockEntities, new TaPlatformForge());
+        TaPlatformForge platform = new TaPlatformForge();
+        TaPlatform.Active.set(platform);
+        Content.init(items, blocks, blockEntities, platform);
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))

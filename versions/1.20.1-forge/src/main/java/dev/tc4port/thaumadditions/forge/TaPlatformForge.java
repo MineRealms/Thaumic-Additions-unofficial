@@ -215,6 +215,16 @@ public final class TaPlatformForge implements TaPlatform {
      * {@code Item#initializeClient} is only ever called on the client, and the renderer it names
      * comes from the client-only {@code MachineItemRenderer}.
      */
+    /** 1.20.1 spells these cues as plain {@code SoundEvent}s. */
+    @Override
+    public void playSound(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos,
+                          dev.tc4port.thaumadditions.platform.TaSound sound, float volume, float pitch) {
+        net.minecraft.sounds.SoundEvent event = switch (sound) {
+            case EXPLODE -> net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE;
+        };
+        level.playSound(null, pos, event, net.minecraft.sounds.SoundSource.BLOCKS, volume, pitch);
+    }
+
     @Override
     public net.minecraft.world.item.Item machineItem(Block block, dev.tc4port.thaumadditions.platform.MachineIcon icon) {
         return new net.minecraft.world.item.BlockItem(block, new net.minecraft.world.item.Item.Properties()) {

@@ -34,6 +34,28 @@ import net.minecraft.network.chat.Component;
  * {@code SwordItem} totals {@code attackDamage + damageBonus}.</p>
  */
 public interface TaPlatform {
+    /**
+     * The active node's platform. Access it as {@code TaPlatform.Active}.
+     *
+     * <p>Registration passes the port around explicitly, but block entities are constructed by the
+     * loader long after that and have no way to reach it. This is the same holder pattern the
+     * HCLite core uses.</p>
+     */
+    final class Active {
+        private static TaPlatform instance;
+
+        private Active() {
+        }
+
+        /** Called once from the loader adapter's mod constructor. */
+        public static void set(TaPlatform platform) {
+            instance = platform;
+        }
+
+        public static TaPlatform get() {
+            return instance;
+        }
+    }
     /** Builds a tool {@link Tier} from 1.12-style raw material values. */
     Tier toolTier(int level, int uses, float speed, float damageBonus, int enchantability,
                   TagKey<Block> incorrectForDrops, Supplier<Ingredient> repair);
@@ -102,6 +124,17 @@ public interface TaPlatform {
      * the node. See {@link MachineIcon}.</p>
      */
     net.minecraft.world.item.Item machineItem(Block block, MachineIcon icon);
+
+    /**
+     * Plays one of the port's shared sound cues at a block position.
+     *
+     * <p>Same drift {@link TaArmorSound} covers: some {@code SoundEvents} constants are a
+     * {@code SoundEvent} on 1.20.1 and a {@code Holder<SoundEvent>} on 1.21.1, so the shared code
+     * names the cue and the node resolves it.</p>
+     */
+    void playSound(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos,
+                   TaSound sound, float volume, float pitch);
+
 
     /**
      * Creates the puriflower bush. 1.21 made {@code BushBlock.codec()} abstract (a
