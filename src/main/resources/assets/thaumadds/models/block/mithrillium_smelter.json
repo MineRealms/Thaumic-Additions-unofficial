@@ -1,7 +1,7 @@
 {
   "parent": "thaumadds:block/orientable",
   "textures": {
-    "top": "thaumcraft:block/smelter_top",
+    "top": "thaumcraft:block/metalbase",
     "front": "thaumadds:block/smelter_mithrillium/front",
     "side": "thaumadds:block/smelter_mithrillium/side",
     "down": "thaumadds:block/mithrillium_block"

@@ -1,7 +1,7 @@
 {
   "parent": "thaumadds:block/orientable",
   "textures": {
-    "top": "thaumcraft:block/smelter_top",
+    "top": "thaumcraft:block/metalbase",
     "front": "thaumadds:block/smelter_adaminite/front",
     "side": "thaumadds:block/smelter_adaminite/side",
     "down": "thaumadds:block/adaminite_block"

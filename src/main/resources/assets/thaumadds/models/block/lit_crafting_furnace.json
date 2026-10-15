@@ -1,9 +1,0 @@
-{
-  "parent": "thaumadds:block/orientable",
-  "textures": {
-    "top": "thaumadds:block/crafting_furnace_top",
-    "front": "thaumadds:block/crafting_furnace_front_lit",
-    "side": "thaumadds:block/crafting_furnace_side",
-    "down": "thaumadds:block/crafting_furnace_down"
-  }
-}

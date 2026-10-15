@@ -1,0 +1,24 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "base": "thaumadds:block/seal_base",
+    "inner": "thaumadds:block/seal_inner",
+    "particle": "thaumadds:block/seal_base"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 1],
+      "faces": {
+        "north": { "texture": "#base", "uv": [0, 0, 16, 16] }
+      }
+    },
+    {
+      "from": [2, 2, 0.5],
+      "to": [14, 14, 1.5],
+      "faces": {
+        "north": { "texture": "#inner", "uv": [2, 2, 14, 14] }
+      }
+    }
+  ]
+}

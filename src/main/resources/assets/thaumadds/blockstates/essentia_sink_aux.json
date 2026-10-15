@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "thaumadds:block/essentia_sink_aux"
+    }
+  }
+}
