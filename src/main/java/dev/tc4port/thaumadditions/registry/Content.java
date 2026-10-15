@@ -247,6 +247,10 @@ public final class Content {
     /** The blue wolf; its class is shared, so this one registers through {@link #init}. */
     public static Supplier<net.minecraft.world.entity.EntityType<dev.tc4port.thaumadditions.entity.BlueWolf>> BLUE_WOLF;
 
+    /** Chester, the walking chest, and the menu that shows its thirty-six slots. */
+    public static Supplier<net.minecraft.world.entity.EntityType<dev.tc4port.thaumadditions.entity.Chester>> CHESTER_ENTITY;
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.ChesterMenu>> CHESTER_MENU;
+
     /** Called by the node once it has registered the entity type. */
     public static void setEssentiaShot(
             Supplier<net.minecraft.world.entity.EntityType<? extends dev.tc4port.thaumadditions.entity.EssentiaShotBase>> type,
@@ -302,6 +306,14 @@ public final class Content {
                         .sized(0.6F, 0.85F)
                         .clientTrackingRange(10)
                         .build("thaumadds:blue_wolf"));
+        CHESTER_ENTITY = entityTypes.register("chester",
+                () -> net.minecraft.world.entity.EntityType.Builder
+                        .<dev.tc4port.thaumadditions.entity.Chester>of(
+                                dev.tc4port.thaumadditions.entity.Chester::new,
+                                net.minecraft.world.entity.MobCategory.CREATURE)
+                        .sized(0.9F, 0.9F)
+                        .clientTrackingRange(10)
+                        .build("thaumadds:chester"));
     }
 
     /** One menu per machine that had a container in 1.12. */
@@ -316,6 +328,8 @@ public final class Content {
                 () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.AuraDisperser::new));
         ENCHANTER_MENU = menus.register("shadow_enchanter",
                 () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.ShadowEnchanter::new));
+        CHESTER_MENU = menus.register("chester",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.ChesterMenu::new));
     }
 
     // ------------------------------------------------------------------ items

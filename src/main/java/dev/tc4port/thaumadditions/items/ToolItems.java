@@ -442,14 +442,28 @@ public final class ToolItems {
      * but spawning the Chester needs {@code EntityChester} (the 5 entities are a
      * separate pass), so the placement interaction is disabled.
      */
+    /** 1.12 {@code ItemChester}: places one where you point it, owned by whoever placed it. */
     public static Item chester(TaPlatform platform) {
-        return platform.behaviorItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON), new ItemBehavior() {
-            @Override
-            public List<Component> tooltipLines(ItemStack stack) {
-                return List.of(Component.translatable("tooltip.thaumadds.chester.pending")
-                        .withStyle(ChatFormatting.DARK_GRAY));
-            }
-        });
+        return platform.behaviorItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON),
+                new ItemBehavior() {
+                    @Override
+                    public InteractionResult useOn(net.minecraft.world.item.context.UseOnContext context) {
+                        Level level = context.getLevel();
+                        if (level.isClientSide || context.getPlayer() == null) {
+                            return InteractionResult.SUCCESS;
+                        }
+                        var at = context.getClickedPos().relative(context.getClickedFace());
+                        var chester = dev.tc4port.thaumadditions.entity.Chester.summon(level,
+                                context.getPlayer(), Vec3.atBottomCenterOf(at));
+                        if (chester == null) {
+                            return InteractionResult.PASS;
+                        }
+                        if (context.getPlayer() == null || !context.getPlayer().getAbilities().instabuild) {
+                            context.getItemInHand().shrink(1);
+                        }
+                        return InteractionResult.CONSUME;
+                    }
+                });
     }
 
     /**

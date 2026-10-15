@@ -31,6 +31,8 @@ public final class ThaumAddsNeoForgeClient {
         event.registerBlockEntityRenderer(Content.ENCHANTER_BE.get(), context -> new ItemRenderers.ShadowEnchanter());
         event.registerBlockEntityRenderer(Content.SUMMONER_BE.get(), context -> new ItemRenderers.MobSummoner());
         event.registerEntityRenderer(Content.BLUE_WOLF.get(), BlueWolfRenderer::new);
+        event.registerEntityRenderer(Content.CHESTER_ENTITY.get(),
+                dev.tc4port.thaumadditions.client.render.ChesterRenderer::new);
     }
 
     /** The arcane cake's top face takes the colour of whatever was last eaten off it. */
@@ -71,5 +73,7 @@ public final class ThaumAddsNeoForgeClient {
                 dev.tc4port.thaumadditions.client.gui.MachineScreens.AuraDisperser::new);
         event.register(Content.ENCHANTER_MENU.get(),
                 dev.tc4port.thaumadditions.client.gui.MachineScreens.ShadowEnchanter::new);
+        event.register(Content.CHESTER_MENU.get(),
+                dev.tc4port.thaumadditions.client.gui.ChesterScreen::new);
     }
 }

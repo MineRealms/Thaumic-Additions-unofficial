@@ -437,6 +437,18 @@ public final class TaPlatformForge implements TaPlatform {
     // ------------------------------------------------------------------ menus
 
     @Override
+    public void saveStackList(net.minecraft.world.level.Level level, net.minecraft.nbt.CompoundTag tag,
+                              net.minecraft.core.NonNullList<ItemStack> slots) {
+        net.minecraft.world.ContainerHelper.saveAllItems(tag, slots);
+    }
+
+    @Override
+    public void loadStackList(net.minecraft.world.level.Level level, net.minecraft.nbt.CompoundTag tag,
+                              net.minecraft.core.NonNullList<ItemStack> slots) {
+        net.minecraft.world.ContainerHelper.loadAllItems(tag, slots);
+    }
+
+    @Override
     public <T extends net.minecraft.world.inventory.AbstractContainerMenu> net.minecraft.world.inventory.MenuType<T> menuType(
             dev.tc4port.thaumadditions.platform.TaMenuFactory<T> factory) {
         return net.minecraftforge.common.extensions.IForgeMenuType.create(factory::create);

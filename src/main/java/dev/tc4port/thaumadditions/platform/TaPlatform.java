@@ -207,4 +207,17 @@ public interface TaPlatform {
      */
     void openMenu(net.minecraft.server.level.ServerPlayer player, net.minecraft.world.MenuProvider provider,
                   java.util.function.Consumer<net.minecraft.network.FriendlyByteBuf> extraData);
+
+    // ------------------------------------------------------------------ entity inventories
+
+    /**
+     * Writes a list of stacks into a tag. 1.21 made the stack codecs registry-aware and so the
+     * loader's helper grew a parameter; the level supplies it here, which is why one is needed.
+     */
+    void saveStackList(net.minecraft.world.level.Level level, net.minecraft.nbt.CompoundTag tag,
+                       net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> slots);
+
+    /** Reads back what {@link #saveStackList} wrote, leaving the slots empty when absent. */
+    void loadStackList(net.minecraft.world.level.Level level, net.minecraft.nbt.CompoundTag tag,
+                       net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> slots);
 }
