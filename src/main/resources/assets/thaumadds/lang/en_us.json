@@ -15,5 +15,10 @@
   "item.thaumadds.mithminite_blade": "Mithminite Blade",
   "item.thaumadds.mithminite_handle": "Mithminite Handle",
   "item.thaumadds.odour_powder": "Odour Powder",
-  "itemGroup.thaumadds": "Thaumic Additions"
+  "itemGroup.thaumadds": "Thaumic Additions",
+  "block.thaumadds.mithrillium_block": "Mithrillium Block",
+  "block.thaumadds.adaminite_block": "Adaminite Block",
+  "block.thaumadds.mithminite_block": "Mithminite Block",
+  "block.thaumadds.taintwood_planks": "Taintwood Planks",
+  "block.thaumadds.chiseled_amber_block": "Chiseled Amber Block"
 }

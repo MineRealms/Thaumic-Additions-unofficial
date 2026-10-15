@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "thaumadds:mithrillium_block",
+    "thaumadds:adaminite_block",
+    "thaumadds:mithminite_block",
+    "thaumadds:chiseled_amber_block"
+  ]
+}

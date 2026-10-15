@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.MapColor;
 
 /**
  * The mod's content declarations. Node adapters call {@link #init(Registrar, Registrar)}
@@ -41,6 +45,13 @@ public final class Content {
     public static Supplier<Item> MITHMINITE_HANDLE;
     public static Supplier<Item> ODOUR_POWDER;
 
+    // --- plain blocks (1.12 BlocksTAR: BlockTARStorage family) ---
+    public static Supplier<Block> MITHRILLIUM_BLOCK;
+    public static Supplier<Block> ADAMINITE_BLOCK;
+    public static Supplier<Block> MITHMINITE_BLOCK;
+    public static Supplier<Block> TAINTWOOD_PLANKS;
+    public static Supplier<Block> CHISELED_AMBER_BLOCK;
+
     private Content() {
     }
 
@@ -62,6 +73,27 @@ public final class Content {
         MITHMINITE_BLADE = track(items.register("mithminite_blade", Content::simple));
         MITHMINITE_HANDLE = track(items.register("mithminite_handle", Content::simple));
         ODOUR_POWDER = track(items.register("odour_powder", Content::simple));
+
+        // 1.12 BlockTARStorage(metal): hardness 3, metal sound, harvest level 3 (diamond pickaxe).
+        MITHRILLIUM_BLOCK = block(items, blocks, "mithrillium_block", metalStorage());
+        ADAMINITE_BLOCK = block(items, blocks, "adaminite_block", metalStorage());
+        MITHMINITE_BLOCK = block(items, blocks, "mithminite_block", metalStorage());
+        // BlockTARStorage(Material.WOOD, WOOD, 1F, "axe", 0) and (Material.ROCK, STONE, 1F, "pickaxe", 0).
+        TAINTWOOD_PLANKS = block(items, blocks, "taintwood_planks",
+                Block.Properties.of().mapColor(MapColor.WOOD).strength(1.0F).sound(SoundType.WOOD));
+        CHISELED_AMBER_BLOCK = block(items, blocks, "chiseled_amber_block",
+                Block.Properties.of().mapColor(MapColor.STONE).strength(1.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+    }
+
+    /** Registers a plain block plus the matching block item, in tab order. */
+    private static Supplier<Block> block(Registrar items, Registrar blocks, String name, Block.Properties properties) {
+        Supplier<Block> holder = blocks.register(name, () -> new Block(properties));
+        track(items.register(name, () -> new BlockItem(holder.get(), new Item.Properties())));
+        return holder;
+    }
+
+    private static Block.Properties metalStorage() {
+        return Block.Properties.of().mapColor(MapColor.METAL).strength(3.0F).sound(SoundType.METAL).requiresCorrectToolForDrops();
     }
 
     private static Item simple() {
