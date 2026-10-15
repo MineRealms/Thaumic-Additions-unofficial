@@ -42,6 +42,17 @@ public final class HCLiteForge {
             public CompoundTag readNbt(FriendlyByteBuf buf) {
                 return buf.readAnySizeNbt();
             }
+
+            @Override
+            public CompoundTag itemTag(net.minecraft.world.item.ItemStack stack) {
+                return stack.getTag();
+            }
+
+            @Override
+            public void updateItemTag(net.minecraft.world.item.ItemStack stack,
+                                      java.util.function.Consumer<CompoundTag> mutator) {
+                mutator.accept(stack.getOrCreateTag());
+            }
         });
 
         HCLiteNet.bootstrap(new PacketChannel() {

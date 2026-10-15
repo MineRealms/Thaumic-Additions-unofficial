@@ -11,5 +11,13 @@ package dev.tc4port.thaumadditions.platform;
 public enum TaEffect {
     NIGHT_VISION,
     WATER_BREATHING,
-    FIRE_RESISTANCE
+    FIRE_RESISTANCE,
+    /** 1.12 belt/amulet speed boost, reimplemented as a status effect. */
+    MOVEMENT_SPEED,
+    /** 1.12 belt jump boost, reimplemented as a status effect. */
+    JUMP,
+    /** 1.12 meteor belt dive / traveller-belt fall damping. */
+    SLOW_FALLING,
+    /** TC4R's warp ward, applied by the fragnant pendant. */
+    WARP_WARD
 }

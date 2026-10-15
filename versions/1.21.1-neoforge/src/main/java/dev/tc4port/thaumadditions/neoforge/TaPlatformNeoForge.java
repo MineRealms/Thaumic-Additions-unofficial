@@ -27,6 +27,10 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -41,8 +45,13 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -147,6 +156,117 @@ public final class TaPlatformNeoForge implements TaPlatform {
         };
     }
 
+    @Override
+    public Item behaviorItem(Item.Properties properties,
+                             dev.tc4port.thaumadditions.items.ItemBehavior behavior) {
+        return new Item(properties) {
+            @Override
+            public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+                return behavior.use(level, player, hand);
+            }
+
+            @Override
+            public InteractionResult useOn(UseOnContext context) {
+                return behavior.useOn(context);
+            }
+
+            @Override
+            public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target,
+                                                          InteractionHand hand) {
+                return behavior.interactLivingEntity(stack, player, target, hand);
+            }
+
+            @Override
+            public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+                behavior.inventoryTick(stack, level, entity, slot, selected);
+            }
+
+            @Override
+            public void onCraftedBy(ItemStack stack, Level level, Player player) {
+                behavior.onCreated(stack, level, player);
+            }
+
+            @Override
+            public boolean isFoil(ItemStack stack) {
+                return behavior.isFoil(stack);
+            }
+
+            @Override
+            public void appendHoverText(ItemStack stack, Item.TooltipContext context,
+                                        List<net.minecraft.network.chat.Component> tooltip,
+                                        net.minecraft.world.item.TooltipFlag flag) {
+                tooltip.addAll(behavior.tooltipLines(stack));
+            }
+        };
+    }
+
+
+    @Override
+    public net.minecraft.world.food.FoodProperties food(int nutrition, float saturationModifier,
+                                                        boolean alwaysEdible) {
+        net.minecraft.world.food.FoodProperties.Builder builder = new net.minecraft.world.food.FoodProperties.Builder()
+                .nutrition(nutrition).saturationModifier(saturationModifier);
+        if (alwaysEdible) {
+            builder = builder.alwaysEdible();
+        }
+        return builder.build();
+    }
+
+    @Override
+    public Block crop(BlockBehaviour.Properties properties, int maxAge) {
+        return new dev.tc4port.thaumadditions.blocks.TaBlocks.CropBlock(properties, maxAge) {
+            @Override
+            public boolean isValidBonemealTarget(net.minecraft.world.level.LevelReader level,
+                                                 BlockPos pos, BlockState state) {
+                return false;
+            }
+
+            @Override
+            public boolean isBonemealSuccess(Level level, net.minecraft.util.RandomSource random,
+                                             BlockPos pos, BlockState state) {
+                return false;
+            }
+        };
+    }
+
+    @Override
+    public Block puriflower(BlockBehaviour.Properties properties) {
+        return new NeoPuriflower(properties);
+    }
+
+    /** Concrete 1.21 shape: the shared base is abstract because {@code BushBlock.codec()} is. */
+    private static final class NeoPuriflower extends dev.tc4port.thaumadditions.blocks.TaBlocks.PuriflowerBlock {
+        private NeoPuriflower(BlockBehaviour.Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BushBlock> codec() {
+            return simpleCodec(NeoPuriflower::new);
+        }
+    }
+
+    @Override
+    public void ignite(LivingEntity target, float seconds) {
+        target.igniteForSeconds(seconds);
+    }
+
+    @Override
+    public Item sword(Tier tier, float attackDamage, float attackSpeed, Item.Properties properties,
+                      SwordBehavior behavior) {
+        return new SwordItem(tier, properties.attributes(SwordItem.createAttributes(tier, attackDamage, attackSpeed))) {
+            @Override
+            public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+                return behavior.hurtEnemy(stack, target, attacker);
+            }
+
+            @Override
+            public boolean isEnchantable(ItemStack stack) {
+                return true;
+            }
+        };
+    }
+
     private static Item.Properties digger(Item.Properties properties, Tier tier, float attackDamage, float attackSpeed) {
         return properties.attributes(DiggerItem.createAttributes(tier, attackDamage, attackSpeed));
     }
@@ -202,6 +322,10 @@ public final class TaPlatformNeoForge implements TaPlatform {
             case NIGHT_VISION -> MobEffects.NIGHT_VISION;
             case WATER_BREATHING -> MobEffects.WATER_BREATHING;
             case FIRE_RESISTANCE -> MobEffects.FIRE_RESISTANCE;
+            case MOVEMENT_SPEED -> MobEffects.MOVEMENT_SPEED;
+            case JUMP -> MobEffects.JUMP;
+            case SLOW_FALLING -> MobEffects.SLOW_FALLING;
+            case WARP_WARD -> dev.tc4port.thaumcraft.registry.TCEffects.WARP_WARD;
         };
     }
 

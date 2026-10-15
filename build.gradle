@@ -132,6 +132,9 @@ if (isForge) {
         compileOnly("dev.latvian.mods:kubejs-forge:${kubejs_forge_version}") { transitive = false }
         compileOnly("dev.latvian.mods:rhino-forge:${rhino_forge_version}") { transitive = false }
 
+        // HCLite ships as a jar-in-jar mod, so main only needs it at compile time.
+        compileOnly sourceSets.hclite.output
+
         // Rosetta remote-debug bridge: DEV-ONLY, never shipped (runtime TCP control plane).
         modRuntimeOnly("dev.rosetta:rosetta-remote-debug-bridge-forge:1.0.0") { transitive = false }
 
@@ -213,6 +216,9 @@ if (isForge) {
         runtimeOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_neoforge_version}") {
             exclude group: 'com.github.rtyley', module: 'animated-gif-lib-for-java'
         }
+
+        // HCLite ships as a jar-in-jar mod, so main only needs it at compile time.
+        compileOnly sourceSets.hclite.output
 
         // Rosetta remote-debug bridge: DEV-ONLY, never shipped (runtime TCP control plane).
         runtimeOnly("dev.rosetta:rosetta-remote-debug-bridge-neoforge:1.0.1") { transitive = false }

@@ -16,12 +16,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 @Mod(ThaumAdditions.MOD_ID)
 public final class ThaumAdditionsForge {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ThaumAdditions.MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ThaumAdditions.MOD_ID);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ThaumAdditions.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ThaumAdditions.MOD_ID);
 
     public ThaumAdditionsForge(FMLJavaModLoadingContext context) {
         IEventBus modBus = context.getModEventBus();
@@ -40,7 +42,14 @@ public final class ThaumAdditionsForge {
                 return (Supplier<T>) (Supplier) BLOCKS.register(name, (Supplier) factory);
             }
         };
-        Content.init(items, blocks, new TaPlatformForge());
+        Registrar blockEntities = new Registrar() {
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            @Override
+            public <T> Supplier<T> register(String name, Supplier<T> factory) {
+                return (Supplier<T>) (Supplier) BLOCK_ENTITIES.register(name, (Supplier) factory);
+            }
+        };
+        Content.init(items, blocks, blockEntities, new TaPlatformForge());
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))
@@ -50,6 +59,7 @@ public final class ThaumAdditionsForge {
 
         ITEMS.register(modBus);
         BLOCKS.register(modBus);
+        BLOCK_ENTITIES.register(modBus);
         TABS.register(modBus);
 
         modBus.addListener(this::commonSetup);

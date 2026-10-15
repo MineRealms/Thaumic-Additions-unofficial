@@ -71,6 +71,20 @@ public final class HCLiteNeoForge {
             public CompoundTag readNbt(FriendlyByteBuf buf) {
                 return buf.readNbt();
             }
+
+            @Override
+            public CompoundTag itemTag(net.minecraft.world.item.ItemStack stack) {
+                net.minecraft.world.item.component.CustomData data =
+                        stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+                return data == null ? null : data.copyTag();
+            }
+
+            @Override
+            public void updateItemTag(net.minecraft.world.item.ItemStack stack,
+                                      java.util.function.Consumer<CompoundTag> mutator) {
+                net.minecraft.world.item.component.CustomData.update(
+                        net.minecraft.core.component.DataComponents.CUSTOM_DATA, stack, mutator);
+            }
         });
 
         HCLiteNet.bootstrap(new PacketChannel() {

@@ -1,7 +1,10 @@
 package dev.tc4port.hclite.platform;
 
+import java.util.function.Consumer;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 /**
@@ -20,6 +23,15 @@ public interface HCLitePlatform {
 
     /** Reads a CompoundTag off the wire (1.20.1 readAnySizeNbt vs 1.21.1 readNbt). */
     CompoundTag readNbt(FriendlyByteBuf buf);
+
+    /**
+     * The item's custom NBT, or {@code null} when absent. 1.20.1 keeps it in
+     * {@code ItemStack.getTag()}; 1.21 moved it to the {@code CustomData} component.
+     */
+    CompoundTag itemTag(ItemStack stack);
+
+    /** Mutates the item's custom NBT, creating and attaching it when absent. */
+    void updateItemTag(ItemStack stack, Consumer<CompoundTag> mutator);
 
     final class Holder {
         private static volatile HCLitePlatform platform;
