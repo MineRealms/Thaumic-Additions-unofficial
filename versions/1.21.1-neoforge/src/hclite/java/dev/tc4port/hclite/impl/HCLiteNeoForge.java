@@ -116,15 +116,16 @@ public final class HCLiteNeoForge {
 
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
-        registrar.playToClient(Envelope.TYPE, Envelope.CODEC, (payload, context) -> context.enqueueWork(() -> {
+        // One Type may only be registered once; playBidirectional covers both flows.
+        // SERVERBOUND flow = received on the server.
+        registrar.playBidirectional(Envelope.TYPE, Envelope.CODEC, (payload, context) -> context.enqueueWork(() -> {
             HCPacket packet = decode(payload);
-            if (packet != null)
-                packet.handleClient();
-        }));
-        registrar.playToServer(Envelope.TYPE, Envelope.CODEC, (payload, context) -> context.enqueueWork(() -> {
-            HCPacket packet = decode(payload);
-            if (packet != null)
+            if (packet == null)
+                return;
+            if (context.flow() == net.minecraft.network.protocol.PacketFlow.SERVERBOUND)
                 packet.handleServer((ServerPlayer) context.player());
+            else
+                packet.handleClient();
         }));
     }
 
