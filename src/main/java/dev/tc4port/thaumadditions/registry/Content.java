@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 import dev.tc4port.thaumadditions.armor.MithminiteArmorBehavior;
 import dev.tc4port.thaumadditions.blocks.TaBlocks;
 import dev.tc4port.thaumadditions.blocks.TaMachineBlocks;
+import dev.tc4port.thaumadditions.items.AspectCharges;
 import dev.tc4port.thaumadditions.items.GearItems;
 import dev.tc4port.thaumadditions.items.ToolItems;
 import dev.tc4port.thaumadditions.items.WeaponItems;
@@ -22,7 +23,10 @@ import dev.tc4port.thaumadditions.tiles.TileAspectCombiner;
 import dev.tc4port.thaumadditions.tiles.TileAuraDisperser;
 import dev.tc4port.thaumadditions.tiles.TileCrystal;
 import dev.tc4port.thaumadditions.tiles.TileCrystalLamp;
+import dev.tc4port.thaumadditions.tiles.TileCrystalBore;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
+import dev.tc4port.thaumadditions.tiles.TileEssentiaSink;
+import dev.tc4port.thaumadditions.tiles.TileFluxConcentrator;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
 import dev.tc4port.thaumadditions.tiles.TileJar;
 import dev.tc4port.thaumadditions.tiles.TileSeal;
@@ -213,16 +217,16 @@ public final class Content {
     public static Supplier<BlockEntityType<TileCrystalLamp>> CRYSTAL_LAMP_BE;
     public static Supplier<BlockEntityType<TileCrystal.Cake>> CAKE_BE;
     public static Supplier<BlockEntityType<TileSeal>> SEAL_BE;
-    public static Supplier<BlockEntityType<TaTiles.Sink>> SINK_BE;
+    public static Supplier<BlockEntityType<TileEssentiaSink>> SINK_BE;
     public static Supplier<BlockEntityType<TaTiles.Summoner>> SUMMONER_BE;
     public static Supplier<BlockEntityType<TileShadowEnchanter>> ENCHANTER_BE;
     public static Supplier<BlockEntityType<TileGrowthChamber>> GROWTH_BE;
     public static Supplier<BlockEntityType<TileAspectCombiner>> COMBINER_BE;
     public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
     public static Supplier<BlockEntityType<TileAuraDisperser>> DISPERSER_BE;
-    public static Supplier<BlockEntityType<TaTiles.Bore>> BORE_BE;
+    public static Supplier<BlockEntityType<TileCrystalBore>> BORE_BE;
     public static Supplier<BlockEntityType<TileCrystalCrusher>> CRUSHER_BE;
-    public static Supplier<BlockEntityType<TaTiles.Concentrator>> CONCENTRATOR_BE;
+    public static Supplier<BlockEntityType<TileFluxConcentrator>> CONCENTRATOR_BE;
 
     private Content() {
     }
@@ -319,6 +323,9 @@ public final class Content {
         MITHMINITE_SCYTHE = track(items.register("mithminite_scythe",
                 () -> WeaponItems.mithminiteScythe(platform, mithminiteWeapon)));
         SHADOW_BEAM_STAFF = track(items.register("shadow_beam_staff", () -> WeaponItems.shadowBeamStaff(platform)));
+        // 1.12 ItemShadowBeamStaff implemented IAspectChargableItem: ELDRITCH only, 500 points.
+        AspectCharges.register("thaumadds:shadow_beam_staff",
+                dev.tc4port.thaumcraft.api.aspect.AspectId.parse("alienis"), 500);
         ESSENTIA_PISTOL = track(items.register("essentia_pistol", () -> WeaponItems.essentiaPistol(platform)));
     }
 
@@ -453,8 +460,8 @@ public final class Content {
                 (pos, state) -> new TileCrystal.Cake(CAKE_BE.get(), pos, state), CAKE.get()).build(null));
         SEAL_BE = registrar.register("seal", () -> BlockEntityType.Builder.<TileSeal>of(
                 (pos, state) -> new TileSeal(SEAL_BE.get(), pos, state), SEAL.get()).build(null));
-        SINK_BE = registrar.register("essentia_sink", () -> BlockEntityType.Builder.<TaTiles.Sink>of(
-                (pos, state) -> new TaTiles.Sink(SINK_BE.get(), pos, state), ESSENTIA_SINK.get()).build(null));
+        SINK_BE = registrar.register("essentia_sink", () -> BlockEntityType.Builder.<TileEssentiaSink>of(
+                (pos, state) -> new TileEssentiaSink(SINK_BE.get(), pos, state), ESSENTIA_SINK.get()).build(null));
         SUMMONER_BE = registrar.register("entity_summoner", () -> BlockEntityType.Builder.<TaTiles.Summoner>of(
                 (pos, state) -> new TaTiles.Summoner(SUMMONER_BE.get(), pos, state), ENTITY_SUMMONER.get()).build(null));
         ENCHANTER_BE = registrar.register("shadow_enchanter", () -> BlockEntityType.Builder.<TileShadowEnchanter>of(
@@ -467,12 +474,12 @@ public final class Content {
                 (pos, state) -> new TaTiles.Charger(CHARGER_BE.get(), pos, state), AURA_CHARGER.get()).build(null));
         DISPERSER_BE = registrar.register("aura_disperser", () -> BlockEntityType.Builder.<TileAuraDisperser>of(
                 (pos, state) -> new TileAuraDisperser(DISPERSER_BE.get(), pos, state), AURA_DISPERSER.get()).build(null));
-        BORE_BE = registrar.register("crystal_bore", () -> BlockEntityType.Builder.<TaTiles.Bore>of(
-                (pos, state) -> new TaTiles.Bore(BORE_BE.get(), pos, state), CRYSTAL_BORE.get()).build(null));
+        BORE_BE = registrar.register("crystal_bore", () -> BlockEntityType.Builder.<TileCrystalBore>of(
+                (pos, state) -> new TileCrystalBore(BORE_BE.get(), pos, state), CRYSTAL_BORE.get()).build(null));
         CRUSHER_BE = registrar.register("crystal_crusher", () -> BlockEntityType.Builder.<TileCrystalCrusher>of(
                 (pos, state) -> new TileCrystalCrusher(CRUSHER_BE.get(), pos, state), CRYSTAL_CRUSHER.get()).build(null));
-        CONCENTRATOR_BE = registrar.register("flux_concentrator", () -> BlockEntityType.Builder.<TaTiles.Concentrator>of(
-                (pos, state) -> new TaTiles.Concentrator(CONCENTRATOR_BE.get(), pos, state), FLUX_CONCENTRATOR.get()).build(null));
+        CONCENTRATOR_BE = registrar.register("flux_concentrator", () -> BlockEntityType.Builder.<TileFluxConcentrator>of(
+                (pos, state) -> new TileFluxConcentrator(CONCENTRATOR_BE.get(), pos, state), FLUX_CONCENTRATOR.get()).build(null));
     }
 
     /**

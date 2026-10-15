@@ -3,6 +3,7 @@ package dev.tc4port.thaumadditions.tiles;
 import dev.tc4port.hclite.tile.SyncedBlockEntity;
 import dev.tc4port.thaumadditions.aspect.TaAspect;
 import dev.tc4port.thaumcraft.api.aspect.AspectId;
+import dev.tc4port.thaumcraft.api.essentia.EssentiaApi;
 import dev.tc4port.thaumcraft.api.essentia.EssentiaTransferMode;
 import dev.tc4port.thaumcraft.api.essentia.EssentiaTransport;
 import net.minecraft.core.BlockPos;
@@ -192,5 +193,42 @@ public abstract class TileEssentia extends SyncedBlockEntity implements Essentia
     /** Reads a stored aspect amount for tooltips and probes. */
     public static int readAmount(CompoundTag tag, String key) {
         return tag.contains(key, Tag.TAG_INT) ? tag.getInt(key) : 0;
+    }
+
+    // ------------------------------------------------------------------ pulling
+
+    /**
+     * 1.12's {@code EssentiaHandler.drainEssentia(this, aspect, null, suction, amount)}: walk the
+     * six neighbours, ask each one whether it offers this aspect out of the face that meets this
+     * block, and take the first that does.
+     *
+     * <p>This is deliberately a directional walk rather than {@code EssentiaApi.extract}'s range
+     * search. TC4R keeps {@code EssentiaSource} — the interface a range search looks for — separate
+     * from {@code EssentiaTransport}, so that a tube endpoint does not become remotely drainable
+     * just because it moves essentia. Jars, alembics and tubes are all transports, so a machine
+     * that wants to drink from one has to reach across the face that touches it, which is what 1.12
+     * did anyway.</p>
+     *
+     * @return how much was actually drawn; {@code 0} when nothing in reach offers it.
+     */
+    public static int pullFromNeighbours(Level level, BlockPos pos, AspectId aspect, int amount) {
+        if (level.isClientSide || aspect == null || amount <= 0) {
+            return 0;
+        }
+        for (Direction face : Direction.values()) {
+            EssentiaTransport neighbour = EssentiaApi.transport(level, pos.relative(face), face.getOpposite());
+            if (neighbour == null || !neighbour.canOutputTo(face.getOpposite())) {
+                continue;
+            }
+            if (!aspect.equals(neighbour.essentiaType(face.getOpposite()))) {
+                continue;
+            }
+            int taken = EssentiaApi.take(level, neighbour, aspect, amount, face.getOpposite(),
+                    EssentiaTransferMode.EXECUTE);
+            if (taken > 0) {
+                return taken;
+            }
+        }
+        return 0;
     }
 }

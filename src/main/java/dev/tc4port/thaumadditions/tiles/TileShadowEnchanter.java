@@ -12,9 +12,6 @@ import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.TaSound;
 import dev.tc4port.thaumcraft.api.aspect.AspectId;
 import dev.tc4port.thaumcraft.api.aspect.AspectList;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaApi;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaSearch;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaTransferMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -62,8 +59,6 @@ public class TileShadowEnchanter extends SyncedBlockEntity
     private static final int DRAIN_SUCTION = 12;
     /** 1.12 {@code atTickRate(6)}: essentia is asked for every sixth tick. */
     private static final int DRAIN_INTERVAL = 6;
-    /** How far the port looks for a source to drain; 1.12's handler walked adjacent endpoints. */
-    private static final int DRAIN_RANGE = 6;
     /** 1.12 refused a recipe costing more than this many points of essentia. */
     private static final int MAX_RECIPE_SIZE = 32;
 
@@ -173,8 +168,7 @@ public class TileShadowEnchanter extends SyncedBlockEntity
 
     /** 1.12 {@code EssentiaHandler.drainEssentia(this, a, null, 12, 1)}. */
     private boolean drain(Level level, BlockPos pos, AspectId aspect) {
-        return EssentiaApi.extract(level, pos, aspect, 1, EssentiaSearch.nearby(DRAIN_RANGE),
-                EssentiaTransferMode.EXECUTE).isPresent();
+        return TileEssentia.pullFromNeighbours(level, pos, aspect, 1) == 1;
     }
 
     /** 1.12's finishing branch: the enchanted copy lands in the output and the input is spent. */

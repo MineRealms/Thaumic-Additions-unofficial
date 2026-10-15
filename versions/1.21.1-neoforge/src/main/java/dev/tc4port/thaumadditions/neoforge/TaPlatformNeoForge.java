@@ -421,6 +421,7 @@ public final class TaPlatformNeoForge implements TaPlatform {
             case HUNGER -> MobEffects.HUNGER;
             case RESISTANCE -> MobEffects.DAMAGE_RESISTANCE;
             case FLUX_TAINT -> dev.tc4port.thaumcraft.registry.TCEffects.FLUX_TAINT;
+            case VIS_EXHAUST -> dev.tc4port.thaumcraft.registry.TCEffects.VIS_EXHAUST;
         };
     }
 

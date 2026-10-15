@@ -61,9 +61,15 @@ public class TileAspectCombiner extends TileEssentia {
         this.craftingTime = getPersistentData().getInt("CraftingTime");
     }
 
-    /** The 1.12 combination rule: a non-primal aspect of exactly these two components. */
+    /**
+     * The 1.12 combination rule: a non-primal aspect of exactly these two components.
+     *
+     * <p>The two inputs must differ. TC4 registered its combinations as ordered pairs, so an aspect
+     * was never its own partner; without the check, feeding the same primal to both input faces
+     * would answer with whichever two-component aspect happens to contain it.</p>
+     */
     public static AspectId combine(AspectId a, AspectId b) {
-        if (a == null || b == null) {
+        if (a == null || b == null || a.equals(b)) {
             return null;
         }
         for (java.util.Map.Entry<AspectId, AspectDefinition> entry : AspectApi.definitions().entrySet()) {

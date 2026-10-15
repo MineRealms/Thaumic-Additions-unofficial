@@ -32,5 +32,7 @@ public enum TaEffect {
     HUNGER,
     RESISTANCE,
     /** TC4R's flux taint, the effect 1.12's FLUX aspect applied. */
-    FLUX_TAINT
+    FLUX_TAINT,
+    /** 1.12 {@code PotionVisExhaust}, which the flux concentrator's field puts on everything in it. */
+    VIS_EXHAUST
 }

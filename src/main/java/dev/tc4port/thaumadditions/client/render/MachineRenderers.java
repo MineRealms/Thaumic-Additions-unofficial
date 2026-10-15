@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import dev.tc4port.thaumadditions.client.model.MachineModels;
 import dev.tc4port.thaumadditions.tiles.TaTiles;
 import dev.tc4port.thaumadditions.tiles.TileAspectCombiner;
+import dev.tc4port.thaumadditions.tiles.TileCrystalBore;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import net.minecraft.client.model.geom.ModelPart;
@@ -87,11 +88,11 @@ public final class MachineRenderers {
     }
 
     /** 1.12 {@code TESRCrystalBore}. */
-    public static final class CrystalBore implements BlockEntityRenderer<TaTiles.Bore> {
+    public static final class CrystalBore implements BlockEntityRenderer<TileCrystalBore> {
         private static final ModelPart ROOT = MachineModels.CrystalBore.layer().bakeRoot();
 
         @Override
-        public void render(TaTiles.Bore be, float partialTick, PoseStack pose, MultiBufferSource buffers,
+        public void render(TileCrystalBore be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
             draw(pose, buffers, MachineModels.CrystalBore.TEXTURE, be.getBlockState(), light, overlay,
                     ROOT, -0.5F);

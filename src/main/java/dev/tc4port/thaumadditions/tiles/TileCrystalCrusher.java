@@ -7,9 +7,6 @@ import dev.tc4port.thaumcraft.api.aspect.AspectAmounts;
 import dev.tc4port.thaumcraft.api.aspect.AspectApi;
 import dev.tc4port.thaumcraft.api.aspect.AspectId;
 import dev.tc4port.thaumcraft.api.aspect.AspectItemView;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaApi;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaSearch;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaTransferMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
@@ -24,11 +21,11 @@ import net.minecraft.world.level.block.state.BlockState;
  * 1.12 {@code TileCrystalCrusher}: spend MECHANISM essentia to grind crystallised essence into the
  * salt essence of the same aspect.
  *
- * <p>1.12 asked TC's {@code EssentiaHandler} to drain from whatever jar or tube was in reach; the
- * port asks TC4R's {@code EssentiaApi.extract}, which searches the neighbourhood for a source the
- * same way. The crystal essence's aspect is read through TC4R's {@code AspectItemView}, because the
- * item belongs to TC4R and keeps its aspect in its own item data rather than the port's NBT shape.
- * The salt essence it produces is the port's own item, so its aspect moves in the port's shape.</p>
+ * <p>1.12 asked TC's {@code EssentiaHandler} to drain from whatever jar or tube was in reach;
+ * {@link TileEssentia#pullFromNeighbours} does the same walk here. The crystal essence's aspect is
+ * read through TC4R's {@code AspectItemView}, because the item belongs to TC4R and keeps its aspect
+ * in its own item data rather than the port's NBT shape. The salt essence it produces is the port's
+ * own item, so its aspect moves in the port's shape.</p>
  */
 public class TileCrystalCrusher extends TileEssentia implements Container {
     public static final int SLOT_INPUT = 0;
@@ -43,8 +40,6 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
     private static final int CRUSHES_PER_DRAIN = 3;
     /** 1.12 {@code craftTime >= 100}. */
     private static final int CRAFT_TICKS = 100;
-    /** How far the port looks for a source to drain; 1.12's handler walked adjacent endpoints. */
-    private static final int DRAIN_RANGE = 6;
 
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
 
@@ -131,8 +126,7 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
         if (machina == null) {
             return false;
         }
-        return EssentiaApi.extract(level, pos, machina, 1, EssentiaSearch.nearby(DRAIN_RANGE),
-                EssentiaTransferMode.EXECUTE).isPresent();
+        return pullFromNeighbours(level, pos, machina, 1) == 1;
     }
 
     /** 1.12 {@code canCraft}: fuel left, a crystallised essence in, and room for the salt essence. */

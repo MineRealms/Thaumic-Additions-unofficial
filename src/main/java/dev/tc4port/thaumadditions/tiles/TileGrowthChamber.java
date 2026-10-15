@@ -7,9 +7,6 @@ import dev.tc4port.thaumadditions.registry.Content;
 import dev.tc4port.thaumcraft.api.aspect.AspectId;
 import dev.tc4port.thaumcraft.api.aspect.VisChannel;
 import dev.tc4port.thaumcraft.api.aspect.VisAction;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaApi;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaTransferMode;
-import dev.tc4port.thaumcraft.api.essentia.EssentiaTransport;
 import dev.tc4port.thaumcraft.api.flux.FluxApi;
 import dev.tc4port.thaumcraft.api.node.VisNetworkApi;
 import net.minecraft.core.BlockPos;
@@ -125,7 +122,9 @@ public class TileGrowthChamber extends TileEssentia implements Container {
         }
 
         boolean dirty = aspectChanged;
-        if (pullFromNeighbours(level, pos, slotAspect)) {
+        int drawn = pullFromNeighbours(level, pos, slotAspect, CAPACITY - amount);
+        if (drawn > 0) {
+            amount += drawn;
             dirty = true;
         }
 
@@ -190,30 +189,6 @@ public class TileGrowthChamber extends TileEssentia implements Container {
         }
         drainCarry -= drained;
         return true;
-    }
-
-    /** 1.12 walked every face for a neighbour offering essentia of the wanted aspect. */
-    private boolean pullFromNeighbours(Level level, BlockPos pos, AspectId aspect) {
-        int room = CAPACITY - amount;
-        if (room <= 0) {
-            return false;
-        }
-        for (Direction face : Direction.values()) {
-            EssentiaTransport neighbour = EssentiaApi.transport(level, pos.relative(face), face.getOpposite());
-            if (neighbour == null || !neighbour.canOutputTo(face.getOpposite())) {
-                continue;
-            }
-            if (!aspect.equals(neighbour.essentiaType(face.getOpposite()))) {
-                continue;
-            }
-            int taken = EssentiaApi.take(level, neighbour, aspect, room, face.getOpposite(),
-                    EssentiaTransferMode.EXECUTE);
-            if (taken > 0) {
-                amount += taken;
-                return true;
-            }
-        }
-        return false;
     }
 
     /** The crystal block item's own aspect tag, or a random one when it has none. */
