@@ -371,5 +371,6 @@
   "seal.thaumadds.harvestcrops2": "Seal of the Replanted Crops: reaps and sows again.",
   "seal.thaumadds.pickupitems": "Seal of the Picked Up Items: gathers loose items.",
   "seal.thaumadds.portal": "Seal of the Portal: passes items to its partner.",
-  "entity.thaumadds.essentia_shot": "Essentia Shot"
+  "entity.thaumadds.essentia_shot": "Essentia Shot",
+  "entity.thaumadds.mithminite_scythe": "Mithminite Scythe"
 }

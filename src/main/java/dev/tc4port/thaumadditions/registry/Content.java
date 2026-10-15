@@ -251,6 +251,21 @@ public final class Content {
     public static Supplier<net.minecraft.world.entity.EntityType<dev.tc4port.thaumadditions.entity.Chester>> CHESTER_ENTITY;
     public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.ChesterMenu>> CHESTER_MENU;
 
+    /** The thrown scythe blade; its class is per node for the same reason the shot's is. */
+    public static Supplier<net.minecraft.world.entity.EntityType<? extends dev.tc4port.thaumadditions.entity.ScytheProjectileBase>> MITHMINITE_SCYTHE_ENTITY;
+    /** Builds one, for the scythe item in shared code. */
+    public static java.util.function.BiFunction<net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity,
+            dev.tc4port.thaumadditions.entity.ScytheProjectileBase> SCYTHE_FACTORY;
+
+    /** Called by the node once it has registered the blade. */
+    public static void setScythe(
+            Supplier<net.minecraft.world.entity.EntityType<? extends dev.tc4port.thaumadditions.entity.ScytheProjectileBase>> type,
+            java.util.function.BiFunction<net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity,
+                    dev.tc4port.thaumadditions.entity.ScytheProjectileBase> factory) {
+        MITHMINITE_SCYTHE_ENTITY = type;
+        SCYTHE_FACTORY = factory;
+    }
+
     /** Called by the node once it has registered the entity type. */
     public static void setEssentiaShot(
             Supplier<net.minecraft.world.entity.EntityType<? extends dev.tc4port.thaumadditions.entity.EssentiaShotBase>> type,

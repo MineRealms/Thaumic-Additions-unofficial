@@ -76,6 +76,17 @@ public final class ThaumAdditionsNeoForge {
                         .build("thaumadds:essentia_shot")),
                 (level, thrower, payload) -> new dev.tc4port.thaumadditions.neoforge.entity.EssentiaShot(
                         Content.ESSENTIA_SHOT.get(), level, thrower, payload));
+        Content.setScythe(entityTypes.register("mithminite_scythe",
+                () -> net.minecraft.world.entity.EntityType.Builder
+                        .<dev.tc4port.thaumadditions.neoforge.entity.MithminiteScythe>of(
+                                dev.tc4port.thaumadditions.neoforge.entity.MithminiteScythe::new,
+                                net.minecraft.world.entity.MobCategory.MISC)
+                        .sized(0.5F, 0.5F)
+                        .clientTrackingRange(6)
+                        .updateInterval(4)
+                        .build("thaumadds:mithminite_scythe")),
+                (level, thrower) -> new dev.tc4port.thaumadditions.neoforge.entity.MithminiteScythe(
+                        Content.MITHMINITE_SCYTHE_ENTITY.get(), level, thrower));
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))

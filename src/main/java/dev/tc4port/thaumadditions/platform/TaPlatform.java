@@ -80,6 +80,16 @@ public interface TaPlatform {
     interface SwordBehavior {
         /** @return the {@code super.hurtEnemy} result, or {@code false} to skip damage */
         boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker);
+
+        /**
+         * What using the sword does, for the one weapon here that is also thrown. Returning
+         * {@code null} keeps the vanilla swing.
+         */
+        default net.minecraft.world.InteractionResultHolder<ItemStack> use(
+                net.minecraft.world.level.Level level, net.minecraft.world.entity.player.Player player,
+                net.minecraft.world.InteractionHand hand) {
+            return null;
+        }
     }
 
     /** Builds (1.20.1) or registers (1.21.1) an armor material and returns an opaque handle. */

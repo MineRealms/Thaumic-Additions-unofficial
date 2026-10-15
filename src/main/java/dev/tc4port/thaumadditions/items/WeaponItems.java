@@ -84,16 +84,43 @@ public final class WeaponItems {
     public static Item mithminiteScythe(dev.tc4port.thaumadditions.platform.TaPlatform platform,
                                         net.minecraft.world.item.Tier tier) {
         return platform.sword(tier, 3.0F, -2.4F, new Item.Properties().rarity(Rarity.RARE),
-                (stack, target, attacker) -> {
-                    if (!target.level().isClientSide && attacker instanceof Player player) {
-                        AABB area = target.getBoundingBox().inflate(2.5D);
-                        List<LivingEntity> nearby = target.level().getEntitiesOfClass(LivingEntity.class, area,
-                                other -> other != player && other != target && other.isAlive());
-                        for (LivingEntity other : nearby) {
-                            other.hurt(target.damageSources().playerAttack(player), 6.0F);
+                new dev.tc4port.thaumadditions.platform.TaPlatform.SwordBehavior() {
+                    @Override
+                    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+                        if (!target.level().isClientSide && attacker instanceof Player player) {
+                            AABB area = target.getBoundingBox().inflate(2.5D);
+                            List<LivingEntity> nearby = target.level().getEntitiesOfClass(
+                                    LivingEntity.class, area,
+                                    other -> other != player && other != target && other.isAlive());
+                            for (LivingEntity other : nearby) {
+                                other.hurt(target.damageSources().playerAttack(player), 6.0F);
+                            }
                         }
+                        return true;
                     }
-                    return true;
+
+                    /**
+                     * 1.12 threw the blade on a left-click with nothing in front of the player.
+                     * There is no vanilla hook for that swing, so the port throws on use instead;
+                     * the sweep above stays where it was, on the hit.
+                     */
+                    @Override
+                    public net.minecraft.world.InteractionResultHolder<ItemStack> use(
+                            Level level, Player player, InteractionHand hand) {
+                        ItemStack stack = player.getItemInHand(hand);
+                        if (level.isClientSide) {
+                            return net.minecraft.world.InteractionResultHolder.success(stack);
+                        }
+                        var blade = dev.tc4port.thaumadditions.registry.Content.SCYTHE_FACTORY
+                                .apply(level, player);
+                        if (blade == null) {
+                            return net.minecraft.world.InteractionResultHolder.pass(stack);
+                        }
+                        blade.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.2F, 0.0F);
+                        level.addFreshEntity(blade);
+                        player.getCooldowns().addCooldown(stack.getItem(), 20);
+                        return net.minecraft.world.InteractionResultHolder.consume(stack);
+                    }
                 });
     }
 

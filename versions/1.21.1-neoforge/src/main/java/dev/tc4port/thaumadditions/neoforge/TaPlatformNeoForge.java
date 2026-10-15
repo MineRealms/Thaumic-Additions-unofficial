@@ -294,6 +294,14 @@ public final class TaPlatformNeoForge implements TaPlatform {
             public boolean isEnchantable(ItemStack stack) {
                 return true;
             }
+
+            @Override
+            public net.minecraft.world.InteractionResultHolder<ItemStack> use(
+                    net.minecraft.world.level.Level level, net.minecraft.world.entity.player.Player player,
+                    net.minecraft.world.InteractionHand hand) {
+                var handled = behavior.use(level, player, hand);
+                return handled == null ? super.use(level, player, hand) : handled;
+            }
         };
     }
 
