@@ -254,6 +254,9 @@ public final class Content {
         machines(items, blocks, platform);
         blockEntities(blockEntities);
         menus(menus, platform);
+        // The seals are behaviour rather than content: the block is registered above, and this
+        // teaches it what its three symbols mean.
+        dev.tc4port.thaumadditions.seals.TaSeals.register();
         blockItems(items);
         crops(items);
     }

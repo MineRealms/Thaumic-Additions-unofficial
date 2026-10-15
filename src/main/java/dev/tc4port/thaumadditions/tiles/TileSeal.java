@@ -20,11 +20,43 @@ import java.util.UUID;
  * self-contained 8-class tree with no TC6 dependency, so it is the cheapest of
  * the remaining subsystems to port. This tile carries the data it needs.</p>
  */
-public class TileSeal extends SyncedBlockEntity {
-    private static final int SLOTS = 3;
+public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
+    /** 1.12's seal had three symbol slots. */
+    public static final int SLOTS = 3;
+
+    /** The behaviour the three symbols mean, or {@code null} while they mean nothing. */
+    private dev.tc4port.thaumadditions.seals.SealInstance instance;
 
     public TileSeal(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+    }
+
+    /** The face the seal points out of. */
+    public net.minecraft.core.Direction orientation() {
+        BlockState state = getBlockState();
+        return state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING)
+                ? state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING)
+                : net.minecraft.core.Direction.UP;
+    }
+
+    /** Where this seal's other half is, for the seal that pairs with one. */
+    public BlockPos portalTarget() {
+        if (!getPersistentData().contains("PortalTarget")) {
+            return null;
+        }
+        long packed = getPersistentData().getLong("PortalTarget");
+        return BlockPos.of(packed);
+    }
+
+    @Override
+    public void tick(net.minecraft.world.level.Level level, BlockPos pos, BlockState state) {
+        // The symbols can change under the machine, so the behaviour is re-resolved whenever they do.
+        if (instance == null) {
+            instance = dev.tc4port.thaumadditions.seals.SealManager.makeInstance(this);
+        }
+        if (instance != null) {
+            instance.tick();
+        }
     }
 
     public AspectId symbol(int slot) {
@@ -35,6 +67,8 @@ public class TileSeal extends SyncedBlockEntity {
     public AspectId setSymbol(int slot, AspectId id) {
         AspectId previous = symbol(slot);
         TaAspect.writeAspect(getPersistentData(), "Symbol" + slot, id);
+        // A different symbol means a different seal, so the resolved behaviour is thrown away.
+        this.instance = null;
         setChanged();
         sync();
         return previous;

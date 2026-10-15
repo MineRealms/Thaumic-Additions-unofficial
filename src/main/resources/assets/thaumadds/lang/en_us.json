@@ -363,5 +363,12 @@
   "tooltip.thaumadds:phantom": "Phantom",
   "tooltip.thaumadds:vis": "Vis: %,d / %,d",
   "jei.thaumadds.flux_concentrator": "Flux Concentrator",
-  "jei.thaumadds.aspect_items": "These items carry an aspect; each aspect is a separate entry."
+  "jei.thaumadds.aspect_items": "These items carry an aspect; each aspect is a separate entry.",
+  "seal.thaumadds.fertilesoil": "Seal of the Fertile Soil: waters farmland in front of it.",
+  "seal.thaumadds.createsoil": "Seal of the Created Soil: tills dirt in front of it.",
+  "seal.thaumadds.bonemealcrops": "Seal of the Bonemealed Crops: fertilises what is in front of it.",
+  "seal.thaumadds.harvestcrops1": "Seal of the Harvested Crops: reaps what is in front of it.",
+  "seal.thaumadds.harvestcrops2": "Seal of the Replanted Crops: reaps and sows again.",
+  "seal.thaumadds.pickupitems": "Seal of the Picked Up Items: gathers loose items.",
+  "seal.thaumadds.portal": "Seal of the Portal: passes items to its partner."
 }
