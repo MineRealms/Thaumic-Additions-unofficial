@@ -29,6 +29,7 @@ public final class ThaumAddsForgeClient {
         event.registerBlockEntityRenderer(Content.CONCENTRATOR_BE.get(), context -> new MachineRenderers.FluxConcentrator());
         event.registerBlockEntityRenderer(Content.ENCHANTER_BE.get(), context -> new ItemRenderers.ShadowEnchanter());
         event.registerBlockEntityRenderer(Content.SUMMONER_BE.get(), context -> new ItemRenderers.MobSummoner());
+        event.registerEntityRenderer(Content.BLUE_WOLF.get(), BlueWolfRenderer::new);
     }
 
     /** The arcane cake's top face takes the colour of whatever was last eaten off it. */

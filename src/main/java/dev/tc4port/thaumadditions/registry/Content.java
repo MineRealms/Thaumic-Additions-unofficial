@@ -244,6 +244,9 @@ public final class Content {
     /** How shared code builds one; the node fills this alongside the type. */
     public static dev.tc4port.thaumadditions.entity.EssentiaShotFactory ESSENTIA_SHOT_FACTORY;
 
+    /** The blue wolf; its class is shared, so this one registers through {@link #init}. */
+    public static Supplier<net.minecraft.world.entity.EntityType<dev.tc4port.thaumadditions.entity.BlueWolf>> BLUE_WOLF;
+
     /** Called by the node once it has registered the entity type. */
     public static void setEssentiaShot(
             Supplier<net.minecraft.world.entity.EntityType<? extends dev.tc4port.thaumadditions.entity.EssentiaShotBase>> type,
@@ -262,7 +265,7 @@ public final class Content {
 
     public static void init(Registrar items, Registrar blocks, Registrar blockEntities, Registrar menus,
                             Registrar entityTypes, TaPlatform platform) {
-        materials(items);
+        materials(items, platform);
         essentiaMaterials(items, platform);
         plainItems(items, platform);
         tools(items, platform);
@@ -277,6 +280,7 @@ public final class Content {
         // The seals are behaviour rather than content: the block is registered above, and this
         // teaches it what its three symbols mean.
         dev.tc4port.thaumadditions.seals.TaSeals.register();
+        entities(entityTypes);
         blockItems(items);
         crops(items);
     }
@@ -286,6 +290,18 @@ public final class Content {
             Supplier<? extends net.minecraft.world.inventory.MenuType<?>> type,
             dev.tc4port.thaumadditions.gui.MachineMenuProvider.ServerMenuFactory builder) {
         return new TaMachineBlocks.MachineGui(type, builder);
+    }
+
+    /** The entities whose class is shared, and so can be registered here. */
+    private static void entities(Registrar entityTypes) {
+        BLUE_WOLF = entityTypes.register("blue_wolf",
+                () -> net.minecraft.world.entity.EntityType.Builder
+                        .<dev.tc4port.thaumadditions.entity.BlueWolf>of(
+                                dev.tc4port.thaumadditions.entity.BlueWolf::new,
+                                net.minecraft.world.entity.MobCategory.CREATURE)
+                        .sized(0.6F, 0.85F)
+                        .clientTrackingRange(10)
+                        .build("thaumadds:blue_wolf"));
     }
 
     /** One menu per machine that had a container in 1.12. */
@@ -304,8 +320,8 @@ public final class Content {
 
     // ------------------------------------------------------------------ items
 
-    private static void materials(Registrar items) {
-        BLUE_BONE = track(items.register("blue_bone", Content::simple));
+    private static void materials(Registrar items, TaPlatform platform) {
+        BLUE_BONE = track(items.register("blue_bone", () -> ToolItems.blueBone(platform)));
         ZEITH_FUR = track(items.register("zeith_fur", Content::simple));
 
         MITHRILLIUM_NUGGET = track(items.register("mithrillium_nugget", Content::simple));

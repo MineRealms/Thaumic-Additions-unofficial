@@ -311,6 +311,31 @@ public final class ToolItems {
      * 1.12 {@code ItemEntityCell}: right-click an entity captures its full NBT,
      * right-click a block releases it with a fresh identity.
      */
+    /**
+     * 1.12 {@code ItemBlueBone}: use it on a wolf and the wolf turns blue.
+     *
+     * <p>Upstream only turned untamed wolves, and the blue wolf is a wild animal rather than a pet,
+     * so that restriction is kept.</p>
+     */
+    public static Item blueBone(TaPlatform platform) {
+        return platform.behaviorItem(new Item.Properties(), new ItemBehavior() {
+            @Override
+            public InteractionResult interactLivingEntity(ItemStack stack, Player player,
+                                                          LivingEntity target, InteractionHand hand) {
+                if (!(target instanceof net.minecraft.world.entity.animal.Wolf wolf)
+                        || wolf.level().isClientSide) {
+                    return InteractionResult.PASS;
+                }
+                if (!dev.tc4port.thaumadditions.entity.BlueWolf.transform(wolf)) {
+                    return InteractionResult.PASS;
+                }
+                stack.shrink(1);
+                player.swing(hand);
+                return InteractionResult.CONSUME;
+            }
+        });
+    }
+
     public static Item entityCell(TaPlatform platform) {
         return platform.behaviorItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE), new ItemBehavior() {
             @Override
