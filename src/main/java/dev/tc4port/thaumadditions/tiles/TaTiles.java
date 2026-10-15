@@ -154,21 +154,4 @@ public final class TaTiles {
         }
     }
 
-    /** 1.12 {@code TileGrowthChamber}: turns crystal blocks into crystal essence, ~1200t each. */
-    public static class GrowthChamber extends TileEssentia {
-        public GrowthChamber(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, 6, 128);
-        }
-
-        @Override
-        protected boolean accepts(Direction face) {
-            return true;
-        }
-
-        @Override
-        protected boolean emits(Direction face) {
-            return false;
-        }
-    }
-
 }

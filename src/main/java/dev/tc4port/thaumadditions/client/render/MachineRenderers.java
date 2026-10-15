@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 
 import dev.tc4port.thaumadditions.client.model.MachineModels;
 import dev.tc4port.thaumadditions.tiles.TaTiles;
+import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
