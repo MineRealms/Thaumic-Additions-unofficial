@@ -26,6 +26,16 @@ public final class MachineInteractions {
      * @return whether a menu was opened, which is what the event listener cancels the interaction on.
      */
     public static boolean openMachine(Player player, Level level, BlockPos pos) {
+        if (level.isClientSide) {
+            // The seal's globe is a screen rather than a menu: its symbols are already on this
+            // side with the block entity, so there is nothing for the server to send.
+            if (level.getBlockState(pos).getBlock()
+                    instanceof dev.tc4port.thaumadditions.blocks.TaMachineBlocks.SealBlock) {
+                dev.tc4port.thaumadditions.client.gui.SealGlobeScreen.tryOpen(level, pos);
+                return true;
+            }
+            return false;
+        }
         if (!(player instanceof ServerPlayer server)) {
             return false;
         }

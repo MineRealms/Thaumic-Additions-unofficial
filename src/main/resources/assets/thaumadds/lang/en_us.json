@@ -373,5 +373,8 @@
   "seal.thaumadds.portal": "Seal of the Portal: passes items to its partner.",
   "entity.thaumadds.essentia_shot": "Essentia Shot",
   "entity.thaumadds.mithminite_scythe": "Mithminite Scythe",
-  "gui.thaumadds.crystal_bag.empty": "Empty: walk over crystallised essence to fill it"
+  "gui.thaumadds.crystal_bag.empty": "Empty: walk over crystallised essence to fill it",
+  "gui.thaumadds.seal_globe": "Seal Globe",
+  "gui.thaumadds.seal_globe.empty": "(empty)",
+  "gui.thaumadds.seal_globe.unknown": "These symbols do not make a seal."
 }
