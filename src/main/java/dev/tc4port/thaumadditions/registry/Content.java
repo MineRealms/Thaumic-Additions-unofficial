@@ -12,6 +12,7 @@ import dev.tc4port.thaumadditions.blocks.TaMachineBlocks;
 import dev.tc4port.thaumadditions.items.GearItems;
 import dev.tc4port.thaumadditions.items.ToolItems;
 import dev.tc4port.thaumadditions.items.WeaponItems;
+import dev.tc4port.thaumadditions.platform.MachineIcon;
 import dev.tc4port.thaumadditions.platform.TaArmorMaterial;
 import dev.tc4port.thaumadditions.platform.TaArmorSound;
 import dev.tc4port.thaumadditions.platform.TaArmorTick;
@@ -178,6 +179,18 @@ public final class Content {
     public static Supplier<Block> AURA_CHARGER;
     public static Supplier<Block> AURA_DISPERSER;
     public static Supplier<Block> FLUX_CONCENTRATOR;
+
+    /**
+     * The item forms of the five machines above. They are named rather than anonymous because the
+     * NeoForge node attaches their inventory icon from a client event and needs the item to hand
+     * it; on Forge the item carries the hook itself.
+     */
+    public static Supplier<Item> CRYSTAL_BORE_ITEM;
+    public static Supplier<Item> CRYSTAL_CRUSHER_ITEM;
+    public static Supplier<Item> ASPECT_COMBINER_ITEM;
+    public static Supplier<Item> AURA_CHARGER_ITEM;
+    public static Supplier<Item> FLUX_CONCENTRATOR_ITEM;
+
     public static Supplier<Block> ESSENTIA_SINK;
     public static Supplier<Block> ESSENTIA_SINK_AUX;
     public static Supplier<Block> SHADOW_ENCHANTER;
@@ -369,16 +382,26 @@ public final class Content {
         // helper taking the supplier as a parameter would) hands the block a null type.
         CRYSTAL_BORE = trackBlock(blocks.<Block>register("crystal_bore",
                 () -> new TaMachineBlocks.MachineBlock(BORE_BE)));
+        CRYSTAL_BORE_ITEM = track(items.register("crystal_bore",
+                () -> platform.machineItem(CRYSTAL_BORE.get(), MachineIcon.CRYSTAL_BORE)));
         CRYSTAL_CRUSHER = trackBlock(blocks.<Block>register("crystal_crusher",
                 () -> new TaMachineBlocks.MachineBlock(CRUSHER_BE)));
+        CRYSTAL_CRUSHER_ITEM = track(items.register("crystal_crusher",
+                () -> platform.machineItem(CRYSTAL_CRUSHER.get(), MachineIcon.CRYSTAL_CRUSHER)));
         ASPECT_COMBINER = trackBlock(blocks.<Block>register("aspect_combiner",
                 () -> new TaMachineBlocks.MachineBlock(COMBINER_BE)));
+        ASPECT_COMBINER_ITEM = track(items.register("aspect_combiner",
+                () -> platform.machineItem(ASPECT_COMBINER.get(), MachineIcon.ASPECT_COMBINER)));
         AURA_CHARGER = trackBlock(blocks.<Block>register("aura_charger",
                 () -> new TaMachineBlocks.MachineBlock(CHARGER_BE)));
+        AURA_CHARGER_ITEM = track(items.register("aura_charger",
+                () -> platform.machineItem(AURA_CHARGER.get(), MachineIcon.AURA_CHARGER)));
         AURA_DISPERSER = trackBlock(blocks.<Block>register("aura_disperser",
                 () -> new TaMachineBlocks.MachineBlock(DISPERSER_BE)));
         FLUX_CONCENTRATOR = trackBlock(blocks.<Block>register("flux_concentrator",
                 () -> new TaMachineBlocks.MachineBlock(CONCENTRATOR_BE)));
+        FLUX_CONCENTRATOR_ITEM = track(items.register("flux_concentrator",
+                () -> platform.machineItem(FLUX_CONCENTRATOR.get(), MachineIcon.FLUX_CONCENTRATOR)));
         ESSENTIA_SINK = trackBlock(blocks.<Block>register("essentia_sink",
                 () -> new TaMachineBlocks.SinkBlock(SINK_BE)));
         ESSENTIA_SINK_AUX = trackBlock(blocks.<Block>register("essentia_sink_aux",
@@ -457,12 +480,7 @@ public final class Content {
         blockItem(items, "adaminite_smelter", ADAMINITE_SMELTER);
         blockItem(items, "mithminite_smelter", MITHMINITE_SMELTER);
         blockItem(items, "growth_chamber", GROWTH_CHAMBER);
-        blockItem(items, "crystal_bore", CRYSTAL_BORE);
-        blockItem(items, "crystal_crusher", CRYSTAL_CRUSHER);
-        blockItem(items, "aspect_combiner", ASPECT_COMBINER);
-        blockItem(items, "aura_charger", AURA_CHARGER);
         blockItem(items, "aura_disperser", AURA_DISPERSER);
-        blockItem(items, "flux_concentrator", FLUX_CONCENTRATOR);
         blockItem(items, "essentia_sink", ESSENTIA_SINK);
         blockItem(items, "shadow_enchanter", SHADOW_ENCHANTER);
         blockItem(items, "entity_summoner", ENTITY_SUMMONER);

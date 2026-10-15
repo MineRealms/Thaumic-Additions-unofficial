@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/crystal_crusher"
+    },
+    "facing=east": {
+      "model": "thaumadds:block/crystal_crusher",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "thaumadds:block/crystal_crusher",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/crystal_crusher",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "thaumadds:block/crystal_crusher",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "thaumadds:block/crystal_crusher",
+      "x": 90
+    }
+  }
+}

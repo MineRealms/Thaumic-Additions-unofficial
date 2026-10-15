@@ -54,8 +54,16 @@ runtime both source sets load as mods through MDG's `mods {}` block.
 | S2 b1–b4 | 14 material items, 5 storage/decor blocks, void-elemental tools + adaminite / mithminite / blue-wolf armor | done |
 | assets | legacy 1.12 assets normalized to modern resource packs in bulk | done |
 | S3 items | all remaining 1.12 items (aspect items, belts, tomes, entity cell, thaumometer, wormhole mirror, shadow beam staff, essentia pistol) | done |
-| S3 blocks | all remaining blocks + 16 block entity types (jars, smelters, crystal machines, seal, cake, crops) | compile-clean, runtime pending |
-| S3 verify | Rosetta runtime probe sweep on both nodes (registration, models/lang, block place + BE, item behaviour) | pending |
+| S3 blocks | all remaining blocks + 16 block entity types (jars, smelters, crystal machines, seal, cake, crops) | done |
+| S3 verify | runtime probe sweep on the 1.20.1 node: 99 items / 42 blocks / 16 BE types register, every name resolves, every block entity attaches where its type claims the block | done (1.21.1 node pending) |
+| S7a | renderer plumbing + the five machine models (the six blocks that render as missingno) | next |
+| S4 | block entity behaviour and ticking | pending |
+| S5 / S6 | menus and GUIs / networking | pending |
+| S7b / S8 / S9 | remaining client work / entities / seals | pending |
+
+See [`docs/PORT_PLAN.md`](docs/PORT_PLAN.md) for what each of the remaining phases contains and why
+they are ordered that way; [`tools/recon/`](tools/recon) holds the upstream inventories they are
+planned from.
 
 Both nodes currently build clean: `:1.20.1-forge:build` + `:1.21.1-neoforge:build` pass with JUnit.
 

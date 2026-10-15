@@ -234,6 +234,16 @@ public final class TaPlatformNeoForge implements TaPlatform {
         return new NeoPuriflower(properties);
     }
 
+    /**
+     * NeoForge 1.21.1 registers item client extensions from a client event instead of from the
+     * item, so a plain block item is all this node needs; the icon is attached in
+     * {@code ThaumAddsNeoForgeClient}.
+     */
+    @Override
+    public net.minecraft.world.item.Item machineItem(Block block, dev.tc4port.thaumadditions.platform.MachineIcon icon) {
+        return new net.minecraft.world.item.BlockItem(block, new net.minecraft.world.item.Item.Properties());
+    }
+
     /** Concrete 1.21 shape: the shared base is abstract because {@code BushBlock.codec()} is. */
     private static final class NeoPuriflower extends dev.tc4port.thaumadditions.blocks.TaBlocks.PuriflowerBlock {
         private NeoPuriflower(BlockBehaviour.Properties properties) {

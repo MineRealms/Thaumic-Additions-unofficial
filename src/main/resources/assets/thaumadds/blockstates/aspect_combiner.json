@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/aspect_combiner"
+    },
+    "facing=east": {
+      "model": "thaumadds:block/aspect_combiner",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "thaumadds:block/aspect_combiner",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/aspect_combiner",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "thaumadds:block/aspect_combiner",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "thaumadds:block/aspect_combiner",
+      "x": 90
+    }
+  }
+}

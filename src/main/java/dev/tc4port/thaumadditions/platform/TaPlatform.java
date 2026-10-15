@@ -95,6 +95,15 @@ public interface TaPlatform {
     Block crop(BlockBehaviour.Properties properties, int maxAge);
 
     /**
+     * The block item for a machine that draws its own inventory icon.
+     *
+     * <p>Which loader registers the icon differs — NeoForge 1.21.1 through a client extension
+     * event, Forge 1.20.1 through {@code Item#initializeClient} — so the item itself comes from
+     * the node. See {@link MachineIcon}.</p>
+     */
+    net.minecraft.world.item.Item machineItem(Block block, MachineIcon icon);
+
+    /**
      * Creates the puriflower bush. 1.21 made {@code BushBlock.codec()} abstract (a
      * {@code MapCodec}, which does not exist on 1.20.1), so the concrete shape has to
      * come from the node that has the codec API.

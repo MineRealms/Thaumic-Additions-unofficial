@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/flux_concentrator"
+    },
+    "facing=east": {
+      "model": "thaumadds:block/flux_concentrator",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "thaumadds:block/flux_concentrator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/flux_concentrator",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "thaumadds:block/flux_concentrator",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "thaumadds:block/flux_concentrator",
+      "x": 90
+    }
+  }
+}

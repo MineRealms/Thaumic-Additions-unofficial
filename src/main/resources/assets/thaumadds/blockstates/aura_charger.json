@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/aura_charger"
+    },
+    "facing=east": {
+      "model": "thaumadds:block/aura_charger",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "thaumadds:block/aura_charger",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/aura_charger",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "thaumadds:block/aura_charger",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "thaumadds:block/aura_charger",
+      "x": 90
+    }
+  }
+}

@@ -210,6 +210,38 @@ public final class TaPlatformForge implements TaPlatform {
         };
     }
 
+    /**
+     * Forge 1.20.1 has no client extension event, so the item carries its own icon hook:
+     * {@code Item#initializeClient} is only ever called on the client, and the renderer it names
+     * comes from the client-only {@code MachineItemRenderer}.
+     */
+    @Override
+    public net.minecraft.world.item.Item machineItem(Block block, dev.tc4port.thaumadditions.platform.MachineIcon icon) {
+        return new net.minecraft.world.item.BlockItem(block, new net.minecraft.world.item.Item.Properties()) {
+            @Override
+            public void initializeClient(java.util.function.Consumer<
+                    net.minecraftforge.client.extensions.common.IClientItemExtensions> consumer) {
+                consumer.accept(new net.minecraftforge.client.extensions.common.IClientItemExtensions() {
+                    @Override
+                    public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return switch (icon) {
+                            case CRYSTAL_BORE ->
+                                    dev.tc4port.thaumadditions.client.render.MachineItemRenderer.bore();
+                            case ASPECT_COMBINER ->
+                                    dev.tc4port.thaumadditions.client.render.MachineItemRenderer.combiner();
+                            case AURA_CHARGER ->
+                                    dev.tc4port.thaumadditions.client.render.MachineItemRenderer.charger();
+                            case CRYSTAL_CRUSHER ->
+                                    dev.tc4port.thaumadditions.client.render.MachineItemRenderer.crusher();
+                            case FLUX_CONCENTRATOR ->
+                                    dev.tc4port.thaumadditions.client.render.MachineItemRenderer.concentrator();
+                        };
+                    }
+                });
+            }
+        };
+    }
+
     @Override
     public Block puriflower(BlockBehaviour.Properties properties) {
         return new dev.tc4port.thaumadditions.blocks.TaBlocks.PuriflowerBlock(properties) {
