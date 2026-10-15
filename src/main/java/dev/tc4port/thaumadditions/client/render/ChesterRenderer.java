@@ -62,6 +62,14 @@ public class ChesterRenderer extends EntityRenderer<Chester> {
         return TEXTURE;
     }
 
+    /** Whether the local player is looking inside this particular chest. */
+    private static boolean lidIsOpenFor(Chester chester) {
+        var player = net.minecraft.client.Minecraft.getInstance().player;
+        return player != null
+                && player.containerMenu instanceof dev.tc4port.thaumadditions.gui.ChesterMenu menu
+                && menu.entityId() == chester.getId();
+    }
+
     @Override
     public void render(Chester chester, float yaw, float partialTick, PoseStack pose,
                        MultiBufferSource buffers, int light) {
@@ -72,9 +80,10 @@ public class ChesterRenderer extends EntityRenderer<Chester> {
         pose.translate(-0.5D, 0.0D, -0.5D);
         pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-yaw));
         var consumer = buffers.getBuffer(RenderType.entityCutout(TEXTURE));
-        // The lid swings up about the back edge, which is where its pivot already is.
-        pose.pushPose();
-        pose.translate(0.0F, 0.0F, 0.0F);
+        // The lid swings up while someone has this chest open. The client knows that from its own
+        // open menu, which is where the state really lives: the server sets a flag the client
+        // never sees.
+        chester.setOpen(lidIsOpenFor(chester));
         lid.xRot = -chester.lidAngle(partialTick) * 1.4F;
         lid.render(pose, consumer, light, net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY);
         pose.popPose();

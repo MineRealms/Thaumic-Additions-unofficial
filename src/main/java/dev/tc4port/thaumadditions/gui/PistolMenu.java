@@ -50,12 +50,25 @@ public class PistolMenu extends AbstractContainerMenu {
         this.owner = inventory.player;
 
         Container feed = new SimpleContainer(1) {
+            /** Guards the empty-out below: emptying is itself a change. */
+            private boolean loading;
+
             @Override
             public void setChanged() {
-                super.setChanged();
+                if (loading) {
+                    super.setChanged();
+                    return;
+                }
                 // Anything dropped in is loaded immediately and the slot empties again.
-                load(getItem(0));
-                setItem(0, ItemStack.EMPTY);
+                ItemStack placed = getItem(0);
+                super.setChanged();
+                if (placed.isEmpty()) {
+                    return;
+                }
+                loading = true;
+                load(placed);
+                super.setItem(0, ItemStack.EMPTY);
+                loading = false;
             }
         };
         addSlot(new Slot(feed, 0, 80, 30) {
