@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "thaumadds:item/vis_seeds_0",
+    "layer1": "thaumadds:item/vis_seeds_1"
+  }
+}

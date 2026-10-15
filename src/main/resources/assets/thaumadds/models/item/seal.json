@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "thaumadds:block/seal_base",
+    "layer1": "thaumadds:block/seal_inner"
+  }
+}

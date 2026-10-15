@@ -1,0 +1,11 @@
+{
+  "parent": "thaumadds:block/orientable",
+  "textures": {
+    "top": "thaumcraft:block/smelter_top",
+    "front": "thaumadds:block/smelter_mithminite/front",
+    "side": "thaumadds:block/smelter_mithminite/side",
+    "down": "thaumadds:block/mithminite_block",
+    "crystal_water_still": "thaumadds:block/crystal_water_still",
+    "crystal_water_flow": "thaumadds:block/crystal_water_flow"
+  }
+}

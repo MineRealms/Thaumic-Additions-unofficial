@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/taintkin"
+    },
+    "facing=south": {
+      "model": "thaumadds:block/taintkin",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/taintkin",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "thaumadds:block/taintkin",
+      "y": 90
+    }
+  }
+}

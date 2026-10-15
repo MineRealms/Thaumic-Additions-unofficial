@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/essentia_sink"
+    },
+    "facing=south": {
+      "model": "thaumadds:block/essentia_sink",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/essentia_sink",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "thaumadds:block/essentia_sink",
+      "y": 90
+    }
+  }
+}

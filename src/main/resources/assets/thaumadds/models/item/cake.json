@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "thaumadds:item/cake",
+    "layer1": "thaumadds:item/cake_overlay"
+  }
+}

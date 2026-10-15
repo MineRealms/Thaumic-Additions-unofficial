@@ -1,0 +1,78 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "thaumadds:block/twilight_totem"
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 90
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 180
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 270
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "y": 90
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "y": 180
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "y": 270
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 270,
+        "y": 90
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 90,
+        "y": 180
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 270,
+        "y": 180
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 90,
+        "y": 270
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "thaumadds:block/twilight_totem",
+        "x": 270,
+        "y": 270
+      }
+    ]
+  }
+}

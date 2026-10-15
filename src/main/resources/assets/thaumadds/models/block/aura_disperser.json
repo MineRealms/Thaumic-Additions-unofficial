@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:block/cube",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        135,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  },
+  "textures": {
+    "particle": "thaumadds:block/aura_disperser/up",
+    "down": "thaumadds:block/aura_disperser/down",
+    "up": "thaumadds:block/aura_disperser/up",
+    "north": "thaumadds:block/aura_disperser/side",
+    "east": "thaumadds:block/aura_disperser/side",
+    "south": "thaumadds:block/aura_disperser/side",
+    "west": "thaumadds:block/aura_disperser/side"
+  }
+}

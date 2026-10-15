@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "thaumadds:block/aura_disperser"
+    },
+    "facing=down": {
+      "model": "thaumadds:block/aura_disperser",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "thaumadds:block/aura_disperser",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "thaumadds:block/aura_disperser",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/aura_disperser",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "thaumadds:block/aura_disperser",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

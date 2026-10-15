@@ -1,0 +1,44 @@
+{
+  "textures": {
+    "particle": "thaumadds:block/cake_side",
+    "bottom": "thaumadds:block/cake_bottom",
+    "top": "thaumadds:block/cake_top",
+    "side": "thaumadds:block/cake_side",
+    "inside": "thaumadds:block/cake_inner"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        8,
+        15
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#inside"
+        },
+        "east": {
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

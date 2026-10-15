@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/growth_chamber"
+    },
+    "facing=south": {
+      "model": "thaumadds:block/growth_chamber",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/growth_chamber",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "thaumadds:block/growth_chamber",
+      "y": 90
+    }
+  }
+}

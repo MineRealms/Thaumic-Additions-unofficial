@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "east": "thaumadds:block/totems/dawn/0",
+    "west": "thaumadds:block/totems/dawn/1",
+    "south": "thaumadds:block/totems/dawn/2",
+    "north": "thaumadds:block/totems/dawn/3",
+    "up": "thaumadds:block/totems/dawn/4",
+    "down": "thaumadds:block/totems/dawn/5",
+    "particle": "thaumadds:block/totems/dawn/0"
+  }
+}

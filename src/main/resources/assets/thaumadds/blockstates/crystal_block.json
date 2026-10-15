@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "thaumadds:block/crystal_block"
+    },
+    "facing=down": {
+      "model": "thaumadds:block/crystal_block",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "thaumadds:block/crystal_block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "thaumadds:block/crystal_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/crystal_block",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "thaumadds:block/crystal_block",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumadds:block/void_anvil"
+    },
+    "facing=south": {
+      "model": "thaumadds:block/void_anvil",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumadds:block/void_anvil",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "thaumadds:block/void_anvil",
+      "y": 90
+    }
+  }
+}
