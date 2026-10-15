@@ -7,11 +7,20 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import dev.tc4port.thaumadditions.armor.MithminiteArmorBehavior;
+import dev.tc4port.thaumadditions.blocks.TaBlocks;
+import dev.tc4port.thaumadditions.blocks.TaMachineBlocks;
+import dev.tc4port.thaumadditions.items.GearItems;
+import dev.tc4port.thaumadditions.items.ToolItems;
+import dev.tc4port.thaumadditions.items.WeaponItems;
 import dev.tc4port.thaumadditions.platform.TaArmorMaterial;
 import dev.tc4port.thaumadditions.platform.TaArmorSound;
 import dev.tc4port.thaumadditions.platform.TaArmorTick;
 import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.ToolKind;
+import dev.tc4port.thaumadditions.tiles.TileCrystal;
+import dev.tc4port.thaumadditions.tiles.TileJar;
+import dev.tc4port.thaumadditions.tiles.TileSeal;
+import dev.tc4port.thaumadditions.tiles.TaTiles;
 import dev.tc4port.thaumcraft.api.ThaumcraftTags;
 import dev.tc4port.thaumcraft.api.item.ArmorTextureApi;
 import net.minecraft.core.registries.Registries;
@@ -24,23 +33,25 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
 /**
  * The mod's content declarations. Node adapters call
- * {@link #init(Registrar, Registrar, TaPlatform)} from their mod constructor,
- * before registry events fire. Registration order here is the order entries
- * land in the creative tab.
+ * {@link #init(Registrar, Registrar, Registrar, TaPlatform)} from their mod
+ * constructor, before registry events fire. Registration order here is the order
+ * entries land in the creative tab.
  *
- * <p>Ids match the 1.12 {@code setTranslationKey} names so the original lang
- * keys and assets stay 1:1 with upstream. Items that carry behaviour in 1.12
- * (flight device, seal globe, resonator, phantom ink phial) are intentionally
- * absent until their behaviour stage — registering them as inert items would
- * ship dead content.</p>
+ * <p>Ids match the 1.12 {@code setTranslationKey} names so the original lang keys
+ * and assets stay 1:1 with upstream — the bulk-normalized assets in
+ * {@code assets/thaumadds} were produced by {@code tools/legacy_assets.py} from
+ * the 1.12 tree, so a blockstate file already exists for every block declared
+ * here (and its property names are the ones declared below).</p>
  *
- * <p>Everything whose vanilla API drifted between 1.20.1 and 1.21.1 (tool
- * tiers, armor materials, tool/armor construction) goes through
- * {@link TaPlatform}; the declarations below stay version-agnostic.</p>
+ * <p>Everything whose vanilla API drifted between 1.20.1 and 1.21.1 (tool tiers,
+ * armor materials, tool/armor construction) goes through {@link TaPlatform}; the
+ * declarations below stay version-agnostic.</p>
  */
 public final class Content {
     /** Ordered view of every registered item, for creative-tab population. */
@@ -70,21 +81,48 @@ public final class Content {
     public static Supplier<Item> MITHMINITE_HANDLE;
     public static Supplier<Item> ODOUR_POWDER;
 
-    // --- plain blocks (1.12 BlocksTAR: BlockTARStorage family) ---
-    public static Supplier<Block> MITHRILLIUM_BLOCK;
-    public static Supplier<Block> ADAMINITE_BLOCK;
-    public static Supplier<Block> MITHMINITE_BLOCK;
-    public static Supplier<Block> TAINTWOOD_PLANKS;
-    public static Supplier<Block> CHISELED_AMBER_BLOCK;
+    // --- essentia materials ---
+    public static Supplier<Item> SALT_ESSENCE;
+    public static Supplier<Item> VIS_POD;
+    public static Supplier<Item> SEAL_SYMBOL;
+    public static Supplier<Item> VIS_SEEDS;
+    public static Supplier<Item> VOID_SEED;
+    public static Supplier<Item> VOID_FRUIT;
+
+    // --- plain materials and self-contained tools ---
+    public static Supplier<Item> MITHRILLIUM_RESONATOR;
+    public static Supplier<Item> LEVITATION_DEVICE;
+    public static Supplier<Item> BONE_EYE;
+    public static Supplier<Item> PHANTOM_INK_PHIAL;
+    public static Supplier<Item> KNOWLEDGE_TOME;
+    public static Supplier<Item> CRYSTAL_BAG;
+    public static Supplier<Item> DISENCHANT_FABRIC;
+    public static Supplier<Item> ENTITY_CELL;
+    public static Supplier<Item> CHESTER;
+    public static Supplier<Item> SEAL_GLOBE;
 
     // --- tools (1.12 ItemsTAR "TOOLS": void elemental family) ---
     public static Supplier<Item> VOID_ELEMENTAL_PICKAXE;
     public static Supplier<Item> VOID_ELEMENTAL_AXE;
     public static Supplier<Item> VOID_ELEMENTAL_SHOVEL;
     public static Supplier<Item> VOID_ELEMENTAL_HOE;
+    public static Supplier<Item> VIS_SCRIBING_TOOLS;
+    public static Supplier<Item> VOID_THAUMOMETER;
+    public static Supplier<Item> WORMHOLE_MIRROR;
 
     // --- weapons (1.12 ItemsTAR "WEAPONS") ---
     public static Supplier<Item> ADAMINITE_SWORD;
+    public static Supplier<Item> THE_BEHEADER;
+    public static Supplier<Item> MITHMINITE_SCYTHE;
+    public static Supplier<Item> SHADOW_BEAM_STAFF;
+    public static Supplier<Item> ESSENTIA_PISTOL;
+
+    // --- baubles (held in this port: Curios is runtime-only) ---
+    public static Supplier<Item> TRAVELLER_BELT;
+    public static Supplier<Item> STRIDING_BELT;
+    public static Supplier<Item> METEOR_BELT;
+    public static Supplier<Item> FRAGNANT_PENDANT;
+    public static Supplier<Item> RECHARGE_CHARM;
 
     // --- armor (1.12 ItemsTAR "ARMOR") ---
     public static Supplier<Item> ADAMINITE_HOOD;
@@ -102,10 +140,92 @@ public final class Content {
     public static Supplier<Item> BLUE_WOLF_LEGS;
     public static Supplier<Item> BLUE_WOLF_FEETPAWS;
 
+    // --- blocks (1.12 BlocksTAR) ---
+    public static Supplier<Block> MITHRILLIUM_BLOCK;
+    public static Supplier<Block> ADAMINITE_BLOCK;
+    public static Supplier<Block> MITHMINITE_BLOCK;
+    public static Supplier<Block> TAINTWOOD_PLANKS;
+    public static Supplier<Block> CHISELED_AMBER_BLOCK;
+    public static Supplier<Block> CHISELED_GREATWOOD;
+    public static Supplier<Block> IRON_FRAMED_GREATWOOD;
+    public static Supplier<Block> BRASS_PLATED_SILVERWOOD;
+    public static Supplier<Block> AMBER_LAMP;
+    public static Supplier<Block> PURIFLOWER;
+    public static Supplier<Block> VOID_CROP;
+    public static Supplier<Block> VIS_CROP;
+    public static Supplier<Block> CAKE;
+    public static Supplier<Block> DAWN_TOTEM;
+    public static Supplier<Block> TWILIGHT_TOTEM;
+    public static Supplier<Block> TAINTKIN;
+    public static Supplier<Block> TAINTKIN_LIT;
+    public static Supplier<Block> VOID_ANVIL;
+    public static Supplier<Block> THAUMIC_LECTERN;
+
+    public static Supplier<Block> JAR_BRASS;
+    public static Supplier<Block> JAR_THAUMIUM;
+    public static Supplier<Block> JAR_ELDRITCH;
+    public static Supplier<Block> JAR_MITHRILLIUM;
+    public static Supplier<Block> JAR_ADAMINITE;
+    public static Supplier<Block> JAR_MITHMINITE;
+
+    public static Supplier<Block> MITHRILLIUM_SMELTER;
+    public static Supplier<Block> ADAMINITE_SMELTER;
+    public static Supplier<Block> MITHMINITE_SMELTER;
+    public static Supplier<Block> GROWTH_CHAMBER;
+    public static Supplier<Block> CRYSTAL_BORE;
+    public static Supplier<Block> CRYSTAL_CRUSHER;
+    public static Supplier<Block> ASPECT_COMBINER;
+    public static Supplier<Block> AURA_CHARGER;
+    public static Supplier<Block> AURA_DISPERSER;
+    public static Supplier<Block> FLUX_CONCENTRATOR;
+    public static Supplier<Block> ESSENTIA_SINK;
+    public static Supplier<Block> ESSENTIA_SINK_AUX;
+    public static Supplier<Block> SHADOW_ENCHANTER;
+    public static Supplier<Block> ENTITY_SUMMONER;
+    public static Supplier<Block> SEAL;
+    public static Supplier<Block> CRYSTAL_BLOCK;
+    public static Supplier<Block> CRYSTAL_LAMP;
+
+    /** The sixteen block entity types. */
+    public static Supplier<BlockEntityType<TileJar>> JAR_BE;
+    public static Supplier<BlockEntityType<TaTiles.Smelter>> SMELTER_BE;
+    public static Supplier<BlockEntityType<TileCrystal>> CRYSTAL_BE;
+    public static Supplier<BlockEntityType<TileCrystal>> CRYSTAL_LAMP_BE;
+    public static Supplier<BlockEntityType<TileCrystal.Cake>> CAKE_BE;
+    public static Supplier<BlockEntityType<TileSeal>> SEAL_BE;
+    public static Supplier<BlockEntityType<TaTiles.Sink>> SINK_BE;
+    public static Supplier<BlockEntityType<TaTiles.Summoner>> SUMMONER_BE;
+    public static Supplier<BlockEntityType<TaTiles.Enchanter>> ENCHANTER_BE;
+    public static Supplier<BlockEntityType<TaTiles.GrowthChamber>> GROWTH_BE;
+    public static Supplier<BlockEntityType<TaTiles.Combiner>> COMBINER_BE;
+    public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
+    public static Supplier<BlockEntityType<TaTiles.Disperser>> DISPERSER_BE;
+    public static Supplier<BlockEntityType<TaTiles.Bore>> BORE_BE;
+    public static Supplier<BlockEntityType<TaTiles.Crusher>> CRUSHER_BE;
+    public static Supplier<BlockEntityType<TaTiles.Concentrator>> CONCENTRATOR_BE;
+
     private Content() {
     }
 
-    public static void init(Registrar items, Registrar blocks, TaPlatform platform) {
+    public static void init(Registrar items, Registrar blocks, Registrar blockEntities, TaPlatform platform) {
+        materials(items);
+        essentiaMaterials(items, platform);
+        plainItems(items, platform);
+        tools(items, platform);
+        weapons(items, platform);
+        baubles(items, platform);
+        armor(items, platform);
+
+        plainBlocks(items, blocks, platform);
+        machines(items, blocks, platform);
+        blockEntities(blockEntities);
+        blockItems(items);
+        crops(items);
+    }
+
+    // ------------------------------------------------------------------ items
+
+    private static void materials(Registrar items) {
         BLUE_BONE = track(items.register("blue_bone", Content::simple));
         ZEITH_FUR = track(items.register("zeith_fur", Content::simple));
 
@@ -123,29 +243,28 @@ public final class Content {
         MITHMINITE_BLADE = track(items.register("mithminite_blade", Content::simple));
         MITHMINITE_HANDLE = track(items.register("mithminite_handle", Content::simple));
         ODOUR_POWDER = track(items.register("odour_powder", Content::simple));
-
-        // 1.12 BlockTARStorage(metal): hardness 3, metal sound, harvest level 3 (diamond pickaxe).
-        MITHRILLIUM_BLOCK = block(items, blocks, "mithrillium_block", metalStorage());
-        ADAMINITE_BLOCK = block(items, blocks, "adaminite_block", metalStorage());
-        MITHMINITE_BLOCK = block(items, blocks, "mithminite_block", metalStorage());
-        // BlockTARStorage(Material.WOOD, WOOD, 1F, "axe", 0) and (Material.ROCK, STONE, 1F, "pickaxe", 0).
-        TAINTWOOD_PLANKS = block(items, blocks, "taintwood_planks",
-                Block.Properties.of().mapColor(MapColor.WOOD).strength(1.0F).sound(SoundType.WOOD));
-        CHISELED_AMBER_BLOCK = block(items, blocks, "chiseled_amber_block",
-                Block.Properties.of().mapColor(MapColor.STONE).strength(1.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
-
-        tools(items, platform);
-        armor(items, platform);
     }
 
-    /**
-     * 1.12 {@code ItemVoidElementalHoe.TOOLMAT_VOID_ELEMENTAL}:
-     * harvest 3, 1500 uses, speed 9, +3 damage, enchantability 18, repaired with thaumium.
-     *
-     * <p>The four tools were TC6 elemental tools that drained ambient aura to repair themselves.
-     * TC4R dropped the aura pool and repairs its own void tools on a timer, so the port follows
-     * that rule (see {@link dev.tc4port.thaumadditions.platform.TaGearBehavior}).</p>
-     */
+    private static void essentiaMaterials(Registrar items, TaPlatform platform) {
+        SALT_ESSENCE = track(items.register("salt_essence", () -> GearItems.saltEssence(platform)));
+        VIS_POD = track(items.register("vis_pod", () -> GearItems.visPod(platform)));
+        SEAL_SYMBOL = track(items.register("seal_symbol", () -> GearItems.sealSymbol(platform)));
+        VOID_FRUIT = track(items.register("void_fruit", () -> ToolItems.voidFruit(platform)));
+    }
+
+    private static void plainItems(Registrar items, TaPlatform platform) {
+        MITHRILLIUM_RESONATOR = track(items.register("mithrillium_resonator", ToolItems::plain));
+        LEVITATION_DEVICE = track(items.register("levitation_device", ToolItems::plain));
+        BONE_EYE = track(items.register("bone_eye", ToolItems::plain));
+        PHANTOM_INK_PHIAL = track(items.register("phantom_ink_phial", ToolItems::plain));
+        KNOWLEDGE_TOME = track(items.register("knowledge_tome", () -> ToolItems.knowledgeTome(platform)));
+        CRYSTAL_BAG = track(items.register("crystal_bag", () -> ToolItems.crystalBag(platform)));
+        DISENCHANT_FABRIC = track(items.register("disenchant_fabric", GearItems::disenchantFabric));
+        ENTITY_CELL = track(items.register("entity_cell", () -> ToolItems.entityCell(platform)));
+        CHESTER = track(items.register("chester", () -> ToolItems.chester(platform)));
+        SEAL_GLOBE = track(items.register("seal_globe", () -> ToolItems.sealGlobe(platform)));
+    }
+
     private static void tools(Registrar items, TaPlatform platform) {
         Tier voidElemental = platform.toolTier(3, 1500, 9.0F, 3.0F, 18, INCORRECT_FOR_DIAMOND_TOOL,
                 Content::thaumiumRepair);
@@ -159,13 +278,228 @@ public final class Content {
         VOID_ELEMENTAL_HOE = track(items.register("void_elemental_hoe",
                 () -> platform.tool(ToolKind.HOE, voidElemental, 0.0F, -3.0F, new Item.Properties())));
 
+        VIS_SCRIBING_TOOLS = track(items.register("vis_scribing_tools", GearItems::visScribingTools));
+        VOID_THAUMOMETER = track(items.register("void_thaumometer", ToolItems::voidThaumometer));
+        WORMHOLE_MIRROR = track(items.register("wormhole_mirror", ToolItems::wormholeMirror));
+    }
+
+    private static void weapons(Registrar items, TaPlatform platform) {
         // 1.12 ItemAdaminiteSword: material (harvest 0, 0 uses, speed 5, +12 damage, enchant 60).
         // maxUses 0 makes the 1.12 item unbreakable; that survives as a 0-durability tier.
         Tier adaminiteSword = platform.toolTier(0, 0, 5.0F, 12.0F, 60, INCORRECT_FOR_DIAMOND_TOOL,
                 Content::thaumiumRepair);
         ADAMINITE_SWORD = track(items.register("adaminite_sword",
                 () -> platform.tool(ToolKind.SWORD, adaminiteSword, 3.0F, -2.4F, new Item.Properties())));
+
+        // 1.12 ItemMithminiteScythe: harvest 3, 4096 uses, +12 damage, enchant 25, thaumium repair.
+        Tier mithminiteWeapon = platform.toolTier(3, 4096, 12.0F, 12.0F, 25, INCORRECT_FOR_DIAMOND_TOOL,
+                Content::thaumiumRepair);
+        THE_BEHEADER = track(items.register("the_beheader",
+                () -> WeaponItems.theBeheader(platform, mithminiteWeapon)));
+        MITHMINITE_SCYTHE = track(items.register("mithminite_scythe",
+                () -> WeaponItems.mithminiteScythe(platform, mithminiteWeapon)));
+        SHADOW_BEAM_STAFF = track(items.register("shadow_beam_staff", () -> WeaponItems.shadowBeamStaff(platform)));
+        ESSENTIA_PISTOL = track(items.register("essentia_pistol", () -> WeaponItems.essentiaPistol(platform)));
     }
+
+    private static void baubles(Registrar items, TaPlatform platform) {
+        TRAVELLER_BELT = track(items.register("traveller_belt", () -> GearItems.travellerBelt(platform)));
+        STRIDING_BELT = track(items.register("striding_belt", () -> GearItems.stridingBelt(platform)));
+        METEOR_BELT = track(items.register("meteor_belt", () -> GearItems.meteorBelt(platform)));
+        FRAGNANT_PENDANT = track(items.register("fragnant_pendant",
+                () -> GearItems.fragnantPendant(platform, ODOUR_POWDER.get())));
+        RECHARGE_CHARM = track(items.register("recharge_charm", GearItems::rechargeCharm));
+    }
+
+    // ------------------------------------------------------------------ blocks
+
+    private static void plainBlocks(Registrar items, Registrar blocks, TaPlatform platform) {
+        // 1.12 BlockTARStorage(metal): hardness 3, metal sound, harvest level 3 (diamond pickaxe).
+        MITHRILLIUM_BLOCK = block(items, blocks, "mithrillium_block", metalStorage());
+        ADAMINITE_BLOCK = block(items, blocks, "adaminite_block", metalStorage());
+        MITHMINITE_BLOCK = block(items, blocks, "mithminite_block", metalStorage());
+        // BlockTARStorage(Material.WOOD, WOOD, 1F, "axe", 0) and (Material.ROCK, STONE, 1F, "pickaxe", 0).
+        TAINTWOOD_PLANKS = block(items, blocks, "taintwood_planks",
+                wood(1.0F, false));
+        CHISELED_AMBER_BLOCK = block(items, blocks, "chiseled_amber_block",
+                stone(1.0F));
+        CHISELED_GREATWOOD = block(items, blocks, "chiseled_greatwood", wood(2.0F, false));
+        IRON_FRAMED_GREATWOOD = block(items, blocks, "iron_framed_greatwood", wood(2.0F, false));
+        BRASS_PLATED_SILVERWOOD = block(items, blocks, "brass_plated_silverwood", wood(2.0F, false));
+        // Amber lamp has no switch in 1.12: it is simply always lit.
+        AMBER_LAMP = block(items, blocks, "amber_lamp",
+                BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F).sound(SoundType.METAL)
+                        .lightLevel(state -> 12).requiresCorrectToolForDrops());
+        PURIFLOWER = block(items, blocks, "puriflower", () -> platform.puriflower(
+                BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).sound(SoundType.GRASS)
+                        .lightLevel(state -> 8).noCollission()));
+        DAWN_TOTEM = block(items, blocks, "dawn_totem", wood(1.5F, false));
+        TWILIGHT_TOTEM = block(items, blocks, "twilight_totem", wood(1.5F, false));
+        TAINTKIN = block(items, blocks, "taintkin",
+                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.WOOD));
+        TAINTKIN_LIT = block(items, blocks, "taintkin_lit",
+                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.WOOD)
+                        .lightLevel(state -> 9));
+        VOID_ANVIL = block(items, blocks, "void_anvil",
+                BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2.0F).sound(SoundType.ANVIL)
+                        .requiresCorrectToolForDrops());
+        THAUMIC_LECTERN = block(items, blocks, "thaumic_lectern",
+                BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD)
+                        .noOcclusion());
+    }
+
+    /** Every block that carries a block entity, wired to its type supplier. */
+    private static void machines(Registrar items, Registrar blocks, TaPlatform platform) {
+        JAR_BRASS = jar(blocks, "jar_brass", 275);
+        JAR_THAUMIUM = jar(blocks, "jar_thaumium", 350);
+        JAR_ELDRITCH = jar(blocks, "jar_eldritch", 500);
+        JAR_MITHRILLIUM = jar(blocks, "jar_mithrillium", 1000);
+        JAR_ADAMINITE = jar(blocks, "jar_adaminite", 2000);
+        JAR_MITHMINITE = jar(blocks, "jar_mithminite", 4000);
+
+        // 1.12 BlockAbstractSmelter(efficiency, speed, capacity) per variant.
+        MITHRILLIUM_SMELTER = smelter(blocks, "mithrillium_smelter", 1.0F, 20, 1000);
+        ADAMINITE_SMELTER = smelter(blocks, "adaminite_smelter", 1.2F, 15, 2000);
+        MITHMINITE_SMELTER = smelter(blocks, "mithminite_smelter", 1.5F, 10, 4000);
+
+        GROWTH_CHAMBER = trackBlock(blocks.<Block>register("growth_chamber",
+                () -> new TaMachineBlocks.GrowthChamberBlock(GROWTH_BE)));
+        CRYSTAL_BORE = machine(blocks, "crystal_bore", BORE_BE);
+        CRYSTAL_CRUSHER = machine(blocks, "crystal_crusher", CRUSHER_BE);
+        ASPECT_COMBINER = machine(blocks, "aspect_combiner", COMBINER_BE);
+        AURA_CHARGER = machine(blocks, "aura_charger", CHARGER_BE);
+        AURA_DISPERSER = machine(blocks, "aura_disperser", DISPERSER_BE);
+        FLUX_CONCENTRATOR = machine(blocks, "flux_concentrator", CONCENTRATOR_BE);
+        ESSENTIA_SINK = trackBlock(blocks.<Block>register("essentia_sink",
+                () -> new TaMachineBlocks.SinkBlock(SINK_BE)));
+        ESSENTIA_SINK_AUX = trackBlock(blocks.<Block>register("essentia_sink_aux",
+                TaMachineBlocks.SinkAuxBlock::new));
+        SHADOW_ENCHANTER = trackBlock(blocks.<Block>register("shadow_enchanter",
+                () -> new TaMachineBlocks.EnchanterBlock(ENCHANTER_BE)));
+        ENTITY_SUMMONER = trackBlock(blocks.<Block>register("entity_summoner",
+                () -> new TaMachineBlocks.SummonerBlock(SUMMONER_BE)));
+        SEAL = trackBlock(blocks.<Block>register("seal", () -> new TaMachineBlocks.SealBlock(SEAL_BE)));
+        CRYSTAL_LAMP = trackBlock(blocks.<Block>register("crystal_lamp",
+                () -> new TaMachineBlocks.CrystalLampBlock(CRYSTAL_LAMP_BE)));
+        CRYSTAL_BLOCK = trackBlock(blocks.<Block>register("crystal_block",
+                () -> new TaMachineBlocks.CrystalBlock(CRYSTAL_BE)));
+
+        // The crops keep their own block classes because the age bound differs.
+        VOID_CROP = trackBlock(blocks.<Block>register("void_crop", () -> platform.crop(crop(0.0F), 3)));
+        VIS_CROP = trackBlock(blocks.<Block>register("vis_crop", () -> platform.crop(crop(0.0F), 4)));
+        CAKE = trackBlock(blocks.<Block>register("cake",
+                () -> new TaBlocks.ArcaneCakeBlock(cake(), CAKE_BE)));
+    }
+
+    /**
+     * The sixteen block entity types. One type covers all six jars and one covers all
+     * three smelters, because 1.12 varied them only through the block's own fields.
+     */
+    private static void blockEntities(Registrar registrar) {
+        JAR_BE = registrar.register("jar", () -> BlockEntityType.Builder.<TileJar>of(
+                (pos, state) -> new TileJar(JAR_BE.get(), pos, state), JAR_BRASS.get(), JAR_THAUMIUM.get(), JAR_ELDRITCH.get(),
+                JAR_MITHRILLIUM.get(), JAR_ADAMINITE.get(), JAR_MITHMINITE.get()).build(null));
+        SMELTER_BE = registrar.register("smelter", () -> BlockEntityType.Builder.<TaTiles.Smelter>of(
+                (pos, state) -> new TaTiles.Smelter(SMELTER_BE.get(), pos, state), MITHRILLIUM_SMELTER.get(), ADAMINITE_SMELTER.get(),
+                MITHMINITE_SMELTER.get()).build(null));
+        CRYSTAL_BE = registrar.register("crystal_block", () -> BlockEntityType.Builder.<TileCrystal>of(
+                (pos, state) -> new TileCrystal(CRYSTAL_BE.get(), pos, state), CRYSTAL_BLOCK.get()).build(null));
+        CRYSTAL_LAMP_BE = registrar.register("crystal_lamp", () -> BlockEntityType.Builder.<TileCrystal>of(
+                (pos, state) -> new TileCrystal(CRYSTAL_LAMP_BE.get(), pos, state), CRYSTAL_LAMP.get()).build(null));
+        CAKE_BE = registrar.register("cake", () -> BlockEntityType.Builder.<TileCrystal.Cake>of(
+                (pos, state) -> new TileCrystal.Cake(CAKE_BE.get(), pos, state), CAKE.get()).build(null));
+        SEAL_BE = registrar.register("seal", () -> BlockEntityType.Builder.<TileSeal>of(
+                (pos, state) -> new TileSeal(SEAL_BE.get(), pos, state), SEAL.get()).build(null));
+        SINK_BE = registrar.register("essentia_sink", () -> BlockEntityType.Builder.<TaTiles.Sink>of(
+                (pos, state) -> new TaTiles.Sink(SINK_BE.get(), pos, state), ESSENTIA_SINK.get()).build(null));
+        SUMMONER_BE = registrar.register("entity_summoner", () -> BlockEntityType.Builder.<TaTiles.Summoner>of(
+                (pos, state) -> new TaTiles.Summoner(SUMMONER_BE.get(), pos, state), ENTITY_SUMMONER.get()).build(null));
+        ENCHANTER_BE = registrar.register("shadow_enchanter", () -> BlockEntityType.Builder.<TaTiles.Enchanter>of(
+                (pos, state) -> new TaTiles.Enchanter(ENCHANTER_BE.get(), pos, state), SHADOW_ENCHANTER.get()).build(null));
+        GROWTH_BE = registrar.register("growth_chamber", () -> BlockEntityType.Builder.<TaTiles.GrowthChamber>of(
+                (pos, state) -> new TaTiles.GrowthChamber(GROWTH_BE.get(), pos, state), GROWTH_CHAMBER.get()).build(null));
+        COMBINER_BE = registrar.register("aspect_combiner", () -> BlockEntityType.Builder.<TaTiles.Combiner>of(
+                (pos, state) -> new TaTiles.Combiner(COMBINER_BE.get(), pos, state), ASPECT_COMBINER.get()).build(null));
+        CHARGER_BE = registrar.register("aura_charger", () -> BlockEntityType.Builder.<TaTiles.Charger>of(
+                (pos, state) -> new TaTiles.Charger(CHARGER_BE.get(), pos, state), AURA_CHARGER.get()).build(null));
+        DISPERSER_BE = registrar.register("aura_disperser", () -> BlockEntityType.Builder.<TaTiles.Disperser>of(
+                (pos, state) -> new TaTiles.Disperser(DISPERSER_BE.get(), pos, state), AURA_DISPERSER.get()).build(null));
+        BORE_BE = registrar.register("crystal_bore", () -> BlockEntityType.Builder.<TaTiles.Bore>of(
+                (pos, state) -> new TaTiles.Bore(BORE_BE.get(), pos, state), CRYSTAL_BORE.get()).build(null));
+        CRUSHER_BE = registrar.register("crystal_crusher", () -> BlockEntityType.Builder.<TaTiles.Crusher>of(
+                (pos, state) -> new TaTiles.Crusher(CRUSHER_BE.get(), pos, state), CRYSTAL_CRUSHER.get()).build(null));
+        CONCENTRATOR_BE = registrar.register("flux_concentrator", () -> BlockEntityType.Builder.<TaTiles.Concentrator>of(
+                (pos, state) -> new TaTiles.Concentrator(CONCENTRATOR_BE.get(), pos, state), FLUX_CONCENTRATOR.get()).build(null));
+    }
+
+    /** Block items for every block 1.12 gave one, in tab order. */
+    private static void blockItems(Registrar items) {
+        blockItem(items, "mithrillium_block", MITHRILLIUM_BLOCK);
+        blockItem(items, "adaminite_block", ADAMINITE_BLOCK);
+        blockItem(items, "mithminite_block", MITHMINITE_BLOCK);
+        blockItem(items, "taintwood_planks", TAINTWOOD_PLANKS);
+        blockItem(items, "chiseled_amber_block", CHISELED_AMBER_BLOCK);
+        blockItem(items, "chiseled_greatwood", CHISELED_GREATWOOD);
+        blockItem(items, "iron_framed_greatwood", IRON_FRAMED_GREATWOOD);
+        blockItem(items, "brass_plated_silverwood", BRASS_PLATED_SILVERWOOD);
+        blockItem(items, "amber_lamp", AMBER_LAMP);
+        blockItem(items, "puriflower", PURIFLOWER);
+        blockItem(items, "dawn_totem", DAWN_TOTEM);
+        blockItem(items, "twilight_totem", TWILIGHT_TOTEM);
+        blockItem(items, "taintkin", TAINTKIN);
+        blockItem(items, "taintkin_lit", TAINTKIN_LIT);
+        blockItem(items, "void_anvil", VOID_ANVIL);
+        blockItem(items, "thaumic_lectern", THAUMIC_LECTERN);
+        blockItem(items, "jar_brass", JAR_BRASS);
+        blockItem(items, "jar_thaumium", JAR_THAUMIUM);
+        blockItem(items, "jar_eldritch", JAR_ELDRITCH);
+        blockItem(items, "jar_mithrillium", JAR_MITHRILLIUM);
+        blockItem(items, "jar_adaminite", JAR_ADAMINITE);
+        blockItem(items, "jar_mithminite", JAR_MITHMINITE);
+        blockItem(items, "mithrillium_smelter", MITHRILLIUM_SMELTER);
+        blockItem(items, "adaminite_smelter", ADAMINITE_SMELTER);
+        blockItem(items, "mithminite_smelter", MITHMINITE_SMELTER);
+        blockItem(items, "growth_chamber", GROWTH_CHAMBER);
+        blockItem(items, "crystal_bore", CRYSTAL_BORE);
+        blockItem(items, "crystal_crusher", CRYSTAL_CRUSHER);
+        blockItem(items, "aspect_combiner", ASPECT_COMBINER);
+        blockItem(items, "aura_charger", AURA_CHARGER);
+        blockItem(items, "aura_disperser", AURA_DISPERSER);
+        blockItem(items, "flux_concentrator", FLUX_CONCENTRATOR);
+        blockItem(items, "essentia_sink", ESSENTIA_SINK);
+        blockItem(items, "shadow_enchanter", SHADOW_ENCHANTER);
+        blockItem(items, "entity_summoner", ENTITY_SUMMONER);
+        blockItem(items, "crystal_block", CRYSTAL_BLOCK);
+        blockItem(items, "crystal_lamp", CRYSTAL_LAMP);
+        blockItem(items, "cake", CAKE);
+    }
+
+    private static void blockItem(Registrar items, String name, Supplier<Block> holder) {
+        track(items.register(name, () -> new BlockItem(holder.get(), new Item.Properties())));
+    }
+
+    /** The two seeds, after their crops exist. */
+    private static void crops(Registrar items) {
+        VIS_SEEDS = track(items.register("vis_seeds", () -> ToolItems.visSeeds(VIS_CROP)));
+        VOID_SEED = track(items.register("void_seed", () -> ToolItems.voidSeed(VOID_CROP)));
+    }
+
+    private static Supplier<Block> jar(Registrar blocks, String name, int capacity) {
+        return blocks.<Block>register(name, () -> new TaMachineBlocks.JarBlock(JAR_BE, capacity));
+    }
+
+    private static Supplier<Block> smelter(Registrar blocks, String name, float efficiency, int speed,
+                                          int capacity) {
+        return blocks.<Block>register(name,
+                () -> new TaMachineBlocks.SmelterBlock(SMELTER_BE, efficiency, speed, capacity));
+    }
+
+    private static Supplier<Block> machine(Registrar blocks, String name,
+                                           java.util.function.Supplier<? extends BlockEntityType<?>> type) {
+        return blocks.<Block>register(name, () -> new TaMachineBlocks.MachineBlock(type));
+    }
+
+    // ------------------------------------------------------------------ armor
 
     /**
      * 1.12 {@code ItemAdaminiteDress.ADAMINITE}: durability factor 40, protection
@@ -229,15 +563,46 @@ public final class Content {
         return Ingredient.of(ThaumcraftTags.THAUMIUM_INGOTS);
     }
 
+    // ------------------------------------------------------------------ helpers
+
+    private static Block.Properties metalStorage() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F).sound(SoundType.METAL)
+                .requiresCorrectToolForDrops();
+    }
+
+    private static Block.Properties wood(float strength, boolean ignored) {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(strength).sound(SoundType.WOOD);
+    }
+
+    private static Block.Properties stone(float strength) {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(strength).sound(SoundType.STONE)
+                .requiresCorrectToolForDrops();
+    }
+
+    private static Block.Properties crop(float strength) {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks()
+                .sound(SoundType.CROP).strength(strength);
+    }
+
+    private static Block.Properties cake() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.5F).sound(SoundType.WOOL)
+                .noOcclusion();
+    }
+
     /** Registers a plain block plus the matching block item, in tab order. */
-    private static Supplier<Block> block(Registrar items, Registrar blocks, String name, Block.Properties properties) {
+    private static Supplier<Block> block(Registrar items, Registrar blocks, String name,
+                                         BlockBehaviour.Properties properties) {
         Supplier<Block> holder = blocks.register(name, () -> new Block(properties));
         track(items.register(name, () -> new BlockItem(holder.get(), new Item.Properties())));
         return holder;
     }
 
-    private static Block.Properties metalStorage() {
-        return Block.Properties.of().mapColor(MapColor.METAL).strength(3.0F).sound(SoundType.METAL).requiresCorrectToolForDrops();
+    /** Registers a block whose concrete class comes from a per-node factory, plus its block item. */
+    private static Supplier<Block> block(Registrar items, Registrar blocks, String name,
+                                         java.util.function.Supplier<Block> factory) {
+        Supplier<Block> holder = blocks.register(name, factory);
+        track(items.register(name, () -> new BlockItem(holder.get(), new Item.Properties())));
+        return holder;
     }
 
     private static Item simple() {
@@ -246,6 +611,11 @@ public final class Content {
 
     private static Supplier<Item> track(Supplier<Item> holder) {
         ITEM_ORDER.add(holder);
+        return holder;
+    }
+
+    /** Blocks have no tab collection of their own; the holder is returned unchanged. */
+    private static Supplier<Block> trackBlock(Supplier<Block> holder) {
         return holder;
     }
 

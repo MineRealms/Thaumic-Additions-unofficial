@@ -1,0 +1,37 @@
+{
+  "rune_set": {
+    "sounds": [
+      "thaumadds:rune_set"
+    ]
+  },
+  "popen": {
+    "sounds": [
+      "thaumadds:popen"
+    ]
+  },
+  "pclose": {
+    "sounds": [
+      "thaumadds:pclose"
+    ]
+  },
+  "fizz": {
+    "sounds": [
+      "thaumadds:fizz"
+    ]
+  },
+  "shadow_beam": {
+    "sounds": [
+      "thaumadds:shadow_beam"
+    ]
+  },
+  "essentia_pistol_shoot": {
+    "sounds": [
+      "thaumadds:essentia_pistol_shoot"
+    ]
+  },
+  "mithminite_scythe": {
+    "sounds": [
+      "thaumadds:mithminite_scythe"
+    ]
+  }
+}
