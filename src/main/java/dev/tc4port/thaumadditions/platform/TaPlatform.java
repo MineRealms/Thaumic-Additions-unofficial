@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
@@ -42,5 +43,16 @@ public interface TaPlatform {
                                   Map<ArmorItem.Type, Integer> visDiscounts, boolean gogglesOverlay);
 
     /** Creates one armor piece for a material built by {@link #armorMaterial}. */
-    Item armor(TaArmorMaterial material, ArmorItem.Type type, int durabilityMultiplier, Item.Properties properties);
+    Item armor(TaArmorMaterial material, ArmorItem.Type type, int durabilityMultiplier, Item.Properties properties,
+               TaArmorTick behavior);
+
+    /** Applies or refreshes a potion effect (ambient, no particles — the 1.12 armor style). */
+    void applyEffect(LivingEntity target, TaEffect effect, int durationTicks, int amplifier);
+
+    boolean hasEffect(LivingEntity target, TaEffect effect);
+
+    void removeEffect(LivingEntity target, TaEffect effect);
+
+    /** Removes every harmful effect, the mithminite full-set cleanse. */
+    void clearHarmfulEffects(LivingEntity target);
 }

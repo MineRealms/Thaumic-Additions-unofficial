@@ -6,11 +6,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import dev.tc4port.thaumadditions.armor.MithminiteArmorBehavior;
 import dev.tc4port.thaumadditions.platform.TaArmorMaterial;
 import dev.tc4port.thaumadditions.platform.TaArmorSound;
+import dev.tc4port.thaumadditions.platform.TaArmorTick;
 import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.ToolKind;
 import dev.tc4port.thaumcraft.api.ThaumcraftTags;
+import dev.tc4port.thaumcraft.api.item.ArmorTextureApi;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -89,6 +92,16 @@ public final class Content {
     public static Supplier<Item> ADAMINITE_BELT;
     public static Supplier<Item> ADAMINITE_BOOTS;
 
+    public static Supplier<Item> MITHMINITE_HOOD;
+    public static Supplier<Item> MITHMINITE_ROBE;
+    public static Supplier<Item> MITHMINITE_BELT;
+    public static Supplier<Item> MITHMINITE_BOOTS;
+
+    public static Supplier<Item> BLUE_WOLF_MASK;
+    public static Supplier<Item> BLUE_WOLF_BODY;
+    public static Supplier<Item> BLUE_WOLF_LEGS;
+    public static Supplier<Item> BLUE_WOLF_FEETPAWS;
+
     private Content() {
     }
 
@@ -135,7 +148,7 @@ public final class Content {
      */
     private static void tools(Registrar items, TaPlatform platform) {
         Tier voidElemental = platform.toolTier(3, 1500, 9.0F, 3.0F, 18, INCORRECT_FOR_DIAMOND_TOOL,
-                () -> Ingredient.of(ThaumcraftTags.THAUMIUM_INGOTS));
+                Content::thaumiumRepair);
 
         VOID_ELEMENTAL_PICKAXE = track(items.register("void_elemental_pickaxe",
                 () -> platform.tool(ToolKind.PICKAXE, voidElemental, 1.0F, -2.8F, new Item.Properties())));
@@ -149,7 +162,7 @@ public final class Content {
         // 1.12 ItemAdaminiteSword: material (harvest 0, 0 uses, speed 5, +12 damage, enchant 60).
         // maxUses 0 makes the 1.12 item unbreakable; that survives as a 0-durability tier.
         Tier adaminiteSword = platform.toolTier(0, 0, 5.0F, 12.0F, 60, INCORRECT_FOR_DIAMOND_TOOL,
-                () -> Ingredient.of(ThaumcraftTags.THAUMIUM_INGOTS));
+                Content::thaumiumRepair);
         ADAMINITE_SWORD = track(items.register("adaminite_sword",
                 () -> platform.tool(ToolKind.SWORD, adaminiteSword, 3.0F, -2.4F, new Item.Properties())));
     }
@@ -160,27 +173,60 @@ public final class Content {
      * Vis discounts (percent) and the head-only goggles overlay come from the 1.12 item.
      */
     private static void armor(Registrar items, TaPlatform platform) {
-        Map<ArmorItem.Type, Integer> defense = Map.of(
-                ArmorItem.Type.HELMET, 5,
-                ArmorItem.Type.CHESTPLATE, 8,
-                ArmorItem.Type.LEGGINGS, 6,
-                ArmorItem.Type.BOOTS, 4);
-        Map<ArmorItem.Type, Integer> discounts = Map.of(
-                ArmorItem.Type.HELMET, 8,
-                ArmorItem.Type.CHESTPLATE, 4);
         TaArmorMaterial adaminite = platform.armorMaterial("adaminite",
-                ResourceLocation.tryParse("thaumadds:adaminite"), defense, 40, 40,
-                TaArmorSound.LEATHER, () -> Ingredient.of(ThaumcraftTags.THAUMIUM_INGOTS),
-                8.0F, 0.0F, discounts, true);
+                ResourceLocation.tryParse("thaumadds:adaminite"), defense(5, 8, 6, 4), 40, 40,
+                TaArmorSound.LEATHER, Content::thaumiumRepair, 8.0F, 0.0F, discounts(8, 4), true);
+        ADAMINITE_HOOD = piece(items, platform, adaminite, ArmorItem.Type.HELMET, 40, null, "adaminite_hood");
+        ADAMINITE_ROBE = piece(items, platform, adaminite, ArmorItem.Type.CHESTPLATE, 40, null, "adaminite_robe");
+        ADAMINITE_BELT = piece(items, platform, adaminite, ArmorItem.Type.LEGGINGS, 40, null, "adaminite_belt");
+        ADAMINITE_BOOTS = piece(items, platform, adaminite, ArmorItem.Type.BOOTS, 40, null, "adaminite_boots");
 
-        ADAMINITE_HOOD = track(items.register("adaminite_hood",
-                () -> platform.armor(adaminite, ArmorItem.Type.HELMET, 40, new Item.Properties())));
-        ADAMINITE_ROBE = track(items.register("adaminite_robe",
-                () -> platform.armor(adaminite, ArmorItem.Type.CHESTPLATE, 40, new Item.Properties())));
-        ADAMINITE_BELT = track(items.register("adaminite_belt",
-                () -> platform.armor(adaminite, ArmorItem.Type.LEGGINGS, 40, new Item.Properties())));
-        ADAMINITE_BOOTS = track(items.register("adaminite_boots",
-                () -> platform.armor(adaminite, ArmorItem.Type.BOOTS, 40, new Item.Properties())));
+        // 1.12 ItemMithminiteDress.MITHMINITE: protection {feet 6, legs 10, chest 15, head 8},
+        // same durability factor/enchantability/toughness, discounts {head 15, chest 10}, goggles.
+        MithminiteArmorBehavior mithminiteBehavior = new MithminiteArmorBehavior(platform);
+        TaArmorMaterial mithminite = platform.armorMaterial("mithminite",
+                ResourceLocation.tryParse("thaumadds:mithminite"), defense(8, 15, 10, 6), 40, 40,
+                TaArmorSound.LEATHER, Content::thaumiumRepair, 8.0F, 0.0F, discounts(15, 10), true);
+        MITHMINITE_HOOD = piece(items, platform, mithminite, ArmorItem.Type.HELMET, 40, mithminiteBehavior, "mithminite_hood");
+        MITHMINITE_ROBE = piece(items, platform, mithminite, ArmorItem.Type.CHESTPLATE, 40, mithminiteBehavior, "mithminite_robe");
+        MITHMINITE_BELT = piece(items, platform, mithminite, ArmorItem.Type.LEGGINGS, 40, mithminiteBehavior, "mithminite_belt");
+        MITHMINITE_BOOTS = piece(items, platform, mithminite, ArmorItem.Type.BOOTS, 40, mithminiteBehavior, "mithminite_boots");
+
+        // 1.12 ItemBlueWolfSuit.BLUE_WOLF: protection {feet 6, legs 12, chest 16, head 8}, same
+        // discounts as mithminite, but no goggles. The 1.12 registrations were commented out
+        // upstream and the suit's appearance is a custom wavefront (OBJ) biped model with 256px
+        // entity textures, none of which is ported yet — so the material points at TC4R's
+        // invisible layer and the worn model is a follow-up. The items are functional.
+        TaArmorMaterial blueWolf = platform.armorMaterial("blue_wolf",
+                ArmorTextureApi.INVISIBLE_MATERIAL, defense(8, 16, 12, 6), 40, 40,
+                TaArmorSound.LEATHER, Content::thaumiumRepair, 8.0F, 0.0F, discounts(15, 10), false);
+        BLUE_WOLF_MASK = piece(items, platform, blueWolf, ArmorItem.Type.HELMET, 40, null, "blue_wolf_mask");
+        BLUE_WOLF_BODY = piece(items, platform, blueWolf, ArmorItem.Type.CHESTPLATE, 40, null, "blue_wolf_body");
+        BLUE_WOLF_LEGS = piece(items, platform, blueWolf, ArmorItem.Type.LEGGINGS, 40, null, "blue_wolf_legs");
+        BLUE_WOLF_FEETPAWS = piece(items, platform, blueWolf, ArmorItem.Type.BOOTS, 40, null, "blue_wolf_feetpaws");
+    }
+
+    /** Registers one armor piece in tab order. */
+    private static Supplier<Item> piece(Registrar items, TaPlatform platform, TaArmorMaterial material,
+                                        ArmorItem.Type type, int durabilityMultiplier, TaArmorTick behavior,
+                                        String name) {
+        return track(items.register(name, () -> platform.armor(
+                material, type, durabilityMultiplier, new Item.Properties(), behavior)));
+    }
+
+    /** 1.12 armor protection, given as head/chest/legs/feet. */
+    private static Map<ArmorItem.Type, Integer> defense(int helmet, int chest, int legs, int boots) {
+        return Map.of(ArmorItem.Type.HELMET, helmet, ArmorItem.Type.CHESTPLATE, chest,
+                ArmorItem.Type.LEGGINGS, legs, ArmorItem.Type.BOOTS, boots);
+    }
+
+    /** 1.12 vis discounts (percent), given as head/chest; the other slots give none. */
+    private static Map<ArmorItem.Type, Integer> discounts(int helmet, int chest) {
+        return Map.of(ArmorItem.Type.HELMET, helmet, ArmorItem.Type.CHESTPLATE, chest);
+    }
+
+    private static Ingredient thaumiumRepair() {
+        return Ingredient.of(ThaumcraftTags.THAUMIUM_INGOTS);
     }
 
     /** Registers a plain block plus the matching block item, in tab order. */

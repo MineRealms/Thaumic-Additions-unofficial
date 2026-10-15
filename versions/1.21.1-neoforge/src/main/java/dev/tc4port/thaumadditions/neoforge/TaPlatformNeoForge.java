@@ -1,12 +1,16 @@
 package dev.tc4port.thaumadditions.neoforge;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
 import dev.tc4port.thaumadditions.ThaumAdditions;
 import dev.tc4port.thaumadditions.platform.TaArmorMaterial;
+import dev.tc4port.thaumadditions.platform.TaArmorSetMember;
 import dev.tc4port.thaumadditions.platform.TaArmorSound;
+import dev.tc4port.thaumadditions.platform.TaArmorTick;
+import dev.tc4port.thaumadditions.platform.TaEffect;
 import dev.tc4port.thaumadditions.platform.TaGearBehavior;
 import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.ToolKind;
@@ -19,7 +23,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -42,11 +50,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 /**
  * 1.21.1 / NeoForge implementation of {@link TaPlatform}.
  *
- * <p>1.21.1 changed both contracts: {@code Tier} lost {@code getLevel()} and
- * gained {@code getIncorrectBlocksForDrops()}, tools take their attack
- * damage/speed through {@code Item.Properties.attributes(...)}, and
+ * <p>1.21.1 changed every contract this port touches: {@code Tier} lost
+ * {@code getLevel()} and gained {@code getIncorrectBlocksForDrops()}, tools
+ * take their attack damage/speed through {@code Item.Properties.attributes(...)},
  * {@code ArmorMaterial} became a registered record that {@code ArmorItem}
- * consumes through a {@code Holder}.</p>
+ * consumes through a {@code Holder}, and potion effects became
+ * {@code Holder<MobEffect>}.</p>
  */
 public final class TaPlatformNeoForge implements TaPlatform {
 
@@ -156,30 +165,76 @@ public final class TaPlatformNeoForge implements TaPlatform {
         DeferredHolder<ArmorMaterial, ArmorMaterial> holder = ARMOR_MATERIALS.register(id, () -> new ArmorMaterial(
                 defense, enchantability, sound, repair,
                 List.of(new ArmorMaterial.Layer(texture)), toughness, knockbackResistance));
-        return new Material(holder, visDiscounts, gogglesOverlay);
+        return new Material(id, holder, visDiscounts, gogglesOverlay);
     }
 
     @Override
-    public Item armor(TaArmorMaterial material, ArmorItem.Type type, int durabilityMultiplier, Item.Properties properties) {
+    public Item armor(TaArmorMaterial material, ArmorItem.Type type, int durabilityMultiplier, Item.Properties properties,
+                      TaArmorTick behavior) {
         Material handle = (Material) material;
-        return new Piece(handle.material(), type, properties.durability(type.getDurability(durabilityMultiplier)),
-                handle.visDiscounts(), handle.gogglesOverlay());
+        return new Piece(handle, type, properties.durability(type.getDurability(durabilityMultiplier)), behavior);
+    }
+
+    @Override
+    public void applyEffect(LivingEntity target, TaEffect effect, int durationTicks, int amplifier) {
+        target.addEffect(new MobEffectInstance(nativeEffect(effect), durationTicks, amplifier, true, false));
+    }
+
+    @Override
+    public boolean hasEffect(LivingEntity target, TaEffect effect) {
+        return target.hasEffect(nativeEffect(effect));
+    }
+
+    @Override
+    public void removeEffect(LivingEntity target, TaEffect effect) {
+        target.removeEffect(nativeEffect(effect));
+    }
+
+    @Override
+    public void clearHarmfulEffects(LivingEntity target) {
+        for (MobEffectInstance active : new ArrayList<>(target.getActiveEffects()))
+            if (!active.getEffect().value().isBeneficial())
+                target.removeEffect(active.getEffect());
+    }
+
+    private static Holder<MobEffect> nativeEffect(TaEffect effect) {
+        return switch (effect) {
+            case NIGHT_VISION -> MobEffects.NIGHT_VISION;
+            case WATER_BREATHING -> MobEffects.WATER_BREATHING;
+            case FIRE_RESISTANCE -> MobEffects.FIRE_RESISTANCE;
+        };
     }
 
     /** Opaque handle: the registered material holder plus the gear hooks it hands to each piece. */
-    private record Material(Holder<ArmorMaterial> material, Map<ArmorItem.Type, Integer> visDiscounts,
+    private record Material(String setId, Holder<ArmorMaterial> material, Map<ArmorItem.Type, Integer> visDiscounts,
                             boolean gogglesOverlay) implements TaArmorMaterial {
     }
 
-    private static final class Piece extends ArmorItem implements VisDiscountGear, GogglesOverlayGear {
+    private static final class Piece extends ArmorItem
+            implements VisDiscountGear, GogglesOverlayGear, TaArmorSetMember {
+        private final String setId;
         private final Map<ArmorItem.Type, Integer> visDiscounts;
         private final boolean gogglesOverlay;
+        private final TaArmorTick behavior;
 
-        private Piece(Holder<ArmorMaterial> material, ArmorItem.Type type, Item.Properties properties,
-                      Map<ArmorItem.Type, Integer> visDiscounts, boolean gogglesOverlay) {
-            super(material, type, properties);
-            this.visDiscounts = visDiscounts;
-            this.gogglesOverlay = gogglesOverlay;
+        private Piece(Material material, ArmorItem.Type type, Item.Properties properties, TaArmorTick behavior) {
+            super(material.material(), type, properties);
+            this.setId = material.setId();
+            this.visDiscounts = material.visDiscounts();
+            this.gogglesOverlay = material.gogglesOverlay();
+            this.behavior = behavior;
+        }
+
+        @Override
+        public String armorSetId() {
+            return setId;
+        }
+
+        @Override
+        public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+            super.inventoryTick(stack, level, entity, slot, selected);
+            if (behavior != null && entity instanceof Player player && player.getItemBySlot(getType().getSlot()) == stack)
+                behavior.onWornTick(stack, level, player, getType());
         }
 
         @Override
