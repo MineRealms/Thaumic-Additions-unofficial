@@ -189,4 +189,22 @@ public interface TaPlatform {
 
     /** Writes the enchantment onto the stack, replacing any existing level of it. */
     void enchantItem(ItemStack stack, TaEnchantment enchantment, int level);
+
+    // ------------------------------------------------------------------ menus
+
+    /**
+     * Builds a {@code MenuType} from a factory that also receives the block position the menu was
+     * opened at. The two loaders spell the constructor and the extended factory differently, so the
+     * shared menu classes name neither.
+     */
+    <T extends net.minecraft.world.inventory.AbstractContainerMenu>
+    net.minecraft.world.inventory.MenuType<T> menuType(TaMenuFactory<T> factory);
+
+    /**
+     * Opens a menu, handing the client whatever it needs to rebuild it. 1.20.1 Forge spells this
+     * {@code NetworkHooks.openScreen}; 1.21.1 NeoForge puts the same two-argument overload on the
+     * player itself.
+     */
+    void openMenu(net.minecraft.server.level.ServerPlayer player, net.minecraft.world.MenuProvider provider,
+                  java.util.function.Consumer<net.minecraft.network.FriendlyByteBuf> extraData);
 }

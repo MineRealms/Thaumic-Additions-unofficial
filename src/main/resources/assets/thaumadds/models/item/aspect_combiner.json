@@ -1,5 +1,8 @@
 {
-  "parent": "thaumadds:block/aspect_combiner",
+  "parent": "builtin/entity",
+  "textures": {
+    "particle": "thaumadds:models/aspect_combiner"
+  },
   "display": {
     "gui": {
       "rotation": [

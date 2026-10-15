@@ -1,5 +1,8 @@
 {
-  "parent": "thaumadds:block/aura_charger",
+  "parent": "builtin/entity",
+  "textures": {
+    "particle": "thaumadds:models/aura_charger"
+  },
   "display": {
     "gui": {
       "rotation": [

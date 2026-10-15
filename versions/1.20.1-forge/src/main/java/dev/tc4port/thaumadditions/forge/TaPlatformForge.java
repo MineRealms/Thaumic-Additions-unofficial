@@ -434,6 +434,21 @@ public final class TaPlatformForge implements TaPlatform {
             implements dev.tc4port.thaumadditions.platform.TaEnchantment {
     }
 
+    // ------------------------------------------------------------------ menus
+
+    @Override
+    public <T extends net.minecraft.world.inventory.AbstractContainerMenu> net.minecraft.world.inventory.MenuType<T> menuType(
+            dev.tc4port.thaumadditions.platform.TaMenuFactory<T> factory) {
+        return net.minecraftforge.common.extensions.IForgeMenuType.create(factory::create);
+    }
+
+    @Override
+    public void openMenu(net.minecraft.server.level.ServerPlayer player,
+                         net.minecraft.world.MenuProvider provider,
+                         java.util.function.Consumer<net.minecraft.network.FriendlyByteBuf> extraData) {
+        net.minecraftforge.network.NetworkHooks.openScreen(player, provider, extraData);
+    }
+
     private static MobEffect nativeEffect(TaEffect effect) {
         return switch (effect) {
             case NIGHT_VISION -> MobEffects.NIGHT_VISION;

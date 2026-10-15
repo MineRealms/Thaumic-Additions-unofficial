@@ -79,8 +79,9 @@ public final class MachineModels {
     /** 1.12 {@code ModelAspectCombiner}: two side tanks feeding a central pot. */
     public static final class AspectCombiner {
         public static final ResourceLocation TEXTURE = texture("aspect_combiner");
-        public static final int TEXTURE_WIDTH = 64;
-        public static final int TEXTURE_HEIGHT = 64;
+        // The 1.12 texture is 128 square; declaring it 64 scaled every UV to the wrong texel.
+        public static final int TEXTURE_WIDTH = 128;
+        public static final int TEXTURE_HEIGHT = 128;
 
         private final ModelPart root;
         private final ModelPart rotor;
@@ -126,8 +127,9 @@ public final class MachineModels {
     /** 1.12 {@code ModelAuraCharger}: a spout whose four sprinkler arms hang off the base. */
     public static final class AuraCharger {
         public static final ResourceLocation TEXTURE = texture("aura_charger");
-        public static final int TEXTURE_WIDTH = 32;
-        public static final int TEXTURE_HEIGHT = 32;
+        // The 1.12 texture is 64 square; declaring it 32 scaled every UV to the wrong texel.
+        public static final int TEXTURE_WIDTH = 64;
+        public static final int TEXTURE_HEIGHT = 64;
 
         private final ModelPart root;
         private final ModelPart rotor;

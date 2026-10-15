@@ -88,6 +88,11 @@ public class TileGrowthChamber extends TileEssentia implements Container {
         return amount;
     }
 
+    /** How far the current piece of essence is towards being grown, {@code 0..1}. */
+    public float growProgress() {
+        return 1.0F - Math.max(0.0F, toDrainAura) / MAX_AURA_DRAIN;
+    }
+
     public AspectId slotAspect() {
         return slotAspect;
     }

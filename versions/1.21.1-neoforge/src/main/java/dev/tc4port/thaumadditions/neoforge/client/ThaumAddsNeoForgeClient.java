@@ -3,6 +3,7 @@ package dev.tc4port.thaumadditions.neoforge.client;
 import dev.tc4port.thaumadditions.ThaumAdditions;
 import dev.tc4port.thaumadditions.client.render.MachineItemRenderer;
 import dev.tc4port.thaumadditions.client.render.ItemRenderers;
+import dev.tc4port.thaumadditions.client.render.MachineColors;
 import dev.tc4port.thaumadditions.client.render.MachineRenderers;
 import dev.tc4port.thaumadditions.registry.Content;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -31,6 +32,12 @@ public final class ThaumAddsNeoForgeClient {
         event.registerBlockEntityRenderer(Content.SUMMONER_BE.get(), context -> new ItemRenderers.MobSummoner());
     }
 
+    /** The arcane cake's top face takes the colour of whatever was last eaten off it. */
+    @SubscribeEvent
+    public static void registerBlockColors(net.neoforged.neoforge.client.event.RegisterColorHandlersEvent.Block event) {
+        event.register(MachineColors.CAKE, Content.CAKE.get());
+    }
+
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(machine(MachineItemRenderer::bore), Content.CRYSTAL_BORE_ITEM.get());
@@ -48,5 +55,20 @@ public final class ThaumAddsNeoForgeClient {
                 return renderer.get();
             }
         };
+    }
+
+    /** The five machine screens; 1.21.1 spells the same event over here. */
+    @SubscribeEvent
+    public static void registerScreens(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
+        event.register(Content.SMELTER_MENU.get(),
+                dev.tc4port.thaumadditions.client.gui.MachineScreens.Smelter::new);
+        event.register(Content.CRUSHER_MENU.get(),
+                dev.tc4port.thaumadditions.client.gui.MachineScreens.CrystalCrusher::new);
+        event.register(Content.GROWTH_MENU.get(),
+                dev.tc4port.thaumadditions.client.gui.MachineScreens.GrowthChamber::new);
+        event.register(Content.DISPERSER_MENU.get(),
+                dev.tc4port.thaumadditions.client.gui.MachineScreens.AuraDisperser::new);
+        event.register(Content.ENCHANTER_MENU.get(),
+                dev.tc4port.thaumadditions.client.gui.MachineScreens.ShadowEnchanter::new);
     }
 }

@@ -25,6 +25,11 @@ public final class TaMachineBlocks {
     public interface BeBlock extends EntityBlock {
         java.util.function.Supplier<? extends BlockEntityType<?>> type();
 
+        /** The GUI this machine opens, or {@code null} for the machines 1.12 gave none. */
+        default MachineGui gui() {
+            return null;
+        }
+
         /**
          * 1.20.1 asks the block which ticker its block entity uses. 1.21 moved that onto
          * {@code BlockEntityType.Builder#build}, which {@code TaPlatform.blockEntityType} supplies,
@@ -38,15 +43,37 @@ public final class TaMachineBlocks {
         }
     }
 
+    /**
+     * A machine's GUI: the registered menu type, and how the server builds that menu. The two live
+     * together because a block can only name its menu type, not reconstruct one from it.
+     */
+    public record MachineGui(java.util.function.Supplier<? extends net.minecraft.world.inventory.MenuType<?>> type,
+                             dev.tc4port.thaumadditions.gui.MachineMenuProvider.ServerMenuFactory builder) {
+    }
+
     /** Shared plumbing so each machine block only names its type. */
     public abstract static class AbstractBeBlock extends TaBlocks.HorizontalFacingBlock implements BeBlock {
         private final java.util.function.Supplier<? extends BlockEntityType<?>> type;
+        private final MachineGui gui;
 
         protected AbstractBeBlock(Properties properties,
                                     java.util.function.Supplier<? extends BlockEntityType<?>> type) {
+            this(properties, type, null);
+        }
+
+        protected AbstractBeBlock(Properties properties,
+                                    java.util.function.Supplier<? extends BlockEntityType<?>> type,
+                                    MachineGui gui) {
             super(properties);
             this.type = type;
+            this.gui = gui;
         }
+
+        @Override
+        public MachineGui gui() {
+            return gui;
+        }
+
 
         @Override
         public java.util.function.Supplier<? extends BlockEntityType<?>> type() {
@@ -125,9 +152,10 @@ public final class TaMachineBlocks {
         private final float efficiency;
         private final int speed;
         private final int capacity;
+        private final MachineGui gui;
 
         public SmelterBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type, float efficiency,
-                            int speed, int capacity) {
+                            int speed, int capacity, MachineGui gui) {
             super(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
                     .mapColor(MapColor.METAL).strength(3.0F).sound(SoundType.METAL)
                     .requiresCorrectToolForDrops().lightLevel(state -> state.getValue(ENABLED) ? 13 : 0));
@@ -135,7 +163,14 @@ public final class TaMachineBlocks {
             this.efficiency = efficiency;
             this.speed = speed;
             this.capacity = capacity;
+            this.gui = gui;
         }
+
+        @Override
+        public MachineGui gui() {
+            return gui;
+        }
+
 
         /** The 1.12 {@code BlockAbstractSmelter(efficiency, speed, capacity)} constructor args. */
         public float efficiency() {
@@ -271,12 +306,20 @@ public final class TaMachineBlocks {
     /** 1.12 {@code BlockShadowEnchanter}: low stone pedestal with an enchant GUI. */
     public static class EnchanterBlock extends TaBlocks.HorizontalFacingBlock implements BeBlock {
         private final java.util.function.Supplier<? extends BlockEntityType<?>> type;
+        private final MachineGui gui;
 
-        public EnchanterBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type) {
+        public EnchanterBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type, MachineGui gui) {
             super(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
                     .mapColor(MapColor.STONE).strength(1.5F).sound(SoundType.STONE).noOcclusion());
             this.type = type;
+            this.gui = gui;
         }
+
+        @Override
+        public MachineGui gui() {
+            return gui;
+        }
+
 
         @Override
         public java.util.function.Supplier<? extends BlockEntityType<?>> type() {
@@ -291,22 +334,35 @@ public final class TaMachineBlocks {
 
     /** 1.12 {@code BlockGrowthChamber}: two-slot converter, facing. */
     public static class GrowthChamberBlock extends AbstractBeBlock {
-        public GrowthChamberBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type) {
+        public GrowthChamberBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type, MachineGui gui) {
             super(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
                     .mapColor(MapColor.METAL).strength(3.0F).sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops(), type);
+                    .requiresCorrectToolForDrops(), type, gui);
         }
     }
 
     /** The six remaining machines, all of which are plain 6-way-facing essentia endpoints. */
     public static class MachineBlock extends TaBlocks.OrientableBlock implements BeBlock {
         private final java.util.function.Supplier<? extends BlockEntityType<?>> type;
+        private final MachineGui gui;
 
         public MachineBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type) {
+            this(type, null);
+        }
+
+        /** The same block with a GUI, for the machines 1.12 gave one. */
+        public MachineBlock(java.util.function.Supplier<? extends BlockEntityType<?>> type, MachineGui gui) {
             super(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
                     .mapColor(MapColor.METAL).strength(2.0F).sound(SoundType.METAL).noOcclusion());
             this.type = type;
+            this.gui = gui;
         }
+
+        @Override
+        public MachineGui gui() {
+            return gui;
+        }
+
 
         @Override
         public java.util.function.Supplier<? extends BlockEntityType<?>> type() {

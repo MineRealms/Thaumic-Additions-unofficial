@@ -74,6 +74,20 @@ public final class MachineRenderers {
                         : Direction.NORTH;
     }
 
+    /**
+     * The transform the four machines that turn on the spot use: the origin goes to the block's
+     * centre a block and a half up, and the model is flipped onto its back.
+     *
+     * <p>This is 1.12's {@code glTranslated(x + .5, y + 1.5, z + .5)} followed by
+     * {@code glRotated(180, 1, 0, 0)}, which every one of those renderers applied and only the bore
+     * did not. Using the orientation transform here instead lays the model on its side and pushes
+     * it out through the neighbouring block, which is why the machines looked empty.</p>
+     */
+    private static void upright(PoseStack pose) {
+        pose.translate(0.5D, 1.5D, 0.5D);
+        pose.mulPose(Axis.XP.rotationDegrees(180.0F));
+    }
+
     /** Draws one model subtree in the block's orientation. */
     private static void draw(PoseStack pose, MultiBufferSource buffers, ResourceLocation texture,
                              BlockState state, int light, int overlay, ModelPart model,
@@ -83,6 +97,15 @@ public final class MachineRenderers {
         if (dropY != 0.0F) {
             pose.translate(0.0F, dropY, 0.0F);
         }
+        model.render(pose, buffers.getBuffer(RenderType.entityCutout(texture)), light, overlay);
+        pose.popPose();
+    }
+
+    /** Draws one model subtree upright, the way the four turning machines are drawn. */
+    private static void drawUpright(PoseStack pose, MultiBufferSource buffers, ResourceLocation texture,
+                                    ModelPart model, int light, int overlay) {
+        pose.pushPose();
+        upright(pose);
         model.render(pose, buffers.getBuffer(RenderType.entityCutout(texture)), light, overlay);
         pose.popPose();
     }
@@ -118,10 +141,10 @@ public final class MachineRenderers {
         @Override
         public void render(TileAspectCombiner be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
-            draw(pose, buffers, MachineModels.AspectCombiner.TEXTURE, be.getBlockState(), light, overlay,
-                    MODEL.staticParts(), 0.0F);
+            drawUpright(pose, buffers, MachineModels.AspectCombiner.TEXTURE, MODEL.staticParts(),
+                    light, overlay);
             pose.pushPose();
-            orient(pose, facing(be.getBlockState()).getOpposite());
+            upright(pose);
             var buffer = buffers.getBuffer(RenderType.entityCutout(MachineModels.AspectCombiner.TEXTURE));
             pose.mulPose(Axis.YP.rotationDegrees(be.rotator().actualRotation(partialTick)));
             MODEL.rotor().render(pose, buffer, light, overlay);
@@ -139,10 +162,10 @@ public final class MachineRenderers {
         @Override
         public void render(TaTiles.Charger be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
-            draw(pose, buffers, MachineModels.AuraCharger.TEXTURE, be.getBlockState(), light, overlay,
-                    MODEL.staticParts(), 0.0F);
+            drawUpright(pose, buffers, MachineModels.AuraCharger.TEXTURE, MODEL.staticParts(),
+                    light, overlay);
             pose.pushPose();
-            orient(pose, facing(be.getBlockState()).getOpposite());
+            upright(pose);
             pose.mulPose(Axis.YP.rotationDegrees(be.rotator().actualRotation(partialTick)));
             MODEL.rotor().render(pose, buffers.getBuffer(
                     RenderType.entityCutout(MachineModels.AuraCharger.TEXTURE)), light, overlay);
@@ -158,10 +181,10 @@ public final class MachineRenderers {
         @Override
         public void render(TileCrystalCrusher be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
-            draw(pose, buffers, MachineModels.CrystalCrusher.TEXTURE, be.getBlockState(), light, overlay,
-                    MODEL.staticParts(), 0.0F);
+            drawUpright(pose, buffers, MachineModels.CrystalCrusher.TEXTURE, MODEL.staticParts(),
+                    light, overlay);
             pose.pushPose();
-            orient(pose, facing(be.getBlockState()).getOpposite());
+            upright(pose);
             pose.mulPose(Axis.YP.rotationDegrees(be.rotator().actualRotation(partialTick)));
             MODEL.head().render(pose, buffers.getBuffer(
                     RenderType.entityCutout(MachineModels.CrystalCrusher.TEXTURE)), light, overlay);
@@ -181,10 +204,10 @@ public final class MachineRenderers {
         @Override
         public void render(TileFluxConcentrator be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                            int light, int overlay) {
-            draw(pose, buffers, MachineModels.FluxConcentrator.TEXTURE, be.getBlockState(), light, overlay,
-                    MODEL.staticParts(), 0.0F);
+            drawUpright(pose, buffers, MachineModels.FluxConcentrator.TEXTURE, MODEL.staticParts(),
+                    light, overlay);
             pose.pushPose();
-            orient(pose, facing(be.getBlockState()).getOpposite());
+            upright(pose);
             pose.translate(1.0F / 16.0F, 1.0F / 16.0F, 0.0F);
             pose.mulPose(Axis.ZP.rotationDegrees(be.rotator().actualRotation(partialTick)));
             pose.translate(-1.0F / 16.0F, -1.0F / 16.0F, 0.0F);

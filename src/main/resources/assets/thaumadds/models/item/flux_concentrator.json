@@ -1,5 +1,8 @@
 {
-  "parent": "thaumadds:block/flux_concentrator",
+  "parent": "builtin/entity",
+  "textures": {
+    "particle": "thaumadds:models/flux_concentrator"
+  },
   "display": {
     "gui": {
       "rotation": [

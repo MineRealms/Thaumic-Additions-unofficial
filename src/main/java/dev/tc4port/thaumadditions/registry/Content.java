@@ -223,6 +223,14 @@ public final class Content {
     public static Supplier<BlockEntityType<TileShadowEnchanter>> ENCHANTER_BE;
     public static Supplier<BlockEntityType<TileGrowthChamber>> GROWTH_BE;
     public static Supplier<BlockEntityType<TileAspectCombiner>> COMBINER_BE;
+
+    // The five machine menus. 1.12 had a container and a GUI per machine; the port has one menu
+    // each, carrying the same slots, and the screens read the machine's own synced state.
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.Smelter>> SMELTER_MENU;
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.CrystalCrusher>> CRUSHER_MENU;
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.GrowthChamber>> GROWTH_MENU;
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.AuraDisperser>> DISPERSER_MENU;
+    public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.ShadowEnchanter>> ENCHANTER_MENU;
     public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
     public static Supplier<BlockEntityType<TileAuraDisperser>> DISPERSER_BE;
     public static Supplier<BlockEntityType<TileCrystalBore>> BORE_BE;
@@ -232,7 +240,8 @@ public final class Content {
     private Content() {
     }
 
-    public static void init(Registrar items, Registrar blocks, Registrar blockEntities, TaPlatform platform) {
+    public static void init(Registrar items, Registrar blocks, Registrar blockEntities, Registrar menus,
+                            TaPlatform platform) {
         materials(items);
         essentiaMaterials(items, platform);
         plainItems(items, platform);
@@ -244,8 +253,30 @@ public final class Content {
         plainBlocks(items, blocks, platform);
         machines(items, blocks, platform);
         blockEntities(blockEntities);
+        menus(menus, platform);
         blockItems(items);
         crops(items);
+    }
+
+    /** A machine's GUI: the registered menu type and the server-side menu constructor. */
+    private static TaMachineBlocks.MachineGui gui(
+            Supplier<? extends net.minecraft.world.inventory.MenuType<?>> type,
+            dev.tc4port.thaumadditions.gui.MachineMenuProvider.ServerMenuFactory builder) {
+        return new TaMachineBlocks.MachineGui(type, builder);
+    }
+
+    /** One menu per machine that had a container in 1.12. */
+    private static void menus(Registrar menus, TaPlatform platform) {
+        SMELTER_MENU = menus.register("smelter",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.Smelter::new));
+        CRUSHER_MENU = menus.register("crystal_crusher",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.CrystalCrusher::new));
+        GROWTH_MENU = menus.register("growth_chamber",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.GrowthChamber::new));
+        DISPERSER_MENU = menus.register("aura_disperser",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.AuraDisperser::new));
+        ENCHANTER_MENU = menus.register("shadow_enchanter",
+                () -> platform.menuType(dev.tc4port.thaumadditions.gui.MachineMenus.ShadowEnchanter::new));
     }
 
     // ------------------------------------------------------------------ items
@@ -395,7 +426,8 @@ public final class Content {
         MITHMINITE_SMELTER = smelter(blocks, "mithminite_smelter", 1.5F, 10, 4000);
 
         GROWTH_CHAMBER = trackBlock(blocks.<Block>register("growth_chamber",
-                () -> new TaMachineBlocks.GrowthChamberBlock(GROWTH_BE)));
+                () -> new TaMachineBlocks.GrowthChamberBlock(GROWTH_BE, gui(GROWTH_MENU,
+                        dev.tc4port.thaumadditions.gui.MachineMenus.GrowthChamber::new))));
         // Each lambda reads its *_BE static field when the block is instantiated, not when this
         // method runs: blockEntities() assigns them further down, so binding the value here (as a
         // helper taking the supplier as a parameter would) hands the block a null type.
@@ -404,7 +436,8 @@ public final class Content {
         CRYSTAL_BORE_ITEM = track(items.register("crystal_bore",
                 () -> platform.machineItem(CRYSTAL_BORE.get(), MachineIcon.CRYSTAL_BORE)));
         CRYSTAL_CRUSHER = trackBlock(blocks.<Block>register("crystal_crusher",
-                () -> new TaMachineBlocks.MachineBlock(CRUSHER_BE)));
+                () -> new TaMachineBlocks.MachineBlock(CRUSHER_BE, gui(CRUSHER_MENU,
+                        dev.tc4port.thaumadditions.gui.MachineMenus.CrystalCrusher::new))));
         CRYSTAL_CRUSHER_ITEM = track(items.register("crystal_crusher",
                 () -> platform.machineItem(CRYSTAL_CRUSHER.get(), MachineIcon.CRYSTAL_CRUSHER)));
         ASPECT_COMBINER = trackBlock(blocks.<Block>register("aspect_combiner",
@@ -416,7 +449,8 @@ public final class Content {
         AURA_CHARGER_ITEM = track(items.register("aura_charger",
                 () -> platform.machineItem(AURA_CHARGER.get(), MachineIcon.AURA_CHARGER)));
         AURA_DISPERSER = trackBlock(blocks.<Block>register("aura_disperser",
-                () -> new TaMachineBlocks.MachineBlock(DISPERSER_BE)));
+                () -> new TaMachineBlocks.MachineBlock(DISPERSER_BE, gui(DISPERSER_MENU,
+                        dev.tc4port.thaumadditions.gui.MachineMenus.AuraDisperser::new))));
         FLUX_CONCENTRATOR = trackBlock(blocks.<Block>register("flux_concentrator",
                 () -> new TaMachineBlocks.MachineBlock(CONCENTRATOR_BE)));
         FLUX_CONCENTRATOR_ITEM = track(items.register("flux_concentrator",
@@ -426,7 +460,8 @@ public final class Content {
         ESSENTIA_SINK_AUX = trackBlock(blocks.<Block>register("essentia_sink_aux",
                 TaMachineBlocks.SinkAuxBlock::new));
         SHADOW_ENCHANTER = trackBlock(blocks.<Block>register("shadow_enchanter",
-                () -> new TaMachineBlocks.EnchanterBlock(ENCHANTER_BE)));
+                () -> new TaMachineBlocks.EnchanterBlock(ENCHANTER_BE, gui(ENCHANTER_MENU,
+                        dev.tc4port.thaumadditions.gui.MachineMenus.ShadowEnchanter::new))));
         ENTITY_SUMMONER = trackBlock(blocks.<Block>register("entity_summoner",
                 () -> new TaMachineBlocks.SummonerBlock(SUMMONER_BE)));
         SEAL = trackBlock(blocks.<Block>register("seal", () -> new TaMachineBlocks.SealBlock(SEAL_BE)));
@@ -524,8 +559,9 @@ public final class Content {
 
     private static Supplier<Block> smelter(Registrar blocks, String name, float efficiency, int speed,
                                           int capacity) {
-        return blocks.<Block>register(name,
-                () -> new TaMachineBlocks.SmelterBlock(SMELTER_BE, efficiency, speed, capacity));
+        return blocks.<Block>register(name, () -> new TaMachineBlocks.SmelterBlock(SMELTER_BE,
+                efficiency, speed, capacity, gui(SMELTER_MENU,
+                        dev.tc4port.thaumadditions.gui.MachineMenus.Smelter::new)));
     }
 
     // ------------------------------------------------------------------ armor
