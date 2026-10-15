@@ -24,7 +24,8 @@ import net.minecraft.world.level.block.state.BlockState;
  *
  * <p>TC6's jar extended its own {@code TileJarFillable} with the whole phial / label / brace
  * interaction surface. This port keeps what the block state, the essentia transport and the two
- * variant rules need. The aspect label is not ported yet, so every jar behaves as an unlabelled
+ * variant rules need. 1.12's separate aspect *label* is not ported — the aspect shows on
+ * the liquid and in the goggles instead — so every jar behaves as an unlabelled
  * one: suction 32 while it has room, and it accepts whatever aspect reaches it first.</p>
  */
 public class TileJar extends TileEssentia {

@@ -233,7 +233,8 @@ public final class Content {
     public static Supplier<net.minecraft.world.inventory.MenuType<dev.tc4port.thaumadditions.gui.MachineMenus.ShadowEnchanter>> ENCHANTER_MENU;
 
     /**
-     * The essentia pistol's shot; the other entities are not ported yet.
+     * The essentia pistol's shot. The blue wolf, Chester and the scythe are registered in
+     * {@link #init}, because their classes are shared rather than per node.
      *
      * <p>Filled by the node rather than by {@link #init}, because the entity's concrete class has to
      * be per node: {@code defineSynchedData} takes a builder on one version and nothing on the

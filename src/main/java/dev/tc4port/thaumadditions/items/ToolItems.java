@@ -59,7 +59,7 @@ import net.minecraft.world.phys.Vec3;
  * version-drifted {@code Item} hooks stay on the platform port.
  *
  * <p>Everything here is self-contained: no packets, no GUIs, no custom entities.
- * Where 1.12 leaned on a subsystem that is not ported yet (the Chester entity,
+ * Where 1.12 leaned on a subsystem the port has since grown (the Chester entity,
  * the seal-globe editor) the item still registers and is fully functional as an
  * object; the missing interaction is called out per item.</p>
  */
@@ -246,7 +246,7 @@ public final class ToolItems {
     /**
      * 1.12 {@code ItemCrystalBag}: absorbs nearby {@code thaumcraft:crystal_essence}
      * item entities into an NBT essentia store (32768 per aspect). The 1.12 GUI is
-     * not ported yet, so the bag shows its contents in the tooltip instead.
+     * a GUI. The bag has one now; the tooltip still lists the first few aspects as a summary.
      */
     public static Item crystalBag(TaPlatform platform) {
         return platform.behaviorItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE), new ItemBehavior() {
@@ -463,15 +463,16 @@ public final class ToolItems {
     }
 
     /**
-     * 1.12 {@code ItemSealGlobe}: opens the seal editor over {@code TileSeal}. The
-     * editor is a GUI, and GUIs are the next pass, so the globe is inert for now.
+     * 1.12 {@code ItemSealGlobe}: a material item with no behaviour of its own. Upstream's seal
+     * globe screen opens from the seal block rather than from this item, and the port does the
+     * same, so there is nothing to do here.
      */
     public static Item sealGlobe(TaPlatform platform) {
         return platform.behaviorItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE), new ItemBehavior() {
             @Override
             public List<Component> tooltipLines(ItemStack stack) {
-                return List.of(Component.translatable("tooltip.thaumadds.seal_globe.pending")
-                        .withStyle(ChatFormatting.DARK_GRAY));
+                return List.of(Component.translatable("tooltip.thaumadds.seal_globe")
+                        .withStyle(ChatFormatting.GRAY));
             }
         });
     }
