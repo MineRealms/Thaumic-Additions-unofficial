@@ -33,23 +33,6 @@ public final class TaTiles {
         }
     }
 
-    /** 1.12 {@code TileAuraDisperser}: nine salt slots, 20s per bag, area effect. */
-    public static class Disperser extends TileEssentia {
-        public Disperser(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, 64, 1);
-        }
-
-        @Override
-        protected boolean accepts(Direction face) {
-            return false;
-        }
-
-        @Override
-        protected boolean emits(Direction face) {
-            return false;
-        }
-    }
-
     /** 1.12 {@code TileCrystalBore}: drains vis while facing a crystal block, 100t per bore. */
     public static class Bore extends TileEssentia {
         public Bore(BlockEntityType<?> type, BlockPos pos, BlockState state) {

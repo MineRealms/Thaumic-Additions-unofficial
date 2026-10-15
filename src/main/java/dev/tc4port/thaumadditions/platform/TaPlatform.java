@@ -154,6 +154,13 @@ public interface TaPlatform {
 
     boolean hasEffect(LivingEntity target, TaEffect effect);
 
+    /**
+     * Ticks left on the effect, or {@code -1} when the target does not have it. 1.12's
+     * {@code EdibleAspect} refused to re-apply an effect that was already running unless it was
+     * nearly out, so the remaining duration has to be readable from shared code.
+     */
+    int effectRemaining(LivingEntity target, TaEffect effect);
+
     void removeEffect(LivingEntity target, TaEffect effect);
 
     /** Removes every harmful effect, the mithminite full-set cleanse. */

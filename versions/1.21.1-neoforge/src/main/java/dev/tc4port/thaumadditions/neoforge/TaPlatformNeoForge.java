@@ -326,6 +326,12 @@ public final class TaPlatformNeoForge implements TaPlatform {
     }
 
     @Override
+    public int effectRemaining(LivingEntity target, TaEffect effect) {
+        MobEffectInstance active = target.getEffect(nativeEffect(effect));
+        return active == null ? -1 : active.getDuration();
+    }
+
+    @Override
     public void removeEffect(LivingEntity target, TaEffect effect) {
         target.removeEffect(nativeEffect(effect));
     }
@@ -346,6 +352,14 @@ public final class TaPlatformNeoForge implements TaPlatform {
             case JUMP -> MobEffects.JUMP;
             case SLOW_FALLING -> MobEffects.SLOW_FALLING;
             case WARP_WARD -> dev.tc4port.thaumcraft.registry.TCEffects.WARP_WARD;
+            case SLOWNESS -> MobEffects.MOVEMENT_SLOWDOWN;
+            case BLINDNESS -> MobEffects.BLINDNESS;
+            case NAUSEA -> MobEffects.CONFUSION;
+            case STRENGTH -> MobEffects.DAMAGE_BOOST;
+            case HASTE -> MobEffects.DIG_SPEED;
+            case HUNGER -> MobEffects.HUNGER;
+            case RESISTANCE -> MobEffects.DAMAGE_RESISTANCE;
+            case FLUX_TAINT -> dev.tc4port.thaumcraft.registry.TCEffects.FLUX_TAINT;
         };
     }
 

@@ -19,6 +19,7 @@ import dev.tc4port.thaumadditions.platform.TaArmorTick;
 import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.ToolKind;
 import dev.tc4port.thaumadditions.tiles.TileAspectCombiner;
+import dev.tc4port.thaumadditions.tiles.TileAuraDisperser;
 import dev.tc4port.thaumadditions.tiles.TileCrystal;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
@@ -216,7 +217,7 @@ public final class Content {
     public static Supplier<BlockEntityType<TileGrowthChamber>> GROWTH_BE;
     public static Supplier<BlockEntityType<TileAspectCombiner>> COMBINER_BE;
     public static Supplier<BlockEntityType<TaTiles.Charger>> CHARGER_BE;
-    public static Supplier<BlockEntityType<TaTiles.Disperser>> DISPERSER_BE;
+    public static Supplier<BlockEntityType<TileAuraDisperser>> DISPERSER_BE;
     public static Supplier<BlockEntityType<TaTiles.Bore>> BORE_BE;
     public static Supplier<BlockEntityType<TileCrystalCrusher>> CRUSHER_BE;
     public static Supplier<BlockEntityType<TaTiles.Concentrator>> CONCENTRATOR_BE;
@@ -462,8 +463,8 @@ public final class Content {
                 (pos, state) -> new TileAspectCombiner(COMBINER_BE.get(), pos, state), ASPECT_COMBINER.get()).build(null));
         CHARGER_BE = registrar.register("aura_charger", () -> BlockEntityType.Builder.<TaTiles.Charger>of(
                 (pos, state) -> new TaTiles.Charger(CHARGER_BE.get(), pos, state), AURA_CHARGER.get()).build(null));
-        DISPERSER_BE = registrar.register("aura_disperser", () -> BlockEntityType.Builder.<TaTiles.Disperser>of(
-                (pos, state) -> new TaTiles.Disperser(DISPERSER_BE.get(), pos, state), AURA_DISPERSER.get()).build(null));
+        DISPERSER_BE = registrar.register("aura_disperser", () -> BlockEntityType.Builder.<TileAuraDisperser>of(
+                (pos, state) -> new TileAuraDisperser(DISPERSER_BE.get(), pos, state), AURA_DISPERSER.get()).build(null));
         BORE_BE = registrar.register("crystal_bore", () -> BlockEntityType.Builder.<TaTiles.Bore>of(
                 (pos, state) -> new TaTiles.Bore(BORE_BE.get(), pos, state), CRYSTAL_BORE.get()).build(null));
         CRUSHER_BE = registrar.register("crystal_crusher", () -> BlockEntityType.Builder.<TileCrystalCrusher>of(
