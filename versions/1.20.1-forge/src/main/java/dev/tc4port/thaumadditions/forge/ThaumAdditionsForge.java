@@ -40,7 +40,7 @@ public final class ThaumAdditionsForge {
                 return (Supplier<T>) (Supplier) BLOCKS.register(name, (Supplier) factory);
             }
         };
-        Content.init(items, blocks);
+        Content.init(items, blocks, new TaPlatformForge());
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))

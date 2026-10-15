@@ -37,7 +37,7 @@ public final class ThaumAdditionsNeoForge {
                 return (Supplier<T>) (Supplier) BLOCKS.register(name, (Supplier) factory);
             }
         };
-        Content.init(items, blocks);
+        Content.init(items, blocks, new TaPlatformNeoForge());
 
         TABS.register("main", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.thaumadds"))
@@ -48,6 +48,8 @@ public final class ThaumAdditionsNeoForge {
         ITEMS.register(modBus);
         BLOCKS.register(modBus);
         TABS.register(modBus);
+        // 1.21.1 armor materials live in their own registry and must be registered before use.
+        TaPlatformNeoForge.register(modBus);
 
         modBus.addListener(this::commonSetup);
         ThaumAdditions.init("neoforge", "1.21.1");
