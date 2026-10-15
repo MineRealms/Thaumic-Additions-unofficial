@@ -110,24 +110,44 @@ public final class TaBlocks {
      * could advance them.
      */
     public static class CropBlock extends net.minecraft.world.level.block.CropBlock {
+        /**
+         * The vanilla {@code CropBlock} constructor calls {@link #getAgeProperty()} and
+         * {@code createBlockStateDefinition} before any field of this subclass is assigned, so the
+         * age property cannot live in an instance field while the super constructor runs.
+         * {@link #installAge} stashes it in a static that the constructor argument evaluates, and
+         * the constructor body then freezes it into the instance field. Block registration is
+         * single-threaded, so one static is enough.
+         */
+        private static IntegerProperty pendingAge;
+
         private final IntegerProperty age;
         private final int maxAge;
 
         public CropBlock(Properties properties, int maxAge) {
-            super(properties);
+            super(installAge(properties, maxAge));
+            this.age = pendingAge;
             this.maxAge = maxAge;
-            this.age = IntegerProperty.create("age", 0, maxAge);
-            registerDefaultState(stateDefinition.any().setValue(age, 0));
+        }
+
+        private static Properties installAge(Properties properties, int maxAge) {
+            pendingAge = IntegerProperty.create("age", 0, maxAge);
+            return properties;
         }
 
         @Override
         public IntegerProperty getAgeProperty() {
-            return age;
+            return age != null ? age : pendingAge;
         }
 
         @Override
         public int getMaxAge() {
             return maxAge;
+        }
+
+        /** Replaces vanilla's {@code AGE_7}: the 1.12 crops stop at their own bound. */
+        @Override
+        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+            builder.add(getAgeProperty());
         }
     }
 
@@ -135,7 +155,8 @@ public final class TaBlocks {
      * 1.12 {@code BlockArcaneCake}: six bites, self-restoring, and it stores its
      * eaten aspects in a block entity instead of dropping them.
      */
-    public static class ArcaneCakeBlock extends net.minecraft.world.level.block.CakeBlock {
+    public static class ArcaneCakeBlock extends net.minecraft.world.level.block.CakeBlock
+            implements net.minecraft.world.level.block.EntityBlock {
         private final java.util.function.Supplier<? extends net.minecraft.world.level.block.entity.BlockEntityType<?>> type;
 
         public ArcaneCakeBlock(Properties properties,
@@ -144,8 +165,9 @@ public final class TaBlocks {
             this.type = type;
         }
 
-        /** {@code Block} declares no {@code newBlockEntity}; the cake is not an {@code EntityBlock}. */
-        public net.minecraft.world.level.block.entity.BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        /** The engine only creates block entities through {@code EntityBlock}, not by naming. */
+        @Override
+        public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return type.get().create(pos, state);
         }
     }

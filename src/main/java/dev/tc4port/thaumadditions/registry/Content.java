@@ -260,7 +260,7 @@ public final class Content {
         KNOWLEDGE_TOME = track(items.register("knowledge_tome", () -> ToolItems.knowledgeTome(platform)));
         CRYSTAL_BAG = track(items.register("crystal_bag", () -> ToolItems.crystalBag(platform)));
         DISENCHANT_FABRIC = track(items.register("disenchant_fabric", GearItems::disenchantFabric));
-        ENTITY_CELL = track(items.register("entity_cell", () -> ToolItems.entityCell(platform)));
+        ENTITY_CELL = track(items.register("dna_sample", () -> ToolItems.entityCell(platform)));
         CHESTER = track(items.register("chester", () -> ToolItems.chester(platform)));
         SEAL_GLOBE = track(items.register("seal_globe", () -> ToolItems.sealGlobe(platform)));
     }
@@ -364,12 +364,21 @@ public final class Content {
 
         GROWTH_CHAMBER = trackBlock(blocks.<Block>register("growth_chamber",
                 () -> new TaMachineBlocks.GrowthChamberBlock(GROWTH_BE)));
-        CRYSTAL_BORE = machine(blocks, "crystal_bore", BORE_BE);
-        CRYSTAL_CRUSHER = machine(blocks, "crystal_crusher", CRUSHER_BE);
-        ASPECT_COMBINER = machine(blocks, "aspect_combiner", COMBINER_BE);
-        AURA_CHARGER = machine(blocks, "aura_charger", CHARGER_BE);
-        AURA_DISPERSER = machine(blocks, "aura_disperser", DISPERSER_BE);
-        FLUX_CONCENTRATOR = machine(blocks, "flux_concentrator", CONCENTRATOR_BE);
+        // Each lambda reads its *_BE static field when the block is instantiated, not when this
+        // method runs: blockEntities() assigns them further down, so binding the value here (as a
+        // helper taking the supplier as a parameter would) hands the block a null type.
+        CRYSTAL_BORE = trackBlock(blocks.<Block>register("crystal_bore",
+                () -> new TaMachineBlocks.MachineBlock(BORE_BE)));
+        CRYSTAL_CRUSHER = trackBlock(blocks.<Block>register("crystal_crusher",
+                () -> new TaMachineBlocks.MachineBlock(CRUSHER_BE)));
+        ASPECT_COMBINER = trackBlock(blocks.<Block>register("aspect_combiner",
+                () -> new TaMachineBlocks.MachineBlock(COMBINER_BE)));
+        AURA_CHARGER = trackBlock(blocks.<Block>register("aura_charger",
+                () -> new TaMachineBlocks.MachineBlock(CHARGER_BE)));
+        AURA_DISPERSER = trackBlock(blocks.<Block>register("aura_disperser",
+                () -> new TaMachineBlocks.MachineBlock(DISPERSER_BE)));
+        FLUX_CONCENTRATOR = trackBlock(blocks.<Block>register("flux_concentrator",
+                () -> new TaMachineBlocks.MachineBlock(CONCENTRATOR_BE)));
         ESSENTIA_SINK = trackBlock(blocks.<Block>register("essentia_sink",
                 () -> new TaMachineBlocks.SinkBlock(SINK_BE)));
         ESSENTIA_SINK_AUX = trackBlock(blocks.<Block>register("essentia_sink_aux",
@@ -432,24 +441,12 @@ public final class Content {
                 (pos, state) -> new TaTiles.Concentrator(CONCENTRATOR_BE.get(), pos, state), FLUX_CONCENTRATOR.get()).build(null));
     }
 
-    /** Block items for every block 1.12 gave one, in tab order. */
+    /**
+     * Block items for every block whose registration did not already create one, in tab order.
+     * The plain blocks ({@link #plainBlocks}) come through {@link #block}, which registers the
+     * block and its item together — listing them here too would double-register.
+     */
     private static void blockItems(Registrar items) {
-        blockItem(items, "mithrillium_block", MITHRILLIUM_BLOCK);
-        blockItem(items, "adaminite_block", ADAMINITE_BLOCK);
-        blockItem(items, "mithminite_block", MITHMINITE_BLOCK);
-        blockItem(items, "taintwood_planks", TAINTWOOD_PLANKS);
-        blockItem(items, "chiseled_amber_block", CHISELED_AMBER_BLOCK);
-        blockItem(items, "chiseled_greatwood", CHISELED_GREATWOOD);
-        blockItem(items, "iron_framed_greatwood", IRON_FRAMED_GREATWOOD);
-        blockItem(items, "brass_plated_silverwood", BRASS_PLATED_SILVERWOOD);
-        blockItem(items, "amber_lamp", AMBER_LAMP);
-        blockItem(items, "puriflower", PURIFLOWER);
-        blockItem(items, "dawn_totem", DAWN_TOTEM);
-        blockItem(items, "twilight_totem", TWILIGHT_TOTEM);
-        blockItem(items, "taintkin", TAINTKIN);
-        blockItem(items, "taintkin_lit", TAINTKIN_LIT);
-        blockItem(items, "void_anvil", VOID_ANVIL);
-        blockItem(items, "thaumic_lectern", THAUMIC_LECTERN);
         blockItem(items, "jar_brass", JAR_BRASS);
         blockItem(items, "jar_thaumium", JAR_THAUMIUM);
         blockItem(items, "jar_eldritch", JAR_ELDRITCH);
@@ -492,11 +489,6 @@ public final class Content {
                                           int capacity) {
         return blocks.<Block>register(name,
                 () -> new TaMachineBlocks.SmelterBlock(SMELTER_BE, efficiency, speed, capacity));
-    }
-
-    private static Supplier<Block> machine(Registrar blocks, String name,
-                                           java.util.function.Supplier<? extends BlockEntityType<?>> type) {
-        return blocks.<Block>register(name, () -> new TaMachineBlocks.MachineBlock(type));
     }
 
     // ------------------------------------------------------------------ armor

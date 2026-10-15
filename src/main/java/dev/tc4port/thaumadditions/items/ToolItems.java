@@ -391,12 +391,25 @@ public final class ToolItems {
      * generic until the per-aspect registration pass.
      */
     public static Item visSeeds(java.util.function.Supplier<Block> crop) {
-        return new BlockItem(crop.get(), new Item.Properties());
+        return named(crop.get(), "item.thaumadds.vis_seeds");
     }
 
     /** 1.12 {@code ItemVoidSeed}: plants the void crop on farmland. */
     public static Item voidSeed(java.util.function.Supplier<Block> crop) {
-        return new BlockItem(crop.get(), new Item.Properties());
+        return named(crop.get(), "item.thaumadds.void_seed");
+    }
+
+    /**
+     * A seed item named after itself rather than its block: {@code BlockItem} defaults
+     * {@code getDescriptionId} to the crop's id, which would show "Void Crop" on a seed.
+     */
+    private static Item named(Block crop, String descriptionId) {
+        return new BlockItem(crop, new Item.Properties()) {
+            @Override
+            public String getDescriptionId() {
+                return descriptionId;
+            }
+        };
     }
 
     /**
