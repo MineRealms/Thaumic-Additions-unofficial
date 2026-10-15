@@ -11,20 +11,61 @@ import net.minecraft.world.item.Item;
  * The mod's content declarations. Node adapters call {@link #init(Registrar, Registrar)}
  * from their mod constructor, before registry events fire. Registration order here is the
  * order entries land in the creative tab.
+ *
+ * <p>Ids match the 1.12 {@code setTranslationKey} names so the original lang keys and
+ * assets stay 1:1 with upstream. Items that carry behaviour in 1.12 (flight device,
+ * seal globe, resonator, phantom ink phial) are intentionally absent until their
+ * behaviour stage — registering them as inert items would ship dead content.</p>
  */
 public final class Content {
     /** Ordered view of every registered item, for creative-tab population. */
     private static final List<Supplier<Item>> ITEM_ORDER = new ArrayList<>();
 
+    // --- drops ---
     public static Supplier<Item> BLUE_BONE;
     public static Supplier<Item> ZEITH_FUR;
+
+    // --- material family (1.12 ItemsTAR "MATERIALS") ---
+    public static Supplier<Item> MITHRILLIUM_NUGGET;
+    public static Supplier<Item> ADAMINITE_NUGGET;
+    public static Supplier<Item> MITHMINITE_NUGGET;
+    public static Supplier<Item> MITHRILLIUM_INGOT;
+    public static Supplier<Item> ADAMINITE_INGOT;
+    public static Supplier<Item> MITHMINITE_INGOT;
+    public static Supplier<Item> MITHRILLIUM_PLATE;
+    public static Supplier<Item> ADAMINITE_PLATE;
+    public static Supplier<Item> MITHMINITE_PLATE;
+    public static Supplier<Item> ADAMINITE_FABRIC;
+    public static Supplier<Item> MITHMINITE_FABRIC;
+    public static Supplier<Item> MITHMINITE_BLADE;
+    public static Supplier<Item> MITHMINITE_HANDLE;
+    public static Supplier<Item> ODOUR_POWDER;
 
     private Content() {
     }
 
     public static void init(Registrar items, Registrar blocks) {
-        BLUE_BONE = track(items.register("blue_bone", () -> new Item(new Item.Properties())));
-        ZEITH_FUR = track(items.register("zeith_fur", () -> new Item(new Item.Properties())));
+        BLUE_BONE = track(items.register("blue_bone", Content::simple));
+        ZEITH_FUR = track(items.register("zeith_fur", Content::simple));
+
+        MITHRILLIUM_NUGGET = track(items.register("mithrillium_nugget", Content::simple));
+        ADAMINITE_NUGGET = track(items.register("adaminite_nugget", Content::simple));
+        MITHMINITE_NUGGET = track(items.register("mithminite_nugget", Content::simple));
+        MITHRILLIUM_INGOT = track(items.register("mithrillium_ingot", Content::simple));
+        ADAMINITE_INGOT = track(items.register("adaminite_ingot", Content::simple));
+        MITHMINITE_INGOT = track(items.register("mithminite_ingot", Content::simple));
+        MITHRILLIUM_PLATE = track(items.register("mithrillium_plate", Content::simple));
+        ADAMINITE_PLATE = track(items.register("adaminite_plate", Content::simple));
+        MITHMINITE_PLATE = track(items.register("mithminite_plate", Content::simple));
+        ADAMINITE_FABRIC = track(items.register("adaminite_fabric", Content::simple));
+        MITHMINITE_FABRIC = track(items.register("mithminite_fabric", Content::simple));
+        MITHMINITE_BLADE = track(items.register("mithminite_blade", Content::simple));
+        MITHMINITE_HANDLE = track(items.register("mithminite_handle", Content::simple));
+        ODOUR_POWDER = track(items.register("odour_powder", Content::simple));
+    }
+
+    private static Item simple() {
+        return new Item(new Item.Properties());
     }
 
     private static Supplier<Item> track(Supplier<Item> holder) {

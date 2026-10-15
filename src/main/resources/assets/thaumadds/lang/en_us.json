@@ -1,5 +1,19 @@
 {
   "item.thaumadds.blue_bone": "Blue Bone",
   "item.thaumadds.zeith_fur": "Blue Wolf Fur",
+  "item.thaumadds.mithrillium_nugget": "Mithrillium Nugget",
+  "item.thaumadds.adaminite_nugget": "Adaminite Nugget",
+  "item.thaumadds.mithminite_nugget": "Mithminite Nugget",
+  "item.thaumadds.mithrillium_ingot": "Mithrillium Ingot",
+  "item.thaumadds.adaminite_ingot": "Adaminite Ingot",
+  "item.thaumadds.mithminite_ingot": "Mithminite Ingot",
+  "item.thaumadds.mithrillium_plate": "Mithrillium Plate",
+  "item.thaumadds.adaminite_plate": "Adaminite Plate",
+  "item.thaumadds.mithminite_plate": "Mithminite Plate",
+  "item.thaumadds.adaminite_fabric": "Adaminite Fabric",
+  "item.thaumadds.mithminite_fabric": "Mithminite Fabric",
+  "item.thaumadds.mithminite_blade": "Mithminite Blade",
+  "item.thaumadds.mithminite_handle": "Mithminite Handle",
+  "item.thaumadds.odour_powder": "Odour Powder",
   "itemGroup.thaumadds": "Thaumic Additions"
 }

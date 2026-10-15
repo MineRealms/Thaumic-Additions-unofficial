@@ -61,6 +61,11 @@ repositories {
     mavenCentral()
 }
 
+// Dev-client conveniences: join straight into the test world (override with -PquickPlay=<name>)
+// and never let the client pause the integrated server (Esc menu / focus loss), so the
+// Rosetta bridge stays responsive while probing.
+def devWorld = project.hasProperty('quickPlay') ? project.property('quickPlay').toString() : 'New World'
+
 if (isForge) {
     // ---------------------------------------------------------------- 1.20.1 / Forge (LegacyForge)
     apply plugin: 'net.neoforged.moddev.legacyforge'
@@ -74,14 +79,14 @@ if (isForge) {
                 // Rosetta remote-debug bridge: dedicated port so concurrent dev clients never
                 // clash (warpfx DEV uses 48790, Isorropia 48791).
                 systemProperty 'rosetta.remote.port', '48793'
+                // Keeps the integrated server ticking with the Esc menu open (see MinecraftNoPauseMixin).
+                systemProperty 'thaumadds.dev.noPause', 'true'
             }
             client {
                 client()
                 gameDirectory = rootProject.file('run-client')
-                if (project.hasProperty('quickPlay')) {
-                    programArgument '--quickPlaySingleplayer'
-                    programArgument project.property('quickPlay').toString()
-                }
+                programArgument '--quickPlaySingleplayer'
+                programArgument devWorld
             }
         }
 
@@ -154,14 +159,14 @@ if (isForge) {
             configureEach {
                 systemProperty 'forge.logging.console.level', 'info'
                 systemProperty 'rosetta.remote.port', '48794'
+                // Keeps the integrated server ticking with the Esc menu open (see MinecraftNoPauseMixin).
+                systemProperty 'thaumadds.dev.noPause', 'true'
             }
             client {
                 client()
                 gameDirectory = rootProject.file('run-client-1.21.1')
-                if (project.hasProperty('quickPlay')) {
-                    programArgument '--quickPlaySingleplayer'
-                    programArgument project.property('quickPlay').toString()
-                }
+                programArgument '--quickPlaySingleplayer'
+                programArgument devWorld
             }
         }
 
@@ -271,6 +276,10 @@ def jarJarMeta = tasks.register('hcliteJarJarMetadata') {
 }
 
 tasks.named('jar', Jar).configure {
+    // Forge reads mixin configs only from the MixinConfigs manifest attribute. Dev runs load the
+    // exploded resources directory, which carries the same attribute in src/main/resources/META-INF/
+    // MANIFEST.MF; the shipped jar must exclude that file and use the generated manifest instead.
+    exclude 'META-INF/MANIFEST.MF'
     manifest {
         attributes('Specification-Title': mod_name, 'Specification-Vendor': mod_authors,
                 'Specification-Version': '1',
