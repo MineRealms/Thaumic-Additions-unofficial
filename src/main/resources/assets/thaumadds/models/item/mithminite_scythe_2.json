@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "thaumadds:entity/mithminite_scythe"
+    "layer0": "thaumadds:item/mithminite_scythe_2"
   }
 }

@@ -348,17 +348,21 @@ public final class Content {
                         .lightLevel(state -> 8).noCollission()));
         DAWN_TOTEM = block(items, blocks, "dawn_totem", wood(1.5F, false));
         TWILIGHT_TOTEM = block(items, blocks, "twilight_totem", wood(1.5F, false));
-        TAINTKIN = block(items, blocks, "taintkin",
-                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.WOOD));
-        TAINTKIN_LIT = block(items, blocks, "taintkin_lit",
+        // These four carry a 1.12 horizontal facing (BlockTaintkin extends BlockPumpkin;
+        // BlockThaumicLectern and BlockVoidAnvil implement IBlockHorizontal), which their
+        // blockstates declare as facing=north/south/west/east. A plain Block has no properties at
+        // all, so nothing but the empty variant matched and the models fell back to missingno.
+        TAINTKIN = block(items, blocks, "taintkin", () -> new TaBlocks.HorizontalFacingBlock(
+                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.WOOD)));
+        TAINTKIN_LIT = block(items, blocks, "taintkin_lit", () -> new TaBlocks.HorizontalFacingBlock(
                 BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.WOOD)
-                        .lightLevel(state -> 9));
-        VOID_ANVIL = block(items, blocks, "void_anvil",
+                        .lightLevel(state -> 9)));
+        VOID_ANVIL = block(items, blocks, "void_anvil", () -> new TaBlocks.HorizontalFacingBlock(
                 BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2.0F).sound(SoundType.ANVIL)
-                        .requiresCorrectToolForDrops());
-        THAUMIC_LECTERN = block(items, blocks, "thaumic_lectern",
+                        .requiresCorrectToolForDrops()));
+        THAUMIC_LECTERN = block(items, blocks, "thaumic_lectern", () -> new TaBlocks.HorizontalFacingBlock(
                 BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD)
-                        .noOcclusion());
+                        .noOcclusion()));
     }
 
     /** Every block that carries a block entity, wired to its type supplier. */
