@@ -227,6 +227,8 @@ public final class TaPlatformForge implements TaPlatform {
             case BRAIN -> dev.tc4port.thaumcraft.registry.TCSounds.BRAIN.get();
             // 1.12's SoundsTC.poof has no TC4R entry; UPGRADE is TC4R's "something finished" cue.
             case CRAFT_DONE -> dev.tc4port.thaumcraft.registry.TCSounds.UPGRADE.get();
+            // TC4R has no grind either; the vanilla grindstone is the same noise.
+            case GRIND -> net.minecraft.sounds.SoundEvents.GRINDSTONE_USE;
         };
         level.playSound(null, pos, event, net.minecraft.sounds.SoundSource.BLOCKS, volume, pitch);
     }

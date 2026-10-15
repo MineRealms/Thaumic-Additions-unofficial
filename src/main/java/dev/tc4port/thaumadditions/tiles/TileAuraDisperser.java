@@ -2,6 +2,7 @@ package dev.tc4port.thaumadditions.tiles;
 
 import dev.tc4port.hclite.platform.HCLitePlatform;
 import dev.tc4port.hclite.tile.SyncedBlockEntity;
+import dev.tc4port.thaumadditions.TaFx;
 import dev.tc4port.thaumadditions.aspect.EdibleAspect;
 import dev.tc4port.thaumadditions.items.AspectItems;
 import dev.tc4port.thaumadditions.registry.Content;
@@ -10,8 +11,6 @@ import dev.tc4port.thaumcraft.api.aspect.AspectList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,6 +43,9 @@ public class TileAuraDisperser extends SyncedBlockEntity
 
     /** 1.12 {@code atTickRate(20)}: the effect is re-applied once a second, not once a tick. */
     private static final int APPLY_INTERVAL = 20;
+
+    /** How many motes the disperser throws when a second of dispersal lands. */
+    private static final int FX_COUNT = 12;
 
     /** 1.12's box: five blocks forward, four up, grown by four/three/four. */
     private static final int REACH_HORIZONTAL = 5;
@@ -159,12 +161,19 @@ public class TileAuraDisperser extends SyncedBlockEntity
             did |= EdibleAspect.execute(entity, aspects).visSize() > 0;
         }
 
-        if (did && level instanceof ServerLevel server) {
-            server.sendParticles(ParticleTypes.ENCHANT,
-                    pos.getX() + 0.5D + facing.getStepX() * 1.5D,
-                    pos.getY() + 0.5D + facing.getStepY() * 1.5D,
-                    pos.getZ() + 0.5D + facing.getStepZ() * 1.5D,
-                    12, 0.8D, 0.8D, 0.8D, 0.05D);
+        if (did) {
+            // 1.12's disperser FX: a puff of motes in the colour of whatever is being dispersed.
+            AspectId dispersed = aspects.aspectsSorted().isEmpty()
+                    ? null : aspects.aspectsSorted().get(0);
+            double x = pos.getX() + 0.5D + facing.getStepX() * 1.5D;
+            double y = pos.getY() + 0.5D + facing.getStepY() * 1.5D;
+            double z = pos.getZ() + 0.5D + facing.getStepZ() * 1.5D;
+            for (int index = 0; index < FX_COUNT; index++) {
+                TaFx.aspectDust(level, x, y, z, dispersed,
+                        (level.getRandom().nextDouble() - 0.5D) * 0.8D,
+                        (level.getRandom().nextDouble() - 0.5D) * 0.8D,
+                        (level.getRandom().nextDouble() - 0.5D) * 0.8D);
+            }
         }
 
         int before = tickTimer;

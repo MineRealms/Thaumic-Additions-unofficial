@@ -1,7 +1,10 @@
 package dev.tc4port.thaumadditions.tiles;
 
 import dev.tc4port.hclite.tile.SyncedBlockEntity;
+import dev.tc4port.thaumadditions.TaFx;
 import dev.tc4port.thaumadditions.items.ThaumcraftItems;
+import dev.tc4port.thaumadditions.platform.TaPlatform;
+import dev.tc4port.thaumadditions.platform.TaSound;
 import dev.tc4port.thaumcraft.api.aspect.AspectId;
 import dev.tc4port.thaumcraft.api.aspect.VisChannel;
 import dev.tc4port.thaumcraft.api.aspect.VisAction;
@@ -46,9 +49,12 @@ public class TileCrystalBore extends SyncedBlockEntity implements TaTickables.Ti
     private static final int DRAIN_PER_TICK = 2;
     /** 1.12 {@code boring >= 100}: a hundred ticks of drilling per crystal. */
     private static final int TICKS_PER_CRYSTAL = 100;
+    /** 1.12 threw four sparks every third tick while boring. */
+    private static final int FX_INTERVAL = 3;
+    private static final int FX_COUNT = 4;
     /** How fast the drill winds up while it is boring, and how fast it coasts back down. */
     private static final float SPIN_UP = 0.5F;
-    private static final float SPIN_FRICTION = 0.25F;
+    private static final float SPIN_FRICTION = TaRotator.DEFAULT_FRICTION;
 
     /** 1.12's {@code minCrystals}; kept for parity with existing saves even though nothing reads it. */
     private int minCrystals = 1;
@@ -56,17 +62,17 @@ public class TileCrystalBore extends SyncedBlockEntity implements TaTickables.Ti
     /** Ticks spent boring the cluster in front; resets on every harvest. */
     private int boring;
 
-    /** Renderer state, client-only and unpersisted. */
-    private float rotation;
-    private float spin;
+    /** The drill head's spin, the way 1.12's {@code FrictionRotator} held it. */
+    private final TaRotator rotator = TaRotator.randomised(new java.util.Random());
 
     /** Ticks waiting on the ground before this machine may draw vis again. */
     private int drainCooldown;
+    /** Counts to the spark cadence. */
+    private int fxTicker;
 
     public TileCrystalBore(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         this.minCrystals = getPersistentData().getInt(KEY_MIN_CRYSTALS);
-        this.rotation = new java.util.Random().nextFloat() * 360.0F;
     }
 
     public int minCrystals() {
@@ -77,8 +83,9 @@ public class TileCrystalBore extends SyncedBlockEntity implements TaTickables.Ti
         return boring;
     }
 
-    public float rotation() {
-        return rotation;
+    /** The drill head; the renderer turns it about Y by this angle. */
+    public TaRotator rotator() {
+        return rotator;
     }
 
     /** The face the block was placed with, or north when it has none. */
@@ -90,19 +97,27 @@ public class TileCrystalBore extends SyncedBlockEntity implements TaTickables.Ti
 
     @Override
     public void tick(Level level, BlockPos pos, BlockState state) {
-        // The drill always turns; it just turns faster while it has something to eat.
-        spin = Math.max(0.0F, spin - SPIN_FRICTION);
-        rotation += spin;
+        rotator.setFriction(SPIN_FRICTION);
+        rotator.update();
 
         Direction ahead = face();
 
-        if (level.isClientSide) {
-            return;
-        }
-
+        // The drill winds up on both sides: the client has to see the same spin the server does,
+        // and it can tell whether the machine is working from the synced block state alone.
         if (!canBore(level, pos, ahead)) {
             boring = 0;
             return;
+        }
+
+        if (level.isClientSide) {
+            rotator.speedup(SPIN_UP);
+            return;
+        }
+
+        // 1.12 threw four sparks off the drill face and ground out a sound every third tick.
+        if (++fxTicker >= FX_INTERVAL) {
+            fxTicker = 0;
+            spark(level, pos, ahead);
         }
 
         if (drainCooldown > 0) {
@@ -116,7 +131,7 @@ public class TileCrystalBore extends SyncedBlockEntity implements TaTickables.Ti
             return;
         }
 
-        spin = Math.min(spin + SPIN_UP, 24.0F);
+        rotator.speedup(SPIN_UP);
         ++boring;
 
         if (boring >= TICKS_PER_CRYSTAL) {
@@ -132,6 +147,21 @@ public class TileCrystalBore extends SyncedBlockEntity implements TaTickables.Ti
         }
         return level.getBlockState(pos.relative(ahead)).getBlock()
                 instanceof dev.tc4port.thaumcraft.block.CrystalClusterBlock;
+    }
+
+    /** 1.12's spark burst: four motes of the cluster's colour scattered off the drill face. */
+    private void spark(Level level, BlockPos pos, Direction ahead) {
+        AspectId aspect = aspectOf(level.getBlockState(pos.relative(ahead)));
+        double x = pos.getX() + 0.5D + ahead.getStepX() * 0.75D;
+        double y = pos.getY() + 0.5D + ahead.getStepY() * 0.75D;
+        double z = pos.getZ() + 0.5D + ahead.getStepZ() * 0.75D;
+        for (int index = 0; index < FX_COUNT; index++) {
+            TaFx.aspectDust(level, x, y, z, aspect,
+                    (level.getRandom().nextDouble() - 0.5D) * 0.1D,
+                    (level.getRandom().nextDouble() - 0.5D) * 0.1D,
+                    (level.getRandom().nextDouble() - 0.5D) * 0.1D);
+        }
+        TaPlatform.Active.get().playSound(level, pos, TaSound.GRIND, 0.5F, 1.0F);
     }
 
     /**

@@ -47,8 +47,8 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
     private int crushes;
     private int craftTime;
 
-    /** Drives the renderer; 1.12 advanced it client-side only. */
-    private float rotation;
+    /** Drives the renderer's rotator; 1.12 wound it up client-side only. */
+    private final TaRotator rotator = TaRotator.randomised(new java.util.Random());
 
     public TileCrystalCrusher(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state, 64, 1);
@@ -75,17 +75,19 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
         return craftTime;
     }
 
-    /** 0..1, for the renderer's rotation. */
-    public float rotation() {
-        return rotation;
+    /** The head's spin, for the renderer. */
+    public TaRotator rotator() {
+        return rotator;
     }
 
     @Override
     protected void machineTick(Level level, BlockPos pos, BlockState state) {
+        rotator.update();
+
         // 1.12 only spun the rotator on the client, and only while it was working.
         if (level.isClientSide) {
             if (canCraft()) {
-                rotation = (rotation + 0.4F) % 360.0F;
+                rotator.speedup(0.4F);
             }
             return;
         }

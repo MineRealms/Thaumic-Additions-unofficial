@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import dev.tc4port.thaumadditions.TaFx;
 import dev.tc4port.thaumadditions.aspect.EdibleAspect;
 import dev.tc4port.thaumadditions.platform.TaEffect;
 import dev.tc4port.thaumcraft.api.aspect.AspectAmounts;
@@ -79,6 +80,8 @@ public class TileFluxConcentrator extends TileEssentia implements AspectContaine
     private static final int CONVERSION_LOCKOUT = 400;
     /** 1.12 put vis exhaustion on everything standing in the field, for this long. */
     private static final int EXHAUST_TICKS = 219;
+    /** 1.12 drew up to five motes over the field each step. */
+    private static final int FX_COUNT = 5;
 
     /** The blocks the field currently covers, in the order they were found. */
     private final List<BlockPos> fluxed = new ArrayList<>();
@@ -96,6 +99,9 @@ public class TileFluxConcentrator extends TileEssentia implements AspectContaine
     private int tearTicker;
     /** Set on the tick the field tears at what is standing in it. */
     private boolean tear;
+
+    /** The valve's spin, for the renderer. 1.12 gave this one a lighter friction than the rest. */
+    private final TaRotator rotator = new TaRotator();
 
     public TileFluxConcentrator(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state, CAPACITY, SUCTION);
@@ -129,6 +135,11 @@ public class TileFluxConcentrator extends TileEssentia implements AspectContaine
 
     public int fuel() {
         return fuel;
+    }
+
+    /** The valve; the renderer turns it about Z. */
+    public TaRotator rotator() {
+        return rotator;
     }
 
     public List<BlockPos> fluxed() {
@@ -172,7 +183,13 @@ public class TileFluxConcentrator extends TileEssentia implements AspectContaine
             --cooldown;
         }
 
+        // 1.12 wound the valve up on the client whenever the machine had work and a field.
+        rotator.setFriction(0.1F);
+        rotator.update();
         if (level.isClientSide) {
+            if (fuel > 0 && !fluxed.isEmpty()) {
+                rotator.speedup(0.25F);
+            }
             return;
         }
 
@@ -312,7 +329,30 @@ public class TileFluxConcentrator extends TileEssentia implements AspectContaine
 
         damageEntities(level, pos);
         convertOne(level, pos);
+        taintParticles(level);
         store();
+    }
+
+    /**
+     * 1.12's field shimmer: up to five motes over random positions the field covers, in the colour
+     * of flux. Upstream drew these on the client from a synced cache; the port has the field list on
+     * both sides, so it draws them wherever the machine is being ticked.
+     */
+    private void taintParticles(Level level) {
+        if (fluxed.isEmpty()) {
+            return;
+        }
+        int count = Math.min(fluxed.size() / 2, FX_COUNT);
+        for (int index = 0; index < count; index++) {
+            BlockPos at = fluxed.get(level.getRandom().nextInt(fluxed.size()));
+            TaFx.aspectDust(level, at.getX() + level.getRandom().nextDouble(),
+                    at.getY() + level.getRandom().nextDouble(),
+                    at.getZ() + level.getRandom().nextDouble(),
+                    fluxAspect(),
+                    (level.getRandom().nextFloat() - level.getRandom().nextFloat()) / 10.0D,
+                    (level.getRandom().nextFloat() - level.getRandom().nextFloat()) / 10.0D,
+                    (level.getRandom().nextFloat() - level.getRandom().nextFloat()) / 10.0D);
+        }
     }
 
     /** 1.12 {@code redefine}: throw the field away and flood it again from the seed. */

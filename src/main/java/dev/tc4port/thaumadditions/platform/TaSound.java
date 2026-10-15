@@ -18,5 +18,7 @@ public enum TaSound {
     /** 1.12 {@code SoundsTC.brain}, the enchanter's idle tick every few seconds. */
     BRAIN,
     /** 1.12 {@code SoundsTC.poof}, played when the shadow enchanter finishes an item. */
-    CRAFT_DONE
+    CRAFT_DONE,
+    /** 1.12's {@code thaumcraft:grind}, which the crystal bore plays while it drills. */
+    GRIND
 }

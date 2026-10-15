@@ -25,6 +25,7 @@ import dev.tc4port.thaumadditions.tiles.TileCrystal;
 import dev.tc4port.thaumadditions.tiles.TileCrystalLamp;
 import dev.tc4port.thaumadditions.tiles.TileCrystalBore;
 import dev.tc4port.thaumadditions.tiles.TileCrystalCrusher;
+import dev.tc4port.thaumadditions.tiles.TileEntitySummoner;
 import dev.tc4port.thaumadditions.tiles.TileEssentiaSink;
 import dev.tc4port.thaumadditions.tiles.TileFluxConcentrator;
 import dev.tc4port.thaumadditions.tiles.TileGrowthChamber;
@@ -218,7 +219,7 @@ public final class Content {
     public static Supplier<BlockEntityType<TileCrystal.Cake>> CAKE_BE;
     public static Supplier<BlockEntityType<TileSeal>> SEAL_BE;
     public static Supplier<BlockEntityType<TileEssentiaSink>> SINK_BE;
-    public static Supplier<BlockEntityType<TaTiles.Summoner>> SUMMONER_BE;
+    public static Supplier<BlockEntityType<TileEntitySummoner>> SUMMONER_BE;
     public static Supplier<BlockEntityType<TileShadowEnchanter>> ENCHANTER_BE;
     public static Supplier<BlockEntityType<TileGrowthChamber>> GROWTH_BE;
     public static Supplier<BlockEntityType<TileAspectCombiner>> COMBINER_BE;
@@ -462,8 +463,8 @@ public final class Content {
                 (pos, state) -> new TileSeal(SEAL_BE.get(), pos, state), SEAL.get()).build(null));
         SINK_BE = registrar.register("essentia_sink", () -> BlockEntityType.Builder.<TileEssentiaSink>of(
                 (pos, state) -> new TileEssentiaSink(SINK_BE.get(), pos, state), ESSENTIA_SINK.get()).build(null));
-        SUMMONER_BE = registrar.register("entity_summoner", () -> BlockEntityType.Builder.<TaTiles.Summoner>of(
-                (pos, state) -> new TaTiles.Summoner(SUMMONER_BE.get(), pos, state), ENTITY_SUMMONER.get()).build(null));
+        SUMMONER_BE = registrar.register("entity_summoner", () -> BlockEntityType.Builder.<TileEntitySummoner>of(
+                (pos, state) -> new TileEntitySummoner(SUMMONER_BE.get(), pos, state), ENTITY_SUMMONER.get()).build(null));
         ENCHANTER_BE = registrar.register("shadow_enchanter", () -> BlockEntityType.Builder.<TileShadowEnchanter>of(
                 (pos, state) -> new TileShadowEnchanter(ENCHANTER_BE.get(), pos, state), SHADOW_ENCHANTER.get()).build(null));
         GROWTH_BE = registrar.register("growth_chamber", () -> BlockEntityType.Builder.<TileGrowthChamber>of(

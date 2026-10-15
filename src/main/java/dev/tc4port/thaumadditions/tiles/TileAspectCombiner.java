@@ -45,8 +45,7 @@ public class TileAspectCombiner extends TileEssentia {
     private int prevCraftingTime;
 
     /** 1.12's animation state, all of it client-only and unpersisted. */
-    private float rotation;
-    private float prevRotation;
+    private final TaRotator rotator = new TaRotator();
     private int toggle;
     private int vis;
     private int prevVis;
@@ -187,8 +186,8 @@ public class TileAspectCombiner extends TileEssentia {
     @Override
     protected void machineTick(Level level, BlockPos pos, BlockState state) {
         prevCraftingTime = craftingTime;
-        prevRotation = rotation;
         prevVis = vis;
+        rotator.update();
 
         vis = (inA != null ? 1 : 0) + (inB != null ? 1 : 0) + (output != null ? 1 : 0);
 
@@ -218,7 +217,7 @@ public class TileAspectCombiner extends TileEssentia {
             toggle = 36;
         }
         float speed = (float) Math.sqrt((!crafting ? toggle / 36.0F : (36 - toggle) / 36.0F) * 81.0F) / 9.0F * 8.0F;
-        rotation += speed;
+        rotator.speedup(speed);
         if (toggle != 0) {
             toggle += toggle < 0 ? 1 : -1;
         }
@@ -318,8 +317,8 @@ public class TileAspectCombiner extends TileEssentia {
         return craftingTime;
     }
 
-    public float rotation() {
-        return rotation;
+    public TaRotator rotator() {
+        return rotator;
     }
 
     public int vis() {

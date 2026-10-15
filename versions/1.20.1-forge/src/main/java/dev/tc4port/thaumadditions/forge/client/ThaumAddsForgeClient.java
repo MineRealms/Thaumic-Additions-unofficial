@@ -1,6 +1,7 @@
 package dev.tc4port.thaumadditions.forge.client;
 
 import dev.tc4port.thaumadditions.ThaumAdditions;
+import dev.tc4port.thaumadditions.client.render.ItemRenderers;
 import dev.tc4port.thaumadditions.client.render.MachineRenderers;
 import dev.tc4port.thaumadditions.registry.Content;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,5 +26,7 @@ public final class ThaumAddsForgeClient {
         event.registerBlockEntityRenderer(Content.CHARGER_BE.get(), context -> new MachineRenderers.AuraCharger());
         event.registerBlockEntityRenderer(Content.CRUSHER_BE.get(), context -> new MachineRenderers.CrystalCrusher());
         event.registerBlockEntityRenderer(Content.CONCENTRATOR_BE.get(), context -> new MachineRenderers.FluxConcentrator());
+        event.registerBlockEntityRenderer(Content.ENCHANTER_BE.get(), context -> new ItemRenderers.ShadowEnchanter());
+        event.registerBlockEntityRenderer(Content.SUMMONER_BE.get(), context -> new ItemRenderers.MobSummoner());
     }
 }
