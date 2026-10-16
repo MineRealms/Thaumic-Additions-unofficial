@@ -180,14 +180,28 @@ def parse(blob, own_keys, items):
         "recipe_ids": [],
     }]
     if recipes:
-        pages.append({
-            "type": "NORMAL_CRAFTING",
-            "value": "",
-            "aspects": {},
-            "compound_blueprint": "",
-            "recipe_link_policy": "DISABLED",
-            "recipe_ids": ["thaumadds:" + name for name in recipes],
-        })
+        # Upstream's setRecipes names a recipe by its own name, and the port's files are named
+        # after what they make, so the two are matched through the item a recipe produces rather
+        # than by the string. A name with no recipe here is dropped rather than left dangling: the
+        # book looks a page's recipes up and shows nothing for one that is not there.
+        linked = []
+        for name in recipes:
+            item = ICON_ALIASES.get(name, name)
+            found = RECIPE_BY_RESULT.get(item)
+            if found and found not in linked:
+                linked.append(found)
+        # One page per recipe, on the page that matches what kind of recipe it is and links to
+        # exactly one: the book refuses to load a page that names several, and a page whose recipe
+        # is of another kind shows nothing. A name with no recipe here gets no page at all.
+        for identifier, page_type in linked:
+            pages.append({
+                "type": page_type,
+                "value": "",
+                "aspects": {},
+                "compound_blueprint": "",
+                "recipe_link_policy": "COMPLETED_SINGLE",
+                "recipe_ids": [identifier],
+            })
 
     return {
         "key": key,
@@ -214,6 +228,35 @@ all_blobs = blobs(source)
 own_keys = {key_of(b) for b in all_blobs if key_of(b)}
 items = {os.path.basename(p)[:-5]
          for p in glob.glob("src/main/resources/assets/thaumadds/models/item/*.json")}
+
+def recipes_by_result():
+    """Every recipe the generators have written, keyed by the item it makes.
+
+    The id keeps the folder it was written in, because that is the id it is loaded under."""
+    found = {}
+    root = "src/main/resources/data/thaumadds/recipes"
+    for folder, _, files in os.walk(root):
+        for name in files:
+            if not name.endswith(".json"):
+                continue
+            document = json.load(io.open(os.path.join(folder, name), encoding="utf-8"))
+            result = (document.get("result") or {}).get("item")
+            if not result:
+                continue
+            relative = os.path.relpath(os.path.join(folder, name), root).replace(os.sep, "/")
+            kind = (document.get("type") or "").split(":")[-1]
+            page = {
+                "thaumcraft:arcane_shaped": "ARCANE_CRAFTING",
+                "thaumcraft:arcane_shapeless": "ARCANE_CRAFTING",
+                "thaumcraft:infusion": "INFUSION_CRAFTING",
+                "thaumcraft:crucible": "CRUCIBLE_CRAFTING",
+            }.get(document.get("type"), "NORMAL_CRAFTING")
+            found.setdefault(result.split(":")[-1],
+                             ("thaumadds:" + relative[:-5], page))
+    return found
+
+
+RECIPE_BY_RESULT = recipes_by_result()
 
 entries, skipped = [], []
 for blob in all_blobs:
@@ -295,6 +338,8 @@ for blob in all_blobs:
         name_by_key[blob_key] = base.group(2)
 
 ENGLISH_STAGES = read_stages(LANG_SOURCE)
+
+
 
 
 def tc4r_research_name(key, locale):

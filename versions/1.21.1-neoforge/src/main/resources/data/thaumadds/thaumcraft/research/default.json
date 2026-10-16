@@ -144,13 +144,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:crystal_crusher"
+            "thaumadds:infusion/crystal_crusher"
           ]
         }
       ]
@@ -198,13 +198,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:aura_disperser"
+            "thaumadds:infusion/aura_disperser"
           ]
         }
       ]
@@ -250,13 +250,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:essentia_pistol"
+            "thaumadds:arcane/essentia_pistol"
           ]
         }
       ]
@@ -302,13 +302,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:seal"
+            "thaumadds:arcane/seal"
           ]
         }
       ]
@@ -400,13 +400,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:seal_globe"
+            "thaumadds:arcane/seal_globe"
           ]
         }
       ]
@@ -455,13 +455,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:knowledge_tome"
+            "thaumadds:arcane/knowledge_tome"
           ]
         }
       ]
@@ -507,14 +507,23 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:chester",
-            "thaumadds:bone_eye"
+            "thaumadds:infusion/chester"
+          ]
+        },
+        {
+          "type": "ARCANE_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:arcane/bone_eye"
           ]
         }
       ]
@@ -562,13 +571,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:vis_scribing_tools"
+            "thaumadds:arcane/vis_scribing_tools"
           ]
         }
       ]
@@ -612,17 +621,6 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
-        },
-        {
-          "type": "NORMAL_CRAFTING",
-          "value": "",
-          "aspects": {},
-          "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
-          "recipe_ids": [
-            "thaumadds:crystal_water",
-            "thaumadds:mb.crystal_acceleration"
-          ]
         }
       ]
     },
@@ -667,13 +665,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:enchanted_golden_apple"
+            "thaumadds:infusion/arcane_cake"
           ]
         }
       ]
@@ -764,13 +762,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:growth_chamber"
+            "thaumadds:infusion/growth_chamber"
           ]
         }
       ]
@@ -816,14 +814,23 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "CRUCIBLE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:odour_powder",
-            "thaumadds:fragnant_pendant"
+            "thaumadds:crucible/odour_powder"
+          ]
+        },
+        {
+          "type": "ARCANE_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:arcane/fragnant_pendant"
           ]
         }
       ]
@@ -914,13 +921,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:crystal_bag"
+            "thaumadds:infusion/crystal_bag"
           ]
         }
       ]
@@ -968,13 +975,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:traveller_belt"
+            "thaumadds:infusion/traveller_belt"
           ]
         }
       ]
@@ -1022,13 +1029,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:striding_belt"
+            "thaumadds:infusion/striding_belt"
           ]
         }
       ]
@@ -1076,13 +1083,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:meteor_belt"
+            "thaumadds:infusion/meteor_belt"
           ]
         }
       ]
@@ -1130,13 +1137,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:brass_jar"
+            "thaumadds:arcane/jar_brass"
           ]
         }
       ]
@@ -1184,13 +1191,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:thaumium_jar"
+            "thaumadds:arcane/jar_thaumium"
           ]
         }
       ]
@@ -1239,13 +1246,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:eldritch_jar"
+            "thaumadds:arcane/jar_eldritch"
           ]
         }
       ]
@@ -1348,14 +1355,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:dna_sample",
-            "thaumadds:mob_summoner"
+            "thaumadds:arcane/dna_sample"
           ]
         }
       ]
@@ -1404,13 +1410,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:aspect_combiner"
+            "thaumadds:infusion/aspect_combiner"
           ]
         }
       ]
@@ -1459,13 +1465,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithrillium_jar"
+            "thaumadds:arcane/jar_mithrillium"
           ]
         }
       ]
@@ -1514,13 +1520,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithrillium_smelter"
+            "thaumadds:arcane/mithrillium_smelter"
           ]
         }
       ]
@@ -1569,13 +1575,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:shadow_enchanter"
+            "thaumadds:infusion/shadow_enchanter"
           ]
         }
       ]
@@ -1623,13 +1629,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:shadow_beam_staff"
+            "thaumadds:infusion/shadow_beam_staff"
           ]
         }
       ]
@@ -1678,13 +1684,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:the_beheader"
+            "thaumadds:infusion/the_beheader"
           ]
         }
       ]
@@ -1778,13 +1784,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:aura_charger"
+            "thaumadds:infusion/aura_charger"
           ]
         }
       ]
@@ -1841,13 +1847,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:adaminite_jar"
+            "thaumadds:arcane/jar_adaminite"
           ]
         }
       ]
@@ -1896,13 +1902,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:adaminite_smelter"
+            "thaumadds:arcane/adaminite_smelter"
           ]
         }
       ]
@@ -1952,13 +1958,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:adaminite_sword"
+            "thaumadds:infusion/adaminite_sword"
           ]
         }
       ]
@@ -2007,17 +2013,53 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:adaminite_fabric",
-            "thaumadds:adaminite_hood",
-            "thaumadds:adaminite_robe",
-            "thaumadds:adaminite_belt",
-            "thaumadds:adaminite_boots"
+            "thaumadds:arcane/adaminite_fabric"
+          ]
+        },
+        {
+          "type": "ARCANE_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:arcane/adaminite_hood"
+          ]
+        },
+        {
+          "type": "ARCANE_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:arcane/adaminite_robe"
+          ]
+        },
+        {
+          "type": "ARCANE_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:arcane/adaminite_belt"
+          ]
+        },
+        {
+          "type": "ARCANE_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:arcane/adaminite_boots"
           ]
         }
       ]
@@ -2111,13 +2153,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_jar"
+            "thaumadds:infusion/mithminite_jar"
           ]
         }
       ]
@@ -2166,13 +2208,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_smelter"
+            "thaumadds:arcane/mithminite_smelter"
           ]
         }
       ]
@@ -2221,15 +2263,33 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_scythe",
-            "thaumadds:mithminite_blade",
-            "thaumadds:mithminite_handle"
+            "thaumadds:infusion/mithminite_scythe"
+          ]
+        },
+        {
+          "type": "INFUSION_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:infusion/mithminite_blade"
+          ]
+        },
+        {
+          "type": "INFUSION_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:infusion/mithminite_handle"
           ]
         }
       ]
@@ -2279,13 +2339,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_fabric"
+            "thaumadds:arcane/mithminite_fabric"
           ]
         }
       ]
@@ -2335,13 +2395,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_hood"
+            "thaumadds:infusion/mithminite_hood"
           ]
         }
       ]
@@ -2390,13 +2450,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_robe"
+            "thaumadds:infusion/mithminite_robe"
           ]
         }
       ]
@@ -2444,13 +2504,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_belt"
+            "thaumadds:infusion/mithminite_belt"
           ]
         }
       ]
@@ -2499,13 +2559,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:mithminite_boots"
+            "thaumadds:infusion/mithminite_boots"
           ]
         }
       ]
@@ -2553,13 +2613,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:arcane_cake"
+            "thaumadds:infusion/arcane_cake"
           ]
         }
       ]
@@ -2615,14 +2675,23 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:twilight_totem",
-            "thaumadds:dawn_totem"
+            "thaumadds:arcane/twilight_totem"
+          ]
+        },
+        {
+          "type": "ARCANE_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "COMPLETED_SINGLE",
+          "recipe_ids": [
+            "thaumadds:arcane/dawn_totem"
           ]
         }
       ]
@@ -2670,13 +2739,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:puriflower"
+            "thaumadds:infusion/puriflower"
           ]
         }
       ]
@@ -2722,13 +2791,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:crystal_bore"
+            "thaumadds:infusion/crystal_bore"
           ]
         }
       ]
@@ -2774,13 +2843,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:flux_concentrator"
+            "thaumadds:infusion/flux_concentrator"
           ]
         }
       ]
@@ -2828,13 +2897,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:disenchant_fabric"
+            "thaumadds:arcane/disenchant_fabric"
           ]
         }
       ]
@@ -2880,13 +2949,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "ARCANE_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:crystal_lamp"
+            "thaumadds:arcane/crystal_lamp"
           ]
         }
       ]
@@ -2918,19 +2987,7 @@
       "entity_triggers": [],
       "aspect_triggers": [],
       "warp": 0,
-      "pages": [
-        {
-          "type": "NORMAL_CRAFTING",
-          "value": "",
-          "aspects": {},
-          "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
-          "recipe_ids": [
-            "thaumadds:voidingot",
-            "thaumadds:void_stuff"
-          ]
-        }
-      ]
+      "pages": []
     },
     {
       "key": "TAR_VOID_THAUMOMETER",
@@ -2975,13 +3032,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:void_thaumometer"
+            "thaumadds:infusion/void_thaumometer"
           ]
         }
       ]
@@ -3030,13 +3087,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:wormhole_mirror"
+            "thaumadds:infusion/wormhole_mirror"
           ]
         }
       ]
@@ -3084,13 +3141,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:void_crop"
+            "thaumadds:infusion/void_crop"
           ]
         }
       ]
@@ -3138,13 +3195,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:void_anvil"
+            "thaumadds:infusion/void_anvil"
           ]
         }
       ]
@@ -3193,13 +3250,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:void_elemental_pickaxe"
+            "thaumadds:infusion/void_elemental_pickaxe"
           ]
         }
       ]
@@ -3248,13 +3305,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:void_elemental_axe"
+            "thaumadds:infusion/void_elemental_axe"
           ]
         }
       ]
@@ -3303,13 +3360,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:void_elemental_shovel"
+            "thaumadds:infusion/void_elemental_shovel"
           ]
         }
       ]
@@ -3358,13 +3415,13 @@
           "recipe_ids": []
         },
         {
-          "type": "NORMAL_CRAFTING",
+          "type": "INFUSION_CRAFTING",
           "value": "",
           "aspects": {},
           "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
+          "recipe_link_policy": "COMPLETED_SINGLE",
           "recipe_ids": [
-            "thaumadds:void_elemental_hoe"
+            "thaumadds:infusion/void_elemental_hoe"
           ]
         }
       ]
