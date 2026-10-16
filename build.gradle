@@ -301,6 +301,23 @@ def hcliteJar = tasks.register('hcliteJar', Jar) {
     from sourceSets.hclite.output
 }
 
+// MDG remaps only the main `jar` task. HCLite is embedded by this separate `hcliteJar` task,
+// so without this its vanilla calls stay mojmap-named and the SRG production runtime throws
+// NoSuchMethodError the moment any HCLite item is touched (seen as a creative-inventory
+// crash on ItemStack#getTag). Route the companion through the same remap. The NeoForge node
+// runs mojmap at runtime and registers no obfuscation extension, so this is Forge-only.
+if (isForge) {
+    // `reobfuscate` resolves the source set's runtime/api elements configurations, which the
+    // Java plugin only creates for `main`.
+    configurations.create('hcliteRuntimeElements') {
+        extendsFrom configurations.hcliteRuntimeClasspath
+    }
+    configurations.create('hcliteApiElements') {
+        extendsFrom configurations.hcliteCompileClasspath
+    }
+    ext.hcliteReobf = obfuscation.reobfuscate(hcliteJar, sourceSets.hclite)
+}
+
 // Embeds HCLite into the release jar via the Forge/NeoForge jar-in-jar format. MDG's jarJar
 // plumbing expects maven-published companions; a manual embed keeps the companion in-repo.
 def jarJarDir = layout.buildDirectory.dir('jarjar')
@@ -343,10 +360,20 @@ tasks.named('jar', Jar).configure {
                 // mixins silently never apply on Forge.
                 'MixinConfigs': 'thaumadds.mixins.json')
     }
-    dependsOn hcliteJar, jarJarMeta
-    from(hcliteJar.map { it.outputs.files }) {
-        into 'META-INF/jarjar/jars'
-        rename { hcliteJarName }
+    dependsOn jarJarMeta
+    if (isForge) {
+        // Embed the remapped companion, not the raw mojmap-named jar.
+        dependsOn hcliteReobf
+        from(hcliteReobf.map { it.archiveFile }) {
+            into 'META-INF/jarjar/jars'
+            rename { hcliteJarName }
+        }
+    } else {
+        dependsOn hcliteJar
+        from(hcliteJar.map { it.outputs.files }) {
+            into 'META-INF/jarjar/jars'
+            rename { hcliteJarName }
+        }
     }
     from(jarJarDir) {
         into 'META-INF/jarjar'
