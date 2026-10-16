@@ -47,8 +47,12 @@ impossible. Written to be read cold.
    textures it needs (`misc/portal*.png`, `misc/seal_0/1/2.png`) are all present.
 5. **Fluid `crystal_water`.** Upstream has flow/still textures and `.mcmeta`, and a crucible recipe
    produces it; the port has no fluid.
-6. **Smaller client pieces**: the crop's baked model, the jar's in-hand model, the
-   `HudHandlerHookTAR` overlay, the charger's thunder/vis-sparkle effects.
+6. **Smaller client pieces**: the jar's in-hand model, the `HudHandlerHookTAR` overlay, the
+   charger's thunder/vis-sparkle effects, and the portal's framebuffer window.
+
+   The crops are *not* on this list: 1.12 baked them with a custom model baker for texture
+   variety, and the port ships per-age blockstate models instead, which is the same crops drawn
+   the ordinary way.
 
 ## Known impossible, with reasons
 
