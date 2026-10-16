@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:cutout",
   "textures": {
     "0": "thaumadds:block/essentia_sink",
     "particle": "thaumadds:block/essentia_sink"

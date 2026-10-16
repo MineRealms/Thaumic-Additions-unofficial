@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
   "textures": {
     "0": "thaumadds:block/crystal_lamp/base",
     "1": "thaumadds:block/crystal_lamp/overlay",

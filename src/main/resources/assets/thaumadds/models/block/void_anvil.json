@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/anvil",
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "thaumadds:block/void_anvil_base",
     "body": "thaumadds:block/void_anvil_base",

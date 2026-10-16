@@ -48,7 +48,7 @@ def shaped(name, result, count, pattern, key):
         "type": "minecraft:crafting_shaped",
         "pattern": pattern,
         "key": {letter: ingredient(value) for letter, value in key.items()},
-        "result": {"count": count, "id": result},
+        "result": {"count": count, "item": result},
     }
 
 
@@ -56,7 +56,7 @@ def shapeless(name, result, count, ingredients):
     return name, {
         "type": "minecraft:crafting_shapeless",
         "ingredients": [ingredient(value) for value in ingredients],
-        "result": {"count": count, "id": result},
+        "result": {"count": count, "item": result},
     }
 
 
