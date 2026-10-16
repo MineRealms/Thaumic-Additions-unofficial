@@ -81,6 +81,12 @@ public final class ItemRenderers {
         /** The preview entity, rebuilt only when the cell changes. */
         private Entity preview;
         private CompoundTag previewSource;
+        /** The cage around the preview; null when the node has not been given one. */
+        private final TesseractRenderer tesseract;
+
+        public MobSummoner(TesseractRenderer tesseract) {
+            this.tesseract = tesseract;
+        }
 
         @Override
         public void render(TileEntitySummoner be, float partialTick, PoseStack pose, MultiBufferSource buffers,
@@ -100,6 +106,16 @@ public final class ItemRenderers {
             dispatcher.render(shown, 0.0D, 0.0D, 0.0D, 0.0F, partialTick, pose, buffers, light);
             dispatcher.setRenderShadow(true);
             pose.popPose();
+
+            // 1.12 turned a hypercube around the creature it was about to summon: the mob preview
+            // is only half of what that machine showed. The turn is the machine's own rotation over
+            // two, in radians. The drawing itself is per node — see TesseractRenderer.
+            if (tesseract != null) {
+                pose.pushPose();
+                pose.translate(0.5D, 0.5D, 0.5D);
+                tesseract.render(pose, buffers, Math.toRadians(twist * 2.0F), light);
+                pose.popPose();
+            }
         }
 
         /** Builds and caches the preview creature from the cell in the machine's slot. */
