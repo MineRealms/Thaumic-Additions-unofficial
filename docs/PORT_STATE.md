@@ -32,18 +32,17 @@ impossible. Written to be read cold.
 | Entities | essentia shot, blue wolf, Chester, thrown scythe |
 | Client renderers | 11 tile renderers, 2 entity renderers, cake tint, jar liquid, void thaumometer |
 | Recipes | 50 (27 arcane, 23 infusion) — see the substitution caveat below |
+| Research | 64 entries with 62 page texts, generated from upstream's tree |
+| Mining tags | 41 of 43 blocks (cake and the unbreakable structure block have none on purpose) |
 
 ## Not done, in the order worth doing
 
-1. **Research tree.** Upstream `KnowledgeTAR` is 579 lines of research entries; the port has none,
-   which is why the Thaumonomicon is empty. TC4R's research is data-pack driven
-   (`data/thaumcraft/research/*.json` under `dev.tc4port.thaumcraft.api.research`), so this is a
-   data-port, not code.
-2. **The per-aspect recipe loops** (48 vis seeds, 48 seal symbols). Their results carry an aspect,
-   which needs checking against TC4R's recipe schema before they can be written.
-3. **Tags.** 1.12 used the ore dictionary; the port ships none. Needed for anything that should
-   accept "any plank" or "any ingot".
-4. **The seal's world rendering.** 1.12 drew the seal's frame and the portal's hole in the world
+1. **The per-aspect recipe loops** (48 vis seeds, 48 seal symbols) are **deliberately not ported**.
+   Their results carry an aspect, and TC4R's recipe format can only patch an item through
+   `input_patch`, which writes modern components — while the port's aspect items keep theirs in
+   legacy item NBT. The port's items assign themselves a random aspect on creation instead
+   (`AspectItems.onCreated`), so a per-aspect recipe would have nothing to set.
+2. **The seal's world rendering.** 1.12 drew the seal's frame and the portal's hole in the world
    (`TESRSeal`, `TARSealRenders`, `PortalRenderer`); the port has only the globe screen. The
    textures it needs (`misc/portal*.png`, `misc/seal_0/1/2.png`) are all present.
 5. **Fluid `crystal_water`.** Upstream has flow/still textures and `.mcmeta`, and a crucible recipe

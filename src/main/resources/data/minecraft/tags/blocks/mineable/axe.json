@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
+    "thaumadds:brass_plated_silverwood",
+    "thaumadds:chiseled_greatwood",
+    "thaumadds:iron_framed_greatwood",
     "thaumadds:taintwood_planks"
   ]
 }
