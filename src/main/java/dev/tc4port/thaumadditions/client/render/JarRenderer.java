@@ -2,9 +2,9 @@ package dev.tc4port.thaumadditions.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import dev.tc4port.thaumadditions.aspect.TaAspect;
 import dev.tc4port.thaumadditions.tiles.TileJar;
 import dev.tc4port.thaumcraft.api.aspect.AspectApi;
-import dev.tc4port.thaumcraft.api.aspect.AspectDefinition;
 import dev.tc4port.thaumcraft.api.aspect.AspectId;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -36,6 +36,10 @@ public class JarRenderer implements BlockEntityRenderer<TileJar> {
 
     private static final ModelPart LIQUID = layer().bakeRoot();
 
+    /** 1.12's {@code thaumcraft:blocks/animatedglow}, the sprite every jar's liquid is drawn with. */
+    private static final net.minecraft.resources.ResourceLocation BRINE =
+            net.minecraft.resources.ResourceLocation.tryParse("thaumcraft:textures/block/animatedglow.png");
+
     /** 1.20.1 builds block entity renderers from a context, even when one needs nothing from it. */
     public JarRenderer(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context context) {
     }
@@ -59,8 +63,7 @@ public class JarRenderer implements BlockEntityRenderer<TileJar> {
         if (amount <= 0 || aspect == null || capacity <= 0) {
             return;
         }
-        AspectDefinition definition = AspectApi.get(aspect);
-        if (definition == null || definition.texture() == null) {
+        if (AspectApi.get(aspect) == null) {
             return;
         }
         float level = amount / (float) capacity * FULL_HEIGHT;
@@ -69,8 +72,13 @@ public class JarRenderer implements BlockEntityRenderer<TileJar> {
         pose.translate(0.5D, FLOOR, 0.5D);
         // The model is one sixteenth tall, so scaling by the fill in sixteenths gives the height.
         pose.scale(1.0F, level * 16.0F, 1.0F);
-        LIQUID.render(pose, buffers.getBuffer(RenderType.entityCutout(definition.texture())),
-                light, overlay);
+        // Upstream bound a plain glow sprite and tinted it with the aspect's colour; what is in the
+        // jar is that colour, and the texture is only there to have something to tint. Binding the
+        // aspect's own icon instead — which is what this did — paints the jar with the aspect's
+        // *picture*, stretched over the inside of the glass.
+        ClientDraw.Holder.get().coloured(LIQUID, pose,
+                buffers.getBuffer(RenderType.entityCutoutNoCull(BRINE)),
+                light, overlay, TaAspect.color(aspect));
         pose.popPose();
     }
 }

@@ -12,7 +12,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class ThaumAdditions {
     public static final String MOD_ID = "thaumadds";
-    private static final Logger LOGGER = LoggerFactory.getLogger("ThaumicAdditions");
+    /** The mod's logger; public so a part of the mod that has no better place to put one can use it. */
+    public static final Logger LOGGER = LoggerFactory.getLogger("ThaumicAdditions");
 
     private static boolean initialized;
 

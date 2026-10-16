@@ -21,6 +21,15 @@ import java.util.function.Supplier;
  */
 @EventBusSubscriber(modid = ThaumAdditions.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public final class ThaumAddsNeoForgeClient {
+    /** The portal window's shared half is handed its node-specific half once. */
+    @SubscribeEvent
+    public static void installPortalWindow(
+            net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
+        dev.tc4port.thaumadditions.client.render.PortalWindow.install(
+                new PortalWindowRenderer());
+        dev.tc4port.thaumadditions.client.render.ClientDraw.Holder.install(new ClientDrawImpl());
+    }
+
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(Content.BORE_BE.get(), context -> new MachineRenderers.CrystalBore());

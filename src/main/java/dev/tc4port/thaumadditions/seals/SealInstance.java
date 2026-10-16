@@ -58,6 +58,15 @@ public abstract class SealInstance {
     }
 
     /**
+     * Where this seal leads, for the one behaviour that leads anywhere.
+     *
+     * <p>The portal window asks every seal for this and gets nothing from all but the portal.</p>
+     */
+    public net.minecraft.core.BlockPos portalBound() {
+        return null;
+    }
+
+    /**
      * How far open this seal's hole stands, {@code 0} shut to {@code 1} fully open.
      *
      * <p>Only the portal has a hole, and only the renderer asks; every other seal answers zero and

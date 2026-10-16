@@ -342,6 +342,11 @@ public final class TaSeals {
         }
 
         @Override
+        public net.minecraft.core.BlockPos portalBound() {
+            return bound;
+        }
+
+        @Override
         public void tick() {
             Level level = seal.getLevel();
             if (level == null) {

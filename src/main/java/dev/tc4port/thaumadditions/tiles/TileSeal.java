@@ -27,6 +27,22 @@ public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
     /** The behaviour the three symbols mean, or {@code null} while they mean nothing. */
     private dev.tc4port.thaumadditions.seals.SealInstance instance;
 
+    /**
+     * Every seal that is loaded, on either side.
+     *
+     * <p>The portal window needs to know where the seals are, once a frame, before the level's block
+     * entities are drawn — and at that moment there is no block entity renderer to be handed one.
+     * Keeping a set is far cheaper than the alternative, which is asking every block entity in the
+     * chunk whether it happens to be a seal.</p>
+     */
+    private static final java.util.Set<TileSeal> LOADED =
+            java.util.Collections.newSetFromMap(new java.util.concurrent.ConcurrentHashMap<>());
+
+    /** Every loaded seal; the portal window reads this and nothing else should. */
+    public static java.util.Set<TileSeal> loaded() {
+        return LOADED;
+    }
+
     public TileSeal(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -37,6 +53,17 @@ public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
         return state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING)
                 ? state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING)
                 : net.minecraft.core.Direction.UP;
+    }
+
+    /**
+     * Where the portal behind this seal leads, or {@code null} when it is not one or not bound.
+     *
+     * <p>Asked of the seal rather than of any one behaviour, so the renderer does not have to know
+     * that portals are the only seal with a destination.</p>
+     */
+    public BlockPos portalBound() {
+        var behaviour = instance();
+        return behaviour == null ? null : behaviour.portalBound();
     }
 
     /**
@@ -82,7 +109,16 @@ public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
     }
 
     @Override
+    public void setLevel(net.minecraft.world.level.Level level) {
+        super.setLevel(level);
+        if (level != null) {
+            LOADED.add(this);
+        }
+    }
+
+    @Override
     public void setRemoved() {
+        LOADED.remove(this);
         if (instance != null) {
             instance.onSealBreak();
         }

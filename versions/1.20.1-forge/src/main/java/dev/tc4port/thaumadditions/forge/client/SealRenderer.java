@@ -71,6 +71,8 @@ public class SealRenderer implements BlockEntityRenderer<TileSeal> {
     private static final float FACE = 0.5F;
     private static final float REACH_IN_1_12 = 2.0F;
     private static final float PORTAL_SCALE = FACE / REACH_IN_1_12;
+    /** The window is the whole face: it is the world, not another sheet of the swirl. */
+    private static final float WINDOW = 1.0F;
 
     public SealRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -82,6 +84,11 @@ public class SealRenderer implements BlockEntityRenderer<TileSeal> {
         MachineRenderers.orient(pose, seal.orientation().getOpposite());
         pose.mulPose(Axis.XP.rotationDegrees(90.0F));
         pose.translate(0.0D, -OFFSET, 0.0D);
+
+        // What is on the other side, when the frame chose this portal. It goes down first: the
+        // sheets are the swirl on the surface of it, not a cover over it.
+        dev.tc4port.thaumadditions.forge.client.PortalWindowRenderer.draw(
+                pose, WINDOW, (float) PORTAL_DEPTH + 0.005F);
 
         portal(seal, partialTick, pose, buffers, light, overlay);
         pictograms(seal, partialTick, pose, buffers, light, overlay);

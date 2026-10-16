@@ -1,78 +1,114 @@
-# Thaumic Additions: Reconstructed — Port (1.20.1 Forge / 1.21.1 NeoForge)
+# Thaumic Additions
 
-`dragon-forze/ThaumicAdditions` (1.12.2, TC6 addon) ported onto **Thaumcraft 4: Reconstructed
-(TC4R) 0.1.0-20740**, multi-version via Stonecutter.
+An addon for **Thaumcraft**, for **Minecraft 1.20.1 (Forge)** and **1.21.1 (NeoForge)**.
 
-## Nodes
+Thaumic Additions adds a second tier to everything a thaumaturge works with: three metals and the
+tools, armour and trinkets made from them, crystals in more shapes than the ones you can grow,
+six kinds of jar, a workshop of machines for essentia and vis, and seven runic seals that do your
+chores for you.
 
-| Node | Loader | MC | Notes |
-|---|---|---|---|
-| `versions/1.20.1-forge` | LegacyForge (MDG) | 1.20.1 | TC4R release jar is SRG; MDG `modImplementation` remaps it |
-| `versions/1.21.1-neoforge` | NeoForge (MDG) | 1.21.1 | TC4R release jar is already official-mapped |
+It began as [`dragon-forze/ThaumicAdditions`](https://github.com/dragon-forze/ThaumicAdditions),
+a Thaumcraft 6 addon for 1.12.2. This is the unofficial port of it onto
+[Thaumcraft 4: Reconstructed](https://github.com/iPortalTeam/Thaumcraft4Reconstructed), which is
+older in setting and newer in code — the two are close enough in what they let a thaumaturge do
+that the addon's own machinery came across whole.
 
-Build both: `./gradlew buildAndCollect` — the two release jars land in `build/distributions/`.
-Per-node build: `./gradlew :1.20.1-forge:build` / `:1.21.1-neoforge:build` (compiles + JUnit).
+---
 
-## Layout
+## What's in it
 
-- `src/main/java` — shared mod code, compiled **raw** on both nodes
-- `src/hclite/java` — shared **HCLite** core (the reimplemented HammerCore essentials)
-- `versions/<node>/src/main/java` — loader adapters (mod entries, client events, KubeJS plugin)
-- `versions/<node>/src/hclite/java` — HCLite loader bindings (`@Mod` entry per loader)
-- `local-repo/` — TC4R 20740 artifacts (not committed); see its README + `DEPENDENCIES.json`
-- `tools/` — migration/validation scripts (legacy asset + lang converters, one-shot patch scripts)
+### Three metals
 
-## Version drift — the adapter rule
+**Mithrillium**, **Adaminite** and **Mithminite**, each with a nugget, an ingot, a plate and a
+block, made from the one below it on an infusion altar. Mithrillium is the whitish one that starts
+you off; Adaminite is what you make when mithrillium is not enough; Mithminite is what you make
+when adaminite is not enough, and it is what the armour and the scythe are made of.
 
-There is **no Stonecutter replacement table and no `//?` conditionals in shared code**. The shared
-source is compiled raw on the active node, so any API that drifted between 1.20.1 and 1.21.1 (or
-Forge and NeoForge) must live behind one of two loader-neutral interfaces with a per-node impl:
+### Crystals
 
-- `dev.tc4port.thaumadditions.platform.TaPlatform` — tool tiers, armor materials, the drifted
-  `Item` hooks (via `ItemBehavior`), food / crop / puriflower factories, effect & ignite helpers.
-- `dev.tc4port.hclite.platform.HCLitePlatform` — block-entity NBT save/load, packet NBT, and item
-  custom NBT. Item NBT is `ItemStack.getTag()`/`getOrCreateTag()` on 1.20.1 and the
-  `DataComponents.CUSTOM_DATA` / `CustomData` component on 1.21 (`itemTag` / `updateItemTag`).
+Crystal blocks hold an aspect and glow with it. Crystal lamps light a room in an aspect's colour.
+Crystalised essence is the raw material for both, and a **crystal bag** carries far more of it
+than your pockets will.
 
-Block-entity state persists through `BlockEntity.getPersistentData()` (the `NeoForgeData` tag both
-loaders serialize): 1.21 added a `HolderLookup.Provider` parameter to `saveAdditional` /
-`loadAdditional`, so no shared override can satisfy both signatures.
+**Crystal water** is a fluid that makes crystals grow. Pour enough of it around a growing crystal
+and it climbs faster, spending the water as it goes.
 
-## HCLite (jar-in-jar companion)
+### Jars
 
-The 1.12 mod depended on HammerCore/HammerLib (no modern version exists). The needed parts are
-reimplemented in-repo as a separate mod (`hclite`), built by the `hcliteJar` task and embedded
-into both release jars via the Forge/NeoForge jar-in-jar format (`META-INF/jarjar/`). In the dev
-runtime both source sets load as mods through MDG's `mods {}` block.
+Six kinds, one for each metal plus eldritch and brass, in the sizes Thaumcraft's own warded jars
+are not.
 
-## Progress
+### Machines
 
-| Batch | Content | State |
-|---|---|---|
-| S0 | multiversion skeleton (Stonecutter + MDG), TC4R 20740 deps, Rosetta bridge in dev runs | done |
-| S1 | HCLite core (synced block entity, packet channel, device block) + first content | done |
-| S2 b1–b4 | 14 material items, 5 storage/decor blocks, void-elemental tools + adaminite / mithminite / blue-wolf armor | done |
-| assets | legacy 1.12 assets normalized to modern resource packs in bulk | done |
-| S3 items | all remaining 1.12 items (aspect items, belts, tomes, entity cell, thaumometer, wormhole mirror, shadow beam staff, essentia pistol) | done |
-| S3 blocks | all remaining blocks + 16 block entity types (jars, smelters, crystal machines, seal, cake, crops) | done |
-| S3 verify | runtime probe sweep on the 1.20.1 node: 99 items / 42 blocks / 16 BE types register, every name resolves, every block entity attaches where its type claims the block | done (1.21.1 node pending) |
-| S7a | renderer plumbing + the five machine models (the six blocks that render as missingno) | next |
-| S4 | block entity behaviour and ticking | pending |
-| S5 / S6 | menus and GUIs / networking | pending |
-| S7b / S8 / S9 | remaining client work / entities / seals | pending |
+- **Crystal crusher** — grinds crystallised essence down into salt essence of the same aspect.
+- **Aspect combiner** — two aspects in, one compound aspect out.
+- **Growth chamber** — feeds a crystal enough essentia and vis to grow more of itself.
+- **Crystal bore** — drills for crystals where they are found, and drinks vis doing it.
+- **Aura charger** — puts vis back into the aura node nearest it.
+- **Aura disperser** — spreads vis around, for when one node is doing all the work.
+- **Flux concentrator** — pulls flux out of the air and bottles it.
+- **Essentia sink** — a drain that empties jars into whatever you have plumbed to it.
+- **Shadow enchanter** — applies enchantments for essentia rather than levels.
+- **Entity summoner** — captures a creature in an entity cell and makes more of it, around a
+  turning hypercube, with no spawner needed.
 
-See [`docs/PORT_PLAN.md`](docs/PORT_PLAN.md) for what each of the remaining phases contains and why
-they are ordered that way; [`tools/recon/`](tools/recon) holds the upstream inventories they are
-planned from.
+### Seals
 
-Both nodes currently build clean: `:1.20.1-forge:build` + `:1.21.1-neoforge:build` pass with JUnit.
+Seven runes to press into a wall, each with three symbol slots. Fill them and the seal does the
+work: waters farmland, tills soil, bonemeals crops, harvests them, harvests and replants, picks
+loose items up off the floor. The seventh is a **portal**: bind two seals to one another and
+step through.
 
-## Configuration
+### Gear
 
-- GeckoLib drives the entity animations (replaces HammerAnimations); never bundled.
-- KubeJS plugin skeleton on both nodes (K6 class / K7 interface) replaces the 1.12 CraftTweaker
-  integration; script bindings come in the compat phase.
-- ColoredLux / Visuals / VFX are reimplemented natively — no external deps.
+The **void thaumometer** scans what you look at and tells you what aspects it carries. The
+**wormhole mirror**, the **shadow beam staff**, the **beheader**, the **essentia pistol**, and
+belts that carry you further, higher and faster. Most of it is infusion work.
 
-Out of scope until the compat phase: dev-kit addon interop (FM / Nodal Mechanics / Tainted Magic /
-Thaumic Tinkerer / Warp Theory), Thaumic Horizons, Thaumic Augmentation.
+### The rest
+
+A blue wolf, a Chester who follows you and carries your things, two crops — one grown from vis,
+one from the void — a cake that remembers every bite taken from it, and a Tome of Sharing that
+hands your knowledge to somebody else.
+
+Everything is written up in the Thaumonomicon under its own category, in English and in Chinese.
+
+---
+
+## Requirements
+
+| | |
+|---|---|
+| Minecraft | 1.20.1 or 1.21.1 |
+| Loader | Forge 47.x (1.20.1) or NeoForge 21.x (1.21.1) |
+| Thaumcraft | [Thaumcraft 4: Reconstructed](https://github.com/iPortalTeam/Thaumcraft4Reconstructed) |
+| Also needed | Curios and GeckoLib, both of which Thaumcraft itself requires |
+
+## Installing
+
+Drop the jar for your version into your `mods` folder. There is no configuration to write and
+nothing to switch on; the mod's own settings, if any are added later, live in
+`config/thaumadds-client.json`.
+
+## Building
+
+```
+./gradlew buildAndCollect
+```
+
+Both jars land in `build/distributions/`. Building one target on its own is
+`./gradlew :1.20.1-forge:build` or `./gradlew :1.21.1-neoforge:build`, either of which also runs
+the data tests. The sources are shared between the two targets and the loader differences live in
+per-target adapters, so most changes are written once.
+
+## Credits
+
+- **dragon-forze** and the DragonForge team, who wrote Thaumic Additions for 1.12.2 — every
+  machine, seal, metal and texture here started as theirs.
+- The **Thaumcraft 4: Reconstructed** team, for the Thaumcraft this runs on.
+- **Azanor**, for Thaumcraft itself.
+
+## License
+
+The original mod's assets and design belong to their authors. This port is distributed under the
+same terms as the mod it ports; see the original repository before redistributing anything from it.
