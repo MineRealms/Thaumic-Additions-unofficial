@@ -23,8 +23,7 @@
       },
       "flags": [
         "AUTO_UNLOCK",
-        "HIDDEN",
-        "SPIKY"
+        "HIDDEN"
       ],
       "parents": [],
       "hidden_parents": [],
@@ -95,7 +94,7 @@
       "parents": [
         "TAR_ESSENCE_SALT",
         "TAR_THAUMADDS",
-        "ARTIFICE"
+        "BASICARTIFACE"
       ],
       "hidden_parents": [],
       "siblings": [],
@@ -139,7 +138,7 @@
       },
       "flags": [],
       "parents": [
-        "ARTIFICE",
+        "BASICARTIFACE",
         "TAR_THAUMADDS",
         "TAR_ESSENCE_SALT"
       ],
@@ -308,8 +307,7 @@
         }
       },
       "flags": [
-        "HIDDEN",
-        "HEX"
+        "HIDDEN"
       ],
       "parents": [
         "TAR_SEAL_SYMBOLS"
@@ -401,9 +399,7 @@
           "id": "thaumadds:chester"
         }
       },
-      "flags": [
-        "SPIKY"
-      ],
+      "flags": [],
       "parents": [
         "TAR_THAUMADDS"
       ],
@@ -1069,7 +1065,6 @@
       },
       "flags": [
         "ROUND",
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -1107,7 +1102,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -1390,7 +1384,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "ROUND",
         "HIDDEN"
       ],
@@ -1439,7 +1432,6 @@
       },
       "flags": [
         "ROUND",
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -1523,7 +1515,6 @@
         }
       },
       "flags": [
-        "HEX",
         "HIDDEN"
       ],
       "parents": [
@@ -1571,7 +1562,6 @@
         }
       },
       "flags": [
-        "HEX",
         "HIDDEN"
       ],
       "parents": [
@@ -1619,7 +1609,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "ROUND",
         "HIDDEN"
       ],
@@ -1669,7 +1658,6 @@
       },
       "flags": [
         "ROUND",
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -1721,7 +1709,6 @@
       },
       "flags": [
         "ROUND",
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -1758,7 +1745,6 @@
         }
       },
       "flags": [
-        "HEX",
         "HIDDEN"
       ],
       "parents": [
@@ -1806,7 +1792,6 @@
         }
       },
       "flags": [
-        "HEX",
         "HIDDEN"
       ],
       "parents": [
@@ -1854,7 +1839,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "ROUND",
         "HIDDEN"
       ],
@@ -1905,7 +1889,6 @@
       },
       "flags": [
         "ROUND",
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -1953,7 +1936,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -2002,7 +1984,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -2050,7 +2031,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -2097,7 +2077,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -2145,7 +2124,6 @@
         }
       },
       "flags": [
-        "HEX",
         "HIDDEN"
       ],
       "parents": [
@@ -2192,7 +2170,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -2240,7 +2217,6 @@
         }
       },
       "flags": [
-        "SPIKY",
         "HIDDEN"
       ],
       "parents": [
@@ -2286,9 +2262,7 @@
           "id": "thaumadds:crystal_bore"
         }
       },
-      "flags": [
-        "SPIKY"
-      ],
+      "flags": [],
       "parents": [
         "TAR_THAUMADDS"
       ],
@@ -2516,8 +2490,7 @@
         }
       },
       "flags": [
-        "HIDDEN",
-        "HEX"
+        "HIDDEN"
       ],
       "parents": [
         "TAR_ELDRITCH"
@@ -2563,8 +2536,7 @@
         }
       },
       "flags": [
-        "HIDDEN",
-        "SPIKY"
+        "HIDDEN"
       ],
       "parents": [
         "TAR_VOID_THAUMOMETER",
@@ -2891,8 +2863,7 @@
         }
       },
       "flags": [
-        "HIDDEN",
-        "HEX"
+        "HIDDEN"
       ],
       "parents": [],
       "hidden_parents": [],

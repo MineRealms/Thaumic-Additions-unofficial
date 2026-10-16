@@ -315,12 +315,22 @@ public final class TaSeals {
         private static final int BIND_COOLDOWN = 5;
         /** How far below the target's floor a traveller arrives, before the air check lifts them. */
         private static final double ARRIVAL_DROP = 1.0D;
+        /** 1.12 opened the hole to this over five ticks, and shut it the same way. */
+        private static final int HOLE_WIDE = 5;
 
         /** Where this portal leads, or {@code null} while it has not been paired. */
         private net.minecraft.core.BlockPos bound;
         private int cooldown;
         /** Whether this seal has forced its own chunk, so it only ever relaxes what it forced. */
         private boolean holding;
+        /**
+         * How far open the hole is right now, 0 to {@link #HOLE_WIDE}.
+         *
+         * <p>Only the <em>target</em> is shared with the client, which walks its own copy of this
+         * towards it a step a tick — so the opening and closing costs one packet each way, while
+         * the animation stays smooth on both sides.</p>
+         */
+        private int hole;
 
         public Portal(TileSeal seal) {
             super(seal);
@@ -334,16 +344,55 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide) {
+            if (level == null) {
                 return;
             }
-            join(level);
-            if (cooldown > 0) {
-                --cooldown;
+            if (!level.isClientSide) {
+                join(level);
+                if (cooldown > 0) {
+                    --cooldown;
+                }
+                if (bound != null && !holding && level instanceof ServerLevel server) {
+                    hold(server, seal.getBlockPos(), true);
+                }
+                aimHole(level);
             }
-            if (bound != null && !holding && level instanceof ServerLevel server) {
-                hold(server, seal.getBlockPos(), true);
-            }
+            // 1.12 moved the hole one step towards its target a tick, on both sides.
+            int target = seal.holeTarget();
+            hole += Math.max(-1, Math.min(1, target - hole));
+        }
+
+        /**
+         * Decides how wide the hole should be, and tells the client when that changed.
+         *
+         * <p>1.12 opened it for anything standing in a box around the seal and shut it otherwise,
+         * so the hole is a hole only while something is about to fall through it. The box is the
+         * seal's own block with one block added on each side <em>along the face's axis</em>, which
+         * is what upstream built: a portal in a wall watches the wall's thickness, and a portal in
+         * a floor watches the floor's.</p>
+         *
+         * <p>A binding in progress holds it shut, which is what the cooldown is for.</p>
+         */
+        private void aimHole(Level level) {
+            Direction face = seal.orientation();
+            net.minecraft.world.phys.AABB box = new net.minecraft.world.phys.AABB(seal.getBlockPos())
+                    .expandTowards(face.getStepX(), face.getStepY(), face.getStepZ())
+                    .expandTowards(-face.getStepX(), -face.getStepY(), -face.getStepZ());
+            // 1.12's only filter was its own viewer entity, which this port does not have; every
+            // entity counts, which is what makes a dropped item open the hole too.
+            boolean occupied = !level.getEntities((net.minecraft.world.entity.Entity) null, box,
+                    entity -> true).isEmpty();
+            seal.setHoleTarget(occupied && cooldown <= 0 ? HOLE_WIDE : 0);
+        }
+
+        @Override
+        public float holeOpenness(float partialTick) {
+            // The last fraction of the step towards the target, so the hole does not flicker
+            // between two sizes on either side of a tick boundary.
+            int target = seal.holeTarget();
+            float behind = Math.max(-partialTick, (float) (target - hole));
+            behind = Math.min(behind, partialTick);
+            return (hole + behind) / HOLE_WIDE;
         }
 
         /**
@@ -409,8 +458,8 @@ public final class TaSeals {
             next.bound = seal.getBlockPos();
             this.cooldown += BIND_COOLDOWN;
             next.cooldown += BIND_COOLDOWN;
-            seal.sync();
-            next.seal.sync();
+            this.saveState();
+            next.saveState();
             level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT,
                     net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
             return true;
@@ -431,6 +480,7 @@ public final class TaSeals {
                     || !(target.instance() instanceof Portal portal)) {
                 // The far end has gone; forget it rather than pointing at nothing.
                 this.bound = null;
+                this.saveState();
                 return;
             }
             net.minecraft.core.Direction out = target.orientation();
@@ -470,6 +520,7 @@ public final class TaSeals {
             for (Portal other : peers) {
                 if (seal.getBlockPos().equals(other.bound)) {
                     other.bound = null;
+                    other.saveState();
                     if (other.seal.getLevel() instanceof ServerLevel otherServer) {
                         other.hold(otherServer, other.seal.getBlockPos(), false);
                     }

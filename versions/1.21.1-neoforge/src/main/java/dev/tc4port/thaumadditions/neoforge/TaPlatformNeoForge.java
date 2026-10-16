@@ -68,6 +68,17 @@ import net.neoforged.neoforge.registries.DeferredRegister;
  * {@code Holder<MobEffect>}.</p>
  */
 public final class TaPlatformNeoForge implements TaPlatform {
+    /** Modern Minecraft keeps a fluid's type in a registry of its own, beside the fluid itself. */
+    private static final net.neoforged.neoforge.registries.DeferredRegister<
+            net.neoforged.neoforge.fluids.FluidType> FLUID_TYPES =
+            net.neoforged.neoforge.registries.DeferredRegister.create(
+                    net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.FLUID_TYPES,
+                    dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID);
+    private static final net.neoforged.neoforge.registries.DeferredRegister<
+            net.minecraft.world.level.material.Fluid> FLUIDS =
+            net.neoforged.neoforge.registries.DeferredRegister.create(
+                    net.minecraft.core.registries.Registries.FLUID, dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID);
+
 
     private static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS =
             DeferredRegister.create(Registries.ARMOR_MATERIAL, ThaumAdditions.MOD_ID);
@@ -75,6 +86,8 @@ public final class TaPlatformNeoForge implements TaPlatform {
     /** Wires the armor-material registry; call from the mod constructor. */
     public static void register(IEventBus modBus) {
         ARMOR_MATERIALS.register(modBus);
+        FLUIDS.register(modBus);
+        FLUID_TYPES.register(modBus);
     }
 
     @Override
@@ -459,6 +472,83 @@ public final class TaPlatformNeoForge implements TaPlatform {
         // 1.21 hands the writer a registry-aware buffer; it is still an ordinary one underneath.
         player.openMenu(provider,
                 (net.minecraft.network.RegistryFriendlyByteBuf buf) -> extraData.accept(buf));
+    }
+
+    @Override
+    public dev.tc4port.thaumadditions.platform.TaFluid fluid(
+            String name, ResourceLocation stillTexture, ResourceLocation flowingTexture,
+            int tint, int lightLevel, int density, int viscosity) {
+        net.neoforged.neoforge.registries.DeferredHolder<net.neoforged.neoforge.fluids.FluidType,
+                net.neoforged.neoforge.fluids.FluidType> type =
+                FLUID_TYPES.register(name, () -> new net.neoforged.neoforge.fluids.FluidType(
+                        net.neoforged.neoforge.fluids.FluidType.Properties.create()
+                                .descriptionId("fluid." + dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID + "." + name)
+                                .lightLevel(lightLevel)
+                                .density(density)
+                                .viscosity(viscosity)) {
+                    @Override
+                    public void initializeClient(java.util.function.Consumer<
+                            net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions> consumer) {
+                        consumer.accept(new net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions() {
+                            @Override
+                            public ResourceLocation getStillTexture() {
+                                return stillTexture;
+                            }
+
+                            @Override
+                            public ResourceLocation getFlowingTexture() {
+                                return flowingTexture;
+                            }
+
+                            @Override
+                            public int getTintColor() {
+                                return tint;
+                            }
+                        });
+                    }
+                });
+
+        // The fluids need the properties and the properties need the fluids; the array breaks the
+        // cycle, since neither supplier is read until the first fluid is built.
+        net.neoforged.neoforge.registries.DeferredHolder<?, ?>[] pair =
+                new net.neoforged.neoforge.registries.DeferredHolder<?, ?>[2];
+        pair[0] = FLUIDS.register(name,
+                () -> new net.neoforged.neoforge.fluids.BaseFlowingFluid.Source(properties(type, pair, name)));
+        pair[1] = FLUIDS.register(name + "_flowing",
+                () -> new net.neoforged.neoforge.fluids.BaseFlowingFluid.Flowing(properties(type, pair, name)));
+
+        return new dev.tc4port.thaumadditions.platform.TaFluid() {
+            @Override
+            public Supplier<? extends net.minecraft.world.level.material.FlowingFluid> source() {
+                return () -> (net.minecraft.world.level.material.FlowingFluid) pair[0].get();
+            }
+
+            @Override
+            public Supplier<? extends net.minecraft.world.level.material.FlowingFluid> flowing() {
+                return () -> (net.minecraft.world.level.material.FlowingFluid) pair[1].get();
+            }
+        };
+    }
+
+    private static net.neoforged.neoforge.fluids.BaseFlowingFluid.Properties properties(
+            net.neoforged.neoforge.registries.DeferredHolder<net.neoforged.neoforge.fluids.FluidType,
+                    net.neoforged.neoforge.fluids.FluidType> type,
+            net.neoforged.neoforge.registries.DeferredHolder<?, ?>[] pair, String name) {
+        return new net.neoforged.neoforge.fluids.BaseFlowingFluid.Properties(type,
+                () -> (net.minecraft.world.level.material.FlowingFluid) pair[0].get(),
+                () -> (net.minecraft.world.level.material.FlowingFluid) pair[1].get())
+                // The block and the bucket are registered after the fluid, so they are found by
+                // name; neither supplier is read until the fluid is used in a world.
+                .block(() -> (net.minecraft.world.level.block.LiquidBlock)
+                        net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(fluidId(name)))
+                .bucket(() -> net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
+                        fluidId(name + "_bucket")))
+                // 1.12's BlockFluidClassic tickRate: crystal water creeps, it does not run.
+                .tickRate(20);
+    }
+
+    private static ResourceLocation fluidId(String path) {
+        return ResourceLocation.tryParse(dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID + ":" + path);
     }
 
     private static Holder<MobEffect> nativeEffect(TaEffect effect) {

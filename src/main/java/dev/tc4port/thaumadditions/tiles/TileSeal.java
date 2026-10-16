@@ -39,19 +39,35 @@ public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
                 : net.minecraft.core.Direction.UP;
     }
 
-    /** Where this seal's other half is, for the seal that pairs with one. */
-    public BlockPos portalTarget() {
-        if (!getPersistentData().contains("PortalTarget")) {
-            return null;
+    /**
+     * How far open the portal's hole is heading: 0 shut, up to {@code 5} fully open.
+     *
+     * <p>It lives on the tile rather than in the behaviour because it is the one piece of a seal's
+     * state the client needs while the behaviour is being resolved again — and because the sync
+     * packet carries the tile's data, not the behaviour's.</p>
+     */
+    public int holeTarget() {
+        return getPersistentData().getInt("HoleTarget");
+    }
+
+    /** Stores the hole's target and pushes it to clients when it moved. */
+    public void setHoleTarget(int target) {
+        if (holeTarget() == target) {
+            return;
         }
-        long packed = getPersistentData().getLong("PortalTarget");
-        return BlockPos.of(packed);
+        getPersistentData().putInt("HoleTarget", target);
+        setChanged();
+        sync();
     }
 
     /** The resolved behaviour, or {@code null} while the symbols mean nothing. */
     public dev.tc4port.thaumadditions.seals.SealInstance instance() {
         if (instance == null) {
             instance = dev.tc4port.thaumadditions.seals.SealManager.makeInstance(this);
+            if (instance != null) {
+                // The behaviour keeps its own state beside the symbols; see SealInstance.loadState.
+                instance.loadState();
+            }
         }
         return instance;
     }
@@ -76,11 +92,9 @@ public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
     @Override
     public void tick(net.minecraft.world.level.Level level, BlockPos pos, BlockState state) {
         // The symbols can change under the machine, so the behaviour is re-resolved whenever they do.
-        if (instance == null) {
-            instance = dev.tc4port.thaumadditions.seals.SealManager.makeInstance(this);
-        }
-        if (instance != null) {
-            instance.step();
+        var behaviour = instance();
+        if (behaviour != null) {
+            behaviour.step();
         }
     }
 

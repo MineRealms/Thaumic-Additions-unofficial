@@ -57,11 +57,43 @@ public abstract class SealInstance {
     public void onSealBreak() {
     }
 
+    /**
+     * How far open this seal's hole stands, {@code 0} shut to {@code 1} fully open.
+     *
+     * <p>Only the portal has a hole, and only the renderer asks; every other seal answers zero and
+     * draws none. {@code partialTick} is what lets it step the last fraction of a tick.</p>
+     */
+    public float holeOpenness(float partialTick) {
+        return 0.0F;
+    }
+
+    // ------------------------------------------------------------------ per-seal state
+
     public void readFromNbt(CompoundTag tag) {
     }
 
     public CompoundTag writeToNbt(CompoundTag tag) {
         return tag;
+    }
+
+    /**
+     * Reads this behaviour's state back out of the seal's own data.
+     *
+     * <p>The two hooks above only run because of this pair: for a while nothing called them, and a
+     * portal lost the block it led to every time the world was reloaded. The data lives in the
+     * block entity's persistent tag, which the game saves and the sync packet carries, so there is
+     * no save/load override to write — and no loader drift to absorb, since that override is one of
+     * the signatures that changed between the two targets.</p>
+     */
+    public final void loadState() {
+        readFromNbt(seal.getPersistentData());
+    }
+
+    /** Writes this behaviour's state back, and makes the seal save and resend it. */
+    protected final void saveState() {
+        writeToNbt(seal.getPersistentData());
+        seal.setChanged();
+        seal.sync();
     }
 
     // ------------------------------------------------------------------ shared plumbing

@@ -34,6 +34,8 @@ impossible. Written to be read cold.
 | Recipes | 50 (27 arcane, 23 infusion) — see the substitution caveat below |
 | Research | 64 entries with 62 page texts, generated from upstream's tree |
 | Mining tags | 41 of 43 blocks (cake and the unbreakable structure block have none on purpose) |
+| Fluid `crystal_water` | registered on both nodes: type, two fluids, block, bucket, crucible recipe, tag made by hand. The bucket is ours — upstream wrote a recipe that filled one it never registered |
+| Portal seal's hole | opens and shuts on 1.12's rule, drawn as 1.12's own six sheets of portal art. The far-side window is not ported; see below |
 
 ## Not done, in the order worth doing
 
@@ -42,13 +44,8 @@ impossible. Written to be read cold.
    `input_patch`, which writes modern components — while the port's aspect items keep theirs in
    legacy item NBT. The port's items assign themselves a random aspect on creation instead
    (`AspectItems.onCreated`), so a per-aspect recipe would have nothing to set.
-2. **The seal's world rendering.** 1.12 drew the seal's frame and the portal's hole in the world
-   (`TESRSeal`, `TARSealRenders`, `PortalRenderer`); the port has only the globe screen. The
-   textures it needs (`misc/portal*.png`, `misc/seal_0/1/2.png`) are all present.
-5. **Fluid `crystal_water`.** Upstream has flow/still textures and `.mcmeta`, and a crucible recipe
-   produces it; the port has no fluid.
-6. **Smaller client pieces**: the jar's in-hand model, the `HudHandlerHookTAR` overlay, the
-   charger's thunder/vis-sparkle effects, and the portal's framebuffer window.
+2. **Smaller client pieces**: the jar's in-hand model, the `HudHandlerHookTAR` overlay, and the
+   charger's thunder/vis-sparkle effects.
 
    The crops are *not* on this list: 1.12 baked them with a custom model baker for texture
    variety, and the port ships per-age blockstate models instead, which is the same crops drawn
@@ -62,6 +59,8 @@ impossible. Written to be read cold.
 | Crystal bore drinking vis | It calls `VisNetworkApi.drain` correctly; a hand-placed node does not serve it and no naturally generated node was found to test against. Unresolved rather than impossible. |
 | Essentia pistol loading from a jar | 1.12 read a jar *item*'s contents; TC4R's jars are blocks whose contents live in the block entity. The port loads from crystallised essence instead. |
 | Blue wolf suit rendering | Its 11 OBJ meshes are **not in the source tree and not in the released 1.12 jar** — upstream referenced meshes it never shipped, so the suit was invisible in 1.12 too. The textures are 256-square OBJ unwraps, so vanilla's 64×32 armour layout cannot stand in. The suit is skipped. |
+| The portal's far-side window | 1.12 rendered the far side of the world into a framebuffer behind a stencil and drew that as the portal's surface, so a portal was a true hole. That is a second pass of the whole level through another camera, plus an `EntitySealViewer` entity to drive it; neither target offers a public API for the first and the port has no such entity. The six-sheet hole that ships **is** 1.12's own fallback for exactly this case — the one its `ConfigsTAR.portalGfx` switch existed to turn off — so a portal here looks the way an upstream portal looked with that switch off. |
+| Crystal water growing a world crystal | 1.12's block grew a partly grown `BlockCrystal` beside it and spent water doing it. TC4R's crystal clusters are grown by its essentia crystalliser and expose no size, so there is nothing there to grow. The rule is pointed at the growth this port does have instead: `TileGrowthChamber` reads the eight blocks around it, grows up to five times faster for a full ring of sources, and spends one — half the time — per grow. Upstream's ring and odds, a different beneficiary. |
 
 ## The recipe economy is substituted, not ported
 
@@ -98,6 +97,15 @@ Kept here because each one cost time to find:
 
 Worth remembering for the next port of this kind:
 
+- A shared save/load override cannot exist: 1.21 added a registry provider to `saveAdditional` and
+  `loadAdditional`. Anything a block entity wants kept goes in `getPersistentData()`, which both
+  loaders serialise without help — which is also why a seal's behaviour state is written there
+  rather than through hooks the tile has to call from an override.
+- A hand-written vertex has five elements, overlay included, and the entity render types carry an
+  overlay beside the light. A vertex that fills only four throws `Not filled all elements of the
+  vertex` when the buffer is drawn — not when it is written, so it waits until the thing is
+  actually on screen. This is what the void thaumometer and the seal's pictograms were doing; they
+  had never been rendered, so nothing had ever said so.
 - A machine's slots were written to NBT and marked dirty but never **pushed**; `setChanged` is not
   `sync`. Every machine looked empty on the client.
 - Cached fields were filled in the constructor and never re-read on reload, so a synced machine
@@ -112,3 +120,13 @@ Worth remembering for the next port of this kind:
   while three of the combinations leave slots wild on purpose.
 - No entity had its attributes registered, so every spawn threw on the first health check.
 - Thirty-eight of forty-three blocks had no loot table, so mining them produced air.
+- An arcane recipe will not load without its `vis` key, even when the cost is nothing. Two recipes
+  whose whole cost had been the aspects this port cannot name came out of the generator with no
+  key at all and were silently dropped; the generator now always writes it.
+- A research entry hangs off a parent, and a parent that does not exist aborts the **whole**
+  research load and names one parent per attempt, so finding them one restart at a time is the slow
+  way. `gen_research.py` now checks every parent against the installed TC4R before writing, and it
+  is what caught `BASEARTIFICE` pointing at nothing.
+- The seal block had a recipe, a loot table, an item model and a lang name, and no item — so it
+  could not be made, could not be placed and could not be picked up. Everything around a
+  registration is not the registration.

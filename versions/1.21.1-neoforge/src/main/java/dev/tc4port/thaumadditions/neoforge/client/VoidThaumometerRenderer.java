@@ -88,6 +88,7 @@ public class VoidThaumometerRenderer extends BlockEntityWithoutLevelRenderer {
                     consumer.addVertex(pose.last(), x, y, z)
                             .setColor(255, 255, 255, 255)
                             .setUv(u, v)
+                            .setOverlay(overlay)
                             .setLight(light)
                             .setNormal(pose.last(), 0.0F, 1.0F, 0.0F);
                 }

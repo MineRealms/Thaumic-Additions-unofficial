@@ -32,16 +32,54 @@ ROOT_KEY = "TAR_THAUMADDS"
 ICON_BY_KEY = {"TAR_ELDRITCH": "void_seed"}
 
 # Upstream's parents that the modern mod renamed. The rest it reorganised away.
+# Upstream named a Thaumcraft 4 entry that is called something else here. The right-hand side has
+# to be a key that exists in the installed TC4R; validate_parents below is what keeps that honest,
+# because the game's own complaint about a bad one aborts the whole research load and names a
+# single parent per attempt.
 TC4_PARENTS = {
-    "BASEARTIFICE": "ARTIFICE",
+    "BASEARTIFICE": "BASICARTIFACE",
     "BASEELDRITCH": "ELDRITCHMINOR",
     "ELEMENTALTOOLS": "ELEMENTALPICK",
     "CRYSTALFARMER": "ESSENTIACRYSTAL",
     "WARDEDJARS": "JARVOID",
 }
 
+# The installed TC4R, kept in the workspace so this does not need the network.
+TC4R_JARS = [
+    "local-repo/dev/tc4port/thaumcraft-forge/0.1.0-20740/thaumcraft-forge-0.1.0-20740.jar",
+    "local-repo/dev/tc4port/thaumcraft-neoforge/0.1.0-20740/thaumcraft-neoforge-0.1.0-20740.jar",
+]
+
+
+def validate_parents(entries):
+    """Fails when an entry hangs off a parent the installed TC4R does not have."""
+    import glob
+    import zipfile
+    known = set()
+    for jar in TC4R_JARS:
+        if not os.path.exists(jar):
+            continue
+        with zipfile.ZipFile(jar) as archive:
+            for name in archive.namelist():
+                if name.startswith("data/thaumcraft/thaumcraft/research/") and name.endswith(".json"):
+                    catalogue = json.loads(archive.read(name).decode("utf-8"))
+                    known.update(entry["key"] for entry in catalogue.get("entries", []))
+        break
+    if not known:
+        print("no installed TC4R found; skipping the parent check")
+        return
+    own = {entry["key"] for entry in entries}
+    for entry in entries:
+        for parent in entry.get("parents", []):
+            if parent not in known and parent not in own:
+                raise SystemExit("%s hangs off %s, which is neither ours nor TC4R's"
+                                 % (entry["key"], parent))
+
 # Where each upstream meta flag lands in the modern format.
-FLAGS = {"HIDDEN", "ROUND", "SPIKY", "HEX"}
+# The icon frames a 1.12 research entry could wear. Only two of the four survive: SPIKY and HEX
+# were the other two frame shapes, and the modern research catalogue has just the round one, so
+# those entries come out round like everything else.
+FLAGS = {"HIDDEN", "ROUND"}
 
 # The name in setBaseInfo is what the entry is called, not always the item it is drawn as.
 ICON_ALIASES = {
@@ -175,6 +213,8 @@ for blob in all_blobs:
         skipped.append(key_of(blob) or "?")
     else:
         entries.append(parsed)
+
+validate_parents(entries)
 
 catalogue = {
     "categories": [{

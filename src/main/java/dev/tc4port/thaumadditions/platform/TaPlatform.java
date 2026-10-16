@@ -114,6 +114,21 @@ public interface TaPlatform {
     Item behaviorItem(Item.Properties properties, dev.tc4port.thaumadditions.items.ItemBehavior behavior);
 
     /**
+     * Registers a fluid: its type and the two fluid objects that flow and stand still.
+     *
+     * <p>Modern Minecraft split a fluid in two — a {@code FluidType} that carries the look and the
+     * physics, and the {@code Fluid} itself that carries the states. Both are loader objects on all
+     * three of these loaders and cannot be named from shared code, and the textures go on the type
+     * through a client extension that the two loaders spell differently. What comes back is the two
+     * fluids; the block and the bucket that stand for them are ordinary classes the shared source
+     * registers itself, out of the suppliers this returns.</p>
+     *
+     * <p>{@code tint} is the fluid's colour as ARGB, which upstream carried as {@code Fluid#getColor}.</p>
+     */
+    TaFluid fluid(String name, ResourceLocation stillTexture, ResourceLocation flowingTexture,
+                  int tint, int lightLevel, int density, int viscosity);
+
+    /**
      * Creates an item whose icon and held model come from a client renderer, for the items whose
      * 1.12 form was a model the modern loaders cannot read. The behaviour goes on it as usual.
      */

@@ -1,12 +1,18 @@
 # Writes the void thaumometer's renderer into both nodes, reading its OBJ at runtime.
 #
-# The two differ only in how a vertex is written: 1.20.1 says vertex/color/uv/uv2/normal and ends
-# each vertex, 1.21 says addVertex/setColor/setUv/setLight/setNormal and flushes on the next one.
+# The two differ only in how a vertex is written: 1.20.1 says vertex/color/uv/overlay/uv2/normal
+# and ends each vertex, 1.21 says addVertex/setColor/setUv/setOverlay/setLight/setNormal and
+# flushes on the next one.
+#
+# All five elements have to be filled. The entity render types carry an overlay coordinate beside
+# the light, and a vertex that skips it throws "Not filled all elements of the vertex" the moment
+# the buffer is drawn — which is what this renderer did until it was first shown in the hotbar.
 import io
 
 FORGE_VERTEX = '''                    consumer.vertex(pose.last().pose(), x, y, z)
                             .color(255, 255, 255, 255)
                             .uv(u, v)
+                            .overlayCoords(overlay)
                             .uv2(light)
                             .normal(pose.last().normal(), 0.0F, 1.0F, 0.0F)
                             .endVertex();'''
@@ -14,6 +20,7 @@ FORGE_VERTEX = '''                    consumer.vertex(pose.last().pose(), x, y, 
 NEO_VERTEX = '''                    consumer.addVertex(pose.last(), x, y, z)
                             .setColor(255, 255, 255, 255)
                             .setUv(u, v)
+                            .setOverlay(overlay)
                             .setLight(light)
                             .setNormal(pose.last(), 0.0F, 1.0F, 0.0F);'''
 

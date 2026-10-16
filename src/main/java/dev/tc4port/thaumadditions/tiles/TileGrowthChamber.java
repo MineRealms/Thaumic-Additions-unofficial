@@ -2,6 +2,7 @@ package dev.tc4port.thaumadditions.tiles;
 
 import dev.tc4port.hclite.platform.HCLitePlatform;
 import dev.tc4port.thaumadditions.aspect.TaAspect;
+import dev.tc4port.thaumadditions.blocks.BlockCrystalWater;
 import dev.tc4port.thaumadditions.items.ThaumcraftItems;
 import dev.tc4port.thaumadditions.registry.Content;
 import dev.tc4port.thaumcraft.api.aspect.AspectId;
@@ -140,11 +141,17 @@ public class TileGrowthChamber extends TileEssentia implements Container {
 
         if (canCraft(output)) {
             if (drainVis(level, pos)) {
-                toDrainAura -= MAX_AURA_DRAIN / DRAIN_TICKS;
+                toDrainAura -= MAX_AURA_DRAIN / DRAIN_TICKS * waterBoost(level, pos);
                 dirty = true;
             }
             if (toDrainAura <= 0.0F) {
                 craft();
+                // Growth costs water, which is the downside the crystal water research warns
+                // about; upstream spent it from the block next to the crystal being grown, and
+                // the chamber stands in for that crystal here.
+                if (level instanceof ServerLevel server) {
+                    BlockCrystalWater.spendSource(server, pos, server.getRandom());
+                }
                 amount--;
                 toDrainAura += MAX_AURA_DRAIN;
                 dirty = true;
@@ -159,6 +166,18 @@ public class TileGrowthChamber extends TileEssentia implements Container {
     private boolean canCraft(ItemStack output) {
         return slotAspect != null && amount > 0
                 && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
+    }
+
+    /**
+     * How much faster the chamber grows for the crystal water standing around it.
+     *
+     * <p>One is the chamber's own rate with no water at all. Each of the eight neighbours holding a
+     * water source adds half again, so a full ring grows it five times over. That keeps the shape
+     * of upstream's speedup — more water, faster growth — while scaling the count to the chamber's
+     * timer rather than to a random tick, which is the only part that had to change.</p>
+     */
+    private static float waterBoost(Level level, BlockPos pos) {
+        return 1.0F + BlockCrystalWater.countSources(level, pos) / 2.0F;
     }
 
     /** 1.12 {@code craft}: one crystal essence of the crystal's aspect into the output slot. */

@@ -96,8 +96,9 @@ def recipe(name, pattern, key, result, count, vis, primals):
     for aspect, amount in vis.items():
         if aspect in ASPECTS:
             costs[ASPECTS[aspect]] = costs.get(ASPECTS[aspect], 0) + amount
-    if costs:
-        entry["vis"] = costs
+    # Always written, even empty: the modern arcane recipe will not load without the key, and the
+    # recipes whose whole cost was the Knowledge aspects end up with nothing to put in it.
+    entry["vis"] = costs
     return entry
 
 

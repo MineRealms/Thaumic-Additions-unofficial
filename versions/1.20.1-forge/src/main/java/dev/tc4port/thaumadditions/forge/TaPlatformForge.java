@@ -59,6 +59,23 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
  * {@code MobEffect} values rather than {@code Holder}s.</p>
  */
 public final class TaPlatformForge implements TaPlatform {
+    /** Modern Minecraft keeps a fluid's type in a registry of its own, beside the fluid itself. */
+    private static final net.minecraftforge.registries.DeferredRegister<
+            net.minecraftforge.fluids.FluidType> FLUID_TYPES =
+            net.minecraftforge.registries.DeferredRegister.create(
+                    net.minecraftforge.registries.ForgeRegistries.Keys.FLUID_TYPES,
+                    dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID);
+    private static final net.minecraftforge.registries.DeferredRegister<
+            net.minecraft.world.level.material.Fluid> FLUIDS =
+            net.minecraftforge.registries.DeferredRegister.create(
+                    net.minecraft.core.registries.Registries.FLUID, dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID);
+
+    /** Wires the fluid registries; call from the mod constructor. */
+    public static void register(net.minecraftforge.eventbus.api.IEventBus modBus) {
+        FLUIDS.register(modBus);
+        FLUID_TYPES.register(modBus);
+    }
+
 
     @Override
     public Tier toolTier(int level, int uses, float speed, float damageBonus, int enchantability,
@@ -497,6 +514,81 @@ public final class TaPlatformForge implements TaPlatform {
                          net.minecraft.world.MenuProvider provider,
                          java.util.function.Consumer<net.minecraft.network.FriendlyByteBuf> extraData) {
         net.minecraftforge.network.NetworkHooks.openScreen(player, provider, extraData);
+    }
+
+    @Override
+    public dev.tc4port.thaumadditions.platform.TaFluid fluid(
+            String name, ResourceLocation stillTexture, ResourceLocation flowingTexture,
+            int tint, int lightLevel, int density, int viscosity) {
+        net.minecraftforge.registries.RegistryObject<net.minecraftforge.fluids.FluidType> type =
+                FLUID_TYPES.register(name, () -> new net.minecraftforge.fluids.FluidType(
+                        net.minecraftforge.fluids.FluidType.Properties.create()
+                                .descriptionId("fluid." + dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID + "." + name)
+                                .lightLevel(lightLevel)
+                                .density(density)
+                                .viscosity(viscosity)) {
+                    @Override
+                    public void initializeClient(java.util.function.Consumer<
+                            net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions> consumer) {
+                        consumer.accept(new net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions() {
+                            @Override
+                            public ResourceLocation getStillTexture() {
+                                return stillTexture;
+                            }
+
+                            @Override
+                            public ResourceLocation getFlowingTexture() {
+                                return flowingTexture;
+                            }
+
+                            @Override
+                            public int getTintColor() {
+                                return tint;
+                            }
+                        });
+                    }
+                });
+
+        // The fluids need the properties and the properties need the fluids; the array breaks the
+        // cycle, since neither supplier is read until the first fluid is built.
+        net.minecraftforge.registries.RegistryObject<?>[] pair =
+                new net.minecraftforge.registries.RegistryObject<?>[2];
+        pair[0] = FLUIDS.register(name,
+                () -> new net.minecraftforge.fluids.ForgeFlowingFluid.Source(properties(type, pair, name)));
+        pair[1] = FLUIDS.register(name + "_flowing",
+                () -> new net.minecraftforge.fluids.ForgeFlowingFluid.Flowing(properties(type, pair, name)));
+
+        return new dev.tc4port.thaumadditions.platform.TaFluid() {
+            @Override
+            public Supplier<? extends net.minecraft.world.level.material.FlowingFluid> source() {
+                return () -> (net.minecraft.world.level.material.FlowingFluid) pair[0].get();
+            }
+
+            @Override
+            public Supplier<? extends net.minecraft.world.level.material.FlowingFluid> flowing() {
+                return () -> (net.minecraft.world.level.material.FlowingFluid) pair[1].get();
+            }
+        };
+    }
+
+    private static net.minecraftforge.fluids.ForgeFlowingFluid.Properties properties(
+            net.minecraftforge.registries.RegistryObject<net.minecraftforge.fluids.FluidType> type,
+            net.minecraftforge.registries.RegistryObject<?>[] pair, String name) {
+        return new net.minecraftforge.fluids.ForgeFlowingFluid.Properties(type,
+                () -> (net.minecraft.world.level.material.FlowingFluid) pair[0].get(),
+                () -> (net.minecraft.world.level.material.FlowingFluid) pair[1].get())
+                // The block and the bucket are registered after the fluid, so they are found by
+                // name; neither supplier is read until the fluid is used in a world.
+                .block(() -> (net.minecraft.world.level.block.LiquidBlock)
+                        net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(fluidId(name)))
+                .bucket(() -> net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
+                        fluidId(name + "_bucket")))
+                // 1.12's BlockFluidClassic tickRate: crystal water creeps, it does not run.
+                .tickRate(20);
+    }
+
+    private static ResourceLocation fluidId(String path) {
+        return ResourceLocation.tryParse(dev.tc4port.thaumadditions.ThaumAdditions.MOD_ID + ":" + path);
     }
 
     private static MobEffect nativeEffect(TaEffect effect) {

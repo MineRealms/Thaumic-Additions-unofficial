@@ -104,6 +104,7 @@ public final class ThaumAdditionsForge {
         MENUS.register(modBus);
         ENTITY_TYPES.register(modBus);
         TABS.register(modBus);
+        TaPlatformForge.register(modBus);
 
         modBus.addListener(this::commonSetup);
         // The right-click hook lives on the game bus, which the mod bus does not carry.

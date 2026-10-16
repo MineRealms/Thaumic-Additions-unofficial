@@ -211,6 +211,11 @@ public final class Content {
     public static Supplier<Block> CRYSTAL_BLOCK;
     public static Supplier<Block> CRYSTAL_LAMP;
 
+    /** Crystal water: the fluid, the block that holds it in the world, and the bucket. */
+    public static dev.tc4port.thaumadditions.platform.TaFluid CRYSTAL_WATER;
+    public static Supplier<Block> CRYSTAL_WATER_BLOCK;
+    public static Supplier<Item> CRYSTAL_WATER_BUCKET;
+
     /** The sixteen block entity types. */
     public static Supplier<BlockEntityType<TileJar>> JAR_BE;
     public static Supplier<BlockEntityType<TileSmelter>> SMELTER_BE;
@@ -300,6 +305,7 @@ public final class Content {
         armor(items, platform);
 
         plainBlocks(items, blocks, platform);
+        fluids(items, blocks, platform);
         machines(items, blocks, platform);
         blockEntities(blockEntities);
         menus(menus, platform);
@@ -451,6 +457,42 @@ public final class Content {
     }
 
     // ------------------------------------------------------------------ blocks
+
+    /**
+     * Crystal water: one fluid, its block, and its bucket.
+     *
+     * <p>Upstream registered only the fluid and a block with no item form, and then wrote a
+     * crucible recipe whose output was {@code FluidUtil.getFilledBucket} of it — which is empty
+     * when the fluid has no bucket. The bucket is registered here so the recipe upstream wrote can
+     * actually produce something; everything else about the pair is upstream's, including the
+     * colour, read off {@code FluidCrystalWater#getColor}.</p>
+     */
+    private static void fluids(Registrar items, Registrar blocks, TaPlatform platform) {
+        CRYSTAL_WATER = platform.fluid("crystal_water",
+                ResourceLocation.tryParse("thaumadds:block/crystal_water_still"),
+                ResourceLocation.tryParse("thaumadds:block/crystal_water_flow"),
+                0xFF3D9999, 0, 1000, 1000);
+        CRYSTAL_WATER_BLOCK = trackBlock(blocks.<Block>register("crystal_water",
+                () -> new dev.tc4port.thaumadditions.blocks.BlockCrystalWater(
+                        CRYSTAL_WATER.source().get(), water())));
+        CRYSTAL_WATER_BUCKET = track(items.register("crystal_water_bucket",
+                () -> new net.minecraft.world.item.BucketItem(CRYSTAL_WATER.source().get(),
+                        new Item.Properties().craftRemainder(net.minecraft.world.item.Items.BUCKET)
+                                .stacksTo(1))));
+    }
+
+    /** Vanilla water's block properties, which a liquid block has to match to behave like one. */
+    private static BlockBehaviour.Properties water() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.WATER)
+                .replaceable()
+                .noCollission()
+                .strength(100.0F)
+                .pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY)
+                .noLootTable()
+                .liquid()
+                .sound(SoundType.EMPTY);
+    }
 
     private static void plainBlocks(Registrar items, Registrar blocks, TaPlatform platform) {
         // 1.12 BlockTARStorage(metal): hardness 3, metal sound, harvest level 3 (diamond pickaxe).
@@ -618,6 +660,7 @@ public final class Content {
         blockItem(items, "essentia_sink", ESSENTIA_SINK);
         blockItem(items, "shadow_enchanter", SHADOW_ENCHANTER);
         blockItem(items, "entity_summoner", ENTITY_SUMMONER);
+        blockItem(items, "seal", SEAL);
         blockItem(items, "crystal_block", CRYSTAL_BLOCK);
         blockItem(items, "crystal_lamp", CRYSTAL_LAMP);
         blockItem(items, "cake", CAKE);
