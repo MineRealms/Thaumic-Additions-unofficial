@@ -21,8 +21,17 @@ import os
 import re
 
 SOURCE = "H:/MinecraftMods/_ta-analysis/src/main/java/org/zeith/thaumicadditions/init/KnowledgeTAR.java"
-LANG_SOURCE = "H:/MinecraftMods/_ta-analysis/src/main/resources/assets/thaumadditions/lang/en_us.lang"
+LANG_DIR = "H:/MinecraftMods/_ta-analysis/src/main/resources/assets/thaumadditions/lang"
+LANG_SOURCE = LANG_DIR + "/en_us.lang"
 OUT = "src/main/resources/data/thaumadds/thaumcraft/research/default.json"
+
+# The catalogue's page text is looked up per locale, so each locale's json gets its own copy of
+# the text upstream wrote for it. Upstream shipped the same entries translated; the port has to
+# carry them across the same way it carried the English.
+LOCALES = {
+    "en_us": LANG_DIR + "/en_us.lang",
+    "zh_cn": LANG_DIR + "/zh_cn.lang",
+}
 
 CATEGORY = "THAUMADDITIONS"
 ROOT_KEY = "TAR_THAUMADDS"
@@ -226,30 +235,80 @@ catalogue = {
     "entries": entries,
 }
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
+
+
+def read_stages(path):
+    """Upstream's research_stage.<mod>:<name>.<n> lines, keyed by name and stage."""
+    stages = {}
+    if not os.path.exists(path):
+        return stages
+    for line in io.open(path, encoding="utf-8", errors="replace"):
+        if not line.startswith("research_stage."):
+            continue
+        text_key, _, text = line.partition("=")
+        parts = text_key.split(":")[-1].rsplit(".", 1)
+        if len(parts) == 1:
+            # One entry in upstream's file has no stage number at all; it is its first stage.
+            stages[(parts[0], 1)] = text.strip().replace("<BR>", "\n")
+        elif parts[1].isdigit():
+            stages[(parts[0], int(parts[1]))] = text.strip().replace("<BR>", "\n")
+    return stages
+
+
+# The name each entry was given in setBaseInfo, which is what the text lines are keyed by — the
+# entry's own key is not it.
+name_by_key = {}
+for blob in all_blobs:
+    blob_key = key_of(blob)
+    base = re.search(r'setBaseInfo\("!?([A-Za-z_0-9]+)",\s*"([^"]*)"', blob)
+    if blob_key and base:
+        name_by_key[blob_key] = base.group(2)
+
+ENGLISH_STAGES = read_stages(LANG_SOURCE)
+
+# Upstream wrote its entries in stages, and every entry but one had more than one; the modern
+# page list is flat, so each stage becomes a page of its own. The catalogue was written with a
+# single page, so the rest are inserted here, before the crafting page.
+inserted = 0
+for entry in entries:
+    name = name_by_key.get(entry["key"])
+    # Only stages that actually have text become pages. An entry upstream never wrote words for —
+    # there is one, and it points at another mod's entry rather than carrying prose of its own —
+    # would otherwise name a page key nothing defines, and the book would print the key.
+    stages = sorted(stage for (entry_name, stage) in ENGLISH_STAGES
+                    if entry_name == name and ENGLISH_STAGES[(entry_name, stage)].strip())
+    text_pages = [{
+        "type": "TEXT",
+        "value": "tc.research_page.%s.%d" % (entry["key"], stage),
+        "aspects": {},
+        "compound_blueprint": "",
+        "recipe_link_policy": "DISABLED",
+        "recipe_ids": [],
+    } for stage in stages]
+    entry["pages"] = text_pages + [page for page in entry["pages"] if page["type"] != "TEXT"]
+    inserted += len(text_pages)
+
+# The text itself, into each locale's own lang file.
+written = 0
+for lang_name, lang_source in sorted(LOCALES.items()):
+    stages = read_stages(lang_source)
+    lang_path = "src/main/resources/assets/thaumadds/lang/%s.json" % lang_name
+    lang = json.load(io.open(lang_path, encoding="utf-8"))
+    for entry in entries:
+        name = name_by_key.get(entry["key"])
+        if name is None:
+            continue
+        for stage in sorted(stage for (entry_name, stage) in stages if entry_name == name):
+            text = stages[(name, stage)]
+            if text:
+                lang["tc.research_page.%s.%d" % (entry["key"], stage)] = text
+                written += 1
+    io.open(lang_path, "w", encoding="utf-8", newline="\n").write(
+        json.dumps(lang, indent=2, ensure_ascii=False) + "\n")
+
 io.open(OUT, "w", encoding="utf-8", newline="\n").write(json.dumps(catalogue, indent=2) + "\n")
 
-# The pages' text. Upstream kept it under research_stage.<mod>:<name>.<n>; the modern catalogue asks
-# for it under tc.research_page.<KEY>.<n>, so the two are matched by the name the entry was given.
-lang_path = "src/main/resources/assets/thaumadds/lang/en_us.json"
-lang = json.load(io.open(lang_path, encoding="utf-8"))
-upstream = {}
-for line in io.open(LANG_SOURCE, encoding="utf-8", errors="replace"):
-    if line.startswith("research_stage."):
-        text_key, _, text = line.partition("=")
-        name = text_key.split(":")[-1].rsplit(".", 1)
-        if len(name) != 2:
-            continue
-        upstream[(name[0], name[1])] = text.strip().replace("<BR>", "\n")
-for blob in all_blobs:
-    entry = parse(blob, own_keys, items)
-    if entry is None:
-        continue
-    base = re.search(r'setBaseInfo\("!?([A-Za-z_0-9]+)",\s*"([^"]*)"', blob)
-    name = base.group(2) if base else ""
-    if (name, "1") in upstream:
-        lang["tc.research_page.%s.1" % entry["key"]] = upstream[(name, "1")]
-io.open(lang_path, "w", encoding="utf-8", newline="\n").write(
-    json.dumps(lang, indent=2, ensure_ascii=False) + "\n")
-print("wrote %d research entries and their page text" % len(entries))
+print("wrote %d research entries, %d pages, %d lines of page text across %d locales"
+      % (len(entries), inserted, written, len(LOCALES)))
 if skipped:
     print("skipped:", skipped)

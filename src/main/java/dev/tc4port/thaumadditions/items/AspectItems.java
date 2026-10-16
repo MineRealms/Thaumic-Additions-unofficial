@@ -54,6 +54,12 @@ public final class AspectItems {
                 return aspectOf(stack) != null;
             }
 
+            /** 1.12 {@code getItemStackDisplayName}: the language file leaves the aspect as a hole. */
+            @Override
+            public Component displayName(ItemStack stack, Component name) {
+                return AspectNames.substitute(name, stack);
+            }
+
             @Override
             public List<Component> tooltipLines(ItemStack stack) {
                 AspectId aspect = aspectOf(stack);

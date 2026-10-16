@@ -40,6 +40,14 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_THAUMADDS.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
         }
       ]
     },
@@ -70,6 +78,22 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_ESSENCE_SALT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ESSENCE_SALT.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ESSENCE_SALT.3",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -106,6 +130,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_CRYSTAL_CRUSHER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_CRUSHER.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -158,6 +190,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_AURA_DISPERSER.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -196,6 +236,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_ESSENTIA_PISTOL.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ESSENTIA_PISTOL.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -246,6 +294,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SEAL.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -290,6 +346,14 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SEAL_SYMBOLS.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
         }
       ]
     },
@@ -322,6 +386,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_SEAL_GLOBE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SEAL_GLOBE.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -375,6 +447,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_KNOWLEDGE_TOME.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -413,6 +493,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_CHESTER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CHESTER.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -466,6 +554,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VIS_SCRIBING_TOOLS.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -504,6 +600,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_CRYSTAL_WATER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_WATER.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -555,6 +659,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ENCHANTED_GOLDEN_APPLE.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -597,6 +709,14 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_BLOCK.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
         }
       ]
     },
@@ -630,6 +750,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_GROWTH_CHAMBER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_GROWTH_CHAMBER.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -680,6 +808,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_FRAGNANT_PENDANT.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -723,6 +859,14 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VIS_SEEDS.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
         }
       ]
     },
@@ -756,6 +900,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_CRYSTAL_BAG.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_BAG.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -808,6 +960,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_TRAVELLER_BELT.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -848,6 +1008,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_STRIDING_BELT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_STRIDING_BELT.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -900,6 +1068,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_METEOR_BELT.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -946,6 +1122,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_BRASS_JAR.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -986,6 +1170,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_THAUMIUM_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_THAUMIUM_JAR.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1039,6 +1231,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ELDRITCH_JAR.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1085,6 +1285,14 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHRILLIUM.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
         }
       ]
     },
@@ -1118,6 +1326,22 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_MOB_SUMMONING.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MOB_SUMMONING.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MOB_SUMMONING.3",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1172,6 +1396,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ASPECT_COMBINER.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1213,6 +1445,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_MITHRILLIUM_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHRILLIUM_JAR.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1266,6 +1506,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHRILLIUM_SMELTER.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1313,6 +1561,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SHADOW_ENCHANTER.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1353,6 +1609,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_SHADOW_BEAM_STAFF.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SHADOW_BEAM_STAFF.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1406,6 +1670,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_THE_BEHEADER.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1451,6 +1723,14 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
         }
       ]
     },
@@ -1484,6 +1764,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_AURA_CHARGER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_AURA_CHARGER.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1537,6 +1825,22 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_JAR.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_JAR.3",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1578,6 +1882,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_ADAMINITE_SMELTER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_SMELTER.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1632,6 +1944,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_SWORD.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1673,6 +1993,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_ADAMINITE_FABRIC.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_FABRIC.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1728,6 +2056,14 @@
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
           "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
         }
       ]
     },
@@ -1761,6 +2097,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_MITHMINITE_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_JAR.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1814,6 +2158,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_SMELTER.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1855,6 +2207,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_MITHMINITE_SCYTHE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_SCYTHE.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -1911,6 +2271,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_FABRIC.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -1953,6 +2321,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_MITHMINITE_HOOD.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_HOOD.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2006,6 +2382,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_ROBE.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2046,6 +2430,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_MITHMINITE_BELT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_BELT.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2099,6 +2491,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_BOOTS.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2145,6 +2545,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CAKE.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2185,6 +2593,22 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_TOTEMS.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_TOTEMS.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_TOTEMS.3",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2238,6 +2662,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_PURIFLOWER.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2282,6 +2714,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_BORE.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2320,6 +2760,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_FLUX_CONCENTRATOR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_FLUX_CONCENTRATOR.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2372,6 +2820,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_DISENCHANT_FABRIC.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2410,6 +2866,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_CRYSTAL_LAMP.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_LAMP.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2456,14 +2920,6 @@
       "warp": 0,
       "pages": [
         {
-          "type": "TEXT",
-          "value": "tc.research_page.TAR_ELDRITCH.1",
-          "aspects": {},
-          "compound_blueprint": "",
-          "recipe_link_policy": "DISABLED",
-          "recipe_ids": []
-        },
-        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2505,6 +2961,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_VOID_THAUMOMETER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_THAUMOMETER.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2558,6 +3022,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_WORMHOLE_MIRROR.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2604,6 +3076,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_CROP.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2644,6 +3124,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_VOID_ANVIL.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ANVIL.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2697,6 +3185,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_PICKAXE.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2738,6 +3234,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_VOID_ELEMENTAL_AXE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_AXE.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",
@@ -2791,6 +3295,14 @@
           "recipe_ids": []
         },
         {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_SHOVEL.2",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
           "type": "NORMAL_CRAFTING",
           "value": "",
           "aspects": {},
@@ -2832,6 +3344,14 @@
         {
           "type": "TEXT",
           "value": "tc.research_page.TAR_VOID_ELEMENTAL_HOE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_HOE.2",
           "aspects": {},
           "compound_blueprint": "",
           "recipe_link_policy": "DISABLED",

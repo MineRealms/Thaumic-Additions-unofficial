@@ -661,7 +661,11 @@ public final class Content {
         blockItem(items, "shadow_enchanter", SHADOW_ENCHANTER);
         blockItem(items, "entity_summoner", ENTITY_SUMMONER);
         blockItem(items, "seal", SEAL);
-        blockItem(items, "crystal_block", CRYSTAL_BLOCK);
+        // The crystal block's item is the aspect-named one: 1.12's name carried the aspect the
+        // block was made of, and its language line leaves a hole for it.
+        track(items.register("crystal_block",
+                () -> new dev.tc4port.thaumadditions.items.AspectNamedBlockItem(CRYSTAL_BLOCK.get(),
+                        new Item.Properties())));
         blockItem(items, "crystal_lamp", CRYSTAL_LAMP);
         blockItem(items, "cake", CAKE);
     }

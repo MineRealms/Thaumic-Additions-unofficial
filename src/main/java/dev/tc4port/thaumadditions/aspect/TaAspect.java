@@ -95,13 +95,24 @@ public final class TaAspect {
         return definition == null ? 0x888888 : definition.color();
     }
 
-    /** Display name of the aspect (or a raw id when the registry has no definition). */
+    /**
+     * The aspect's name as the reader's language has it.
+     *
+     * <p>Thaumcraft carries a line per aspect under {@code tc.aspect.&lt;id&gt;}, which is what
+     * 1.12's {@code Aspect#getName} returned and what every tooltip in that mod printed. The port
+     * printed the registry path instead, so a tooltip read {@code ignis} where a translated game
+     * says {@code Fire} — and the id is lower case, which no name is. Everything that shows an
+     * aspect's name comes through here, the item names and the JEI subtype labels included.</p>
+     */
     public static String displayName(AspectId id) {
         if (id == null) {
             return "?";
         }
-        AspectDefinition definition = AspectApi.get(id);
-        return definition == null ? id.value().toString() : id.value().getPath();
+        if (AspectApi.get(id) == null) {
+            return id.value().toString();
+        }
+        return net.minecraft.network.chat.Component
+                .translatable("tc.aspect." + id.value().getPath()).getString();
     }
 
     /** Uniformly random aspect from the live registry; {@code null} when none are registered. */

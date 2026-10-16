@@ -211,6 +211,11 @@ public final class TaPlatformNeoForge implements TaPlatform {
                                         net.minecraft.world.item.TooltipFlag flag) {
                 tooltip.addAll(behavior.tooltipLines(stack));
             }
+
+            @Override
+            public Component getName(ItemStack stack) {
+                return behavior.displayName(stack, super.getName(stack));
+            }
         };
     }
 

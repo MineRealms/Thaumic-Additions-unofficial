@@ -29,7 +29,7 @@ PICKAXE = [
     "jar_brass", "jar_thaumium", "jar_eldritch", "jar_mithrillium",
     "jar_adaminite", "jar_mithminite",
     # The totems are carved stone.
-    "dawn_totem", "twilight_totem", "aura_totem",
+    "dawn_totem", "twilight_totem",
 ]
 
 AXE = [

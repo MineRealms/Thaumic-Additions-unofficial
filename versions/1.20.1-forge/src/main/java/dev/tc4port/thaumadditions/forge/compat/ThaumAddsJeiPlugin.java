@@ -74,5 +74,8 @@ public class ThaumAddsJeiPlugin implements IModPlugin {
         registration.registerSubtypeInterpreter(Content.SALT_ESSENCE.get(), interpreter);
         registration.registerSubtypeInterpreter(Content.VIS_POD.get(), interpreter);
         registration.registerSubtypeInterpreter(Content.SEAL_SYMBOL.get(), interpreter);
+        // Upstream registered the crystal block too — nine crystals of one aspect pressed
+        // into a block — so that a block of ignis and one of aqua are two entries and not one.
+        registration.registerSubtypeInterpreter(Content.CRYSTAL_BLOCK.get().asItem(), interpreter);
     }
 }

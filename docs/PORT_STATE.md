@@ -9,9 +9,18 @@ impossible. Written to be read cold.
 - **Build**: `./gradlew :1.20.1-forge:build :1.21.1-neoforge:build --offline`. The `--offline` is
   not optional on this machine right now: Gradle cannot reach `maven.neoforged.net` (TLS handshake
   fails), and the local cache is complete, so offline builds work and online ones do not.
-- **Test**: the dev client exposes a Rosetta bridge on port **48793**. Kill any running client
-  first — a stale one answers the bridge and makes every probe look like it passed. Then
-  `python tools/bridge_exec.py 48793 tools/<probe>.java`.
+  `maven.blamejared.com` and `modmaven.dev` **are** reachable, so a dependency that is not in the
+  cache yet can be fetched by dropping `--offline` for one build.
+- **Tests**: `./gradlew test` runs `DataIntegrityTest`, which checks the mod's own JSON against
+  itself — both languages carry the same keys, every research page has text, every arcane recipe
+  has its `vis`, every blockstate and item model resolves, every loot table drops an item we ship a
+  model for. It needs no game and catches the faults that are otherwise a restart each.
+- **Live audit**: `python tools/bridge_exec.py 48793 tools/probe_audit.java` walks every registered
+  item, block, recipe, loot table and research entry and prints `AUDIT PASS` or the list of things
+  that resolve to nothing. This is the one that catches an id nothing registered.
+- **Test**: the dev client exposes a Rosetta bridge on port **48793** (48794 for the 1.21.1 client).
+  Kill any running client first — a stale one answers the bridge and makes every probe look like it
+  passed. Then `python tools/bridge_exec.py 48793 tools/<probe>.java`.
 - **The bridge's compiler does not carry the hclite source set**, so anything on
   `SyncedBlockEntity` (every block entity) has to be reached reflectively; the tile's class cannot
   even be named as a type in a probe.
@@ -36,6 +45,9 @@ impossible. Written to be read cold.
 | Mining tags | 41 of 43 blocks (cake and the unbreakable structure block have none on purpose) |
 | Fluid `crystal_water` | registered on both nodes: type, two fluids, block, bucket, crucible recipe, tag made by hand. The bucket is ours — upstream wrote a recipe that filled one it never registered |
 | Portal seal's hole | opens and shuts on 1.12's rule, drawn as 1.12's own six sheets of portal art. The far-side window is not ported; see below |
+| Text | both languages carry the same 381 lines, and every one of the 129 research pages has its text in each. `tools/fill_zh.py` fills the gaps from upstream's own `zh_cn.lang`; `tools/gen_research.py` writes the page text per locale |
+| JEI | the flux concentrator's category and catalysts, the aspect item subtypes, and the crystal block's — upstream's four, no more |
+| Tests | `DataIntegrityTest` (no game needed) and `tools/probe_audit.java` (live, registry-side) |
 
 ## Not done, in the order worth doing
 
@@ -61,6 +73,8 @@ impossible. Written to be read cold.
 | Blue wolf suit rendering | Its 11 OBJ meshes are **not in the source tree and not in the released 1.12 jar** — upstream referenced meshes it never shipped, so the suit was invisible in 1.12 too. The textures are 256-square OBJ unwraps, so vanilla's 64×32 armour layout cannot stand in. The suit is skipped. |
 | The portal's far-side window | 1.12 rendered the far side of the world into a framebuffer behind a stencil and drew that as the portal's surface, so a portal was a true hole. That is a second pass of the whole level through another camera, plus an `EntitySealViewer` entity to drive it; neither target offers a public API for the first and the port has no such entity. The six-sheet hole that ships **is** 1.12's own fallback for exactly this case — the one its `ConfigsTAR.portalGfx` switch existed to turn off — so a portal here looks the way an upstream portal looked with that switch off. |
 | Crystal water growing a world crystal | 1.12's block grew a partly grown `BlockCrystal` beside it and spent water doing it. TC4R's crystal clusters are grown by its essentia crystalliser and expose no size, so there is nothing there to grow. The rule is pointed at the growth this port does have instead: `TileGrowthChamber` reads the eight blocks around it, grows up to five times faster for a full ring of sources, and spends one — half the time — per grow. Upstream's ring and odds, a different beneficiary. |
+| Thaumcraft's own JEI plugin | The installed TC4R ships a JEI plugin written against JEI 9's `ISubtypeInterpreter`, which JEI 15 renamed. It throws once, JEI logs it and carries on, and the mod's own plugin is unaffected — but Thaumcraft's aspect subtypes do not reach JEI. It is a fault in a binary dependency, not in this port, and cannot be patched from here. |
+| A KubeJS plugin with anything in it | Upstream had no CraftTweaker integration to translate: the 1.12 jar carries no `crafttweaker` or `minetweaker` class of any kind. The plugin class the port ships is what makes KubeJS load without complaint, and adding script bindings would be inventing an API upstream never had. |
 
 ## The recipe economy is substituted, not ported
 
@@ -129,4 +143,17 @@ Worth remembering for the next port of this kind:
   is what caught `BASEARTIFICE` pointing at nothing.
 - The seal block had a recipe, a loot table, an item model and a lang name, and no item — so it
   could not be made, could not be placed and could not be picked up. Everything around a
-  registration is not the registration.
+  registration is not the registration. `tools/probe_audit.java` now asks the registry.
+- KubeJS refuses to load against a JEI older than it names, and a mod that refuses to load takes
+  the **whole client** with it at mod-loading, before anything of this mod has run. The 1.21.1 node
+  pinned JEI 19.21 and KubeJS wanted 19.25; the version in `versions/1.21.1-neoforge/gradle.properties`
+  is now the one that satisfies it.
+- The integrated server's resource manager holds `data/` and the client's holds `assets/`. Asking
+  one for the other's files reports every model in the mod as missing — which is what the first run
+  of the live audit did.
+- An aspect's name is a translation. Thaumcraft keeps one line per aspect under
+  `tc.aspect.<id>`, and printing the registry path instead put `ignis` — lower case, untranslated —
+  in every tooltip and in the name of anything carrying one.
+- A research entry can have several stages of text, and upstream wrote `@ASPECT` into its language
+  files where an aspect belongs, to be swapped out when the stack is asked for its name. Neither
+  came across on its own: the port emitted stage one only, and printed the marker.

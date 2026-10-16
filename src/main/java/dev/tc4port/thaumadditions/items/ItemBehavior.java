@@ -61,6 +61,18 @@ public interface ItemBehavior {
         return List.of();
     }
 
+    /**
+     * 1.12 {@code getItemStackDisplayName}: the item's name, once the language has been asked.
+     *
+     * <p>Upstream wrote a literal {@code @ASPECT} into its language files and swapped it for the
+     * stack's aspect here, because the aspect is not known until the stack exists. The signature
+     * of {@code Item#getName} did not drift between the two targets, so this hook is only here to
+     * keep every item written against one interface.</p>
+     */
+    default Component displayName(ItemStack stack, Component name) {
+        return name;
+    }
+
     /** Convenience: an item with tooltip lines only. */
     static Function<ItemStack, List<Component>> lines(List<Component> constant) {
         return stack -> constant;

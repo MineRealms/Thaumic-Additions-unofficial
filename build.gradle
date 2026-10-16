@@ -154,6 +154,9 @@ if (isForge) {
         testImplementation(platform("org.junit:junit-bom:${junit_version}"))
         testImplementation 'org.junit.jupiter:junit-jupiter'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        // The data tests read the mod's own JSON, and the test source set does not inherit the
+        // game's classpath the way main does.
+        testImplementation "com.google.code.gson:gson:${gson_version}"
     }
 
     tasks.named('processResources', ProcessResources).configure {
@@ -243,6 +246,9 @@ if (isForge) {
         testImplementation(platform("org.junit:junit-bom:${junit_version}"))
         testImplementation 'org.junit.jupiter:junit-jupiter'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        // The data tests read the mod's own JSON, and the test source set does not inherit the
+        // game's classpath the way main does.
+        testImplementation "com.google.code.gson:gson:${gson_version}"
     }
 
     tasks.named('processResources', ProcessResources).configure {
