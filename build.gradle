@@ -139,7 +139,9 @@ if (isForge) {
         compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}") { transitive = false }
         compileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}") { transitive = false }
         // Only the dev client loads JEI, so the plugin can be exercised without shipping the dep.
-        runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") { transitive = false }
+        // modRuntimeOnly, not runtimeOnly: the published jar is SRG-named and has to be remapped,
+        // or it fails at load with a NoSuchMethodError on an SRG method that no longer exists.
+        modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") { transitive = false }
         compileOnly("dev.latvian.mods:kubejs-forge:${kubejs_forge_version}") { transitive = false }
         compileOnly("dev.latvian.mods:rhino-forge:${rhino_forge_version}") { transitive = false }
 

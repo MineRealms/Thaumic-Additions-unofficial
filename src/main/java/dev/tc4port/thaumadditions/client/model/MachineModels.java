@@ -79,9 +79,11 @@ public final class MachineModels {
     /** 1.12 {@code ModelAspectCombiner}: two side tanks feeding a central pot. */
     public static final class AspectCombiner {
         public static final ResourceLocation TEXTURE = texture("aspect_combiner");
-        // The 1.12 texture is 128 square; declaring it 64 scaled every UV to the wrong texel.
-        public static final int TEXTURE_WIDTH = 128;
-        public static final int TEXTURE_HEIGHT = 128;
+        // The 1.12 model declares 64 square, and that is the size the UVs are written against.
+        // The texture file is a 2x upscale of that original, which changes nothing: u/64 lands on
+        // pixel 2u of the 128-square file, which is exactly pixel u of the 64-square one.
+        public static final int TEXTURE_WIDTH = 64;
+        public static final int TEXTURE_HEIGHT = 64;
 
         private final ModelPart root;
         private final ModelPart rotor;
@@ -127,9 +129,10 @@ public final class MachineModels {
     /** 1.12 {@code ModelAuraCharger}: a spout whose four sprinkler arms hang off the base. */
     public static final class AuraCharger {
         public static final ResourceLocation TEXTURE = texture("aura_charger");
-        // The 1.12 texture is 64 square; declaring it 32 scaled every UV to the wrong texel.
-        public static final int TEXTURE_WIDTH = 64;
-        public static final int TEXTURE_HEIGHT = 64;
+        // The 1.12 model declares 32 square, and that is the size the UVs are written against.
+        // The texture file is a 2x upscale of that original; see the combiner's note above.
+        public static final int TEXTURE_WIDTH = 32;
+        public static final int TEXTURE_HEIGHT = 32;
 
         private final ModelPart root;
         private final ModelPart rotor;

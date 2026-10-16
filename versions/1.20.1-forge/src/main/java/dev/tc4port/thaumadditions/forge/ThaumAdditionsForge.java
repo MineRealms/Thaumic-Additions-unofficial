@@ -129,4 +129,17 @@ public final class ThaumAdditionsForge {
             event.setCancellationResult(net.minecraft.world.InteractionResult.SUCCESS);
         }
     }
+
+    /**
+     * Every entity needs its attributes put somewhere before it exists; without this a spawned one
+     * throws on its first health check, which is exactly what happened to the blue wolf.
+     */
+    @net.minecraftforge.eventbus.api.SubscribeEvent
+    public static void registerAttributes(
+            net.minecraftforge.event.entity.EntityAttributeCreationEvent event) {
+        event.put(Content.BLUE_WOLF.get(),
+                dev.tc4port.thaumadditions.entity.BlueWolf.createBlueWolfAttributes().build());
+        event.put(Content.CHESTER_ENTITY.get(),
+                dev.tc4port.thaumadditions.entity.Chester.createChesterAttributes().build());
+    }
 }

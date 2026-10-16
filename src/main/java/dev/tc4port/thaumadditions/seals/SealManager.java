@@ -28,9 +28,18 @@ public final class SealManager {
         ENTRIES.add(new Entry(combination, factory));
     }
 
-    /** The behaviour a seal block's symbols mean, or {@code null} when they mean nothing yet. */
+    /**
+     * The behaviour a seal block's symbols mean, or {@code null} when they mean nothing.
+     *
+     * <p>Note what is <em>not</em> required: a full set of symbols. Three of the seven seals name
+     * only one or two, and treat the rest as "anything" — the watering seal is water and then two
+     * of whatever. Requiring every slot to be filled refused those three outright, which is a bug
+     * this method had until a live run showed three quarters of the seals doing nothing.</p>
+     */
     public static SealInstance makeInstance(TileSeal seal) {
-        if (!seal.isComplete()) {
+        if (seal.symbol(0) == null) {
+            // Every seal names its first symbol, so an empty block means nothing rather than
+            // matching whichever combination happens to start with a wildcard.
             return null;
         }
         Entry best = null;

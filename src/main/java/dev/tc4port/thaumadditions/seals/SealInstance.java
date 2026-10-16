@@ -21,9 +21,17 @@ public abstract class SealInstance {
     public static final int RADIUS = 5;
 
     protected final TileSeal seal;
+    /** This seal's own tick count, which is what 1.12 measured its cadences against. */
+    private long ticks;
 
     protected SealInstance(TileSeal seal) {
         this.seal = seal;
+    }
+
+    /** One tick, counted. The block entity calls this rather than {@link #tick()}. */
+    public final void step() {
+        ++ticks;
+        tick();
     }
 
     /** The description key this seal shows, e.g. {@code seal.thaumadds:createsoil}. */
@@ -58,9 +66,14 @@ public abstract class SealInstance {
 
     // ------------------------------------------------------------------ shared plumbing
 
-    /** 1.12's {@code atTickRate}: true on every n-th tick. */
-    public static boolean atTickRate(Level level, int rate) {
-        return rate <= 1 || level.getGameTime() % rate == 0;
+    /**
+     * 1.12's {@code atTickRate}: true on every n-th tick of <em>this</em> seal's life.
+     *
+     * <p>Keyed on the seal's own count rather than the world clock, which is what upstream did and
+     * what keeps two seals' cadences from marching in step with each other.</p>
+     */
+    protected boolean atTickRate(int rate) {
+        return rate <= 1 || ticks % rate == 0;
     }
 
     /** The centre of the box the seal searches: four blocks out, or two when it points up. */

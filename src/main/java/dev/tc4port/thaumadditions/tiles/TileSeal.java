@@ -80,7 +80,7 @@ public class TileSeal extends SyncedBlockEntity implements TaTickables.Ticking {
             instance = dev.tc4port.thaumadditions.seals.SealManager.makeInstance(this);
         }
         if (instance != null) {
-            instance.tick();
+            instance.step();
         }
     }
 

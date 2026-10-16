@@ -110,6 +110,22 @@ public final class MachineRenderers {
         pose.popPose();
     }
 
+    /**
+     * The four machines the 1.12 renderers drew upright turn a further quarter turn when the block
+     * faces along the east-west axis, because their models are authored to look along north.
+     *
+     * <p>Only the combiner's renderer spelled this out, but every one of the four used the same
+     * {@code translate(x+.5, y+1.5, z+.5)} frame, so the port applies it to all four: without it a
+     * machine placed facing east or west stands a quarter turn out.</p>
+     */
+    private static void uprightFacing(PoseStack pose, BlockState state) {
+        upright(pose);
+        Direction facing = facing(state);
+        if (facing.getAxis() == Direction.Axis.X) {
+            pose.mulPose(Axis.YP.rotationDegrees(90.0F));
+        }
+    }
+
     /** 1.12 {@code TESRCrystalBore}: the drill head turns about Y while the machine bores. */
     public static final class CrystalBore implements BlockEntityRenderer<TileCrystalBore> {
         private static final MachineModels.CrystalBore MODEL =
@@ -144,7 +160,7 @@ public final class MachineRenderers {
             drawUpright(pose, buffers, MachineModels.AspectCombiner.TEXTURE, MODEL.staticParts(),
                     light, overlay);
             pose.pushPose();
-            upright(pose);
+            uprightFacing(pose, be.getBlockState());
             var buffer = buffers.getBuffer(RenderType.entityCutout(MachineModels.AspectCombiner.TEXTURE));
             pose.mulPose(Axis.YP.rotationDegrees(be.rotator().actualRotation(partialTick)));
             MODEL.rotor().render(pose, buffer, light, overlay);

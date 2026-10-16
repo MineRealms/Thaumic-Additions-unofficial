@@ -127,4 +127,14 @@ public final class ThaumAdditionsNeoForge {
             event.setCancellationResult(net.minecraft.world.InteractionResult.SUCCESS);
         }
     }
+
+    /** Every entity needs its attributes put somewhere before it exists; see the Forge twin. */
+    @net.neoforged.bus.api.SubscribeEvent
+    public static void registerAttributes(
+            net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event) {
+        event.put(Content.BLUE_WOLF.get(),
+                dev.tc4port.thaumadditions.entity.BlueWolf.createBlueWolfAttributes().build());
+        event.put(Content.CHESTER_ENTITY.get(),
+                dev.tc4port.thaumadditions.entity.Chester.createChesterAttributes().build());
+    }
 }

@@ -30,8 +30,9 @@ import net.minecraft.world.item.ItemStack;
  * to take back out, because 1.12 had no way to unload one either.</p>
  */
 public class PistolMenu extends AbstractContainerMenu {
+    /** 1.12's {@code GuiEssentiaPistol}: 176 wide and 192 tall. */
     public static final int WIDTH = 176;
-    public static final int HEIGHT = 166;
+    public static final int HEIGHT = 192;
     /** 1.12's pistol held five hundred points at once. */
     private static final int CAPACITY = 500;
 
@@ -71,7 +72,8 @@ public class PistolMenu extends AbstractContainerMenu {
                 loading = false;
             }
         };
-        addSlot(new Slot(feed, 0, 80, 30) {
+        // 1.12 put the loading slot at 80,47 and the player's rows from y=110.
+        addSlot(new Slot(feed, 0, 80, 47) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(ThaumcraftItems.crystalEssence());
@@ -79,11 +81,11 @@ public class PistolMenu extends AbstractContainerMenu {
         });
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 9; column++) {
-                addSlot(new Slot(inventory, column + row * 9 + 9, 8 + column * 18, 84 + row * 18));
+                addSlot(new Slot(inventory, column + row * 9 + 9, 8 + column * 18, 110 + row * 18));
             }
         }
         for (int column = 0; column < 9; column++) {
-            addSlot(new Slot(inventory, column, 8 + column * 18, 142));
+            addSlot(new Slot(inventory, column, 8 + column * 18, 168));
         }
     }
 

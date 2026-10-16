@@ -9,10 +9,14 @@ import net.minecraft.world.entity.player.Inventory;
 /**
  * 1.12 {@code GuiEssentiaPistol}: one slot to feed the pistol with.
  *
- * <p>Upstream's panel points at Thaumcraft's own; the modern one has no equivalent file, so this
- * draws the same flat panel the two machine screens without textures draw.</p>
+ * <p>Upstream's own panel, drawn at its own size; the slot coordinates in the menu are upstream's
+ * too, so the wells in the texture line up with where the slots actually are.</p>
  */
 public class PistolScreen extends AbstractContainerScreen<PistolMenu> {
+    private static final net.minecraft.resources.ResourceLocation PANEL =
+            net.minecraft.resources.ResourceLocation.tryParse(
+                    "thaumadds:textures/gui/essentia_pistol.png");
+
     public PistolScreen(PistolMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         this.imageWidth = PistolMenu.WIDTH;
@@ -21,8 +25,7 @@ public class PistolScreen extends AbstractContainerScreen<PistolMenu> {
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        MachineScreens.MachineScreen.flatPanel(graphics, leftPos, topPos, imageWidth, imageHeight);
-        graphics.fill(leftPos + 79, topPos + 29, leftPos + 97, topPos + 47, 0xFF8B8B8B);
+        graphics.blit(PANEL, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         graphics.drawString(font, Component.translatable("gui.thaumadds.pistol.load"),
                 leftPos + 8, topPos + 12, 0x404040, false);
     }

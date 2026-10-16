@@ -84,7 +84,7 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide || !atTickRate(level, 20) || powered(level)) {
+            if (level == null || level.isClientSide || !atTickRate(20) || powered(level)) {
                 return;
             }
             for (int attempt = 0; attempt < TRIES; attempt++) {
@@ -121,7 +121,7 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide || !atTickRate(level, 10) || powered(level)) {
+            if (level == null || level.isClientSide || !atTickRate(10) || powered(level)) {
                 return;
             }
             for (int attempt = 0; attempt < TRIES; attempt++) {
@@ -155,7 +155,7 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide || !atTickRate(level, 50) || powered(level)) {
+            if (level == null || level.isClientSide || !atTickRate(50) || powered(level)) {
                 return;
             }
             if (!(level instanceof ServerLevel)) {
@@ -189,7 +189,7 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide || !atTickRate(level, 20) || powered(level)) {
+            if (level == null || level.isClientSide || !atTickRate(20) || powered(level)) {
                 return;
             }
             for (int attempt = 0; attempt < TRIES; attempt++) {
@@ -222,7 +222,7 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide || !atTickRate(level, 20) || powered(level)) {
+            if (level == null || level.isClientSide || !atTickRate(20) || powered(level)) {
                 return;
             }
             for (int attempt = 0; attempt < TRIES; attempt++) {
@@ -269,7 +269,7 @@ public final class TaSeals {
         @Override
         public void tick() {
             Level level = seal.getLevel();
-            if (level == null || level.isClientSide || !atTickRate(level, 10) || powered(level)) {
+            if (level == null || level.isClientSide || !atTickRate(10) || powered(level)) {
                 return;
             }
             BlockPos centre = seal.getBlockPos();
