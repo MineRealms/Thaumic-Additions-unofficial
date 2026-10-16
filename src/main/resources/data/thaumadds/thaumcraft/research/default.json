@@ -1,0 +1,2916 @@
+{
+  "categories": [
+    {
+      "key": "THAUMADDITIONS",
+      "icon": "thaumadds:textures/gui/thaumonomicon_icon.png",
+      "background": "thaumcraft:textures/gui/gui_researchback.png",
+      "sort_order": 6
+    }
+  ],
+  "entries": [
+    {
+      "key": "TAR_THAUMADDS",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 0,
+      "display_row": 0,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:knowledge_tome"
+        }
+      },
+      "flags": [
+        "AUTO_UNLOCK",
+        "HIDDEN",
+        "SPIKY"
+      ],
+      "parents": [],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_THAUMADDS.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_ESSENCE_SALT",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -2,
+      "display_row": -2,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:salt_essence"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ESSENCE_SALT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_CRYSTAL_CRUSHER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -2,
+      "display_row": -4,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:crystal_crusher"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_ESSENCE_SALT",
+        "TAR_THAUMADDS",
+        "ARTIFICE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_CRUSHER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:crystal_crusher"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_AURA_DISPERSER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 0,
+      "display_row": -2,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:aura_disperser"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "ARTIFICE",
+        "TAR_THAUMADDS",
+        "TAR_ESSENCE_SALT"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_AURA_DISPERSER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:aura_disperser"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ESSENTIA_PISTOL",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 0,
+      "display_row": -4,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:essentia_pistol"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_AURA_DISPERSER"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ESSENTIA_PISTOL.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:essentia_pistol"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_SEAL",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -4,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:seal"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SEAL.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:seal"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_SEAL_SYMBOLS",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -4,
+      "display_row": -3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:seal_symbol"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_SEAL"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SEAL_SYMBOLS.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_SEAL_GLOBE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -4,
+      "display_row": -10,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:seal_globe"
+        }
+      },
+      "flags": [
+        "HIDDEN",
+        "HEX"
+      ],
+      "parents": [
+        "TAR_SEAL_SYMBOLS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SEAL_GLOBE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:seal_globe"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_KNOWLEDGE_TOME",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -6,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:knowledge_tome"
+        }
+      },
+      "flags": [
+        "ROUND",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_KNOWLEDGE_TOME.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:knowledge_tome"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_CHESTER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -8,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:chester"
+        }
+      },
+      "flags": [
+        "SPIKY"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CHESTER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:chester",
+            "thaumadds:bone_eye"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VIS_SCRIBING_TOOLS",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -10,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:vis_scribing_tools"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VIS_SCRIBING_TOOLS.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:vis_scribing_tools"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_CRYSTAL_WATER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -2,
+      "display_row": 2,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:crystal_block"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_WATER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:crystal_water",
+            "thaumadds:mb.crystal_acceleration"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ENCHANTED_GOLDEN_APPLE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -4,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:cake"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ENCHANTED_GOLDEN_APPLE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:enchanted_golden_apple"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_CRYSTAL_BLOCK",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -6,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:crystal_block"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_BLOCK.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_GROWTH_CHAMBER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -6,
+      "display_row": 3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:growth_chamber"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_CRYSTAL_BLOCK",
+        "ESSENTIACRYSTAL"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_GROWTH_CHAMBER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:growth_chamber"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_FRAGNANT_PENDANT",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -8,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:fragnant_pendant"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_FRAGNANT_PENDANT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:odour_powder",
+            "thaumadds:fragnant_pendant"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VIS_SEEDS",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -10,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:vis_seeds"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VIS_SEEDS.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_CRYSTAL_BAG",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -12,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:crystal_bag"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS",
+        "ESSENTIACRYSTAL"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_BAG.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:crystal_bag"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_TRAVELLER_BELT",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -12,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:traveller_belt"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_TRAVELLER_BELT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:traveller_belt"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_STRIDING_BELT",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -12,
+      "display_row": 3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:striding_belt"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_TRAVELLER_BELT"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_STRIDING_BELT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:striding_belt"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_METEOR_BELT",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -12,
+      "display_row": 5,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:meteor_belt"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_STRIDING_BELT"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_METEOR_BELT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:meteor_belt"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_BRASS_JAR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 8,
+      "display_row": 5,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:jar_brass"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "JARVOID"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_BRASS_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:brass_jar"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_THAUMIUM_JAR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 8,
+      "display_row": 3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:jar_thaumium"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_BRASS_JAR"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_THAUMIUM_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:thaumium_jar"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ELDRITCH_JAR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 8,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:jar_eldritch"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMIUM_JAR",
+        "ELDRITCHMINOR"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ELDRITCH_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:eldritch_jar"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHRILLIUM",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 2,
+      "display_row": -2,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithrillium_ingot"
+        }
+      },
+      "flags": [
+        "ROUND",
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS",
+        "ELDRITCHMINOR"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHRILLIUM.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_MOB_SUMMONING",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 4,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:dna_sample"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHRILLIUM",
+        "TAR_TOTEMS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MOB_SUMMONING.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:dna_sample",
+            "thaumadds:mob_summoner"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ASPECT_COMBINER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 6,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:aspect_combiner"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS",
+        "TAR_MITHRILLIUM"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ASPECT_COMBINER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:aspect_combiner"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHRILLIUM_JAR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 8,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:jar_mithrillium"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ELDRITCH_JAR",
+        "TAR_MITHRILLIUM"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHRILLIUM_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithrillium_jar"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHRILLIUM_SMELTER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 10,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithrillium_smelter"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHRILLIUM",
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHRILLIUM_SMELTER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithrillium_smelter"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_SHADOW_ENCHANTER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 12,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:shadow_enchanter"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHRILLIUM",
+        "TAR_DISENCHANT_FABRIC"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SHADOW_ENCHANTER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:shadow_enchanter"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_SHADOW_BEAM_STAFF",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 14,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:shadow_beam_staff"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHRILLIUM"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_SHADOW_BEAM_STAFF.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:shadow_beam_staff"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_THE_BEHEADER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 16,
+      "display_row": -1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:the_beheader"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "ROUND",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHRILLIUM"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_THE_BEHEADER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:the_beheader"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ADAMINITE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 4,
+      "display_row": -4,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:adaminite_ingot"
+        }
+      },
+      "flags": [
+        "ROUND",
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHRILLIUM"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_AURA_CHARGER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 6,
+      "display_row": -3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:aura_charger"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ASPECT_COMBINER",
+        "TAR_ADAMINITE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_AURA_CHARGER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:aura_charger"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ADAMINITE_JAR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 8,
+      "display_row": -3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:jar_adaminite"
+        }
+      },
+      "flags": [
+        "HEX",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHRILLIUM_JAR",
+        "TAR_ADAMINITE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:adaminite_jar"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ADAMINITE_SMELTER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 10,
+      "display_row": -3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:adaminite_smelter"
+        }
+      },
+      "flags": [
+        "HEX",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ADAMINITE",
+        "TAR_MITHRILLIUM_SMELTER"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_SMELTER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:adaminite_smelter"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ADAMINITE_SWORD",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 12,
+      "display_row": -3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:adaminite_sword"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "ROUND",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ADAMINITE",
+        "ELDRITCHMINOR"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_SWORD.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:adaminite_sword"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ADAMINITE_FABRIC",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 3,
+      "display_row": -6,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:adaminite_fabric"
+        }
+      },
+      "flags": [
+        "ROUND",
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ADAMINITE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ADAMINITE_FABRIC.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:adaminite_fabric",
+            "thaumadds:adaminite_hood",
+            "thaumadds:adaminite_robe",
+            "thaumadds:adaminite_belt",
+            "thaumadds:adaminite_boots"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 5,
+      "display_row": -6,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_ingot"
+        }
+      },
+      "flags": [
+        "ROUND",
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ADAMINITE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_JAR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 8,
+      "display_row": -5,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:jar_mithminite"
+        }
+      },
+      "flags": [
+        "HEX",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ADAMINITE_JAR",
+        "TAR_MITHMINITE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_JAR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_jar"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_SMELTER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 10,
+      "display_row": -5,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_smelter"
+        }
+      },
+      "flags": [
+        "HEX",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHMINITE",
+        "TAR_ADAMINITE_SMELTER"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_SMELTER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_smelter"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_SCYTHE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 12,
+      "display_row": -5,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_scythe"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "ROUND",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHMINITE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_SCYTHE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_scythe",
+            "thaumadds:mithminite_blade",
+            "thaumadds:mithminite_handle"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_FABRIC",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 4,
+      "display_row": -8,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_fabric"
+        }
+      },
+      "flags": [
+        "ROUND",
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ADAMINITE_FABRIC",
+        "TAR_MITHMINITE"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_FABRIC.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_fabric"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_HOOD",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 1,
+      "display_row": -10,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_hood"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHMINITE_FABRIC",
+        "TAR_SEAL_GLOBE",
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_HOOD.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_hood"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_ROBE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 3,
+      "display_row": -10,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_robe"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHMINITE_FABRIC",
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_ROBE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_robe"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_BELT",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 5,
+      "display_row": -10,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_belt"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHMINITE_FABRIC"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_BELT.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_belt"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_MITHMINITE_BOOTS",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 7,
+      "display_row": -10,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:mithminite_boots"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_MITHMINITE_FABRIC",
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_MITHMINITE_BOOTS.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:mithminite_boots"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_CAKE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 2,
+      "display_row": 2,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:cake"
+        }
+      },
+      "flags": [
+        "HEX",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CAKE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:arcane_cake"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_TOTEMS",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 4,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:dawn_totem"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_TOTEMS.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:twilight_totem",
+            "thaumadds:dawn_totem"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_PURIFLOWER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 4,
+      "display_row": 3,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:puriflower"
+        }
+      },
+      "flags": [
+        "SPIKY",
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_TOTEMS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_PURIFLOWER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:puriflower"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_CRYSTAL_BORE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 6,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:crystal_bore"
+        }
+      },
+      "flags": [
+        "SPIKY"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_BORE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:crystal_bore"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_FLUX_CONCENTRATOR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 10,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:flux_concentrator"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_FLUX_CONCENTRATOR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:flux_concentrator"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_DISENCHANT_FABRIC",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 12,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:disenchant_fabric"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_DISENCHANT_FABRIC.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:disenchant_fabric"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_CRYSTAL_LAMP",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 14,
+      "display_row": 1,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:crystal_lamp"
+        }
+      },
+      "flags": [],
+      "parents": [
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_CRYSTAL_LAMP.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:crystal_lamp"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_ELDRITCH",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 0,
+      "display_row": 8,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_seed"
+        }
+      },
+      "flags": [
+        "HIDDEN",
+        "ROUND"
+      ],
+      "parents": [
+        "TAR_THAUMADDS",
+        "ELDRITCHMINOR"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_ELDRITCH.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:voidingot",
+            "thaumadds:void_stuff"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VOID_THAUMOMETER",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 2,
+      "display_row": 7,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_thaumometer"
+        }
+      },
+      "flags": [
+        "HIDDEN",
+        "HEX"
+      ],
+      "parents": [
+        "TAR_ELDRITCH"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_THAUMOMETER.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:void_thaumometer"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_WORMHOLE_MIRROR",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 2,
+      "display_row": 5,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:wormhole_mirror"
+        }
+      },
+      "flags": [
+        "HIDDEN",
+        "SPIKY"
+      ],
+      "parents": [
+        "TAR_VOID_THAUMOMETER",
+        "TAR_THAUMADDS"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_WORMHOLE_MIRROR.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:wormhole_mirror"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VOID_CROP",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 2,
+      "display_row": 9,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_seed"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ELDRITCH"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_CROP.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:void_crop"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VOID_ANVIL",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": 4,
+      "display_row": 7,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_anvil"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ELDRITCH"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ANVIL.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:void_anvil"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VOID_ELEMENTAL_PICKAXE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -2,
+      "display_row": 7,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_elemental_pickaxe"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ELDRITCH",
+        "ELEMENTALPICK"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_PICKAXE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:void_elemental_pickaxe"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VOID_ELEMENTAL_AXE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -2,
+      "display_row": 9,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_elemental_axe"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ELDRITCH",
+        "ELEMENTALPICK"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_AXE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:void_elemental_axe"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VOID_ELEMENTAL_SHOVEL",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -4,
+      "display_row": 7,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_elemental_shovel"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ELDRITCH",
+        "ELEMENTALPICK"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_SHOVEL.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:void_elemental_shovel"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TAR_VOID_ELEMENTAL_HOE",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -4,
+      "display_row": 9,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:void_elemental_hoe"
+        }
+      },
+      "flags": [
+        "HIDDEN"
+      ],
+      "parents": [
+        "TAR_ELDRITCH",
+        "ELEMENTALPICK"
+      ],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TAR_VOID_ELEMENTAL_HOE.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        },
+        {
+          "type": "NORMAL_CRAFTING",
+          "value": "",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": [
+            "thaumadds:void_elemental_hoe"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TARBlueWolf",
+      "category": "THAUMADDITIONS",
+      "aspects": {},
+      "display_column": -6,
+      "display_row": -10,
+      "complexity": 1,
+      "icon": {
+        "type": "STACK",
+        "stack": {
+          "id": "thaumadds:blue_bone"
+        }
+      },
+      "flags": [
+        "HIDDEN",
+        "HEX"
+      ],
+      "parents": [],
+      "hidden_parents": [],
+      "siblings": [],
+      "object_triggers": [],
+      "entity_triggers": [],
+      "aspect_triggers": [],
+      "warp": 0,
+      "pages": [
+        {
+          "type": "TEXT",
+          "value": "tc.research_page.TARBlueWolf.1",
+          "aspects": {},
+          "compound_blueprint": "",
+          "recipe_link_policy": "DISABLED",
+          "recipe_ids": []
+        }
+      ]
+    }
+  ]
+}
