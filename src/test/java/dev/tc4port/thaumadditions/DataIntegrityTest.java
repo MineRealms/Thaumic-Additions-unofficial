@@ -79,6 +79,76 @@ class DataIntegrityTest {
     }
 
     /**
+     * Every key the code asks for has a line behind it.
+     *
+     * <p>A missing line does not fail anything — the game prints the key instead, so a chat message
+     * reads {@code chat.thaumadds.thaumometer.target} and nobody notices until a player does. The
+     * source is read here rather than the compiled classes, because the literal in the call is what
+     * has to match.</p>
+     */
+    @Test
+    @DisplayName("every key the code asks for is in both languages")
+    void translatableKeysAreDefined() {
+        java.util.Set<String> used = new TreeSet<>();
+        java.util.regex.Pattern call = java.util.regex.Pattern.compile(
+                "Component\\.translatable\\(\\s*\"([^\"]+)\"");
+        for (String source : sources()) {
+            var matcher = call.matcher(source);
+            while (matcher.find()) {
+                String key = matcher.group(1);
+                // Another mod's keys are its own business.
+                if (!key.startsWith("minecraft.") && !key.startsWith("thaumcraft.")
+                        && !key.startsWith("jei.")) {
+                    used.add(key);
+                }
+            }
+        }
+        assertFalse(used.isEmpty(), "the source scan found no translatable calls at all");
+        for (String locale : LOCALES) {
+            Map<String, String> lines = lang(locale);
+            Set<String> missing = new TreeSet<>();
+            for (String key : used) {
+                if (!lines.containsKey(key)) {
+                    missing.add(key);
+                }
+            }
+            assertTrue(missing.isEmpty(), locale + " has no line for: " + missing);
+        }
+    }
+
+    /** Every .java file of the mod, from the repository rather than from this build's output. */
+    private static List<String> sources() {
+        java.nio.file.Path root = java.nio.file.Paths.get("").toAbsolutePath();
+        // The tests run from the node's own directory, so the repository is found by walking up.
+        while (root != null && !java.nio.file.Files.exists(root.resolve("settings.gradle"))) {
+            root = root.getParent();
+        }
+        assertNotNull(root, "could not find the repository root from the working directory");
+
+        List<String> out = new ArrayList<>();
+        for (String folder : new String[] {"src/main/java", "src/hclite/java",
+                "versions/1.20.1-forge/src/main/java", "versions/1.21.1-neoforge/src/main/java",
+                "versions/1.20.1-forge/src/hclite/java", "versions/1.21.1-neoforge/src/hclite/java"}) {
+            java.nio.file.Path start = root.resolve(folder);
+            if (!java.nio.file.Files.isDirectory(start)) {
+                continue;
+            }
+            try (var walk = java.nio.file.Files.walk(start)) {
+                walk.filter(path -> path.toString().endsWith(".java")).forEach(path -> {
+                    try {
+                        out.add(java.nio.file.Files.readString(path));
+                    } catch (Exception failure) {
+                        throw new AssertionError("could not read " + path, failure);
+                    }
+                });
+            } catch (Exception failure) {
+                throw new AssertionError("could not walk " + folder, failure);
+            }
+        }
+        return out;
+    }
+
+    /**
      * The one placeholder the language files are allowed to carry.
      *
      * <p>{@code @ASPECT} is upstream's own: 1.12 wrote it where an aspect's name belongs and

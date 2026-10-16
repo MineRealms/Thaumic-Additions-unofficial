@@ -34,8 +34,18 @@ public class VoidThaumometerRenderer extends BlockEntityWithoutLevelRenderer {
             ResourceLocation.tryParse("thaumadds:textures/item/void_thaumometer.png");
     private static final ResourceLocation PANE =
             ResourceLocation.tryParse("thaumcraft:textures/models/scanscreen.png");
-    /** The mesh is about 2.8 across; a sixteenth of that sits right in a hand. */
-    private static final float MODEL_SCALE = 0.0625F;
+    /**
+     * What a hand adds, and only a hand.
+     *
+     * <p>1.12's own numbers for this model are the ones in
+     * {@link VoidThaumometerTransforms}, and they are in whole blocks: the mesh is 2.8 across and
+     * its transform for the inventory scales it by 0.35, which is what makes an icon fill a slot.
+     * The one context with no scale of its own is the first person, and that is not an oversight
+     * upstream: a held item is scaled by the hand — 0.4 of a block, which is where vanilla's
+     * default first-person transform gets its size from — before the model's own transform is
+     * applied. Overriding that transform drops the hand's scale, so the port puts it back.</p>
+     */
+    private static final float HAND_SCALE = 0.4F;
 
     public VoidThaumometerRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
@@ -63,7 +73,7 @@ public class VoidThaumometerRenderer extends BlockEntityWithoutLevelRenderer {
         if (place.rotZ() != 0.0F) {
             pose.mulPose(Axis.ZP.rotationDegrees(place.rotZ()));
         }
-        float scale = place.sx() * MODEL_SCALE;
+        float scale = place.sx() * (context.firstPerson() ? HAND_SCALE : 1.0F);
         pose.scale(scale, scale, scale);
 
         // One pass per material: the two halves of the model come from different sheets, and a
