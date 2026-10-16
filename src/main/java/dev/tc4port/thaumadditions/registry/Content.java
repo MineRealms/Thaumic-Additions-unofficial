@@ -414,7 +414,8 @@ public final class Content {
                 () -> platform.tool(ToolKind.HOE, voidElemental, 0.0F, -3.0F, new Item.Properties())));
 
         VIS_SCRIBING_TOOLS = track(items.register("vis_scribing_tools", GearItems::visScribingTools));
-        VOID_THAUMOMETER = track(items.register("void_thaumometer", ToolItems::voidThaumometer));
+        VOID_THAUMOMETER = track(items.register("void_thaumometer",
+                () -> ToolItems.voidThaumometer(platform)));
         WORMHOLE_MIRROR = track(items.register("wormhole_mirror", ToolItems::wormholeMirror));
     }
 

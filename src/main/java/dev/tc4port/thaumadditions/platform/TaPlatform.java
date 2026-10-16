@@ -114,6 +114,13 @@ public interface TaPlatform {
     Item behaviorItem(Item.Properties properties, dev.tc4port.thaumadditions.items.ItemBehavior behavior);
 
     /**
+     * Creates an item whose icon and held model come from a client renderer, for the items whose
+     * 1.12 form was a model the modern loaders cannot read. The behaviour goes on it as usual.
+     */
+    Item modelledItem(Item.Properties properties, ToolIcon icon,
+                      dev.tc4port.thaumadditions.items.ItemBehavior behavior);
+
+    /**
      * Builds the 1.12 void-fruit food properties. {@code FoodProperties.Builder}
      * spells the always-edible flag {@code alwaysEat} on 1.20.1 and
      * {@code alwaysEdible} on 1.21.1, so it lives on the port too.

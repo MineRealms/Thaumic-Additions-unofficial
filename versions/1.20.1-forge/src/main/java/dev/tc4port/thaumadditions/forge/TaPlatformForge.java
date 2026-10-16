@@ -456,6 +456,36 @@ public final class TaPlatformForge implements TaPlatform {
         net.minecraft.world.ContainerHelper.loadAllItems(tag, slots);
     }
 
+    /**
+     * An item drawn by a renderer rather than by a model file. Forge 1.20.1 has no client
+     * extension event, so the hook goes on the item itself, exactly as the machine icons do.
+     */
+    @Override
+    public Item modelledItem(Item.Properties properties,
+                             dev.tc4port.thaumadditions.platform.ToolIcon icon,
+                             dev.tc4port.thaumadditions.items.ItemBehavior behavior) {
+        return new net.minecraft.world.item.Item(properties) {
+            @Override
+            public net.minecraft.world.InteractionResultHolder<net.minecraft.world.item.ItemStack> use(
+                    net.minecraft.world.level.Level level,
+                    net.minecraft.world.entity.player.Player player,
+                    net.minecraft.world.InteractionHand hand) {
+                return behavior.use(level, player, hand);
+            }
+
+            @Override
+            public void initializeClient(java.util.function.Consumer<
+                    net.minecraftforge.client.extensions.common.IClientItemExtensions> consumer) {
+                consumer.accept(new net.minecraftforge.client.extensions.common.IClientItemExtensions() {
+                    @Override
+                    public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new dev.tc4port.thaumadditions.forge.client.VoidThaumometerRenderer();
+                    }
+                });
+            }
+        };
+    }
+
     @Override
     public <T extends net.minecraft.world.inventory.AbstractContainerMenu> net.minecraft.world.inventory.MenuType<T> menuType(
             dev.tc4port.thaumadditions.platform.TaMenuFactory<T> factory) {

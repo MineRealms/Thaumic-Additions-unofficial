@@ -430,6 +430,22 @@ public final class TaPlatformNeoForge implements TaPlatform {
         net.minecraft.world.ContainerHelper.loadAllItems(tag, slots, level.registryAccess());
     }
 
+    /** An item drawn by a renderer rather than by a model file; see the Forge twin. */
+    @Override
+    public Item modelledItem(Item.Properties properties,
+                             dev.tc4port.thaumadditions.platform.ToolIcon icon,
+                             dev.tc4port.thaumadditions.items.ItemBehavior behavior) {
+        return new net.minecraft.world.item.Item(properties) {
+            @Override
+            public net.minecraft.world.InteractionResultHolder<net.minecraft.world.item.ItemStack> use(
+                    net.minecraft.world.level.Level level,
+                    net.minecraft.world.entity.player.Player player,
+                    net.minecraft.world.InteractionHand hand) {
+                return behavior.use(level, player, hand);
+            }
+        };
+    }
+
     @Override
     public <T extends net.minecraft.world.inventory.AbstractContainerMenu> net.minecraft.world.inventory.MenuType<T> menuType(
             dev.tc4port.thaumadditions.platform.TaMenuFactory<T> factory) {
