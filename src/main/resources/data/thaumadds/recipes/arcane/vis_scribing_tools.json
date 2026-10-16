@@ -1,0 +1,34 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    " v ",
+    "vtg",
+    " ga"
+  ],
+  "key": {
+    "v": {
+      "item": "thaumcraft:crystal_essence"
+    },
+    "t": {
+      "item": "thaumcraft:thaumometer"
+    },
+    "g": {
+      "item": "minecraft:glass"
+    },
+    "a": {
+      "item": "thaumcraft:essence_phial"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:vis_scribing_tools"
+  },
+  "vis": {
+    "aer": 1,
+    "terra": 1,
+    "ignis": 1,
+    "aqua": 1,
+    "ordo": 1,
+    "perditio": 1
+  }
+}

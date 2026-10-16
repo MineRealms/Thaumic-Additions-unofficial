@@ -1,0 +1,31 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "s",
+    "c",
+    "t"
+  ],
+  "key": {
+    "s": {
+      "item": "thaumcraft:thaumometer"
+    },
+    "c": {
+      "item": "thaumcraft:knowledge_fragment"
+    },
+    "t": {
+      "item": "thaumcraft:thaumonomicon"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:knowledge_tome"
+  },
+  "vis": {
+    "aer": 1,
+    "terra": 1,
+    "ignis": 1,
+    "aqua": 1,
+    "ordo": 1,
+    "perditio": 1
+  }
+}

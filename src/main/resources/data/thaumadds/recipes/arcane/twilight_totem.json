@@ -1,0 +1,27 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "sws",
+    "wcw",
+    "sws"
+  ],
+  "key": {
+    "s": {
+      "item": "thaumadds:taintwood_planks"
+    },
+    "w": {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    "c": {
+      "item": "thaumcraft:crystal_essence"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:twilight_totem"
+  },
+  "vis": {
+    "perditio": 1,
+    "aer": 1
+  }
+}

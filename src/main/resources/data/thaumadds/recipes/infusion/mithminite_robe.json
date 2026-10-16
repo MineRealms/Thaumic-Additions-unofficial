@@ -1,0 +1,55 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumadds:adaminite_robe"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithrillium_resonator"
+    },
+    {
+      "item": "thaumadds:levitation_device"
+    },
+    {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithminite_robe"
+  },
+  "instability": 10,
+  "aspects": {
+    "tutamen": 200,
+    "victus": 250,
+    "vitium": 150,
+    "ignis": 250
+  }
+}

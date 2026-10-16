@@ -1,0 +1,36 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumcraft:thaumium_axe"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "minecraft:skeleton_skull"
+    },
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "minecraft:skeleton_skull"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:the_beheader"
+  },
+  "instability": 8,
+  "aspects": {
+    "perditio": 70,
+    "praecantatio": 85,
+    "telum": 120
+  }
+}

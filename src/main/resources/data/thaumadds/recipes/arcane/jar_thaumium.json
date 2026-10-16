@@ -1,0 +1,26 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "gpg",
+    "gjg",
+    "ggg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:glass_pane"
+    },
+    "p": {
+      "item": "minecraft:copper_ingot"
+    },
+    "j": {
+      "item": "thaumadds:jar_brass"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:jar_thaumium"
+  },
+  "vis": {
+    "aqua": 2
+  }
+}

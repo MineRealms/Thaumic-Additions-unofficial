@@ -1,0 +1,40 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumcraft:resonator"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:shadow_beam_staff"
+  },
+  "instability": 10,
+  "aspects": {
+    "aer": 50,
+    "terra": 50,
+    "ignis": 50,
+    "aqua": 50,
+    "ordo": 50,
+    "perditio": 50,
+    "alienis": 500
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "bsb",
+    "mcm",
+    "mmm"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:copper_ingot"
+    },
+    "s": {
+      "item": "thaumcraft:alchemical_furnace"
+    },
+    "m": {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    "c": {
+      "item": "thaumcraft:advanced_alchemical_construct"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithrillium_smelter"
+  },
+  "vis": {
+    "ignis": 6,
+    "aqua": 2
+  }
+}

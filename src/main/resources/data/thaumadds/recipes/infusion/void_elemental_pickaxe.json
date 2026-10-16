@@ -1,0 +1,27 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumcraft:elemental_pickaxe"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:primordial_pearl"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:void_elemental_pickaxe"
+  },
+  "instability": 6,
+  "aspects": {
+    "alienis": 40,
+    "ignis": 80,
+    "metallum": 300
+  }
+}

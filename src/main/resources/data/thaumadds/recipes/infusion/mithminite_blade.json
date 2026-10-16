@@ -1,0 +1,28 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumadds:adaminite_sword"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_plate"
+    },
+    {
+      "item": "thaumadds:mithminite_plate"
+    },
+    {
+      "item": "thaumadds:mithrillium_resonator"
+    },
+    {
+      "item": "thaumadds:mithminite_plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithminite_blade"
+  },
+  "instability": 1,
+  "aspects": {
+    "telum": 250
+  }
+}

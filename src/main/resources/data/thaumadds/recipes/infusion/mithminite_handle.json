@@ -1,0 +1,25 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumadds:mithminite_nugget"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_plate"
+    },
+    {
+      "item": "thaumadds:mithminite_ingot"
+    },
+    {
+      "item": "thaumadds:mithminite_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithminite_handle"
+  },
+  "instability": 1,
+  "aspects": {
+    "instrumentum": 100
+  }
+}

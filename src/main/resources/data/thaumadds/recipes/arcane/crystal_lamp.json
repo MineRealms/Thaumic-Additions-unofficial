@@ -1,0 +1,20 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "g g",
+    " a ",
+    "g g"
+  ],
+  "key": {
+    "g": {
+      "item": "thaumcraft:greatwood_planks"
+    },
+    "a": {
+      "item": "thaumcraft:nitor"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:crystal_lamp"
+  }
+}

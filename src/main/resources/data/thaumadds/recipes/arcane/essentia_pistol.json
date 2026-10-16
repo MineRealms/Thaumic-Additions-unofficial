@@ -1,0 +1,32 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "stt",
+    "gbd",
+    "g  "
+  ],
+  "key": {
+    "s": {
+      "item": "thaumcraft:nitor"
+    },
+    "t": {
+      "item": "thaumcraft:thaumium_ingot"
+    },
+    "g": {
+      "item": "thaumcraft:greatwood_planks"
+    },
+    "b": {
+      "item": "minecraft:stone_button"
+    },
+    "d": {
+      "item": "thaumadds:aura_disperser"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:essentia_pistol"
+  },
+  "vis": {
+    "aer": 1
+  }
+}

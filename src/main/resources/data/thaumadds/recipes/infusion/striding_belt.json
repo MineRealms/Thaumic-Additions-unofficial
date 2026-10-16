@@ -1,0 +1,29 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumadds:traveller_belt"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:amber"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "thaumcraft:amber"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:striding_belt"
+  },
+  "instability": 3,
+  "aspects": {
+    "volatus": 150,
+    "aer": 200
+  }
+}

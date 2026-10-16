@@ -1,0 +1,30 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumcraft:primordial_pearl"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_blade"
+    },
+    {
+      "item": "thaumadds:mithminite_plate"
+    },
+    {
+      "item": "thaumadds:mithminite_handle"
+    },
+    {
+      "item": "thaumadds:mithminite_plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithminite_scythe"
+  },
+  "instability": 1,
+  "aspects": {
+    "telum": 250,
+    "instrumentum": 150,
+    "praecantatio": 100
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    " f ",
+    "saf",
+    "mp "
+  ],
+  "key": {
+    "f": {
+      "item": "thaumcraft:essentia_filter"
+    },
+    "s": {
+      "item": "thaumcraft:salis_mundus"
+    },
+    "a": {
+      "item": "thaumcraft:nitor"
+    },
+    "m": {
+      "item": "thaumcraft:amber"
+    },
+    "p": {
+      "item": "thaumadds:odour_powder"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:fragnant_pendant"
+  },
+  "vis": {
+    "aer": 1,
+    "terra": 1,
+    "ignis": 1,
+    "aqua": 1,
+    "ordo": 1,
+    "perditio": 1
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumadds:adaminite_hood"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumcraft:brain_jar"
+    },
+    {
+      "item": "thaumadds:mithrillium_resonator"
+    },
+    {
+      "item": "minecraft:sea_lantern"
+    },
+    {
+      "item": "thaumadds:fragnant_pendant"
+    },
+    {
+      "item": "thaumadds:seal_globe"
+    },
+    {
+      "item": "thaumcraft:arcane_lamp"
+    },
+    {
+      "item": "thaumcraft:sanity_checker"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithminite_hood"
+  },
+  "instability": 10,
+  "aspects": {
+    "tutamen": 200,
+    "vitium": 150,
+    "aqua": 250,
+    "cognitio": 250
+  }
+}

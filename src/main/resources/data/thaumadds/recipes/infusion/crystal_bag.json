@@ -1,0 +1,42 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumcraft:focus_pouch"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:air_crystal_cluster"
+    },
+    {
+      "item": "thaumcraft:earth_crystal_cluster"
+    },
+    {
+      "item": "thaumcraft:entropy_crystal_cluster"
+    },
+    {
+      "item": "thaumcraft:fire_crystal_cluster"
+    },
+    {
+      "item": "thaumcraft:order_crystal_cluster"
+    },
+    {
+      "item": "thaumcraft:mixed_crystal_cluster"
+    },
+    {
+      "item": "thaumcraft:water_crystal_cluster"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:crystal_bag"
+  },
+  "instability": 6,
+  "aspects": {
+    "aer": 10,
+    "terra": 10,
+    "ignis": 10,
+    "aqua": 10,
+    "ordo": 10,
+    "perditio": 10
+  }
+}

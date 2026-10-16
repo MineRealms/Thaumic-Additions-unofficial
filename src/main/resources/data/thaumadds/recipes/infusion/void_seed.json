@@ -1,0 +1,39 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "minecraft:wheat_seeds"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:primordial_pearl"
+    },
+    {
+      "item": "thaumcraft:void_seed"
+    },
+    {
+      "item": "thaumcraft:salis_mundus"
+    },
+    {
+      "item": "thaumcraft:void_seed"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_seed"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:void_seed"
+  },
+  "instability": 5,
+  "aspects": {
+    "aer": 20,
+    "terra": 20,
+    "ignis": 20,
+    "aqua": 20,
+    "ordo": 20,
+    "perditio": 20
+  }
+}

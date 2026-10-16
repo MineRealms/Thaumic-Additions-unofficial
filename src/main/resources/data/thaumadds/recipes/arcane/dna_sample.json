@@ -1,0 +1,34 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "tmt",
+    "rpr",
+    "tmt"
+  ],
+  "key": {
+    "r": {
+      "item": "thaumcraft:nitor"
+    },
+    "t": {
+      "item": "thaumcraft:thaumium_ingot"
+    },
+    "m": {
+      "item": "thaumcraft:resonator"
+    },
+    "p": {
+      "item": "thaumcraft:thaumium_ingot"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:dna_sample"
+  },
+  "vis": {
+    "aer": 6,
+    "terra": 6,
+    "ignis": 6,
+    "aqua": 6,
+    "ordo": 6,
+    "perditio": 6
+  }
+}

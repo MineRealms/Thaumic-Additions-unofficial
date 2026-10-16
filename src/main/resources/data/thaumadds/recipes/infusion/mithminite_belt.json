@@ -1,0 +1,35 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumadds:adaminite_belt"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithrillium_resonator"
+    },
+    {
+      "item": "thaumadds:levitation_device"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithminite_belt"
+  },
+  "instability": 10,
+  "aspects": {
+    "tutamen": 200,
+    "vitium": 150
+  }
+}

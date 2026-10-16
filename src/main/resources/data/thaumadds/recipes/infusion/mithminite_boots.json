@@ -1,0 +1,39 @@
+{
+  "type": "thaumcraft:infusion",
+  "central": {
+    "item": "thaumadds:adaminite_boots"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithminite_fabric"
+    },
+    {
+      "item": "thaumadds:mithrillium_resonator"
+    },
+    {
+      "item": "thaumcraft:boots_of_the_traveller"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithminite_boots"
+  },
+  "instability": 10,
+  "aspects": {
+    "tutamen": 200,
+    "aer": 250,
+    "vitium": 150
+  }
+}

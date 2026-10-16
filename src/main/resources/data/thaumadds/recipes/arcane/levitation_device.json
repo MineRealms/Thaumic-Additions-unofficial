@@ -1,0 +1,33 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "ini",
+    "cmc",
+    "iai"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "n": {
+      "item": "thaumcraft:nitor"
+    },
+    "c": {
+      "item": "thaumcraft:resonator"
+    },
+    "m": {
+      "item": "thaumcraft:arcane_levitator"
+    },
+    "a": {
+      "item": "thaumcraft:alumentum"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "thaumadds:levitation_device"
+  },
+  "vis": {
+    "aer": 5,
+    "ordo": 2
+  }
+}
