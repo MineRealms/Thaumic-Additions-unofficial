@@ -1,0 +1,31 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_METEOR_BELT",
+  "central": {
+    "item": "thaumadds:striding_belt"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "minecraft:nether_brick"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "minecraft:nether_brick"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:meteor_belt"
+  },
+  "instability": 5,
+  "aspects": {
+    "motus": 250,
+    "volatus": 250,
+    "ignis": 200
+  }
+}

@@ -251,10 +251,35 @@ if (isForge) {
         testImplementation "com.google.code.gson:gson:${gson_version}"
     }
 
+    // 1.21 renamed every data folder to its registry's own name, singular. The shared tree is
+    // written in 1.20.1's spelling, so this node's own resources hold renamed copies of the four
+    // folders that changed — and they are *derived*, so the build derives them rather than trusting
+    // a committed copy to stay in step. Not deriving them is how the 1.21.1 build came to ship
+    // every file under a name its loader never looks for: present, resolvable, and read by nothing.
+    def splitData = tasks.register('splitData', Exec) {
+        description = 'Writes the shared data files in 1.21.1\'s folder spelling.'
+        group = 'build'
+        inputs.dir rootProject.file('src/main/resources/data')
+        outputs.dir layout.projectDirectory.dir('src/main/resources/data')
+        workingDir rootProject.projectDir
+        commandLine 'python', '-I', 'tools/split_data.py'
+    }
+
     tasks.named('processResources', ProcessResources).configure {
+        dependsOn splitData
         inputs.properties metadata
+        // The originals are left out rather than shipped alongside: two spellings of every recipe
+        // in one jar, one of which no loader reads, is a trap for whoever looks next.
+        //
+        // Named one by one, and not as `data/*/tags/**`: an exclude applies to every source
+        // directory of the source set, this node's own included, and the broad pattern took the
+        // renamed copies out along with the originals.
+        exclude 'data/*/recipes/**', 'data/*/loot_tables/**', 'data/*/structures/**',
+                'data/*/tags/blocks/**', 'data/*/tags/items/**', 'data/*/tags/fluids/**',
+                'data/*/tags/entity_types/**'
         filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) { expand metadata }
     }
+    tasks.named('test').configure { dependsOn splitData }
     tasks.named('processHcliteResources', ProcessResources).configure {
         inputs.properties hcliteMeta
         filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) { expand hcliteMeta }

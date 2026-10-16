@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_SHADOW_ENCHANTER",
   "central": {
     "item": "minecraft:enchanting_table"
   },

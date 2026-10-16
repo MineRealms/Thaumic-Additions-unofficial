@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_CRYSTAL_BAG",
   "central": {
     "item": "thaumcraft:focus_pouch"
   },
@@ -37,6 +38,7 @@
     "ignis": 10,
     "aqua": 10,
     "ordo": 10,
-    "perditio": 10
+    "perditio": 10,
+    "vacuos": 50
   }
 }

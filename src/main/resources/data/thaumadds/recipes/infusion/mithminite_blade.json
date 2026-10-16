@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_SCYTHE",
   "central": {
     "item": "thaumadds:adaminite_sword"
   },

@@ -1,0 +1,2508 @@
+[
+ {
+  "kind": "infusion",
+  "name": "test",
+  "result": {
+   "kind": "field",
+   "value": "InfuserRecipeTypesTAR.MAKE_UNBREAKABLE.createRecipeResult(IInfusionOutputInstance.EMPTY)"
+  },
+  "research": "TAR_ADAMINITE",
+  "instability": 1,
+  "central": {
+   "kind": "field",
+   "value": "i"
+  },
+  "aspects": {
+   "FIRE": 5
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "Blocks.BEDROCK",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithrillium_ingot",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHRILLIUM_INGOT",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHRILLIUM",
+  "instability": 5,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.ingots",
+   "count": 1,
+   "meta": 1
+  },
+  "aspects": {
+   "CRYSTAL": 30,
+   "ENERGY": 15,
+   "ELDRITCH": 10,
+   "METAL": 30,
+   "MAGIC": 10
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTC.amber",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.alumentum",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.quicksilver",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.fabric",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.salisMundus",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.amber",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.alumentum",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.quicksilver",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.fabric",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.salisMundus",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "adaminite_ingot",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_INGOT",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_ADAMINITE",
+  "instability": 10,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHRILLIUM_INGOT",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "LIFE": 100,
+   "ALCHEMY": 30,
+   "EXCHANGE": 40,
+   "METAL": 40,
+   "SOUL": 120,
+   "MAGIC": 100,
+   "DRACO": 20,
+   "INFERNUM": 100,
+   "VISUM": 20
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "Items.NETHER_STAR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.fabric",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "field",
+    "value": "primordialPearl"
+   },
+   {
+    "kind": "stack",
+    "value": "Items.NETHER_STAR",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_ingot",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_INGOT",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE",
+  "instability": 8,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_INGOT",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "CAELES": 10,
+   "METAL": 60,
+   "LIFE": 90,
+   "MAGIC": 120
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_INGOT",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.quicksilver",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_INGOT",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.quicksilver",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_jar",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.MITHMINITE_JAR",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_JAR",
+  "instability": 7,
+  "central": {
+   "kind": "stack",
+   "value": "BlocksTAR.ADAMINITE_JAR",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "CAELES": 16,
+   "ALCHEMY": 32,
+   "EXCHANGE": 10,
+   "WATER": 40,
+   "VOID": 30
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_INGOT",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.amber",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.alumentum",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.jarVoid",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "aspect_combiner",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.ASPECT_COMBINER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_ASPECT_COMBINER",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "BlocksTC.centrifuge",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "EXCHANGE": 16,
+   "ENTROPY": 30,
+   "ALCHEMY": 20,
+   "MECHANISM": 15
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.EXCHANGE"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.filter",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "plateBrass"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.alumentum",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "aura_charger",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.AURA_CHARGER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_AURA_CHARGER",
+  "instability": 8,
+  "central": {
+   "kind": "stack",
+   "value": "BlocksTAR.ASPECT_COMBINER",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "AURA": 20,
+   "MAGIC": 20,
+   "ENERGY": 40
+  },
+  "components": [
+   {
+    "kind": "essence",
+    "value": "TileAuraCharger.AURA"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.ADAMINITE_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.ADAMINITE_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.ADAMINITE_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.ADAMINITE_NUGGET",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "crystal_crusher",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.CRYSTAL_CRUSHER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_CRYSTAL_CRUSHER",
+  "instability": 3,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.mechanismComplex",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "CRAFT": 20,
+   "EXITIUM": 20,
+   "TOOL": 20
+  },
+  "components": [
+   {
+    "kind": "essence",
+    "value": "Aspect.AIR"
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.EARTH"
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.FIRE"
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.WATER"
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.ORDER"
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.ENTROPY"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.slabArcaneStone",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.slabArcaneStone",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.slabArcaneStone",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.SALT_ESSENCE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.SALT_ESSENCE",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "aura_disperser",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.AURA_DISPERSER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_AURA_DISPERSER",
+  "instability": 4,
+  "central": {
+   "kind": "stack",
+   "value": "Blocks.DISPENSER",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "FLUCTUS": 30,
+   "AURA": 10,
+   "ALCHEMY": 20,
+   "VENTUS": 50
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "salt",
+    "value": "Aspect.AURA"
+   },
+   {
+    "kind": "salt",
+    "value": "Aspect.ALCHEMY"
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.shimmerleaf",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.morphicResonator",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "salt",
+    "value": "KnowledgeTAR.FLUCTUS"
+   },
+   {
+    "kind": "salt",
+    "value": "KnowledgeTAR.DRACO"
+   },
+   {
+    "kind": "tag",
+    "value": "nitor"
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "crystal_bore",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.CRYSTAL_BORE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_CRYSTAL_BORE",
+  "instability": 5,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.morphicResonator",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "EXITIUM": 20,
+   "EARTH": 10,
+   "ENTROPY": 30
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "BlocksTC.stoneArcane",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.stoneArcane",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.stoneArcane",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "enchanted_golden_apple",
+  "result": {
+   "kind": "stack",
+   "value": "Items.GOLDEN_APPLE",
+   "count": 1,
+   "meta": 1
+  },
+  "research": "TAR_ENCHANTED_GOLDEN_APPLE",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "Items.GOLDEN_APPLE",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "DESIRE": 10,
+   "LIFE": 5,
+   "VISUM": 20
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "Blocks.GOLD_BLOCK",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.DESIRE"
+   },
+   {
+    "kind": "stack",
+    "value": "Blocks.GOLD_BLOCK",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.DESIRE"
+   },
+   {
+    "kind": "stack",
+    "value": "Blocks.GOLD_BLOCK",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.DESIRE"
+   },
+   {
+    "kind": "stack",
+    "value": "Blocks.GOLD_BLOCK",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.DESIRE"
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mob_summoner",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.ENTITY_SUMMONER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MOB_SUMMONING",
+  "instability": 5,
+  "central": {
+   "kind": "stack",
+   "value": "BlocksTC.metalBlockThaumium",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "DRACO": 10,
+   "IMPERIUM": 50,
+   "EXITIUM": 10,
+   "LIFE": 15,
+   "SOUL": 20,
+   "MAN": 30,
+   "BEAST": 25,
+   "INFERNUM": 100
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.ENTITY_CELL",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismSimple",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.filter",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.alumentum",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "nitor"
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTAR.TWILIGHT_TOTEM",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "puriflower",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.PURIFLOWER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_PURIFLOWER",
+  "instability": 2,
+  "central": {
+   "kind": "stack",
+   "value": "BlocksTAR.DAWN_TOTEM",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "AURA": 10,
+   "IMPERIUM": 15,
+   "ORDER": 30,
+   "PLANT": 60
+  },
+  "components": [
+   {
+    "kind": "field",
+    "value": "BlocksTC.shimmerleaf"
+   },
+   {
+    "kind": "field",
+    "value": "BlocksTC.vishroom"
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.PLANT"
+   },
+   {
+    "kind": "field",
+    "value": "BlocksTC.vishroom"
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "growth_chamber",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.GROWTH_CHAMBER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_GROWTH_CHAMBER",
+  "instability": 3,
+  "central": {
+   "kind": "field",
+   "value": "BlocksTAR.CRYSTAL_BLOCK"
+  },
+  "aspects": {
+   "ORDER": 20,
+   "MECHANISM": 15,
+   "IMPERIUM": 10
+  },
+  "components": [
+   {
+    "kind": "field",
+    "value": "ItemsTC.amber"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   },
+   {
+    "kind": "field",
+    "value": "ItemsTC.morphicResonator"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   },
+   {
+    "kind": "field",
+    "value": "ItemsTC.visResonator"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   },
+   {
+    "kind": "field",
+    "value": "ItemsTC.mechanismComplex"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "flux_concentrator",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.FLUX_CONCENTRATOR",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_FLUX_CONCENTRATOR",
+  "instability": 2,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.mechanismComplex",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "FLUX": 100,
+   "EXCHANGE": 50
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTC.filter",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.quicksilver",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.bellows",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.quicksilver",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "arcane_cake",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.CAKE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_CAKE",
+  "instability": 5,
+  "central": {
+   "kind": "stack",
+   "value": "Items.CAKE",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "LIFE": 20,
+   "DESIRE": 30,
+   "MAGIC": 15,
+   "VENTUS": 10
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTC.primordialPearl",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.quicksilver",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.salisMundus",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "essence",
+    "value": "KnowledgeTAR.IMPERIUM"
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "chester",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.CHESTER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_CHESTER",
+  "instability": 2,
+  "central": {
+   "kind": "stack",
+   "value": "BlocksTC.hungryChest",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "IMPERIUM": 80,
+   "LIFE": 40,
+   "VOID": 20,
+   "MECHANISM": 10
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "BlocksTC.plankGreatwood",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "ingotThaumium"
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.plankGreatwood",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.brain",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.plankGreatwood",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.morphicResonator",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.plankGreatwood",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "ingotThaumium"
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithrillium_resonator",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHRILLIUM",
+  "instability": 5,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.morphicResonator",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "@primals": 10,
+   "IMPERIUM": 10
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "void_thaumometer",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.VOID_THAUMOMETER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_VOID_THAUMOMETER",
+  "instability": 4,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.thaumometer",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "@primals": 10,
+   "ELDRITCH": 40,
+   "MIND": 20
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTC.ingots",
+    "count": 1,
+    "meta": 1
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.ingots",
+    "count": 1,
+    "meta": 1
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.ingots",
+    "count": 1,
+    "meta": 1
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.ingots",
+    "count": 1,
+    "meta": 1
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "wormhole_mirror",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.WORMHOLE_MIRROR",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_WORMHOLE_MIRROR",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.handMirror",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "ELDRITCH": 50,
+   "IMPERIUM": 100,
+   "VISUM": 80
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.VOID_THAUMOMETER",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "void_elemental_hoe",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.VOID_ELEMENTAL_HOE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_VOID_ELEMENTAL_HOE",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.elementalHoe",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "ELDRITCH": 40,
+   "PLANT": 80,
+   "LIFE": 100
+  },
+  "components": [
+   {
+    "kind": "field",
+    "value": "primordialPearl"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "void_elemental_shovel",
+  "result": {
+   "kind": "field",
+   "value": "ItemsTAR.VOID_ELEMENTAL_SHOVEL.defInst()"
+  },
+  "research": "TAR_VOID_ELEMENTAL_SHOVEL",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.elementalShovel",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "ELDRITCH": 40,
+   "CRAFT": 100,
+   "EARTH": 150
+  },
+  "components": [
+   {
+    "kind": "field",
+    "value": "primordialPearl"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "void_elemental_axe",
+  "result": {
+   "kind": "field",
+   "value": "ItemsTAR.VOID_ELEMENTAL_AXE.defInst()"
+  },
+  "research": "TAR_VOID_ELEMENTAL_AXE",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.elementalAxe",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "ELDRITCH": 40,
+   "WATER": 100,
+   "PLANT": 150
+  },
+  "components": [
+   {
+    "kind": "field",
+    "value": "primordialPearl"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "void_elemental_pickaxe",
+  "result": {
+   "kind": "field",
+   "value": "ItemsTAR.VOID_ELEMENTAL_PICKAXE.defInst()"
+  },
+  "research": "TAR_VOID_ELEMENTAL_PICKAXE",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.elementalPick",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "ELDRITCH": 40,
+   "FIRE": 80,
+   "METAL": 300,
+   "SENSES": 50
+  },
+  "components": [
+   {
+    "kind": "field",
+    "value": "primordialPearl"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "void_crop",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.VOID_SEED",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_VOID_CROP",
+  "instability": 5,
+  "central": {
+   "kind": "stack",
+   "value": "Items.WHEAT_SEEDS",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "@primals": 20,
+   "DARKNESS": 100,
+   "CAELES": 10
+  },
+  "components": [
+   {
+    "kind": "field",
+    "value": "primordialPearl"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.voidSeed",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.salisMundus",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.voidSeed",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.metalBlockVoid",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.voidSeed",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "shadow_enchanter",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.SHADOW_ENCHANTER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_SHADOW_ENCHANTER",
+  "instability": 10,
+  "central": {
+   "kind": "stack",
+   "value": "Blocks.ENCHANTING_TABLE",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "@primals": 120,
+   "MIND": 500
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "ingotThaumium"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "ingotThaumium"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.mechanismComplex",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.DISENCHANT_FABRIC",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_hood",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_HOOD",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_HOOD",
+  "instability": 10,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_HOOD",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "PROTECT": 200,
+   "VISUM": 250,
+   "FLUX": 150,
+   "LIGHT": 200,
+   "WATER": 250,
+   "MIND": 250,
+   "CAELES": 75
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.jarBrain",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Blocks.SEA_LANTERN",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.FRAGNANT_PENDANT",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.SEAL_GLOBE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.lampArcane",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.sanityChecker",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_robe",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_ROBE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_ROBE",
+  "instability": 10,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_ROBE",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "PROTECT": 200,
+   "LIFE": 250,
+   "FLUX": 150,
+   "VENTUS": 200,
+   "FIRE": 250,
+   "CAELES": 75
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.LEVITATION_DEVICE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Items.GOLDEN_APPLE",
+    "count": 1,
+    "meta": 1
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.modules",
+    "count": 1,
+    "meta": 1
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_belt",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_BELT",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_BELT",
+  "instability": 10,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_BELT",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "PROTECT": 200,
+   "FLUCTUS": 250,
+   "FLUX": 150,
+   "VENTUS": 200,
+   "CAELES": 75
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.LEVITATION_DEVICE",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_boots",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_BOOTS",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_BOOTS",
+  "instability": 10,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_BOOTS",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "PROTECT": 200,
+   "AIR": 250,
+   "FLUX": 150,
+   "FLUCTUS": 200,
+   "CAELES": 75
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_FABRIC",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.travellerBoots",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "shadow_beam_staff",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.SHADOW_BEAM_STAFF",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_SHADOW_BEAM_STAFF",
+  "instability": 10,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.visResonator",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "@primals": 50,
+   "ELDRITCH": 500,
+   "DRACO": 50
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "plateIron"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "plateIron"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "tag",
+    "value": "plateIron"
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "void_anvil",
+  "result": {
+   "kind": "stack",
+   "value": "BlocksTAR.VOID_ANVIL",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_VOID_ANVIL",
+  "instability": 7,
+  "central": {
+   "kind": "stack",
+   "value": "Blocks.ANVIL",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "ELDRITCH": 200,
+   "CAELES": 10
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.metalBlockVoid",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.metalBlockVoid",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.metalBlockVoid",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 3
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.metalBlockVoid",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "crystal_bag",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.CRYSTAL_BAG",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_CRYSTAL_BAG",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.focusPouch",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "@primals": 10,
+   "VOID": 50
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "BlocksTC.crystalAir",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.crystalEarth",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.crystalEntropy",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.crystalFire",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.crystalOrder",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.crystalTaint",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "BlocksTC.crystalWater",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "blue_bone",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.BLUE_BONE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHRILLIUM",
+  "instability": 1,
+  "central": {
+   "kind": "stack",
+   "value": "Items.BONE",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "EXITIUM": 6,
+   "EXCHANGE": 6,
+   "DRACO": 6
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.salisMundus",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_NUGGET",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.salisMundus",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "the_beheader",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.THE_BEHEADER",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_THE_BEHEADER",
+  "instability": 8,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.thaumiumAxe",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "UNDEAD": 100,
+   "ENTROPY": 70,
+   "MAGIC": 85,
+   "AVERSION": 120,
+   "DEATH": 70
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Items.SKULL",
+    "count": 1,
+    "meta": 1
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.plate",
+    "count": 1,
+    "meta": 2
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Items.SKULL",
+    "count": 1,
+    "meta": 1
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "traveller_belt",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.TRAVELLER_BELT",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_TRAVELLER_BELT",
+  "instability": 1,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.baubles",
+   "count": 1,
+   "meta": 2
+  },
+  "aspects": {
+   "MOTION": 100,
+   "FLIGHT": 100
+  },
+  "components": [
+   {
+    "kind": "essence",
+    "value": "Aspect.AIR"
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.AIR"
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.fabric",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.fabric",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Items.FEATHER",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Items.FISH",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "striding_belt",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.STRIDING_BELT",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_STRIDING_BELT",
+  "instability": 3,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.TRAVELLER_BELT",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "MOTION": 150,
+   "FLIGHT": 150,
+   "AIR": 200,
+   "FLUCTUS": 50
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTC.amber",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Items.FEATHER",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTC.amber",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "Items.FEATHER",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "meteor_belt",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.METEOR_BELT",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_METEOR_BELT",
+  "instability": 5,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.STRIDING_BELT",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "MOTION": 250,
+   "FLIGHT": 250,
+   "FIRE": 200,
+   "FLUCTUS": 50
+  },
+  "components": [
+   {
+    "kind": "essence",
+    "value": "Aspect.FIRE"
+   },
+   {
+    "kind": "stack",
+    "value": "Items.NETHERBRICK",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "essence",
+    "value": "Aspect.FIRE"
+   },
+   {
+    "kind": "stack",
+    "value": "Items.NETHERBRICK",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "adaminite_sword",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_SWORD",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_ADAMINITE_SWORD",
+  "instability": 6,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTC.voidSword",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "DRACO": 40,
+   "MAGIC": 70,
+   "AVERSION": 150,
+   "INFERNUM": 90,
+   "METAL": 60
+  },
+  "components": [
+   {
+    "kind": "tag",
+    "value": "plateAdaminite"
+   },
+   {
+    "kind": "tag",
+    "value": "plateAdaminite"
+   },
+   {
+    "kind": "field",
+    "value": "primordialPearl"
+   },
+   {
+    "kind": "tag",
+    "value": "plateAdaminite"
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_scythe",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_SCYTHE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_SCYTHE",
+  "instability": 1,
+  "central": {
+   "kind": "field",
+   "value": "primordialPearl"
+  },
+  "aspects": {
+   "AVERSION": 250,
+   "TOOL": 150,
+   "MAGIC": 100
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_BLADE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_HANDLE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_PLATE",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_blade",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_BLADE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_SCYTHE",
+  "instability": 1,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.ADAMINITE_SWORD",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "AVERSION": 250,
+   "INFERNUM": 150
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHRILLIUM_RESONATOR",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_PLATE",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "infusion",
+  "name": "mithminite_handle",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_HANDLE",
+   "count": 1,
+   "meta": 0
+  },
+  "research": "TAR_MITHMINITE_SCYTHE",
+  "instability": 1,
+  "central": {
+   "kind": "stack",
+   "value": "ItemsTAR.MITHMINITE_NUGGET",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "TOOL": 100,
+   "SOUL": 150
+  },
+  "components": [
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_PLATE",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_INGOT",
+    "count": 1,
+    "meta": 0
+   },
+   {
+    "kind": "stack",
+    "value": "ItemsTAR.MITHMINITE_INGOT",
+    "count": 1,
+    "meta": 0
+   }
+  ]
+ },
+ {
+  "kind": "crucible",
+  "name": "crystal_water",
+  "research": "TAR_CRYSTAL_WATER",
+  "result": {
+   "kind": "field",
+   "value": "FluidUtil.getFilledBucket(new FluidStack(FluidsTAR.CRYSTAL_WATER, Fluid.BUCKET_VOLUME))"
+  },
+  "catalyst": {
+   "kind": "stack",
+   "value": "Items.WATER_BUCKET",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "CRYSTAL": 10,
+   "DESIRE": 4,
+   "EXCHANGE": 6
+  }
+ },
+ {
+  "kind": "crucible",
+  "name": "odour_powder",
+  "research": "TAR_FRAGNANT_PENDANT",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.ODOUR_POWDER",
+   "count": 4,
+   "meta": 0
+  },
+  "catalyst": {
+   "kind": "stack",
+   "value": "ItemsTC.bathSalts",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "ORDER": 10,
+   "EXITIUM": 5,
+   "VENTUS": 5
+  }
+ },
+ {
+  "kind": "crucible",
+  "name": "phantom_ink_phial",
+  "research": "TAR_THAUMADDS",
+  "result": {
+   "kind": "stack",
+   "value": "ItemsTAR.PHANTOM_INK_PHIAL",
+   "count": 1,
+   "meta": 0
+  },
+  "catalyst": {
+   "kind": "stack",
+   "value": "ItemsTC.phial",
+   "count": 1,
+   "meta": 0
+  },
+  "aspects": {
+   "VISUM": 10,
+   "ELDRITCH": 20
+  }
+ }
+]

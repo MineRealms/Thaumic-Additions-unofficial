@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "thaumadds:puriflower",
+    "thaumadds:taintkin",
+    "thaumadds:taintkin_lit",
+    "thaumadds:vis_crop",
+    "thaumadds:void_crop"
+  ]
+}

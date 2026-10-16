@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_VOID_ELEMENTAL_SHOVEL",
   "central": {
     "item": "thaumcraft:elemental_shovel"
   },
@@ -21,6 +22,7 @@
   "instability": 6,
   "aspects": {
     "alienis": 40,
+    "fabrico": 100,
     "terra": 150
   }
 }

@@ -106,6 +106,10 @@ public final class ThaumAdditionsNeoForge {
         TaPlatformNeoForge.register(modBus);
 
         modBus.addListener(this::commonSetup);
+        // Attributes are a mod-bus event, and the class-level registration above is on the common
+        // bus, so this is wired by hand rather than swept up with the right-click hook. Registering
+        // it with @SubscribeEvent there aborts mod loading outright.
+        modBus.addListener(ThaumAdditionsNeoForge::registerAttributes);
         ThaumAdditions.init("neoforge", "1.21.1");
     }
 
@@ -128,8 +132,12 @@ public final class ThaumAdditionsNeoForge {
         }
     }
 
-    /** Every entity needs its attributes put somewhere before it exists; see the Forge twin. */
-    @net.neoforged.bus.api.SubscribeEvent
+    /**
+     * Every entity needs its attributes put somewhere before it exists; see the Forge twin.
+     *
+     * <p>Deliberately without {@code @SubscribeEvent}: the class is registered on the common bus,
+     * and this event belongs to the mod bus.</p>
+     */
     public static void registerAttributes(
             net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event) {
         event.put(Content.BLUE_WOLF.get(),

@@ -1,0 +1,36 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_TRAVELLER_BELT",
+  "central": {
+    "item": "thaumcraft:hover_girdle"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:cod"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:traveller_belt"
+  },
+  "instability": 1,
+  "aspects": {
+    "motus": 100,
+    "volatus": 100
+  }
+}

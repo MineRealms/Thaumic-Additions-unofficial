@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_BOOTS",
   "central": {
     "item": "thaumadds:adaminite_boots"
   },

@@ -1,0 +1,26 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "gpg",
+    "gjg",
+    "ggg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:glass_pane"
+    },
+    "p": {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    "j": {
+      "item": "thaumadds:jar_eldritch"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:jar_mithrillium"
+  },
+  "vis": {
+    "aqua": 12
+  }
+}

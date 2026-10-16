@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_VOID_ELEMENTAL_AXE",
   "central": {
     "item": "thaumcraft:elemental_axe"
   },

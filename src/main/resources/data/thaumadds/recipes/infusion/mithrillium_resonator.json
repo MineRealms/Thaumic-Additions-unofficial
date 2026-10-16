@@ -1,0 +1,34 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_MITHRILLIUM",
+  "central": {
+    "item": "thaumcraft:resonator"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:mithrillium_resonator"
+  },
+  "instability": 5,
+  "aspects": {
+    "aer": 10,
+    "terra": 10,
+    "ignis": 10,
+    "aqua": 10,
+    "ordo": 10,
+    "perditio": 10
+  }
+}

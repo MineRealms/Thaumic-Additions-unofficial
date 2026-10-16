@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ppp"
+  ],
+  "key": {
+    "p": {
+      "item": "thaumadds:mithminite_ingot"
+    }
+  },
+  "result": {
+    "count": 3,
+    "id": "thaumadds:mithminite_plate"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_CHESTER",
+  "central": {
+    "item": "thaumcraft:hungry_chest"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:greatwood_planks"
+    },
+    {
+      "item": "thaumcraft:thaumium_ingot"
+    },
+    {
+      "item": "thaumcraft:greatwood_planks"
+    },
+    {
+      "item": "thaumcraft:zombie_brain"
+    },
+    {
+      "item": "thaumcraft:greatwood_planks"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumcraft:greatwood_planks"
+    },
+    {
+      "item": "thaumcraft:thaumium_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:chester"
+  },
+  "instability": 2,
+  "aspects": {
+    "victus": 40,
+    "vacuos": 20,
+    "machina": 10
+  }
+}

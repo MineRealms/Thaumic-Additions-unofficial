@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_STRIDING_BELT",
   "central": {
     "item": "thaumadds:traveller_belt"
   },
@@ -23,6 +24,7 @@
   },
   "instability": 3,
   "aspects": {
+    "motus": 150,
     "volatus": 150,
     "aer": 200
   }

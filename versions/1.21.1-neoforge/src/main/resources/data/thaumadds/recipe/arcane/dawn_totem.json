@@ -1,0 +1,27 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "sws",
+    "wcw",
+    "sws"
+  ],
+  "key": {
+    "s": {
+      "item": "thaumcraft:greatwood_planks"
+    },
+    "w": {
+      "item": "thaumcraft:crystal_essence"
+    },
+    "c": {
+      "item": "thaumcraft:shimmerleaf"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:dawn_totem"
+  },
+  "vis": {
+    "ordo": 1,
+    "aer": 1
+  }
+}

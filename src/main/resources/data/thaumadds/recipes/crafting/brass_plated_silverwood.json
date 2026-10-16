@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "npn",
+    "ppp",
+    "npn"
+  ],
+  "key": {
+    "n": {
+      "item": "thaumcraft:copper_nugget"
+    },
+    "p": {
+      "item": "thaumcraft:greatwood_planks"
+    }
+  },
+  "result": {
+    "count": 5,
+    "id": "thaumadds:brass_plated_silverwood"
+  }
+}

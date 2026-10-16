@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:adaminite_ingot"
+  }
+}

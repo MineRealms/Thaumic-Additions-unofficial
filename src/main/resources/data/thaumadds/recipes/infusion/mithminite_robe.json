@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_ROBE",
   "central": {
     "item": "thaumadds:adaminite_robe"
   },
@@ -35,10 +36,10 @@
       "item": "thaumadds:levitation_device"
     },
     {
-      "item": "thaumcraft:enchanted_fabric"
+      "item": "minecraft:enchanted_golden_apple"
     },
     {
-      "item": "thaumcraft:resonator"
+      "item": "thaumcraft:golem_core"
     }
   ],
   "result": {

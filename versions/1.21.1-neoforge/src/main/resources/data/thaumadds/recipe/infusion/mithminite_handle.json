@@ -1,0 +1,27 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_SCYTHE",
+  "central": {
+    "item": "thaumadds:mithminite_nugget"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_plate"
+    },
+    {
+      "item": "thaumadds:mithminite_ingot"
+    },
+    {
+      "item": "thaumadds:mithminite_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:mithminite_handle"
+  },
+  "instability": 1,
+  "aspects": {
+    "instrumentum": 100,
+    "spiritus": 150
+  }
+}

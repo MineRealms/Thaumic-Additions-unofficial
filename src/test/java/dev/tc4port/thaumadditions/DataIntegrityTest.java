@@ -63,10 +63,14 @@ class DataIntegrityTest {
     @Test
     @DisplayName("no language value is left empty")
     void noEmptyTranslations() {
+        // One family is blank on purpose. tc.research_text.<KEY> is the line the book prints under
+        // an entry's title, and upstream never wrote one for any of its entries; the line is
+        // defined and empty rather than absent, because the book prints the key when the line is
+        // missing and a missing line is worse than a short one.
         for (String locale : LOCALES) {
             List<String> empty = new ArrayList<>();
             lang(locale).forEach((key, value) -> {
-                if (value.isBlank()) {
+                if (value.isBlank() && !key.startsWith("tc.research_text.")) {
                     empty.add(key);
                 }
             });
@@ -169,7 +173,7 @@ class DataIntegrityTest {
     @DisplayName("every arcane recipe can be parsed, which means it has its vis key")
     void arcaneRecipesCarryTheirVis() {
         List<String> broken = new ArrayList<>();
-        for (String path : resources("data/" + MOD + "/recipes/arcane")) {
+        for (String path : resources("data/" + MOD, "recipes/arcane", "recipe/arcane")) {
             if (!path.endsWith(".json")) {
                 continue;
             }
@@ -185,8 +189,8 @@ class DataIntegrityTest {
     @DisplayName("every recipe names a result and a catalyst or a pattern")
     void recipesAreWellFormed() {
         List<String> broken = new ArrayList<>();
-        for (String folder : new String[] {"recipes/arcane", "recipes/infusion", "recipes/crucible"}) {
-            for (String path : resources("data/" + MOD + "/" + folder)) {
+        for (String folder : new String[] {"arcane", "infusion", "crucible"}) {
+            for (String path : resources("data/" + MOD, "recipes/" + folder, "recipe/" + folder)) {
                 if (!path.endsWith(".json")) {
                     continue;
                 }
@@ -209,7 +213,7 @@ class DataIntegrityTest {
     @DisplayName("every blockstate points at a model that exists")
     void blockstatesResolve() {
         List<String> broken = new ArrayList<>();
-        for (String path : resources("assets/" + MOD + "/blockstates")) {
+        for (String path : resources("assets/" + MOD, "blockstates")) {
             if (!path.endsWith(".json")) {
                 continue;
             }
@@ -222,7 +226,7 @@ class DataIntegrityTest {
     @DisplayName("every item model points at a texture that exists, or at a parent that does")
     void itemModelsResolve() {
         List<String> broken = new ArrayList<>();
-        for (String path : resources("assets/" + MOD + "/models/item")) {
+        for (String path : resources("assets/" + MOD + "/models", "item")) {
             if (!path.endsWith(".json")) {
                 continue;
             }
@@ -242,7 +246,7 @@ class DataIntegrityTest {
     @DisplayName("every loot table that names one of our items names an item we ship a model for")
     void lootTablesNameKnownItems() {
         List<String> unknown = new ArrayList<>();
-        for (String path : resources("data/" + MOD + "/loot_tables/blocks")) {
+        for (String path : resources("data/" + MOD, "loot_tables/blocks", "loot_table/blocks")) {
             if (!path.endsWith(".json")) {
                 continue;
             }
@@ -322,21 +326,28 @@ class DataIntegrityTest {
     }
 
     /** Every resource under a directory, as paths relative to the resource root. */
-    private static List<String> resources(String folder) {
-        List<String> out = new ArrayList<>();
-        try {
-            var url = DataIntegrityTest.class.getClassLoader().getResource(folder);
-            assertNotNull(url, "missing resource directory: " + folder);
-            var root = java.nio.file.Paths.get(url.toURI());
-            try (var walk = java.nio.file.Files.walk(root)) {
-                walk.filter(java.nio.file.Files::isRegularFile)
-                        .forEach(path -> out.add(folder + "/" + root.relativize(path).toString()
-                                .replace('\\', '/')));
+    private static List<String> resources(String parent, String... folders) {
+        for (String folder : folders) {
+            String path = parent + "/" + folder;
+            var url = DataIntegrityTest.class.getClassLoader().getResource(path);
+            if (url == null) {
+                continue;
             }
-        } catch (Exception failure) {
-            throw new AssertionError("could not list " + folder, failure);
+            List<String> out = new ArrayList<>();
+            try {
+                var root = java.nio.file.Paths.get(url.toURI());
+                try (var walk = java.nio.file.Files.walk(root)) {
+                    walk.filter(java.nio.file.Files::isRegularFile)
+                            .forEach(file -> out.add(path + "/" + root.relativize(file).toString()
+                                    .replace('\\', '/')));
+                }
+            } catch (Exception failure) {
+                throw new AssertionError("could not list " + path, failure);
+            }
+            out.sort(Comparator.naturalOrder());
+            return out;
         }
-        out.sort(Comparator.naturalOrder());
-        return out;
+        throw new AssertionError("no such resource directory under " + parent + ": "
+                + String.join(" or ", folders));
     }
 }

@@ -1,0 +1,34 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "ggg",
+    "grg",
+    "lcl"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:glass"
+    },
+    "r": {
+      "item": "thaumcraft:resonator"
+    },
+    "l": {
+      "item": "minecraft:gold_ingot"
+    },
+    "c": {
+      "item": "thaumcraft:crystal_essence"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:seal_globe"
+  },
+  "vis": {
+    "aer": 1,
+    "terra": 1,
+    "ignis": 1,
+    "aqua": 1,
+    "ordo": 1,
+    "perditio": 1
+  }
+}

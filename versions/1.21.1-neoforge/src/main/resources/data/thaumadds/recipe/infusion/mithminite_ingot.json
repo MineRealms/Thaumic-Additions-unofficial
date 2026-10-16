@@ -1,0 +1,31 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE",
+  "central": {
+    "item": "thaumadds:adaminite_ingot"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumcraft:quicksilver"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumcraft:quicksilver"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:mithminite_ingot"
+  },
+  "instability": 8,
+  "aspects": {
+    "metallum": 60,
+    "victus": 90,
+    "praecantatio": 120
+  }
+}

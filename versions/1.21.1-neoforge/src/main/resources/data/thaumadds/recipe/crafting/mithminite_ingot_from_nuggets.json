@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    },
+    {
+      "item": "thaumadds:mithminite_nugget"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:mithminite_ingot"
+  }
+}

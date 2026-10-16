@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_SCYTHE",
   "central": {
     "item": "thaumadds:mithminite_nugget"
   },
@@ -20,6 +21,7 @@
   },
   "instability": 1,
   "aspects": {
-    "instrumentum": 100
+    "instrumentum": 100,
+    "spiritus": 150
   }
 }

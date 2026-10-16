@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:mithrillium_block"
+  }
+}

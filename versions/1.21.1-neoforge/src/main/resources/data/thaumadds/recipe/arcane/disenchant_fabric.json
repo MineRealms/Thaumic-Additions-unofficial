@@ -1,0 +1,23 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    " f ",
+    "fsf",
+    " f "
+  ],
+  "key": {
+    "f": {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    "s": {
+      "item": "thaumcraft:salis_mundus"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:disenchant_fabric"
+  },
+  "vis": {
+    "terra": 1
+  }
+}

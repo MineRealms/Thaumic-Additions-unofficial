@@ -107,6 +107,9 @@ public final class ThaumAdditionsForge {
         TaPlatformForge.register(modBus);
 
         modBus.addListener(this::commonSetup);
+        // Attributes are a mod-bus event, and the class-level registration below is on the common
+        // bus, so this is wired by hand rather than swept up with the right-click hook.
+        modBus.addListener(ThaumAdditionsForge::registerAttributes);
         // The right-click hook lives on the game bus, which the mod bus does not carry.
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(ThaumAdditionsForge.class);
         ThaumAdditions.init("forge", "1.20.1");
@@ -134,8 +137,10 @@ public final class ThaumAdditionsForge {
     /**
      * Every entity needs its attributes put somewhere before it exists; without this a spawned one
      * throws on its first health check, which is exactly what happened to the blue wolf.
+     *
+     * <p>Deliberately without {@code @SubscribeEvent}: the class is registered on the common bus,
+     * and this event belongs to the mod bus.</p>
      */
-    @net.minecraftforge.eventbus.api.SubscribeEvent
     public static void registerAttributes(
             net.minecraftforge.event.entity.EntityAttributeCreationEvent event) {
         event.put(Content.BLUE_WOLF.get(),

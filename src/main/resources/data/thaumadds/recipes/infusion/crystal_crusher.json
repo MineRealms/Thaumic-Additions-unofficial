@@ -1,0 +1,60 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_CRYSTAL_CRUSHER",
+  "central": {
+    "item": "thaumcraft:resonator"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "thaumcraft:arcane_stone_slab"
+    },
+    {
+      "item": "thaumcraft:arcane_stone_slab"
+    },
+    {
+      "item": "thaumcraft:arcane_stone_slab"
+    },
+    {
+      "item": "thaumadds:salt_essence"
+    },
+    {
+      "item": "thaumadds:salt_essence"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:crystal_crusher"
+  },
+  "instability": 3,
+  "aspects": {
+    "fabrico": 20,
+    "instrumentum": 20
+  }
+}

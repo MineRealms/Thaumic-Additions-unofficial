@@ -1,0 +1,31 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_CAKE",
+  "central": {
+    "item": "minecraft:cake"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:primordial_pearl"
+    },
+    {
+      "item": "thaumcraft:quicksilver"
+    },
+    {
+      "item": "thaumcraft:salis_mundus"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:cake"
+  },
+  "instability": 5,
+  "aspects": {
+    "victus": 20,
+    "fames": 30,
+    "praecantatio": 15
+  }
+}

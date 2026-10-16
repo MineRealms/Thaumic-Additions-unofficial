@@ -1,0 +1,42 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_GROWTH_CHAMBER",
+  "central": {
+    "item": "thaumadds:crystal_block"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:amber"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:growth_chamber"
+  },
+  "instability": 3,
+  "aspects": {
+    "ordo": 20,
+    "machina": 15
+  }
+}

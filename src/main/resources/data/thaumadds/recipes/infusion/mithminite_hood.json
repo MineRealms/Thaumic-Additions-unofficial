@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_HOOD",
   "central": {
     "item": "thaumadds:adaminite_hood"
   },
@@ -49,6 +50,7 @@
   "aspects": {
     "tutamen": 200,
     "vitium": 150,
+    "lux": 200,
     "aqua": 250,
     "cognitio": 250
   }

@@ -1,0 +1,38 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_MOB_SUMMONING",
+  "central": {
+    "item": "thaumcraft:thaumium_block"
+  },
+  "components": [
+    {
+      "item": "thaumadds:dna_sample"
+    },
+    {
+      "item": "thaumcraft:nitor"
+    },
+    {
+      "item": "thaumcraft:essentia_filter"
+    },
+    {
+      "item": "thaumcraft:alumentum"
+    },
+    {
+      "item": "thaumcraft:nitor"
+    },
+    {
+      "item": "thaumadds:twilight_totem"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:entity_summoner"
+  },
+  "instability": 5,
+  "aspects": {
+    "victus": 15,
+    "spiritus": 20,
+    "humanus": 30,
+    "bestia": 25
+  }
+}

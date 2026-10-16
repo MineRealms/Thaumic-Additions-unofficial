@@ -1,0 +1,43 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_ASPECT_COMBINER",
+  "central": {
+    "item": "thaumcraft:alchemical_centrifuge"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithrillium_nugget"
+    },
+    {
+      "item": "thaumadds:mithrillium_nugget"
+    },
+    {
+      "item": "thaumadds:mithrillium_nugget"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumcraft:essentia_filter"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "thaumcraft:alumentum"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:aspect_combiner"
+  },
+  "instability": 6,
+  "aspects": {
+    "permutatio": 36,
+    "perditio": 30,
+    "machina": 15
+  }
+}

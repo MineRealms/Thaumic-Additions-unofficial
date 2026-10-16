@@ -1,0 +1,31 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_SCYTHE",
+  "central": {
+    "item": "thaumcraft:primordial_pearl"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithminite_blade"
+    },
+    {
+      "item": "thaumadds:mithminite_plate"
+    },
+    {
+      "item": "thaumadds:mithminite_handle"
+    },
+    {
+      "item": "thaumadds:mithminite_plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:mithminite_scythe"
+  },
+  "instability": 1,
+  "aspects": {
+    "telum": 250,
+    "instrumentum": 150,
+    "praecantatio": 100
+  }
+}

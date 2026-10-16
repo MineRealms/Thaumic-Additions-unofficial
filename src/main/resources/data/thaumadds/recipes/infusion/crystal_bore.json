@@ -1,0 +1,36 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_CRYSTAL_BORE",
+  "central": {
+    "item": "thaumcraft:resonator"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:arcane_stone"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "thaumcraft:arcane_stone"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "thaumcraft:arcane_stone"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:crystal_bore"
+  },
+  "instability": 5,
+  "aspects": {
+    "terra": 10,
+    "perditio": 30
+  }
+}

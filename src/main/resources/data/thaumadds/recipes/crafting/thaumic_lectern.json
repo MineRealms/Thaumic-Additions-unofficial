@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mtm",
+    "www",
+    " w "
+  ],
+  "key": {
+    "w": {
+      "item": "thaumcraft:greatwood_slab"
+    },
+    "m": {
+      "item": "thaumcraft:thaumium_ingot"
+    },
+    "t": {
+      "item": "thaumcraft:thaumonomicon"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:thaumic_lectern"
+  }
+}

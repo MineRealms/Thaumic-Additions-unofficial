@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "lvl",
+    "igt",
+    "isi"
+  ],
+  "key": {
+    "l": {
+      "item": "minecraft:iron_ingot"
+    },
+    "v": {
+      "item": "thaumcraft:essentia_valve"
+    },
+    "g": {
+      "item": "thaumcraft:table"
+    },
+    "t": {
+      "item": "thaumcraft:essentia_tube"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "s": {
+      "item": "thaumcraft:greatwood_slab"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:essentia_sink"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "thaumcraft:crucible",
+  "research": "TAR_FRAGNANT_PENDANT",
+  "catalyst": {
+    "item": "thaumcraft:bath_salts"
+  },
+  "result": {
+    "count": 4,
+    "id": "thaumadds:odour_powder"
+  },
+  "aspects": {
+    "ordo": 10
+  }
+}

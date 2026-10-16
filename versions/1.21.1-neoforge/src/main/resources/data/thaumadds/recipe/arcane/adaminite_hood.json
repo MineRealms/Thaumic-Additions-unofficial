@@ -1,0 +1,27 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "fff",
+    "fmf"
+  ],
+  "key": {
+    "f": {
+      "item": "thaumadds:adaminite_fabric"
+    },
+    "m": {
+      "item": "thaumadds:mithrillium_resonator"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:adaminite_hood"
+  },
+  "vis": {
+    "aer": 4,
+    "terra": 4,
+    "ignis": 4,
+    "aqua": 4,
+    "ordo": 4,
+    "perditio": 4
+  }
+}

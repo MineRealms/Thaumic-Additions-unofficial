@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_MITHRILLIUM",
   "central": {
     "item": "minecraft:bone"
   },

@@ -1,0 +1,24 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    "gpg",
+    "gjg",
+    "ggg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:glass_pane"
+    },
+    "p": {
+      "item": "minecraft:copper_ingot"
+    },
+    "j": {
+      "item": "thaumcraft:warded_jar"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:jar_brass"
+  },
+  "vis": {}
+}

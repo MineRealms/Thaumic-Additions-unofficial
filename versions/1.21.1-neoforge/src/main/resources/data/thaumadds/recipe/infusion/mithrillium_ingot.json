@@ -1,0 +1,51 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_MITHRILLIUM",
+  "central": {
+    "item": "thaumcraft:thaumium_ingot"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:amber"
+    },
+    {
+      "item": "thaumcraft:alumentum"
+    },
+    {
+      "item": "thaumcraft:quicksilver"
+    },
+    {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    {
+      "item": "thaumcraft:salis_mundus"
+    },
+    {
+      "item": "thaumcraft:amber"
+    },
+    {
+      "item": "thaumcraft:alumentum"
+    },
+    {
+      "item": "thaumcraft:quicksilver"
+    },
+    {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    {
+      "item": "thaumcraft:salis_mundus"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:mithrillium_ingot"
+  },
+  "instability": 5,
+  "aspects": {
+    "vitreus": 30,
+    "potentia": 15,
+    "alienis": 10,
+    "metallum": 30,
+    "praecantatio": 10
+  }
+}

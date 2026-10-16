@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_VOID_CROP",
   "central": {
     "item": "minecraft:wheat_seeds"
   },
@@ -25,7 +26,7 @@
   ],
   "result": {
     "count": 1,
-    "item": "thaumadds:void_seed"
+    "id": "thaumadds:void_seed"
   },
   "instability": 5,
   "aspects": {
@@ -34,6 +35,7 @@
     "ignis": 20,
     "aqua": 20,
     "ordo": 20,
-    "perditio": 20
+    "perditio": 20,
+    "tenebrae": 100
   }
 }

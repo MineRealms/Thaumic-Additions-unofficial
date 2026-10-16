@@ -1,0 +1,37 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_AURA_CHARGER",
+  "central": {
+    "item": "thaumadds:aspect_combiner"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    },
+    {
+      "item": "thaumadds:adaminite_nugget"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:aura_charger"
+  },
+  "instability": 8,
+  "aspects": {
+    "auram": 20,
+    "praecantatio": 20,
+    "potentia": 40
+  }
+}

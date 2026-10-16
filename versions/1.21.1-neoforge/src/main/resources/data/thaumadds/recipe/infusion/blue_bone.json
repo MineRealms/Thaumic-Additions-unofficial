@@ -1,0 +1,29 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_MITHRILLIUM",
+  "central": {
+    "item": "minecraft:bone"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithrillium_nugget"
+    },
+    {
+      "item": "thaumcraft:salis_mundus"
+    },
+    {
+      "item": "thaumadds:mithrillium_nugget"
+    },
+    {
+      "item": "thaumcraft:salis_mundus"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:blue_bone"
+  },
+  "instability": 1,
+  "aspects": {
+    "permutatio": 6
+  }
+}

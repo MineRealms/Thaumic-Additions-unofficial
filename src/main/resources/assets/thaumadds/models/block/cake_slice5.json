@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "thaumadds:block/cake_side",
     "bottom": "thaumadds:block/cake_bottom",

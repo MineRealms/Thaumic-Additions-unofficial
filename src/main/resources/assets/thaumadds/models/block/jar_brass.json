@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:translucent",
   "ambientocclusion": false,
   "textures": {
     "side": "thaumadds:block/jar_side_brass",

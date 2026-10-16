@@ -1,0 +1,28 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_VOID_ELEMENTAL_HOE",
+  "central": {
+    "item": "thaumcraft:elemental_hoe"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:primordial_pearl"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:void_elemental_hoe"
+  },
+  "instability": 6,
+  "aspects": {
+    "alienis": 40,
+    "herba": 80,
+    "victus": 100
+  }
+}

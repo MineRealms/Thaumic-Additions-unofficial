@@ -1,0 +1,28 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    " a ",
+    "ama",
+    " a "
+  ],
+  "key": {
+    "m": {
+      "item": "thaumadds:mithminite_ingot"
+    },
+    "a": {
+      "item": "thaumadds:adaminite_fabric"
+    }
+  },
+  "result": {
+    "count": 2,
+    "id": "thaumadds:mithminite_fabric"
+  },
+  "vis": {
+    "aer": 8,
+    "terra": 8,
+    "ignis": 8,
+    "aqua": 8,
+    "ordo": 8,
+    "perditio": 8
+  }
+}

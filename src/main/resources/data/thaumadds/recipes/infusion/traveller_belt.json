@@ -1,7 +1,8 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_TRAVELLER_BELT",
   "central": {
-    "item": "thaumcraft:nitor"
+    "item": "thaumcraft:hover_girdle"
   },
   "components": [
     {
@@ -29,6 +30,7 @@
   },
   "instability": 1,
   "aspects": {
+    "motus": 100,
     "volatus": 100
   }
 }

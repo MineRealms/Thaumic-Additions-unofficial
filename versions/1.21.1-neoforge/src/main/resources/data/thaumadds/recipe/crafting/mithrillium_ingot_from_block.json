@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thaumadds:mithrillium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "thaumadds:mithrillium_ingot"
+  }
+}

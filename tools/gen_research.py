@@ -255,6 +255,36 @@ def read_stages(path):
     return stages
 
 
+def read_names(path):
+    """Upstream's research_name.<mod>:<name> lines, which are the entries' titles."""
+    names = {}
+    if not os.path.exists(path):
+        return names
+    for line in io.open(path, encoding="utf-8", errors="replace"):
+        if not line.startswith("research_name."):
+            continue
+        text_key, _, text = line.partition("=")
+        name = text_key.split(":")[-1]
+        if name and text.strip():
+            names[name] = text.strip()
+    return names
+
+
+def read_block_names(path):
+    """Upstream's tile.<mod>:<name>.name lines, which name the blocks that have no entry title."""
+    names = {}
+    if not os.path.exists(path):
+        return names
+    for line in io.open(path, encoding="utf-8", errors="replace"):
+        text_key, _, text = line.partition("=")
+        if not text_key.startswith("tile.") or not text_key.rstrip().endswith(".name"):
+            continue
+        name = text_key.split(":")[-1].rsplit(".", 1)[0]
+        if name and text.strip():
+            names[name] = text.strip()
+    return names
+
+
 # The name each entry was given in setBaseInfo, which is what the text lines are keyed by — the
 # entry's own key is not it.
 name_by_key = {}
@@ -265,6 +295,41 @@ for blob in all_blobs:
         name_by_key[blob_key] = base.group(2)
 
 ENGLISH_STAGES = read_stages(LANG_SOURCE)
+
+
+def tc4r_research_name(key, locale):
+    """Thaumcraft's own title for one of its entries, from the installed jar."""
+    import zipfile
+    for jar in TC4R_JARS:
+        if not os.path.exists(jar):
+            continue
+        with zipfile.ZipFile(jar) as archive:
+            path = "assets/thaumcraft/lang/%s.json" % locale
+            if path not in archive.namelist():
+                continue
+            catalogue = json.loads(archive.read(path).decode("utf-8"))
+            return catalogue.get("tc.research_name." + key)
+        break
+    return None
+
+
+# Two entries upstream gave no title of their own: one is named after its block, which upstream
+# did put in the language file under the block's own name, and the other points straight at a
+# Thaumcraft entry instead of carrying prose, so it wears that entry's title.
+TITLE_FROM_UPSTREAM_BLOCK = {"TAR_CRYSTAL_LAMP": "crystal_lamp"}
+TITLE_FROM_TC4R = {"TAR_ELDRITCH": "ELDRITCHMINOR"}
+
+
+def fallback_title(entry_key, locale):
+    block = TITLE_FROM_UPSTREAM_BLOCK.get(entry_key)
+    if block is not None:
+        title = read_block_names(LOCALES[locale]).get(block)
+        if title:
+            return title
+    parent = TITLE_FROM_TC4R.get(entry_key)
+    if parent is not None:
+        return tc4r_research_name(parent, locale)
+    return None
 
 # Upstream wrote its entries in stages, and every entry but one had more than one; the modern
 # page list is flat, so each stage becomes a page of its own. The catalogue was written with a
@@ -288,27 +353,46 @@ for entry in entries:
     entry["pages"] = text_pages + [page for page in entry["pages"] if page["type"] != "TEXT"]
     inserted += len(text_pages)
 
-# The text itself, into each locale's own lang file.
+# The text itself, into each locale's own lang file. Three lines per entry and one per page:
+#
+#   tc.research_name.<KEY>      what the entry is called, which the book prints as its title
+#   tc.research_text.<KEY>      the line under it; upstream wrote none, so it is empty rather
+#                               than absent — the book prints the key when a line is missing
+#   tc.research_page.<KEY>.<n>  the page text
+#
+# The titles are the reason this exists: without them every entry in the book was headed by its
+# own key, because 1.12 spelled this research_name.<mod>:<name> and nothing reads that any more.
 written = 0
+untitled = []
 for lang_name, lang_source in sorted(LOCALES.items()):
     stages = read_stages(lang_source)
+    titles = read_names(lang_source)
     lang_path = "src/main/resources/assets/thaumadds/lang/%s.json" % lang_name
     lang = json.load(io.open(lang_path, encoding="utf-8"))
     for entry in entries:
         name = name_by_key.get(entry["key"])
         if name is None:
             continue
+        title = titles.get(name) or fallback_title(entry["key"], lang_name)
+        if title is None:
+            untitled.append("%s (%s)" % (entry["key"], name))
+        else:
+            lang["tc.research_name.%s" % entry["key"]] = title
+            written += 1
+        lang.setdefault("tc.research_text.%s" % entry["key"], "")
         for stage in sorted(stage for (entry_name, stage) in stages if entry_name == name):
             text = stages[(name, stage)]
             if text:
                 lang["tc.research_page.%s.%d" % (entry["key"], stage)] = text
                 written += 1
     io.open(lang_path, "w", encoding="utf-8", newline="\n").write(
-        json.dumps(lang, indent=2, ensure_ascii=False) + "\n")
+        json.dumps(dict(sorted(lang.items())), indent=2, ensure_ascii=False) + "\n")
 
 io.open(OUT, "w", encoding="utf-8", newline="\n").write(json.dumps(catalogue, indent=2) + "\n")
 
-print("wrote %d research entries, %d pages, %d lines of page text across %d locales"
+print("wrote %d research entries, %d pages, %d lines of text across %d locales"
       % (len(entries), inserted, written, len(LOCALES)))
+if untitled:
+    print("entries upstream never named:", sorted(set(untitled)))
 if skipped:
     print("skipped:", skipped)

@@ -40,7 +40,7 @@ impossible. Written to be read cold.
 | Seals | all 7 behaviours, including the portal's network, binding and chunk-forcing |
 | Entities | essentia shot, blue wolf, Chester, thrown scythe |
 | Client renderers | 11 tile renderers, 2 entity renderers, cake tint, jar liquid, void thaumometer |
-| Recipes | 50 (27 arcane, 23 infusion) — see the substitution caveat below |
+| Recipes | 94 (27 arcane, 41 infusion, 23 crafting, 3 crucible) — see the substitution caveat below |
 | Research | 64 entries with 62 page texts, generated from upstream's tree |
 | Mining tags | 41 of 43 blocks (cake and the unbreakable structure block have none on purpose) |
 | Fluid `crystal_water` | registered on both nodes: type, two fluids, block, bucket, crucible recipe, tag made by hand. The bucket is ours — upstream wrote a recipe that filled one it never registered |
@@ -75,6 +75,28 @@ impossible. Written to be read cold.
 | Crystal water growing a world crystal | 1.12's block grew a partly grown `BlockCrystal` beside it and spent water doing it. TC4R's crystal clusters are grown by its essentia crystalliser and expose no size, so there is nothing there to grow. The rule is pointed at the growth this port does have instead: `TileGrowthChamber` reads the eight blocks around it, grows up to five times faster for a full ring of sources, and spends one — half the time — per grow. Upstream's ring and odds, a different beneficiary. |
 | Thaumcraft's own JEI plugin | The installed TC4R ships a JEI plugin written against JEI 9's `ISubtypeInterpreter`, which JEI 15 renamed. It throws once, JEI logs it and carries on, and the mod's own plugin is unaffected — but Thaumcraft's aspect subtypes do not reach JEI. It is a fault in a binary dependency, not in this port, and cannot be patched from here. |
 | A KubeJS plugin with anything in it | Upstream had no CraftTweaker integration to translate: the 1.12 jar carries no `crafttweaker` or `minetweaker` class of any kind. The plugin class the port ships is what makes KubeJS load without complaint, and adding script bindings would be inventing an API upstream never had. |
+
+## The recipes are read from upstream's source, not transcribed
+
+The first pass wrote fifty-one of them by hand from 1.12's `RecipesTAR.java`, and a hand pass over
+seventy-odd recipes is a pass with holes in it: the whole `crafting()` method — the nugget, ingot
+and block chains for the three metals, the plates, the tainted planks, the lamp, the lectern —
+and nineteen of the infusion recipes were simply never written down. Nothing said so, because a
+recipe that was never transcribed looks exactly like a recipe that is merely hard to find.
+
+`tools/parse_upstream_recipes.py` reads the source now, and `gen_infusion.py` and `gen_crafting.py`
+turn what it read into the port's spelling. **Fourteen** of the hundred and one registered items
+still have no recipe, and each one is one of:
+
+- the five per-aspect loops (`crystal_block`, `salt_essence`, `vis_pod`, `seal_symbol`,
+  `vis_seeds`), which cannot be expressed — see below;
+- four pieces of the blue wolf suit, which upstream had no recipe for either;
+- `taintkin`, `taintkin_lit`, `void_fruit` and `zeith_fur`, which are grown or dropped, not made.
+
+`gen_infusion.py` checks every `thaumcraft:` id it writes against the installed Thaumcraft and
+refuses to write a recipe naming something that is not there. Ten recipes were being dropped at
+load by exactly that mistake — `elemental_pick` for `elemental_pickaxe`, `bellows` for
+`arcane_bellows` — and the game reports each one as a recipe that simply does not exist.
 
 ## The recipe economy is substituted, not ported
 

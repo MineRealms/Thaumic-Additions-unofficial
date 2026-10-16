@@ -1,0 +1,33 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_ADAMINITE",
+  "central": {
+    "item": "thaumadds:mithrillium_ingot"
+  },
+  "components": [
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "thaumcraft:enchanted_fabric"
+    },
+    {
+      "item": "thaumcraft:primordial_pearl"
+    },
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:adaminite_ingot"
+  },
+  "instability": 10,
+  "aspects": {
+    "victus": 100,
+    "permutatio": 70,
+    "metallum": 40,
+    "spiritus": 120,
+    "praecantatio": 100
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "thaumcraft:arcane_shaped",
+  "pattern": [
+    " b ",
+    " eb",
+    "t  "
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:quartz"
+    },
+    "e": {
+      "item": "minecraft:spider_eye"
+    },
+    "t": {
+      "item": "thaumcraft:thaumium_ingot"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:bone_eye"
+  },
+  "vis": {
+    "ordo": 1,
+    "aer": 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thaumadds:mithminite_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "thaumadds:mithminite_nugget"
+  }
+}

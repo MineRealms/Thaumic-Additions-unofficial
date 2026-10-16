@@ -44,7 +44,6 @@ WRITTEN = {
     "gui.thaumadds.seal_globe": "纹章晶球",
     "gui.thaumadds.seal_globe.empty": "（空）",
     "gui.thaumadds.seal_globe.unknown": "这些符文组不成任何纹章。",
-    "jei.thaumadds.aspect_items": "这些物品携带要素；每一种要素都是独立的条目。",
     "jei.thaumadds.flux_concentrator": "咒波集中器",
     "tooltip.thaumadds.chester": "把他放下，他就能为你携带三十六个格子。",
     "tooltip.thaumadds.seal_globe": "右键一个纹章，读出它的符文含义。",

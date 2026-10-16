@@ -1,0 +1,50 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_SHADOW_ENCHANTER",
+  "central": {
+    "item": "minecraft:enchanting_table"
+  },
+  "components": [
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "thaumcraft:thaumium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_resonator"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumadds:mithrillium_plate"
+    },
+    {
+      "item": "thaumcraft:thaumium_ingot"
+    },
+    {
+      "item": "thaumadds:mithrillium_resonator"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumadds:disenchant_fabric"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:shadow_enchanter"
+  },
+  "instability": 10,
+  "aspects": {
+    "aer": 120,
+    "terra": 120,
+    "ignis": 120,
+    "aqua": 120,
+    "ordo": 120,
+    "perditio": 120,
+    "cognitio": 500
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_FLUX_CONCENTRATOR",
+  "central": {
+    "item": "thaumcraft:resonator"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:essentia_filter"
+    },
+    {
+      "item": "thaumcraft:quicksilver"
+    },
+    {
+      "item": "thaumcraft:arcane_bellows"
+    },
+    {
+      "item": "thaumcraft:quicksilver"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "thaumadds:flux_concentrator"
+  },
+  "instability": 2,
+  "aspects": {
+    "vitium": 100,
+    "permutatio": 50
+  }
+}

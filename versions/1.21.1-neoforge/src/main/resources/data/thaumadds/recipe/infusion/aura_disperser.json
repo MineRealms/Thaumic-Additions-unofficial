@@ -1,0 +1,42 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_AURA_DISPERSER",
+  "central": {
+    "item": "minecraft:dispenser"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumadds:salt_essence"
+    },
+    {
+      "item": "thaumadds:salt_essence"
+    },
+    {
+      "item": "thaumcraft:shimmerleaf"
+    },
+    {
+      "item": "thaumcraft:resonator"
+    },
+    {
+      "item": "thaumadds:salt_essence"
+    },
+    {
+      "item": "thaumadds:salt_essence"
+    },
+    {
+      "item": "thaumcraft:nitor"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:aura_disperser"
+  },
+  "instability": 4,
+  "aspects": {
+    "auram": 10,
+    "permutatio": 20
+  }
+}

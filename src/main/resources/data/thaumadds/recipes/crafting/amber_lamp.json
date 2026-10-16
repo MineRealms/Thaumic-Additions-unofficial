@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bnb",
+    "aaa",
+    "bnb"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:iron_bars"
+    },
+    "n": {
+      "item": "thaumcraft:nitor"
+    },
+    "a": {
+      "item": "thaumcraft:amber_block"
+    }
+  },
+  "result": {
+    "count": 3,
+    "id": "thaumadds:amber_lamp"
+  }
+}

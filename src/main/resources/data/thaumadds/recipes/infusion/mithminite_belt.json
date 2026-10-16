@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_MITHMINITE_BELT",
   "central": {
     "item": "thaumadds:adaminite_belt"
   },

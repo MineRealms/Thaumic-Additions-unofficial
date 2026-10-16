@@ -1,0 +1,26 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_WORMHOLE_MIRROR",
+  "central": {
+    "item": "thaumcraft:hand_mirror"
+  },
+  "components": [
+    {
+      "item": "thaumadds:void_thaumometer"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:wormhole_mirror"
+  },
+  "instability": 6,
+  "aspects": {
+    "alienis": 50
+  }
+}

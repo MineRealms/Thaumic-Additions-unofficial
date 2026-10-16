@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_VOID_ELEMENTAL_PICKAXE",
   "central": {
     "item": "thaumcraft:elemental_pickaxe"
   },
@@ -22,6 +23,7 @@
   "aspects": {
     "alienis": 40,
     "ignis": 80,
-    "metallum": 300
+    "metallum": 300,
+    "sensus": 50
   }
 }

@@ -1,0 +1,53 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_VOID_ANVIL",
+  "central": {
+    "item": "minecraft:anvil"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:void_anvil"
+  },
+  "instability": 7,
+  "aspects": {
+    "alienis": 200
+  }
+}

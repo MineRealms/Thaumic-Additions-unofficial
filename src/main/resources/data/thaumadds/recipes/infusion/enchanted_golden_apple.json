@@ -1,0 +1,42 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_ENCHANTED_GOLDEN_APPLE",
+  "central": {
+    "item": "minecraft:golden_apple"
+  },
+  "components": [
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    },
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "thaumcraft:crystal_essence"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "minecraft:enchanted_golden_apple"
+  },
+  "instability": 6,
+  "aspects": {
+    "fames": 10,
+    "victus": 5
+  }
+}

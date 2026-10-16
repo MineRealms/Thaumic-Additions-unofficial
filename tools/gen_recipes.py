@@ -17,6 +17,9 @@ SUBSTITUTIONS = {
     "plateBrass": "minecraft:copper_ingot",        # brass was a copper alloy in all but name
     "plateIron": "minecraft:iron_ingot",
     "plateThaumium": "thaumcraft:thaumium_ingot",
+    "plateMithrillium": "thaumadds:mithrillium_plate",  # the mod's own plates, as tag names
+    "plateAdaminite": "thaumadds:adaminite_plate",
+    "plateMithminite": "thaumadds:mithminite_plate",
     "plate_iron": "minecraft:iron_ingot",          # ItemsTC.plate, meta 0
     "plate_copper": "minecraft:copper_ingot",      # ItemsTC.plate, meta 2
     "plate_thaumium": "thaumcraft:thaumium_ingot",  # ItemsTC.plate, meta 1
@@ -67,6 +70,10 @@ ASPECTS = {
     "DESIRE": "fames", "FLUX": "vitium", "PLANT": "herba", "METAL": "metallum", "AURA": "auram",
     "ALCHEMY": "permutatio", "PROTECT": "tutamen", "AVERSION": "telum", "ELDRITCH": "alienis",
     "MIND": "cognitio", "COLD": "gelum", "FLIGHT": "volatus", "TOOL": "instrumentum",
+    "CRYSTAL": "vitreus", "SOUL": "spiritus", "MAN": "humanus", "BEAST": "bestia",
+    "DARKNESS": "tenebrae", "LIGHT": "lux", "SENSES": "sensus", "MECHANISM": "machina",
+    "CRAFT": "fabrico", "ENERGY": "potentia", "DEATH": "mortuus", "UNDEAD": "exanimis",
+    "MOTION": "motus", "VOID": "vacuos",
     # The Knowledge aspects have no counterpart and are dropped:
     # IMPERIUM CAELES EXITIUM FLUCTUS DRACO VISUM VENTUS INFERNUM
 }

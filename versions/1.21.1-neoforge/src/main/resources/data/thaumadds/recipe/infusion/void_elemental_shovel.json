@@ -1,0 +1,28 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_VOID_ELEMENTAL_SHOVEL",
+  "central": {
+    "item": "thaumcraft:elemental_shovel"
+  },
+  "components": [
+    {
+      "item": "thaumcraft:primordial_pearl"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    },
+    {
+      "item": "thaumcraft:void_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:void_elemental_shovel"
+  },
+  "instability": 6,
+  "aspects": {
+    "alienis": 40,
+    "fabrico": 100,
+    "terra": 150
+  }
+}

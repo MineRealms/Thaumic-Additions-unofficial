@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_METEOR_BELT",
   "central": {
     "item": "thaumadds:striding_belt"
   },
@@ -23,6 +24,7 @@
   },
   "instability": 5,
   "aspects": {
+    "motus": 250,
     "volatus": 250,
     "ignis": 200
   }

@@ -7,7 +7,8 @@
 StringBuilder out = new StringBuilder();
 int[] problems = {0};
 
-var server = net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer();
+// The integrated server, reached the way both loaders reach it: the client owns it.
+var server = net.minecraft.client.Minecraft.getInstance().getSingleplayerServer();
 var level = server.overworld();
 String MOD = "thaumadds";
 
@@ -125,14 +126,30 @@ java.util.function.BiFunction<String, String, com.google.gson.JsonElement> readJ
 // Recipes: every item id they name is registered.
 int recipes = 0;
 java.util.List<String> unresolved = new java.util.ArrayList<>();
-for (var recipe : server.getRecipeManager().getRecipes()) {
-    net.minecraft.resources.ResourceLocation id =
-            ((net.minecraft.world.item.crafting.Recipe<?>) recipe).getId();
-    if (!MOD.equals(id.getNamespace())) {
+for (Object recipe : server.getRecipeManager().getRecipes()) {
+    // 1.20.1 hands out Recipe, which carries its own id; 1.21.1 hands out RecipeHolder, which
+    // carries the id beside it. Neither type fits the other target, so it is read reflectively.
+    net.minecraft.resources.ResourceLocation id = null;
+    for (String accessor : java.util.List.of("id", "getId")) {
+        try {
+            Object value = recipe.getClass().getMethod(accessor).invoke(recipe);
+            if (value instanceof net.minecraft.resources.ResourceLocation found) {
+                id = found;
+                break;
+            }
+        } catch (ReflectiveOperationException notHere) {
+            // try the next name
+        }
+    }
+    if (id == null || !MOD.equals(id.getNamespace())) {
         continue;
     }
     recipes++;
+    // 1.20.1 keeps recipes in recipes/, 1.21 in recipe/; the id's path is the rest either way.
     var path = "recipes/" + id.getPath() + ".json";
+    if (!hasData.apply(path)) {
+        path = "recipe/" + id.getPath() + ".json";
+    }
     if (!hasData.apply(path)) {
         unresolved.add("recipe " + id + " has no data file");
         continue;

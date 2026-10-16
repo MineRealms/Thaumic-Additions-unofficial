@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_THE_BEHEADER",
   "central": {
     "item": "thaumcraft:thaumium_axe"
   },
@@ -29,8 +30,10 @@
   },
   "instability": 8,
   "aspects": {
+    "exanimis": 100,
     "perditio": 70,
     "praecantatio": 85,
-    "telum": 120
+    "telum": 120,
+    "mortuus": 70
   }
 }

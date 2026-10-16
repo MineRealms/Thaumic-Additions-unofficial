@@ -1,5 +1,6 @@
 {
   "type": "thaumcraft:infusion",
+  "research": "TAR_SHADOW_BEAM_STAFF",
   "central": {
     "item": "thaumcraft:resonator"
   },

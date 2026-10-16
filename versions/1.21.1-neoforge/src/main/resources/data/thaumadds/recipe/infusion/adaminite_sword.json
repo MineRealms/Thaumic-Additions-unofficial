@@ -1,0 +1,31 @@
+{
+  "type": "thaumcraft:infusion",
+  "research": "TAR_ADAMINITE_SWORD",
+  "central": {
+    "item": "thaumcraft:void_sword"
+  },
+  "components": [
+    {
+      "item": "thaumadds:adaminite_plate"
+    },
+    {
+      "item": "thaumadds:adaminite_plate"
+    },
+    {
+      "item": "thaumcraft:primordial_pearl"
+    },
+    {
+      "item": "thaumadds:adaminite_plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "thaumadds:adaminite_sword"
+  },
+  "instability": 6,
+  "aspects": {
+    "praecantatio": 70,
+    "telum": 150,
+    "metallum": 60
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "thaumcraft:crucible",
+  "research": "TAR_THAUMADDS",
+  "catalyst": {
+    "item": "thaumcraft:essence_phial"
+  },
+  "result": {
+    "count": 1,
+    "id": "thaumadds:phantom_ink_phial"
+  },
+  "aspects": {
+    "alienis": 20
+  }
+}
