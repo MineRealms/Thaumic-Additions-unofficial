@@ -19,6 +19,9 @@ public final class PortalWindowStage {
             // 1.21 hands the stage a delta tracker where 1.20 handed a partial tick.
             PortalWindow.renderFrame(
                     event.getPartialTick().getGameTimeDeltaPartialTick(false));
+            // Then the window itself, in the same pass and the same transform the far side was
+            // rendered with.
+            PortalWindowRenderer.draw();
         }
     }
 }

@@ -87,20 +87,22 @@ public final class PortalWindowRenderer implements PortalWindow.WorldRenderer {
     }
 
     /**
-     * Draws the frame on the portal's face.
+     * Draws the frame on the portal's face, in the world.
      *
      * <p>What came back is a raw GL texture, not a file, so there is no name to give a render type
      * — and a render type's own state shards are not reachable from a mod's package anyway. The
      * shader and the texture are therefore bound by hand and the quad drawn directly, which is
      * what a second render target is normally drawn with.</p>
+     *
+     * <p>The corners are the world's, and this runs in the frame's own stage: same transform the
+     * far side was rendered with, so the window and its picture agree by construction.</p>
      */
-    public static void draw(PoseStack pose, float size, float depth) {
+    public static void draw() {
         int texture = PortalWindow.texture();
-        if (texture < 0) {
+        float[][] corners = PortalWindow.corners();
+        if (texture < 0 || corners == null) {
             return;
         }
-        Matrix4f matrix = pose.last().pose();
-
         RenderSystem.enableDepthTest();
         RenderSystem.depthMask(true);
         RenderSystem.disableBlend();
@@ -109,12 +111,12 @@ public final class PortalWindowRenderer implements PortalWindow.WorldRenderer {
 
         BufferBuilder builder = Tesselator.getInstance().getBuilder();
         builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        float half = size / 2.0F;
-        // The buffer's origin is its own bottom-left, so the image arrives turned over.
-        builder.vertex(matrix, -half, half, depth).uv(0.0F, 0.0F).endVertex();
-        builder.vertex(matrix, half, half, depth).uv(1.0F, 0.0F).endVertex();
-        builder.vertex(matrix, half, -half, depth).uv(1.0F, 1.0F).endVertex();
-        builder.vertex(matrix, -half, -half, depth).uv(0.0F, 1.0F).endVertex();
+        for (int[] order : new int[][] {{0, 1, 2, 3}}) {
+            for (int index : order) {
+                builder.vertex(corners[index][0], corners[index][1], corners[index][2])
+                        .uv(corners[index][3], corners[index][4]).endVertex();
+            }
+        }
         BufferUploader.drawWithShader(builder.end());
 
         RenderSystem.enableBlend();

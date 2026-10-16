@@ -78,14 +78,13 @@ public final class PortalWindowRenderer implements PortalWindow.WorldRenderer {
         return new Matrix4f().rotation(camera.rotation().conjugate(new Quaternionf()));
     }
 
-    /** Draws the frame on the portal's face; see the Forge twin. */
-    public static void draw(PoseStack pose, float size, float depth) {
+    /** Draws the frame on the portal's face, in the world; see the Forge twin. */
+    public static void draw() {
         int texture = PortalWindow.texture();
-        if (texture < 0) {
+        float[][] corners = PortalWindow.corners();
+        if (texture < 0 || corners == null) {
             return;
         }
-        Matrix4f matrix = pose.last().pose();
-
         RenderSystem.enableDepthTest();
         RenderSystem.depthMask(true);
         RenderSystem.disableBlend();
@@ -94,12 +93,10 @@ public final class PortalWindowRenderer implements PortalWindow.WorldRenderer {
 
         BufferBuilder builder = Tesselator.getInstance()
                 .begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        float half = size / 2.0F;
-        // The buffer's origin is its own bottom-left, so the image arrives turned over.
-        builder.addVertex(matrix, -half, half, depth).setUv(0.0F, 0.0F);
-        builder.addVertex(matrix, half, half, depth).setUv(1.0F, 0.0F);
-        builder.addVertex(matrix, half, -half, depth).setUv(1.0F, 1.0F);
-        builder.addVertex(matrix, -half, -half, depth).setUv(0.0F, 1.0F);
+        for (int index : new int[] {0, 1, 2, 3}) {
+            builder.addVertex(corners[index][0], corners[index][1], corners[index][2])
+                    .setUv(corners[index][3], corners[index][4]);
+        }
         BufferUploader.drawWithShader(builder.buildOrThrow());
 
         RenderSystem.enableBlend();

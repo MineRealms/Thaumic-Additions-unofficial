@@ -15,6 +15,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix3f;
+import org.joml.Vector3f;
 
 /**
  * What a portal shows: the far side of the world, rendered a second time from where the far seal
@@ -36,8 +38,14 @@ import net.minecraft.world.phys.Vec3;
 public final class PortalWindow {
     /** Upstream rendered into a 512-square buffer, and so does this. */
     private static final int SIZE = 512;
-    /** How far away a portal can be and still get a window; beyond this it is a speck. */
-    private static final double RANGE = 32.0D;
+    /**
+     * How far away a portal can be and still get a window.
+     *
+     * <p>Close, because this is when a portal is a thing being looked through rather than a thing
+     * seen. Measured against the seal's own 0.4-block teleport reach, twelve blocks is a wide
+     * margin: it is the range at which the far side is still legible on a one-block face.</p>
+     */
+    private static final double RANGE = 12.0D;
 
     /** The node's half: making the buffer, entering the level's pass, and restoring afterwards. */
     public interface WorldRenderer {
@@ -60,7 +68,12 @@ public final class PortalWindow {
      */
     private static boolean inside;
     private static int texture = -1;
+    /** Which seal the frame rendered for, and which way its face points. */
+    private static BlockPos chosen;
+    private static Direction chosenFace;
     private static long currentFrame = -1L;
+    /** Why the last frame did or did not produce a window; for the probes, and cheap. */
+    private static String lastReason = "not run";
 
     private PortalWindow() {
     }
@@ -81,6 +94,45 @@ public final class PortalWindow {
         return texture;
     }
 
+    /**
+     * The window's four corners in the world, ready to draw, or null when there is no window.
+     *
+     * <p>In world space and drawn from the frame's own stage, not from the seal's renderer. The
+     * first attempt drew it there, in the seal's own pose, and it came out somewhere else: a block
+     * entity renderer is handed a pose and inherits whatever transform is current, and a quad
+     * drawn by hand in that moment does not land where the batched geometry beside it does. The
+     * stage has the level's own transform, which is the one the far side was rendered with, so the
+     * two agree by construction rather than by luck.</p>
+     *
+     * <p>Corners run bottom-left, bottom-right, top-right, top-left as seen by someone standing in
+     * front of the face; the image's own origin is its bottom-left, so the two line up.</p>
+     */
+    public static float[][] corners() {
+        if (texture < 0 || chosen == null || chosenFace == null) {
+            return null;
+        }
+        Vec3 out = axis(chosenFace);
+        Vec3 up = chosenFace.getAxis().isVertical()
+                ? new Vec3(0.0D, 0.0D, -1.0D) : new Vec3(0.0D, 1.0D, 0.0D);
+        Vec3 right = up.cross(out);
+        // On the face, not in the middle of the block. Half a block out from the centre is the
+        // plane the seal's own art is drawn on, and a hundredth further so the window is not
+        // fighting the block for the same depth.
+        Vec3 centre = chosen.getCenter().add(out.scale(0.5D + 0.005D));
+        Vec3 halfRight = right.scale(0.5D);
+        Vec3 halfUp = up.scale(0.5D);
+        Vec3 lowNear = centre.subtract(halfRight).subtract(halfUp);
+        Vec3 lowFar = centre.add(halfRight).subtract(halfUp);
+        Vec3 highFar = centre.add(halfRight).add(halfUp);
+        Vec3 highNear = centre.subtract(halfRight).add(halfUp);
+        return new float[][] {
+                {(float) lowNear.x, (float) lowNear.y, (float) lowNear.z, 0.0F, 1.0F},
+                {(float) lowFar.x, (float) lowFar.y, (float) lowFar.z, 1.0F, 1.0F},
+                {(float) highFar.x, (float) highFar.y, (float) highFar.z, 1.0F, 0.0F},
+                {(float) highNear.x, (float) highNear.y, (float) highNear.z, 0.0F, 0.0F},
+        };
+    }
+
     /** True while the setting is on and nothing has gone wrong. */
     public static boolean enabled() {
         return !broken && renderer != null && TaClientConfig.portalWindow();
@@ -89,12 +141,16 @@ public final class PortalWindow {
     /** Called once per frame, before the level's block entities are drawn. */
     public static void renderFrame(float partialTick) {
         texture = -1;
+        chosen = null;
+        chosenFace = null;
         if (inside || !enabled()) {
+            lastReason = inside ? "already inside" : "disabled";
             return;
         }
         Minecraft minecraft = Minecraft.getInstance();
         Level level = minecraft.level;
         if (level == null || minecraft.player == null) {
+            lastReason = "no level or player";
             return;
         }
         // Once a frame, not once a portal: two portals in one frame would be two extra renders.
@@ -117,14 +173,16 @@ public final class PortalWindow {
         Camera camera = minecraft.gameRenderer.getMainCamera();
         Vec3 eye = camera.getPosition();
 
-        TileSeal near = nearestBoundPortal(level, eye);
+        TileSeal near = watchedPortal(level, eye, camera.getLookVector());
         if (near == null) {
+            lastReason = "no portal watched";
             return;
         }
         Level farLevel = minecraft.level;
         BlockPos farPos = near.portalBound();
         if (farPos == null || !farLevel.isLoaded(farPos)
                 || farLevel.getBlockEntity(farPos) == null) {
+            lastReason = "far end not there: " + farPos;
             return;
         }
         Direction farFace = farLevel.getBlockState(farPos)
@@ -142,22 +200,47 @@ public final class PortalWindow {
         into.clear(Minecraft.ON_OSX);
         renderer.renderLevelInto(farCamera, partialTick, into);
         texture = into.getColorTextureId();
+        chosen = near.getBlockPos();
+        chosenFace = near.orientation();
+        lastReason = "rendered for " + chosen + " -> " + farPos + " texture " + texture;
     }
 
-    /** The closest seal near the camera that is bound and open, or null. */
-    private static TileSeal nearestBoundPortal(Level level, Vec3 eye) {
+    /**
+     * The portal the camera is looking at, or null.
+     *
+     * <p>Looking at, not nearest to: there are always two portals in a pair, they are usually a few
+     * blocks apart, and picking whichever is nearer makes the image hop from one to the other as
+     * the player turns — which reads as the picture sliding around on its own. The one in front of
+     * the camera, and best lined up with where it is pointing, is the one being looked through.</p>
+     */
+    private static TileSeal watchedPortal(Level level, Vec3 eye, org.joml.Vector3f look) {
+        Vec3 gaze = new Vec3(look.x(), look.y(), look.z()).normalize();
         TileSeal best = null;
-        double bestDistance = RANGE * RANGE;
+        double bestAngle = -1.0D;
         for (TileSeal seal : TileSeal.loaded()) {
             if (seal.getLevel() != level || seal.isRemoved()) {
                 continue;
             }
-            if (seal.portalBound() == null || seal.holeTarget() <= 0) {
+            // Bound, and that is all. It is tempting to ask that the hole be open — there is
+            // something pleasingly literal about a window only where there is a hole — but the
+            // open hole is the state that carries things through, and the two compete: whatever
+            // stands in the seal to hold it open is the thing it takes away. 1.12 drew the window
+            // for a *viewer* rather than for an open hole, and a viewer is what a player looking at
+            // one from a few blocks away is.
+            if (seal.portalBound() == null) {
                 continue;
             }
-            double distance = seal.getBlockPos().distToCenterSqr(eye);
-            if (distance < bestDistance) {
-                bestDistance = distance;
+            Vec3 toPortal = seal.getBlockPos().getCenter().subtract(eye);
+            double distance = toPortal.length();
+            if (distance > RANGE || distance < 0.05D) {
+                continue;
+            }
+            double alignment = toPortal.normalize().dot(gaze);
+            if (alignment <= 0.0D) {
+                continue;
+            }
+            if (alignment > bestAngle) {
+                bestAngle = alignment;
                 best = seal;
             }
         }
@@ -179,27 +262,33 @@ public final class PortalWindow {
                                          BlockPos farPos, Direction farFace, float partialTick) {
         Vec3 near = Vec3.atCenterOf(nearPos);
         Vec3 far = Vec3.atCenterOf(farPos);
-        Vec3 normal = new Vec3(nearFace.getStepX(), nearFace.getStepY(), nearFace.getStepZ());
+        Vec3 normal = axis(nearFace);
 
+        // The reflection through the near portal's plane. Applied to the camera's position and to
+        // its direction together: a portal is a mirror, and half a mirror is not a picture of
+        // anything.
         Vec3 offset = eye.subtract(near);
-        // Reflection through the near portal's plane.
         Vec3 mirrored = offset.subtract(normal.scale(2.0D * offset.dot(normal)));
         Vec3 mirroredLook = look.subtract(normal.scale(2.0D * look.dot(normal)));
 
-        // The rotation carrying the near portal's outward face onto the far portal's.
-        Vec3 from = normal;
-        Vec3 to = new Vec3(farFace.getStepX(), farFace.getStepY(), farFace.getStepZ());
-        Vec3 position = far.add(rotate(mirrored, from, to));
-        Vec3 direction = rotate(mirroredLook, from, to);
+        // And then carried from the near portal's own frame to the far portal's. This is the part
+        // that is easy to get wrong: any rotation at all takes one face's normal to the other's,
+        // and they are not the same picture. What is wanted is the one that takes the near
+        // portal's *right and up* to the far portal's, which is this, and only this.
+        Matrix3f carry = frame(farFace).mul(frame(nearFace).transpose(), new Matrix3f());
+
+        Vector3f position = carry.transform(mirrored.toVector3f(), new Vector3f())
+                .add(far.toVector3f());
+        Vector3f direction = carry.transform(mirroredLook.toVector3f(), new Vector3f());
 
         // A camera is placed by an entity, and Entity is abstract: a dropped item is the cheapest
         // concrete one, and it is never added to the level, so nothing can see it.
         Entity stand = new net.minecraft.world.entity.item.ItemEntity(level,
-                position.x, position.y, position.z, net.minecraft.world.item.ItemStack.EMPTY);
-        stand.setPos(position.x, position.y - stand.getEyeHeight(), position.z);
-        stand.setYRot((float) (Mth.atan2(-direction.x, direction.z) * 180.0F / (float) Math.PI));
-        stand.setXRot((float) (Mth.atan2(-direction.y, Math.sqrt(direction.x * direction.x
-                + direction.z * direction.z)) * 180.0F / (float) Math.PI));
+                position.x(), position.y(), position.z(), net.minecraft.world.item.ItemStack.EMPTY);
+        stand.setPos(position.x(), position.y() - stand.getEyeHeight(), position.z());
+        stand.setYRot((float) (Mth.atan2(-direction.x(), direction.z()) * 180.0F / (float) Math.PI));
+        stand.setXRot((float) (Mth.atan2(-direction.y(), Math.sqrt(direction.x() * direction.x()
+                + direction.z() * direction.z())) * 180.0F / (float) Math.PI));
         stand.setOldPosAndRot();
 
         Camera camera = new Camera();
@@ -207,30 +296,29 @@ public final class PortalWindow {
         return camera;
     }
 
-    /** Rotates {@code vector} by the shortest rotation taking {@code from} to {@code to}. */
-    private static Vec3 rotate(Vec3 vector, Vec3 from, Vec3 to) {
-        Vec3 a = from.normalize();
-        Vec3 b = to.normalize();
-        Vec3 axis = a.cross(b);
-        double sin = axis.length();
-        double cos = a.dot(b);
-        if (sin < 1.0E-6D) {
-            // Already aligned, or exactly opposed: the first needs nothing, the second is a flip
-            // about any axis perpendicular to it, and the sign then does not matter.
-            return cos > 0.0D ? vector : vector.scale(-1.0D).add(a.scale(2.0D * vector.dot(a)));
-        }
-        Vec3 unit = axis.scale(1.0D / sin);
-        double angle = Math.atan2(sin, cos);
-        return rotateAbout(vector, unit, angle);
+    /** One face's outward normal, as a vector. */
+    private static Vec3 axis(Direction face) {
+        return new Vec3(face.getStepX(), face.getStepY(), face.getStepZ());
     }
 
-    /** Rodrigues' rotation formula. */
-    private static Vec3 rotateAbout(Vec3 vector, Vec3 axis, double angle) {
-        double cos = Math.cos(angle);
-        double sin = Math.sin(angle);
-        return vector.scale(cos)
-                .add(axis.cross(vector).scale(sin))
-                .add(axis.scale(axis.dot(vector) * (1.0D - cos)));
+    /**
+     * A portal's own frame: which way is right, which way is up, which way is out.
+     *
+     * <p>Out is the face's normal. Up is up — except for a portal in a floor or a ceiling, where
+     * there is no up in the face and north is used instead, which is the same choice the model
+     * rotator makes. Right is the one the other two imply.</p>
+     */
+    private static Matrix3f frame(Direction face) {
+        Vec3 out = axis(face);
+        Vec3 up = face.getAxis().isVertical()
+                ? new Vec3(0.0D, 0.0D, -1.0D)
+                : new Vec3(0.0D, 1.0D, 0.0D);
+        Vec3 right = up.cross(out);
+        // Columns: a local point (x, y, z) becomes x·right + y·up + z·out.
+        return new Matrix3f(
+                (float) right.x, (float) up.x, (float) out.x,
+                (float) right.y, (float) up.y, (float) out.y,
+                (float) right.z, (float) up.z, (float) out.z);
     }
 
     /** The shared offscreen buffer, sized to the window and made on first use. */
@@ -240,6 +328,11 @@ public final class PortalWindow {
             target.setClearColor(0.0F, 0.0F, 0.0F, 0.0F);
         }
         return target;
+    }
+
+    /** What the last frame did, for the probes. */
+    public static String lastReason() {
+        return lastReason;
     }
 
     /** For the frame gate; a portal is only worth a second render once per frame. */

@@ -23,6 +23,9 @@ public final class PortalWindowStage {
     public static void onStage(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_BLOCKS) {
             PortalWindow.renderFrame(event.getPartialTick());
+            // Then the window itself, in the same pass and the same transform the far side was
+            // rendered with.
+            PortalWindowRenderer.draw();
         }
     }
 }
