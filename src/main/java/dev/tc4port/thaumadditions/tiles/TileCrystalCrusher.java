@@ -38,6 +38,8 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
     private static final int DRAIN_SUCTION = 12;
     /** Each drain buys three crushes. */
     private static final int CRUSHES_PER_DRAIN = 3;
+    /** How many pieces of the crystal fly off each time it is ground down. */
+    private static final int CRUSH_PARTICLES = 8;
     /** 1.12 {@code craftTime >= 100}. */
     private static final int CRAFT_TICKS = 100;
 
@@ -163,6 +165,18 @@ public class TileCrystalCrusher extends TileEssentia implements Container {
         AspectId aspect = inputAspect();
         if (aspect == null) {
             return;
+        }
+        // 1.12 crumbled the crystal it had just ground up. It did that with a particle of its own
+        // that drew the item's own texture breaking apart; the modern game has that particle built
+        // in, so the crystal's own icon flies off in pieces.
+        if (getLevel() instanceof net.minecraft.server.level.ServerLevel server) {
+            ItemStack ground = inventory.get(SLOT_INPUT);
+            if (!ground.isEmpty()) {
+                server.sendParticles(new net.minecraft.core.particles.ItemParticleOption(
+                                net.minecraft.core.particles.ParticleTypes.ITEM, ground.copyWithCount(1)),
+                        getBlockPos().getX() + 0.5D, getBlockPos().getY() + 0.75D,
+                        getBlockPos().getZ() + 0.5D, CRUSH_PARTICLES, 0.25D, 0.25D, 0.25D, 0.05D);
+            }
         }
         ItemStack out = inventory.get(SLOT_OUTPUT);
         if (out.isEmpty()) {

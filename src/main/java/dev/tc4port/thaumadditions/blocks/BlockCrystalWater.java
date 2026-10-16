@@ -58,11 +58,12 @@ public class BlockCrystalWater extends LiquidBlock {
      * Takes one neighbouring source away, if the roll allows and there is one to take.
      *
      * <p>This is the cost side of the water: growth does not come free, and upstream made the
-     * player keep spares. Returns true when a source went, so a caller can say so.</p>
+     * player keep spares. Returns where the water was taken from, or null when none was — the
+     * caller needs the spot, because 1.12 threw a coloured cloud up from it as it went.</p>
      */
-    public static boolean spendSource(Level level, BlockPos pos, RandomSource random) {
+    public static BlockPos spendSource(Level level, BlockPos pos, RandomSource random) {
         if (random.nextInt(SPEND_ONE_IN) != 0) {
-            return false;
+            return null;
         }
         List<BlockPos> sources = new ArrayList<>(RING.length);
         for (int[] offset : RING) {
@@ -72,10 +73,11 @@ public class BlockCrystalWater extends LiquidBlock {
             }
         }
         if (sources.isEmpty()) {
-            return false;
+            return null;
         }
-        level.destroyBlock(sources.get(random.nextInt(sources.size())), false);
-        return true;
+        BlockPos taken = sources.get(random.nextInt(sources.size()));
+        level.destroyBlock(taken, false);
+        return taken;
     }
 
     /** True when {@code pos} holds a source block of this water rather than a flowing edge. */

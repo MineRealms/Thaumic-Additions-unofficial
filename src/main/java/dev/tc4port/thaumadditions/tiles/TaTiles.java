@@ -42,6 +42,9 @@ public final class TaTiles {
         private static final int CHARGE_INTERVAL = 100;
         /** How far the machine looks for a node to charge. */
         private static final int NODE_RANGE = 8;
+        /** 1.12's {@code int rays = 2}, and how finely the trail between the ends is drawn. */
+        private static final int SPARK_RAYS = 2;
+        private static final int SPARK_STEPS = 12;
 
         /** The sprinkler arms' spin, for the renderer. */
         private final TaRotator rotator = TaRotator.randomised(new java.util.Random());
@@ -86,6 +89,45 @@ public final class TaTiles {
             chargeTicker = 0;
             if (chargeNearestNode(server, pos)) {
                 extract(getAspect(), 1);
+                chargeSparks(server, pos);
+            }
+        }
+
+        /**
+         * The sprinkle of vis the machine throws when it charges something.
+         *
+         * <p>1.12 fired this from a client event and spawned Thaumcraft's own vis sparkle particle:
+         * two rays, each starting a third of a block out from the centre at the rotor's current
+         * angle and flying outwards and upwards, in the colour of the aura aspect. The port sends
+         * dust in the same colour, as a trail rather than a single sprite — the same picture
+         * without a particle class, and the trail is what makes a ray read as a line.</p>
+         *
+         * <p>What is <em>not</em> here is the lightning 1.12 also wrote for this machine: its
+         * calls to {@code ThunderRunnable} sit inside a comment in the 1.12 source, so the arcs
+         * never ran there either and the port does not invent them back.</p>
+         */
+        private void chargeSparks(ServerLevel server, BlockPos pos) {
+            dev.tc4port.thaumcraft.api.aspect.AspectId aura =
+                    dev.tc4port.thaumcraft.api.aspect.AspectId.parse("auram");
+            int colour = dev.tc4port.thaumadditions.aspect.TaAspect.color(aura);
+            java.util.Random random = new java.util.Random(server.getRandom().nextLong());
+            for (int ray = 0; ray < SPARK_RAYS; ray++) {
+                float degrees = rotator.actualRotation(1.0F) - 5.0F + ray * (360.0F / SPARK_RAYS);
+                double radians = Math.toRadians(degrees);
+                double cos = Math.cos(radians);
+                double sin = Math.sin(radians);
+                double x = pos.getX() + 0.5D + cos * 0.3D;
+                double y = pos.getY() + 0.5D;
+                double z = pos.getZ() + 0.5D + sin * 0.3D;
+                double farX = pos.getX() + 0.5D + cos * random.nextFloat() * 6.0D;
+                double farY = pos.getY() + 1.5D + random.nextFloat() * 4.0D;
+                double farZ = pos.getZ() + 0.5D + sin * random.nextFloat() * 6.0D;
+                for (int step = 0; step <= SPARK_STEPS; step++) {
+                    double t = step / (double) SPARK_STEPS;
+                    dev.tc4port.thaumadditions.TaFx.dust(server,
+                            x + (farX - x) * t, y + (farY - y) * t, z + (farZ - z) * t,
+                            colour, 0.0D, 0.0D, 0.0D);
+                }
             }
         }
 

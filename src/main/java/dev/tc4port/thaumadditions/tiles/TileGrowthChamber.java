@@ -1,6 +1,7 @@
 package dev.tc4port.thaumadditions.tiles;
 
 import dev.tc4port.hclite.platform.HCLitePlatform;
+import dev.tc4port.thaumadditions.TaFx;
 import dev.tc4port.thaumadditions.aspect.TaAspect;
 import dev.tc4port.thaumadditions.blocks.BlockCrystalWater;
 import dev.tc4port.thaumadditions.items.ThaumcraftItems;
@@ -45,6 +46,9 @@ public class TileGrowthChamber extends TileEssentia implements Container {
     private static final float DRAIN_TICKS = 20.0F * 60.0F;
     /** 1.12 {@code capacity}: how much essentia the chamber holds before it can grow. */
     private static final int CAPACITY = 6;
+    /** 1.12's {@code CLOUD_COLOR}, and how many motes of it one spent source throws. */
+    private static final int SPENT_COLOUR = 0x00FFFF;
+    private static final int SPENT_MOTES = 6;
 
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
 
@@ -150,7 +154,16 @@ public class TileGrowthChamber extends TileEssentia implements Container {
                 // about; upstream spent it from the block next to the crystal being grown, and
                 // the chamber stands in for that crystal here.
                 if (level instanceof ServerLevel server) {
-                    BlockCrystalWater.spendSource(server, pos, server.getRandom());
+                    net.minecraft.core.BlockPos spent =
+                            BlockCrystalWater.spendSource(server, pos, server.getRandom());
+                    if (spent != null) {
+                        // 1.12 threw a cyan cloud up from the water it spent, which is how a player
+                        // watching the setup saw the cost. Upstream's colour, upstream's drift.
+                        for (int mote = 0; mote < SPENT_MOTES; mote++) {
+                            TaFx.dust(server, spent.getX() + 0.5D, spent.getY() + 0.75D,
+                                    spent.getZ() + 0.5D, SPENT_COLOUR, 0.0D, 0.08D, 0.0D);
+                        }
+                    }
                 }
                 amount--;
                 toDrainAura += MAX_AURA_DRAIN;
