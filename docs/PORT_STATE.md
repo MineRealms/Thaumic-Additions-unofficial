@@ -56,8 +56,25 @@ impossible. Written to be read cold.
    `input_patch`, which writes modern components — while the port's aspect items keep theirs in
    legacy item NBT. The port's items assign themselves a random aspect on creation instead
    (`AspectItems.onCreated`), so a per-aspect recipe would have nothing to set.
-2. **Smaller client pieces**: the jar's in-hand model, the `HudHandlerHookTAR` overlay, and the
-   charger's thunder/vis-sparkle effects.
+2. **The rest of upstream's effects.** Its client package is the full list, and this is what of it
+   is not here. Nothing below changes what anything *does*; they are all things you see.
+
+   | Upstream | What it is | State |
+   |---|---|---|
+   | `util/tesseract/Tesseract`, `Plane` | the hypercube in the entity summoner | ported |
+   | `runnable/ThunderRunnable` | lightning arcs, HammerCore's `spawnSimpleThunder` | missing |
+   | `runnable/VisSparkleRunnable` | a vis sparkle flying from one point to another | missing |
+   | `fx/FXShadowBeam` | the shadow beam staff's beam | missing |
+   | `fx/FXTextureAtlasSpriteDigging` | item-crack particles, the crystal crusher's | missing |
+   | `fx/FXColoredDrop` | a coloured droplet travelling | missing |
+   | `fx/ParticleFX` | HammerCore's general-purpose coloured particle | partly: `TaFx` dusts |
+   | `texture/TextureThaumonomiconBG` | the book's animated background | missing; the book uses Thaumcraft's |
+   | `HudHandlerHookTAR` | the thaumometer's chunk-vis bar | impossible, see above |
+   | `seal/PortalRenderer` | the portal's framebuffer window | impossible, see above |
+
+   The four that carry a machine's own action — the charger's thunder and sparkles, the crusher's
+   item cracks, the staff's beam, the coloured droplets the septic machines throw — are all
+   expressible with modern particles and are the ones worth doing next.
 
    The crops are *not* on this list: 1.12 baked them with a custom model baker for texture
    variety, and the port ships per-age blockstate models instead, which is the same crops drawn
@@ -75,6 +92,8 @@ impossible. Written to be read cold.
 | Crystal water growing a world crystal | 1.12's block grew a partly grown `BlockCrystal` beside it and spent water doing it. TC4R's crystal clusters are grown by its essentia crystalliser and expose no size, so there is nothing there to grow. The rule is pointed at the growth this port does have instead: `TileGrowthChamber` reads the eight blocks around it, grows up to five times faster for a full ring of sources, and spends one — half the time — per grow. Upstream's ring and odds, a different beneficiary. |
 | Thaumcraft's own JEI plugin | The installed TC4R ships a JEI plugin written against JEI 9's `ISubtypeInterpreter`, which JEI 15 renamed. It throws once, JEI logs it and carries on, and the mod's own plugin is unaffected — but Thaumcraft's aspect subtypes do not reach JEI. It is a fault in a binary dependency, not in this port, and cannot be patched from here. |
 | A KubeJS plugin with anything in it | Upstream had no CraftTweaker integration to translate: the 1.12 jar carries no `crafttweaker` or `minetweaker` class of any kind. The plugin class the port ships is what makes KubeJS load without complaint, and adding script bindings would be inventing an API upstream never had. |
+| Three of upstream's four integrations | Upstream's `compat` package is Thaumcraft, JEI, `visuals`, `lux` and `thaumicaugmentation`. The last three are 1.12-only mods by the same author — a chest renderer, a dynamic lighting mod, and a Thaumcraft expansion — and none of them has a build for either target. Nothing in this workspace or in the Gradle cache carries any of them. The two that exist here, Thaumcraft and JEI, are both ported. |
+| The thaumometer's HUD bar | Upstream's `HudHandlerHookTAR` drew the chunk's vis and flux down the side of the screen while a thaumometer was held. It reads `AuraChunk.getVis` and `getFlux`, and there is no chunk aura to read — the same reason the aura charger charges nodes. A bar showing the nearest node exists, but it would be this port's own idea rather than upstream's. |
 
 ## The recipes are read from upstream's source, not transcribed
 
