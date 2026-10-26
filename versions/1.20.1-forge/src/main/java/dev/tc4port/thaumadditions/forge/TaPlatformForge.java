@@ -514,6 +514,13 @@ public final class TaPlatformForge implements TaPlatform {
         return net.minecraftforge.common.extensions.IForgeMenuType.create(factory::create);
     }
 
+    /** 1.20.1's bucket keeps the fluid's supplier and resolves it on first use. */
+    @Override
+    public Item bucketItem(java.util.function.Supplier<? extends net.minecraft.world.level.material.FlowingFluid> fluid,
+                           Item.Properties properties) {
+        return new net.minecraft.world.item.BucketItem(fluid, properties);
+    }
+
     @Override
     public void openMenu(net.minecraft.server.level.ServerPlayer player,
                          net.minecraft.world.MenuProvider provider,

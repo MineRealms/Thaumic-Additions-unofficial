@@ -129,6 +129,19 @@ public interface TaPlatform {
                   int tint, int lightLevel, int density, int viscosity);
 
     /**
+     * Builds the bucket that carries a fluid, out of the supplier {@link TaFluid#source()} hands
+     * back rather than out of the fluid itself.
+     *
+     * <p>1.20.1's {@code BucketItem} keeps the supplier and resolves it when the bucket is first
+     * used; 1.21.1's takes the fluid there and then. That matters because the item registry can be
+     * filled before the fluid one: a bucket built by resolving the fluid at registration time
+     * either comes out empty or, on the loader that refuses an unbound holder, never comes out at
+     * all. Each loader gets the form it can honour.</p>
+     */
+    Item bucketItem(Supplier<? extends net.minecraft.world.level.material.FlowingFluid> fluid,
+                    Item.Properties properties);
+
+    /**
      * Creates an item whose icon and held model come from a client renderer, for the items whose
      * 1.12 form was a model the modern loaders cannot read. The behaviour goes on it as usual.
      */

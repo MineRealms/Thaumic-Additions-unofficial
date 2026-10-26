@@ -470,6 +470,16 @@ public final class TaPlatformNeoForge implements TaPlatform {
         return net.neoforged.neoforge.common.extensions.IMenuTypeExtension.create(factory::create);
     }
 
+    /**
+     * 1.21.1's bucket takes the fluid itself, so it is resolved here. The fluid registry is filled
+     * before the item one on this loader, which is why this is safe to do at registration time.
+     */
+    @Override
+    public Item bucketItem(java.util.function.Supplier<? extends net.minecraft.world.level.material.FlowingFluid> fluid,
+                           Item.Properties properties) {
+        return new net.minecraft.world.item.BucketItem(fluid.get(), properties);
+    }
+
     @Override
     public void openMenu(net.minecraft.server.level.ServerPlayer player,
                          net.minecraft.world.MenuProvider provider,

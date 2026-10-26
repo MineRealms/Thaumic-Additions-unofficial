@@ -475,8 +475,11 @@ public final class Content {
         CRYSTAL_WATER_BLOCK = trackBlock(blocks.<Block>register("crystal_water",
                 () -> new dev.tc4port.thaumadditions.blocks.BlockCrystalWater(
                         CRYSTAL_WATER.source().get(), water())));
+        // The bucket is handed the fluid's *supplier*: the item registry can be filled before the
+        // fluid one, and 1.20.1's bucket resolves its supplier lazily, at world use. 1.21.1's takes
+        // the fluid itself, so that node resolves it here — see {@code TaPlatform#bucketItem}.
         CRYSTAL_WATER_BUCKET = track(items.register("crystal_water_bucket",
-                () -> new net.minecraft.world.item.BucketItem(CRYSTAL_WATER.source().get(),
+                () -> platform.bucketItem(CRYSTAL_WATER.source(),
                         new Item.Properties().craftRemainder(net.minecraft.world.item.Items.BUCKET)
                                 .stacksTo(1))));
     }
@@ -813,7 +816,14 @@ public final class Content {
 
     /** Hands every registered item to the creative tab builder, in declaration order. */
     public static void forEachItem(Consumer<Item> out) {
-        for (Supplier<Item> item : ITEM_ORDER)
-            out.accept(item.get());
+        for (Supplier<Item> item : ITEM_ORDER) {
+            // A failed entry (for example an item whose fluid was not registered yet) stays an
+            // empty holder; handing its get() to the tab builder would abort the whole tab.
+            try {
+                out.accept(item.get());
+            } catch (RuntimeException ignored) {
+                // skipped: not registered in this environment
+            }
+        }
     }
 }
