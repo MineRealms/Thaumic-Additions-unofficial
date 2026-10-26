@@ -14,7 +14,10 @@ def node = sc.current.project
 
 version = mod_version
 group = mod_group_id
-base { archivesName = "${mod_id}-${minecraft_version}-${mod_loader}" }
+// The name the modpack ships it under: the Chinese name first, then the English one, then the
+// game version. The "(48+)" prefix is the pack's marker for the TC4R API generation this build
+// targets (20748), not a version of this mod — it moves with the tc4r pin in versions/*/gradle.properties.
+base { archivesName = "(48+)神秘领域 Thaumic Additions-${minecraft_version}" }
 java.toolchain.languageVersion = JavaLanguageVersion.of(java_version.toInteger())
 
 def tc4Repository = file(providers.gradleProperty('tc4Repository')

@@ -9,8 +9,12 @@ tasks.register('buildAndCollect', Sync) {
     group = 'build'
     description = 'Builds both targets, then collects the two release jars.'
     dependsOn ':1.20.1-forge:build', ':1.21.1-neoforge:build'
-    from(layout.projectDirectory.dir('versions/1.20.1-forge/build/libs')) { include '*-forge-*.jar' }
-    from(layout.projectDirectory.dir('versions/1.21.1-neoforge/build/libs')) { include '*-neoforge-*.jar' }
+    from(layout.projectDirectory.dir('versions/1.20.1-forge/build/libs')) {
+        include "(48+)神秘领域 Thaumic Additions-1.20.1-*.jar"
+    }
+    from(layout.projectDirectory.dir('versions/1.21.1-neoforge/build/libs')) {
+        include "(48+)神秘领域 Thaumic Additions-1.21.1-*.jar"
+    }
     into layout.buildDirectory.dir('distributions')
     duplicatesStrategy = DuplicatesStrategy.FAIL
 }
