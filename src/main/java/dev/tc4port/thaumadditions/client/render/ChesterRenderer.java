@@ -86,7 +86,6 @@ public class ChesterRenderer extends EntityRenderer<Chester> {
         chester.setOpen(lidIsOpenFor(chester));
         lid.xRot = -chester.lidAngle(partialTick) * 1.4F;
         lid.render(pose, consumer, light, net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY);
-        pose.popPose();
         knob.render(pose, consumer, light, net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY);
         body.render(pose, consumer, light, net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY);
         pose.popPose();
