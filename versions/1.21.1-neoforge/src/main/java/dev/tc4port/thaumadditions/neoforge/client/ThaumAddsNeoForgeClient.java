@@ -5,7 +5,9 @@ import dev.tc4port.thaumadditions.client.render.MachineItemRenderer;
 import dev.tc4port.thaumadditions.client.render.ItemRenderers;
 import dev.tc4port.thaumadditions.client.render.MachineColors;
 import dev.tc4port.thaumadditions.client.render.MachineRenderers;
+import dev.tc4port.thaumadditions.client.render.ScytheRenderer;
 import dev.tc4port.thaumadditions.registry.Content;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -43,6 +45,13 @@ public final class ThaumAddsNeoForgeClient {
         event.registerEntityRenderer(Content.BLUE_WOLF.get(), BlueWolfRenderer::new);
         event.registerEntityRenderer(Content.CHESTER_ENTITY.get(),
                 dev.tc4port.thaumadditions.client.render.ChesterRenderer::new);
+        // Both of these were registered without a renderer, and an entity type with no renderer
+        // crashes the client the moment one exists: EntityRenderDispatcher#shouldRender
+        // dereferences the null it looked up. The shot drew nothing in 1.12 either — its trail of
+        // aspect dust was the whole visual — so vanilla's no-op renderer is what it wants.
+        event.registerEntityRenderer(Content.ESSENTIA_SHOT.get(), NoopRenderer::new);
+        event.registerEntityRenderer(Content.MITHMINITE_SCYTHE_ENTITY.get(),
+                context -> new ScytheRenderer(context, Content.MITHMINITE_SCYTHE.get()));
         event.registerBlockEntityRenderer(Content.JAR_BE.get(),
                 dev.tc4port.thaumadditions.client.render.JarRenderer::new);
         event.registerBlockEntityRenderer(Content.SEAL_BE.get(),

@@ -137,6 +137,10 @@ Kept here because each one cost time to find:
   the writer a `RegistryFriendlyByteBuf`.
 - `MenuType` construction; `RegisterMenuScreensEvent` exists only on NeoForge.
 - `Entity#defineSynchedData` takes a builder on 1.21 — per-node subclasses for both projectiles.
+- `BucketItem` keeps the fluid's `Supplier` on 1.20.1 and takes the `Fluid` itself on 1.21.1, so
+  the bucket comes from `TaPlatform#bucketItem`. It matters because the item registry can be
+  filled before the fluid one: a bucket that resolves the fluid at registration time either comes
+  out empty or, on the loader that refuses an unbound holder, never comes out at all.
 - `ContainerHelper` save/load grew a registry parameter on 1.21.
 - `dropCustomDeathLoot` renamed; Chester spills from `die` instead.
 - `VertexConsumer`: `vertex/color/uv/uv2/normal` + `endVertex` vs
@@ -198,3 +202,9 @@ Worth remembering for the next port of this kind:
 - A research entry can have several stages of text, and upstream wrote `@ASPECT` into its language
   files where an aspect belongs, to be swapped out when the stack is asked for its name. Neither
   came across on its own: the port emitted stage one only, and printed the marker.
+- An entity type registered without a client renderer does not fail where it is registered. It
+  fails the first time one of those entities is in view, as a `NullPointerException` inside
+  `EntityRenderDispatcher#shouldRender`, and the crash report names no mod at all. Both of this
+  port's projectiles had been left that way: the scythe, and the pistol's shot — which drew nothing
+  in 1.12 either, its trail of aspect dust being the whole visual, so it takes vanilla's
+  `NoopRenderer` while the scythe gets `ScytheRenderer`.
