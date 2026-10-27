@@ -15,13 +15,13 @@ for (String n : armor) {
             .getOptional(net.minecraft.resources.ResourceLocation.tryParse("thaumadds:" + n)).orElse(null);
     sb.append(n);
     sb.append(" | VisDiscountGear=").append(item instanceof dev.tc4port.thaumcraft.api.item.VisDiscountGear);
-    sb.append(" | GogglesOverlayGear=").append(item instanceof dev.tc4port.thaumcraft.api.item.GogglesOverlayGear);
+    sb.append(" | PlayerAbilityGear=").append(item instanceof dev.tc4port.thaumcraft.api.item.PlayerAbilityGear);
     if (item instanceof dev.tc4port.thaumcraft.api.item.VisDiscountGear && player != null) {
         net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(item);
         sb.append(" | discount=").append(((dev.tc4port.thaumcraft.api.item.VisDiscountGear) item)
                 .thaumcraftVisDiscount(stack, player, dev.tc4port.thaumcraft.api.aspect.VisChannel.AER));
-        sb.append(" | goggles=").append(((dev.tc4port.thaumcraft.api.item.GogglesOverlayGear) item)
-                .showsThaumcraftGogglesOverlay(stack, player));
+        sb.append(" | goggles=").append(((dev.tc4port.thaumcraft.api.item.PlayerAbilityGear) item)
+                .grantsPlayerAbility(stack, player, dev.tc4port.thaumcraft.api.ability.PlayerAbility.GOGGLES_OVERLAY));
     }
     sb.append("\n");
 }

@@ -13,8 +13,9 @@ import dev.tc4port.thaumadditions.platform.TaEffect;
 import dev.tc4port.thaumadditions.platform.TaGearBehavior;
 import dev.tc4port.thaumadditions.platform.TaPlatform;
 import dev.tc4port.thaumadditions.platform.ToolKind;
+import dev.tc4port.thaumcraft.api.ability.PlayerAbility;
 import dev.tc4port.thaumcraft.api.aspect.VisChannel;
-import dev.tc4port.thaumcraft.api.item.GogglesOverlayGear;
+import dev.tc4port.thaumcraft.api.item.PlayerAbilityGear;
 import dev.tc4port.thaumcraft.api.item.VisDiscountGear;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -630,7 +631,7 @@ public final class TaPlatformForge implements TaPlatform {
     }
 
     private static final class Piece extends ArmorItem
-            implements VisDiscountGear, GogglesOverlayGear, TaArmorSetMember {
+            implements VisDiscountGear, PlayerAbilityGear, TaArmorSetMember {
         private final String setId;
         private final Map<ArmorItem.Type, Integer> visDiscounts;
         private final boolean gogglesOverlay;
@@ -662,8 +663,8 @@ public final class TaPlatformForge implements TaPlatform {
         }
 
         @Override
-        public boolean showsThaumcraftGogglesOverlay(ItemStack stack, Player wearer) {
-            return gogglesOverlay && getType() == ArmorItem.Type.HELMET;
+        public boolean grantsPlayerAbility(ItemStack stack, Player wearer, PlayerAbility ability) {
+            return ability == PlayerAbility.GOGGLES_OVERLAY && gogglesOverlay && getType() == ArmorItem.Type.HELMET;
         }
     }
 }

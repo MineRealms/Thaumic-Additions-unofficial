@@ -31,8 +31,8 @@ for (String n : names) {
     sb.append(n);
     sb.append(" | discount=").append(((dev.tc4port.thaumcraft.api.item.VisDiscountGear) item)
             .thaumcraftVisDiscount(stack, p, dev.tc4port.thaumcraft.api.aspect.VisChannel.AER));
-    sb.append(" | goggles=").append(((dev.tc4port.thaumcraft.api.item.GogglesOverlayGear) item)
-            .showsThaumcraftGogglesOverlay(stack, p));
+    sb.append(" | goggles=").append(((dev.tc4port.thaumcraft.api.item.PlayerAbilityGear) item)
+            .grantsPlayerAbility(stack, p, dev.tc4port.thaumcraft.api.ability.PlayerAbility.GOGGLES_OVERLAY));
     sb.append("\n");
 }
 // --- resources ---
